@@ -1,3 +1,4 @@
+
 * {
     margin: 0;
     padding: 0;
@@ -15,38 +16,161 @@ body {
     display: flex;
 }
 
+
+/* =========================
+   CAIXA FLUTUANTE
+========================= */
+
 .card-cadastro {
-    width: 51%;
-    height: 100vh;
+    position: absolute;
+
+    width: 430px;
+    height: auto;
+
+    top: 50%;
+    left: 25.5%;
+
+    transform: translate(-50%, -50%);
 
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 
-    background-color: #111111;
+    padding: 35px 40px;
+
+    /* preto um pouco mais claro que o fundo */
+    background-color: #181818;
+
+    border-radius: 20px;
+
+    z-index: 2;
+
+    box-shadow:
+        0 15px 40px rgba(0, 0, 0, 0.6),
+        0 5px 15px rgba(0, 0, 0, 0.4);
 }
 
+
+/* =========================
+   STREAMER / DESENVOLVEDOR
+========================= */
+
+.tipo-usuario {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+    height: 45px;
+
+    margin-bottom: 30px;
+
+    background-color: #252525;
+
+    border-radius: 30px;
+
+    overflow: hidden;
+}
+
+.tipo-usuario input {
+    display: none;
+}
+
+.tipo-usuario label {
+    position: relative;
+    z-index: 2;
+
+    width: 50%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    color: #888;
+
+    font-size: 13px;
+    font-weight: bold;
+
+    transition: 0.3s;
+}
+
+
+/* FUNDO QUE DESLIZA */
+
+.seletor {
+    position: absolute;
+
+    width: 50%;
+    height: 100%;
+
+    left: 0;
+    top: 0;
+
+    background-color: #9229e8;
+
+    border-radius: 30px;
+
+    transition: transform 0.3s ease;
+}
+
+
+/* DESENVOLVEDOR */
+
+#desenvolvedor:checked ~ .seletor {
+    transform: translateX(100%);
+}
+
+
+/* TEXTO SELECIONADO */
+
+#streamer:checked ~ label[for="streamer"],
+#desenvolvedor:checked ~ label[for="desenvolvedor"] {
+    color: white;
+}
+
+
+/* =========================
+   TÍTULO
+========================= */
+
 .titulo {
-    width: 55%;
-    margin-bottom: 50px;
+    width: 100%;
+
+    margin-bottom: 30px;
+
+    text-align: center;
 
     h1 {
         color: white;
+
         font-size: 24px;
+
         font-weight: bold;
+
         font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     }
 }
 
+
+/* =========================
+   FORMULÁRIO
+========================= */
+
 .formulario {
-    width: 55%;
+    width: 100%;
 
     display: flex;
     flex-direction: column;
 }
 
 .campo {
+    position: relative;
+
     width: 100%;
     height: 46px;
 
@@ -56,99 +180,160 @@ body {
     align-items: center;
 
     border: 2px solid #9cff00;
+
     background-color: #252525;
-    transition:0.2s;
+
+    transition: 0.2s;
 
     &:hover {
-        transition:0.5s;
+        transition: 0.5s;
+
         scale: 1.05;
+
         box-shadow: 5px 5px 20px 2px #9cff00;
     }
 
     input {
         width: 100%;
         height: 100%;
+
         padding-left: 21px;
+
         border: none;
         outline: none;
+
         background-color: transparent;
+
         color: white;
+
         font-size: 13px;
     }
 
-    input::placeholder{
+    input::placeholder {
         color: white;
     }
 
-    i{
+    i {
         color: #9229e8;
+
         font-size: 15px;
+
         margin-right: 15px;
     }
 }
 
+
+/* =========================
+   BOTÃO
+========================= */
+
 .botao {
     width: 100%;
     height: 43px;
-    margin-top: 26px;
-    border: none;
-    background-color: #9229e8;
-    color: white;
-    font-size: 18px;
-    font-weight: bold;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    cursor: pointer;
-    border-radius: 30px;
-    transition:0.3s;
 
-    &:hover{
+    margin-top: 26px;
+
+    border: none;
+
+    background-color: #9229e8;
+
+    color: white;
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+
+    cursor: pointer;
+
+    border-radius: 30px;
+
+    transition: 0.3s;
+
+    &:hover {
         box-shadow: 0px 0px 20px 2px #9229e8;
-        transition:0.5s;
+
+        transition: 0.5s;
+
         scale: 1.1;
     }
 }
 
+
+/* =========================
+   IMAGEM — 49%
+========================= */
+
 .imagem {
+    position: absolute;
+
+    top: 0;
+    right: 0;
+
     width: 49%;
     height: 100vh;
+
     overflow: hidden;
 
-    img{
+    z-index: 1;
+
+    img {
         width: 100%;
         height: 100%;
+
         object-fit: cover;
     }
 }
 
+
+/* =========================
+   BOTÃO SAIR
+========================= */
+
 .botao-saida {
     position: absolute;
+
     top: 20px;
     left: 20px;
 
     color: white;
+
     font-size: 22px;
 
     z-index: 10;
+
     text-decoration: none;
 
-    &:hover{
+    &:hover {
         color: #9229e8;
     }
 }
+
+
+/* =========================
+   LOGIN
+========================= */
+
 .login-link {
-    width: 55%;
+    width: 100%;
+
     margin-top: 20px;
+
     text-align: center;
 }
 
 .login-link p {
     color: white;
+
     font-size: 13px;
 }
 
 .login-link a {
     color: #9cff00;
+
     text-decoration: none;
+
     font-weight: bold;
 }
 
@@ -156,63 +341,151 @@ body {
     text-decoration: underline;
 }
 
+.erro {
+    display: none;
+
+    position: absolute;
+    left: calc(100% + 12px);
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    font-size: 18px;
+    cursor: help;
+
+    z-index: 20;
+}
+
+.erro i {
+    color: #ff3333;
+}
+
+.mensagem-erro {
+    display: none;
+
+    position: absolute;
+
+    left: 50%;
+    bottom: 28px;
+
+    transform: translateX(-50%);
+
+    width: max-content;
+
+    padding: 8px 12px;
+
+    background-color: #222222;
+
+    color: white;
+
+    font-size: 11px;
+
+    border-radius: 6px;
+
+    white-space: nowrap;
+
+    z-index: 30;
+}
+
+.erro:hover .mensagem-erro {
+    display: block;
+}
+
+.erro:hover .mensagem-erro {
+    display: block;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
 @media (max-width: 768px) {
+
     .container {
         position: relative;
+
         flex-direction: column;
+
         height: 100vh;
+
         overflow: hidden;
     }
 
     .imagem {
         position: absolute;
+
         top: 0;
         left: 0;
+
         width: 100%;
         height: 100%;
+
         z-index: 1;
 
         &::after {
             content: "";
+
             position: absolute;
+
             top: 0;
             left: 0;
+
             width: 100%;
             height: 100%;
+
             background-color: rgba(2, 2, 2, 0.8);
+
             z-index: 1;
         }
 
         img {
             filter: blur(8px);
+
             transform: scale(1.1);
         }
     }
 
     .card-cadastro {
-        position: relative;
+        position: absolute;
+
         z-index: 2;
+
         width: 85%;
         max-width: 340px;
+
         height: auto;
-        margin: 0 auto;
-        margin-top: 58vh;
-        transform: translateY(-50%);
+
+        top: 50%;
+        left: 50%;
+
+        margin: 0;
+
+        transform: translate(-50%, -50%);
+
         padding: 30px 20px;
+
         border-radius: 20px;
-        background-color: rgba(255, 255, 255, 0.08);
+
+        background-color: rgba(24, 24, 24, 0.92);
+
         backdrop-filter: blur(20px);
+
         -webkit-backdrop-filter: blur(20px);
+
         border: 1px solid rgba(255, 255, 255, 0.2);
+
         box-shadow: 0 0 30px 4px #9cff00;
     }
 
     .titulo {
         width: 100%;
+
         margin-bottom: 30px;
 
         h1 {
             font-size: 22px;
+
             text-align: center;
         }
     }
@@ -224,7 +497,9 @@ body {
     .campo {
         background-color: rgba(37, 37, 37, 0.4);
     }
+
     .login-link {
-    width: 100%;
+        width: 100%;
+    }
 }
-}
+
