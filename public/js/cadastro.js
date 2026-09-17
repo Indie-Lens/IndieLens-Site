@@ -13,9 +13,50 @@ function cadastrar(){
 
     //validações simples
     let nomeValido = (nome.length >= 1 && nome.length <= 50) ? true : false;
+    let emailValido = validarEmail(email);
+    let senhaValida = validarSenha(senha);
     let senhasValidas = (senha === senhaConfirmacao) ? true : false;
 
-    if(nomeValido && validarEmail(email) && validarSenha(senha) && senhasValidas){
+
+    // ESCONDE OS ÍCONES DE ERRO ANTES DE VALIDAR NOVAMENTE
+
+    document.getElementById("erro_nome").style.display = "none";
+    document.getElementById("erro_email").style.display = "none";
+    document.getElementById("erro_senha").style.display = "none";
+    document.getElementById("erro_confirmacao").style.display = "none";
+
+
+    // MOSTRA O ERRO DO NOME
+
+    if(!nomeValido){
+        document.getElementById("erro_nome").style.display = "block";
+    }
+
+
+    // MOSTRA O ERRO DO EMAIL
+
+    if(!emailValido){
+        document.getElementById("erro_email").style.display = "block";
+    }
+
+
+    // MOSTRA O ERRO DA SENHA
+
+    if(!senhaValida){
+        document.getElementById("erro_senha").style.display = "block";
+
+        document.querySelector("#erro_senha .mensagem-erro").innerText = "Senha inválida";
+    }
+
+
+    // MOSTRA O ERRO DE CONFIRMAÇÃO
+
+    if(!senhasValidas){
+    document.getElementById("erro_confirmacao").style.display = "block";
+}
+
+
+    if(nomeValido && emailValido && senhaValida && senhasValidas){
         fetch("/usuarios/cadastrarUsuario",
             {
                 method : "POST",
@@ -88,8 +129,6 @@ function validarSenha(senha){
         }
     }
 
-    //TODO fazer retorno baseado em o que está faltando
-    //se bem que podemos dar uma tabela para o usuario validar o que está de errado né
     return false;
 }
 
@@ -101,6 +140,7 @@ function validarEmail(email){
     if (email.indexOf("@") != -1) {
         especial = true;
         let posicaoPonto = email.indexOf(".", email.indexOf("@"));
+
         if(posicaoPonto != -1){
             pontoDepois = true;
         }
@@ -114,3 +154,4 @@ function validarEmail(email){
 
     return false;
 }
+
