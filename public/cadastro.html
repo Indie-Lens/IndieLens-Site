@@ -3,59 +3,103 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Cadastro</title>
+
   <link rel="stylesheet" href="css/cadastro.css">
   <script src="js/cadastro.js"></script>
   <script src="https://kit.fontawesome.com/d840916580.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
-   <div class="container">
-    <a href="index.html" class="botao-saida"><i class="fa-solid fa-right-from-bracket"></i></a>
 
-        <div class="card-cadastro">
+  <div class="container">
 
-            <div class="titulo">
-                <h1>CADASTRE-SE</h1>
-            </div>
+    <a href="index.html" class="botao-saida">
+      <i class="fa-solid fa-right-from-bracket"></i>
+    </a>
 
-            <div class="formulario">
+    <div class="card-cadastro">
 
-                <div class="campo">
-                    <input id="nome_input" type="text" placeholder="Nome completo">
-                    <i class="fa-solid fa-user"></i>
-                </div>
+      <!-- ESCOLHA DO PERFIL -->
+      <div class="tipo-usuario">
 
-                <div class="campo">
-                    <input id="email_input" type="text" placeholder="Email">
-                    <i class="fa-solid fa-envelope"></i>
-                </div>
+        <input type="radio" name="tipo_usuario" id="streamer" value="streamer" checked>
+        <label for="streamer">Streamer</label>
 
-                <div class="campo">
-                    <input id="senha_input" type="password" placeholder="Senha">
-                    <i class="fa-solid fa-circle-info"></i>
-                </div>
+        <input type="radio" name="tipo_usuario" id="desenvolvedor" value="desenvolvedor">
+        <label for="desenvolvedor">Desenvolvedor</label>
 
-                <div class="campo">
-                    <input id="confirmacao_senha_input" type="password" placeholder="Confirmar Senha">
-                    <i class="fa-solid fa-circle-info"></i>
-                </div>
+        <div class="seletor"></div>
 
-                <button class="botao" onclick="cadastrar()">CADASTRAR</button>
+      </div>
 
-            </div>
-            <div class="login-link">
-                <p>Já tem conta? <a href="login.html">Faça login</a></p>
-            </div>
+      <div class="titulo">
+        <h1>CADASTRE-SE</h1>
+      </div>
 
-        </div>
+      <div class="formulario">
 
-        <div class="imagem">
+        
+<div class="campo">
+    <input id="nome_input" type="text" placeholder="Nome completo">
+    <i class="fa-solid fa-user"></i>
 
-            <img src="assets/imgs/celeste-e1534205369647.jpg" alt="Imagem">
+    <span class="erro" id="erro_nome">
+        <i class="fa-solid fa-circle-exclamation"></i>
+        <span class="mensagem-erro">Nome inválido</span>
+    </span>
+</div>
 
-        </div>
+
+<div class="campo">
+    <input id="email_input" type="text" placeholder="Email">
+    <i class="fa-solid fa-envelope"></i>
+
+    <span class="erro" id="erro_email">
+        <i class="fa-solid fa-circle-exclamation"></i>
+        <span class="mensagem-erro">Email inválido</span>
+    </span>
+</div>
+
+
+<div class="campo">
+    <input id="senha_input" type="password" placeholder="Senha">
+    <i class="fa-solid fa-circle-info"></i>
+
+    <span class="erro" id="erro_senha">
+        <i class="fa-solid fa-circle-exclamation"></i>
+        <span class="mensagem-erro">Senha inválida</span>
+    </span>
+</div>
+
+
+<div class="campo">
+    <input id="confirmacao_senha_input" type="password" placeholder="Confirmar Senha">
+    <i class="fa-solid fa-circle-info"></i>
+
+    <span class="erro" id="erro_confirmacao">
+        <i class="fa-solid fa-circle-exclamation"></i>
+        <span class="mensagem-erro">As senhas não coincidem</span>
+    </span>
+</div>
+
+
+        <button class="botao" onclick="cadastrar()">CADASTRAR</button>
+
+      </div>
+
+      <div class="login-link">
+        <p>Já tem conta? <a href="login.html">Faça login</a></p>
+      </div>
 
     </div>
+
+    <div class="imagem">
+      <img src="assets/imgs/celeste-e1534205369647.jpg" alt="Imagem">
+    </div>
+
+  </div>
+
 </body>
 </html>
+
