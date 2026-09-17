@@ -1,3 +1,4 @@
+@import url("style.css");
 
 * {
     margin: 0;
@@ -6,7 +7,7 @@
 }
 
 body {
-    background-color: #111111;
+    background-color: var(--preto-primario);
     font-family: Arial, Helvetica, sans-serif;
   
     overflow: hidden;
@@ -28,7 +29,7 @@ body {
     align-items: center;
     justify-content: center;
 
-    background-color: #111111;
+    background-color: var(--preto-primario);
 
     order: 2;
 }
@@ -61,14 +62,14 @@ body {
     display: flex;
     align-items: center;
 
-    border: 2px solid #9cff00;
+    border: 2px solid var(--verde-primario);
     background-color: #252525;
     transition:0.2s;
 
     &:hover{
         transition:0.5s;
         scale: 1.05;
-        box-shadow: 5px 5px 20px 2px #9cff00;
+        box-shadow: 5px 5px 20px 2px var(--verde-primario);
     }
 
     input {
@@ -87,7 +88,7 @@ body {
     }
 
     i {
-        color: #9229e8;
+        color: var(--roxo-primario);
         font-size: 15px;
         margin-right: 15px;
     }
@@ -101,7 +102,7 @@ body {
 
     border: none;
 
-    background-color: #9229e8;
+    background-color: var(--roxo-primario);
     color: white;
 
     font-size: 18px;
@@ -114,7 +115,7 @@ body {
     transition:0.3s;
 
     &:hover{
-        box-shadow: 0px 0px 20px 2px #9229e8;
+        box-shadow: 0px 0px 20px 2px var(--roxo-primario);
         transition:0.5s;
         scale: 1.1;
     }
@@ -146,7 +147,7 @@ body {
     text-decoration: none;
 
     &:hover{
-        color: #9229e8;
+        color: var(--roxo-primario);
     }
 }
 .cadastro-link {
@@ -161,7 +162,7 @@ body {
 }
 
 .cadastro-link a {
-    color: #9cff00;
+    color: var(--verde-primario);
     text-decoration: none;
     font-weight: bold;
 }
@@ -221,7 +222,7 @@ body {
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
         border: 1px solid rgba(255, 255, 255, 0.2);
-        box-shadow: 0 0 30px 4px #9cff00;
+        box-shadow: 0 0 30px 4px var(--verde-primario);
     }
 
     .titulo {
