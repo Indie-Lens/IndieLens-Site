@@ -13,50 +13,26 @@ function cadastrar(){
 
     //validações simples
     let nomeValido = (nome.length >= 1 && nome.length <= 50) ? true : false;
-    let emailValido = validarEmail(email);
-    let senhaValida = validarSenha(senha);
     let senhasValidas = (senha === senhaConfirmacao) ? true : false;
 
-
-    // ESCONDE OS ÍCONES DE ERRO ANTES DE VALIDAR NOVAMENTE
-
-    document.getElementById("erro_nome").style.display = "none";
-    document.getElementById("erro_email").style.display = "none";
-    document.getElementById("erro_senha").style.display = "none";
-    document.getElementById("erro_confirmacao").style.display = "none";
-
+    esconderErros();
 
     // MOSTRA O ERRO DO NOME
-
     if(!nomeValido){
-        document.getElementById("erro_nome").style.display = "block";
+        exibirErro("nome");
     }
-
-
-    // MOSTRA O ERRO DO EMAIL
-
-    if(!emailValido){
-        document.getElementById("erro_email").style.display = "block";
-    }
-
 
     // MOSTRA O ERRO DA SENHA
-
-    if(!senhaValida){
-        document.getElementById("erro_senha").style.display = "block";
-
-        document.querySelector("#erro_senha .mensagem-erro").innerText = "Senha inválida";
+    if(!validarSenha(senha)){
+        exibirErro("senha");
     }
 
-
     // MOSTRA O ERRO DE CONFIRMAÇÃO
-
     if(!senhasValidas){
-    document.getElementById("erro_confirmacao").style.display = "block";
-}
+        exibirErro("distintas");
+    }
 
-
-    if(nomeValido && emailValido && senhaValida && senhasValidas){
+    if(nomeValido && validarEmail(email) && validarSenha(senha) && senhasValidas){
         fetch("/usuarios/cadastrarUsuario",
             {
                 method : "POST",
@@ -149,9 +125,36 @@ function validarEmail(email){
     if (especial && pontoDepois){
         return true
     } else {
-        // TODO returno onde está o erro
+        exibirErro("email");
     }
 
     return false;
+}
+
+function esconderErros(){
+    document.getElementById("erro_nome").style.display = "none";
+    document.getElementById("erro_email").style.display = "none";
+    document.getElementById("erro_senha").style.display = "none";
+    document.getElementById("erro_confirmacao").style.display = "none";
+}
+
+function exibirErro(campo){
+    switch (campo) {
+        case "email" : 
+            document.getElementById("erro_email").style.display = "block";
+            break;
+        
+        case "nome" : 
+            document.getElementById("erro_nome").style.display = "block";
+            break;
+
+        case "senha" :
+            document.getElementById("erro_senha").style.display = "block";
+            document.querySelector("#erro_senha .mensagem-erro").innerText = "Senha inválida";
+            break;
+
+        case "distintas" : 
+            document.getElementById("erro_confirmacao").style.display = "block";
+    }
 }
 
