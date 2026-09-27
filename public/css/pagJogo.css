@@ -1,0 +1,273 @@
+.banner-jogo {
+    width: 100%;
+    height: 80vh;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.poster-jogo {
+    width: 35%;
+    height: 30px;
+    background-color: rgb(44, 177, 177);
+}
+
+.header {
+    position: relative;
+    margin: 0%;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    overflow: hidden;
+    justify-content: end;
+    flex-direction: column;
+    align-items: end;
+}
+
+.header img{
+    opacity: 31%;
+}
+
+.conteudo-imagem{
+     position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+.header-jogo {
+    margin: 0%;
+    width: 45%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: right;
+    padding-right: 40px;
+    padding-bottom: 20px;
+    box-sizing: border-box;
+    gap: 15px;
+}
+
+.header-titulo p {
+    color: #ffff;
+    font-size: 36px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.header-descricao {
+    width: 60%;
+}
+
+.header-descricao p {
+    color: #ffffff;
+    font-size: 15px;
+    line-height: 1.4;
+    margin: 0;
+}
+
+.streamers-que-recomendam p {
+    color: #aaff00;
+    font-weight: bold;
+    font-size: 14px;
+    margin: 0;
+}
+
+
+
+.preco-valor {
+    color: #ffff;
+    font-size: 28px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.preco-loja {
+    color: #ddd;
+    font-size: 13px;
+    margin: 0;
+    font-style: italic;
+}
+
+
+.container-sobre-jogo {
+    margin-top: 30px;
+    margin-bottom: 30px;
+
+    width: 100%;
+    height: 70vh;
+    display: flex;
+    justify-content: center;
+}
+
+.container-sobre {
+    
+    width: 80%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+}
+
+.opcoes-buttons {
+    width: 100%;
+    height: 15%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.btn-opcao {
+    font-size: 21px;
+    width: 250px;
+    color: #ffff;
+    background-color: black;
+    border: 0px;
+}
+
+
+
+
+.btn-opcao.active {
+    background-color: #8a2be2;
+}
+
+.container-informacoes {
+    height: 85%;
+    border-top: 4px solid #aaff00;
+    background-color: rgb(3, 3, 3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    padding: 30px ;
+    box-sizing: border-box;
+    background-color: #252525;
+}
+
+.conteudo {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.cards {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start; 
+    align-items: stretch;
+    gap: 20px;
+    
+}
+
+.card01, .card02, .card03{
+    color: #ffff;
+    
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    height: auto;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: 16px;
+    gap: 10px;
+}
+
+
+
+.div-infos {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    font-size: 16px;
+    white-space: nowrap;
+    
+}
+
+.div-infos a {
+    color: #aaff00;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.label {
+    font-weight: bold;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.div-infos, .titulo-div p {
+    margin: 0;
+}
+
+.card01 .div-infos {
+    align-self: flex-start;
+    justify-content: flex-start;
+    text-align: left;
+}
+
+.card02 .div-infos {
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+}
+
+.card03 .titulo-div{
+    justify-content: flex-end;
+   align-self: flex-end;
+
+}
+.card03 .div-infos{
+
+justify-content: flex-end;
+text-align: right;
+}
+
+.card-suporte {
+    width: 90%;
+    height: 20%;
+    
+}
+
+.card04 {
+    color: #ffff;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 10px;
+    font-size: 16px;
+    width: 20%;
+    
+}
+
+.card04 .titulo-div {
+    align-self: flex-start;
+}
+
+.card04 .div-infos {
+
+    justify-content: flex-start;
+    text-align: left;
+}
+.card04 .titulo-div {
+    align-self: flex-start;
+    
+}
+.card04 .div-infos{
+
+justify-content: flex-start;
+text-align: left;
+}
