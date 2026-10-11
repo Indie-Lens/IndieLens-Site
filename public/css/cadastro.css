@@ -17,11 +17,6 @@ body {
     display: flex;
 }
 
-
-/* =========================
-   CAIXA FLUTUANTE
-========================= */
-
 .card-cadastro {
     position: absolute;
 
@@ -40,7 +35,6 @@ body {
 
     padding: 35px 40px;
 
-    /* preto um pouco mais claro que o fundo */
     background-color: #181818;
 
     border-radius: 20px;
@@ -73,35 +67,32 @@ body {
     border-radius: 30px;
 
     overflow: hidden;
+
+    input {
+        display: none;
+    }
+
+    label {
+        position: relative;
+        z-index: 2;
+
+        width: 50%;
+        height: 100%;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        cursor: pointer;
+
+        color: #888;
+
+        font-size: 13px;
+        font-weight: bold;
+
+        transition: 0.3s;
+    }
 }
-
-.tipo-usuario input {
-    display: none;
-}
-
-.tipo-usuario label {
-    position: relative;
-    z-index: 2;
-
-    width: 50%;
-    height: 100%;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    cursor: pointer;
-
-    color: #888;
-
-    font-size: 13px;
-    font-weight: bold;
-
-    transition: 0.3s;
-}
-
-
-/* FUNDO QUE DESLIZA */
 
 .seletor {
     position: absolute;
@@ -134,11 +125,6 @@ body {
     color: white;
 }
 
-
-/* =========================
-   TÍTULO
-========================= */
-
 .titulo {
     width: 100%;
 
@@ -156,11 +142,6 @@ body {
         font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     }
 }
-
-
-/* =========================
-   FORMULÁRIO
-========================= */
 
 .formulario {
     width: 100%;

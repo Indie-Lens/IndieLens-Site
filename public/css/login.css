@@ -154,21 +154,21 @@ body {
     width: 55%;
     margin-top: 20px;
     text-align: center;
-}
 
-.cadastro-link p {
-    color: white;
-    font-size: 13px;
-}
+    p {
+        color: white;
+        font-size: 13px;
+    }
 
-.cadastro-link a {
-    color: var(--verde-primario);
-    text-decoration: none;
-    font-weight: bold;
-}
+    a {
+        color: var(--verde-primario);
+        text-decoration: none;
+        font-weight: bold;
+    }
 
-.cadastro-link a:hover {
-    text-decoration: underline;
+    a:hover {
+        text-decoration: underline;
+    }
 }
 
 @media (max-width: 768px) {
