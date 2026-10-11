@@ -560,14 +560,14 @@ body {
 .sobre-img {
     width: 50%;
     overflow: hidden;
-}
 
-.sobre-img img {
-    width: 100%;
-    height: 100%;
+    img {
+        width: 100%;
+        height: 100%;
 
-    object-fit: cover;
-    display: block;
+        object-fit: cover;
+        display: block;
+    }
 }
 
 #home,
@@ -694,9 +694,10 @@ body {
     
     .sobre-titulo {
         height: 55px;
+
+        h2 {
+            font-size: 0.9rem;
+        }
     }
     
-    .sobre-titulo h2 {
-        font-size: 0.9rem;
-    }
 }
