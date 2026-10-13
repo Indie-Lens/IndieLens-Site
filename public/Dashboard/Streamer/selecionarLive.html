@@ -1,13 +1,282 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
-    <link rel="stylesheet" href="../../css/style.css">
-    
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="../../css/style.css" />
+        <link rel="stylesheet" href="./CSS/SelecionarLives.css" />
+        <title>Document</title>
+    </head>
+    <body>
+        <aside class="sidebar">
+            <div class="logo"></div>
+
+            <nav class="menu-navegacao"></nav>
+
+            <nav class="menu-streamer"></nav>
+        </aside>
+
+        <main class="conteudo-principal">
+            <header class="cabecalho">
+                <div class="titulo-sessao">
+                    <div>
+                        <h1>Histórico de Lives</h1>
+                        <p>
+                            Acompanhe todas as suas transmissões e veja o
+                            desempenho de cada uma.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="acoes-usuario">
+
+                    
+                    <button class="btn-notificacao">
+                     
+                    </button>
+                    <div class="perfil">
+                        <img
+                           src="../../assets/imgs/Hades.jpg"
+                            alt="Avatar do Streamer"
+                            class="avatar"
+                        />
+                        <div class="info-perfil">
+                            <span class="nome">Guilherme</span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <section class="barra-filtros">
+                <div class="input-grupo">
+                  
+                    <input
+                        type="text"
+                        placeholder="Buscar por jogo, categoria ou título da live..."
+                    />
+                </div>
+
+                <div class="filtros-selecao">
+                    <div class="select-grupo">
+                   
+                        <select>
+                            <option>Todos os jogos</option>
+                        </select>
+                    </div>
+
+                    <div class="select-grupo">
+                       
+                        <select>
+                            <option>Todas as categorias</option>
+                        </select>
+                    </div>
+
+                    <div class="select-grupo">
+                      
+                        <select>
+                            <option>Mais recentes</option>
+                        </select>
+                    </div>
+                </div>
+
+
+            </section>
+
+            <section class="grid-lives">
+                <article class="card-live">
+                    <div class="card-header">
+                        <div class="thumb-container">
+                            <img
+                                src="../../assets/imgs/Hades.jpg"
+                                alt="Hades"
+                            />
+                        
+                        </div>
+                        <div class="info-principal">
+                            <div class="topo-info">
+                                <h3>Hades</h3>
+                                <button class="btn-opcoes">
+                   
+                                </button>
+                            </div>
+                            <span class="categoria"
+                            <p class="descricao-live">
+                                Run até o final do Ato 2 (dificuldade maior)
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card-detalhes">
+                        <span class="detalhe-item"
+                            ><i class="fa-regular fa-calendar"></i> 12/08/2026 •
+                            20:15 - 23:57</span
+                        >
+                        <span class="detalhe-item"
+                            ><i class="fa-regular fa-clock"></i> 3h 42min</span
+                        >
+                    </div>
+                    <div class="card-metricas">
+                        <div class="metrica">
+                            <span class="metrica-header"
+                                > Espectadores
+                                Médios</span
+                            >
+                            <span class="valor">185</span>
+                        </div>
+                        <div class="metrica">
+                            <span class="metrica-header"
+                                > Pico de
+                                Viewers</span
+                            >
+                            <span class="valor">342</span>
+                        </div>
+                        <div class="metrica">
+                            <span class="metrica-header"
+                                >
+                                Visualizações</span
+                            >
+                            <span class="valor">4.802</span>
+                        </div>
+                      
+                    </div>
+                    <div class="card-tags">
+                        <span class="tag">RPG</span>
+                        <span class="tag">Rogue-like</span>
+                    </div>
+                </article>
+
+                <article class="card-live">
+                    <div class="card-header">
+                        <div class="thumb-container">
+                            <img
+                                src="../../assets/imgs/Hades.jpg"
+                                alt="Stardew Valley"
+                            />
+                            
+                        </div>
+                        <div class="info-principal">
+                            <div class="topo-info">
+                                <h3>Stardew Valley</h3>
+                                <button class="btn-opcoes">
+                           
+                                </button>
+                            </div>
+                            <span class="categoria"
+                                >
+                                Simulação</span
+                            >
+                            <p class="descricao-live">
+                                Organizando a fazenda e conversando com os
+                                inscritos
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card-detalhes">
+                        <span class="detalhe-item"
+                            ><i class="fa-regular fa-calendar"></i> 09/08/2026 •
+                            19:00 - 22:15</span
+                        >
+                        <span class="detalhe-item"
+                            ><i class="fa-regular fa-clock"></i> 3h 15min</span
+                        >
+                    </div>
+                    <div class="card-metricas">
+                        <div class="metrica">
+                            <span class="metrica-header"
+                                > Espectadores
+                                Médios</span
+                            >
+                            <span class="valor">142</span>
+                        </div>
+                        <div class="metrica">
+                            <span class="metrica-header"
+                                >Pico de
+                                Viewers</span
+                            >
+                            <span class="valor">231</span>
+                        </div>
+                        <div class="metrica">
+                            <span class="metrica-header"
+                                >
+                                Visualizações</span
+                            >
+                            <span class="valor">3.764</span>
+                        </div>
+                       
+                    </div>
+                    <div class="card-tags">
+                        <span class="tag">Simulação</span>
+                        <span class="tag">Relaxante</span>
+                    </div>
+                </article>
+
+                <article class="card-live">
+                    <div class="card-header">
+                        <div class="thumb-container">
+                            <img
+                                src="../../assets/imgs/Hades.jpg"
+                            />
+                            
+                        </div>
+                        <div class="info-principal">
+                            <div class="topo-info">
+                                <h3>Hollow Knight</h3>
+                                <button class="btn-opcoes">
+                               
+                                </button>
+                            </div>
+                            <span class="categoria"
+                               
+                                Aventura</span
+                            >
+                            <p class="descricao-live">
+                                Explorando a Cidade das Lágrimas
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card-detalhes">
+                        <span class="detalhe-item"
+                            ><i class="fa-regular fa-calendar"></i> 05/08/2026 •
+                            21:40 - 01:13</span
+                        >
+                        <span class="detalhe-item"
+                            ><i class="fa-regular fa-clock"></i> 3h 33min</span
+                        >
+                    </div>
+                    <div class="card-metricas">
+                        <div class="metrica">
+                            <span class="metrica-header"
+                                > Espectadores
+                                Médios</span
+                            >
+                            <span class="valor">98</span>
+                        </div>
+                        <div class="metrica">
+                            <span class="metrica-header"
+                                > Pico de
+                                Viewers</span
+                            >
+                            <span class="valor">176</span>
+                        </div>
+                        <div class="metrica">
+                            <span class="metrica-header"
+                                >
+                                Visualizações</span
+                            >
+                            <span class="valor">2.843</span>
+                        </div>
+                    
+                    </div>
+                    <div class="card-tags">
+                        <span class="tag">Aventura</span>
+                        <span class="tag">Metroidvania</span>
+                    </div>
+                </article>
+
+            </section>
+
+            <button class="btn-adicionar-live">
+ Adicionar Live
+            </button>
+        </main>
+    </body>
 </html>
