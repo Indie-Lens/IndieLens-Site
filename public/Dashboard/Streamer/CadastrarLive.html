@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link rel="stylesheet" href="../../css/style.css" />
+        <link rel="stylesheet" href="./CSS/CadastrarLive.css" />
+
+        <title>Cadastrar Live | INDIE LENS</title>
+    </head>
+
+    <body class="pagina-cadastro">
+        <main class="cadastro-container">
+            <!-- Cabeçalho do formulário -->
+            <header class="cadastro-header">
+                <div class="cadastro-titulo">
+                    <div>
+                        <h1>Cadastrar Nova Live</h1>
+                        <p>
+                            Registre sua transmissão e acompanhe seu desempenho.
+                        </p>
+                    </div>
+                </div>
+            </header>
+
+            <form id="formCadastroLive">
+                <!-- Informações principais -->
+                <section class="form-secao">
+                    <div class="secao-titulo">
+                        <h2>Informações da Live</h2>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="campo">
+                            <label for="jogo">Jogo *</label>
+                            <select id="jogo" name="jogo" required>
+                                <option value="">Selecione um jogo</option>
+                                <option value="Hades">Hades</option>
+                                <option value="Stardew Valley">
+                                    Stardew Valley
+                                </option>
+                                <option value="Hollow Knight">
+                                    Hollow Knight
+                                </option>
+                                <option value="Cuphead">Cuphead</option>
+                                <option value="Outro">Outro</option>
+                            </select>
+                        </div>
+
+                        <div class="campo">
+                            <label for="categoria">Categoria *</label>
+                            <select id="categoria" name="categoria" required>
+                                <option value="">
+                                    Selecione uma categoria
+                                </option>
+                                <option value="RPG">RPG</option>
+                                <option value="Indie">Indie</option>
+                                <option value="Aventura">Aventura</option>
+                                <option value="Simulação">Simulação</option>
+                                <option value="Plataforma">Plataforma</option>
+                                <option value="Sandbox">Sandbox</option>
+                                <option value="Outros">Outros</option>
+                            </select>
+                        </div>
+
+                        <div class="campo campo-completo">
+                            <label for="tituloLive"
+                                >Título da transmissão *</label
+                            >
+                            <input
+                                type="text"
+                                id="tituloLive"
+                                name="tituloLive"
+                                placeholder="Ex.: Tentando zerar Hades pela primeira vez"
+                                maxlength="100"
+                                required
+                            />
+                        </div>
+
+                        <div class="campo campo-completo">
+                            <label for="descricao">Descrição da live</label>
+                            <textarea
+                                id="descricao"
+                                name="descricao"
+                                rows="3"
+                                maxlength="500"
+                                placeholder="Conte um pouco sobre o que aconteceu na transmissão..."
+                            ></textarea>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Data e horário -->
+                <section class="form-secao">
+                    <div class="secao-titulo">
+                        <h2>Data e Horário</h2>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="campo">
+                            <label for="dataLive">Data da transmissão *</label>
+                            <input
+                                type="date"
+                                id="dataLive"
+                                name="dataLive"
+                                required
+                            />
+                        </div>
+
+                        <div class="campo">
+                            <label for="horaInicio">Horário de início *</label>
+                            <input
+                                type="time"
+                                id="horaInicio"
+                                name="horaInicio"
+                                required
+                            />
+                        </div>
+
+                        <div class="campo">
+                            <label for="horaTermino"
+                                >Horário de término *</label
+                            >
+                            <input
+                                type="time"
+                                id="horaTermino"
+                                name="horaTermino"
+                                required
+                            />
+                        </div>
+
+                        <div class="campo">
+                            <label for="duracao">Duração calculada</label>
+                            <input
+                                type="text"
+                                id="duracao"
+                                name="duracao"
+                                placeholder="Calculada automaticamente"
+                                readonly
+                            />
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Métricas -->
+                <section class="form-secao">
+                    <div class="secao-titulo">
+                        <h2>Métricas da Live</h2>
+                    </div>
+
+                    <p class="secao-descricao">
+                        Informe os resultados da transmissão para gerar suas
+                        análises.
+                    </p>
+
+                    <div class="form-grid">
+                        <div class="campo">
+                            <label for="mediaEspectadores">
+                                Média de espectadores *
+                            </label>
+                            <input
+                                type="number"
+                                id="mediaEspectadores"
+                                name="mediaEspectadores"
+                                min="0"
+                                step="1"
+                                placeholder="Ex.: 120"
+                                required
+                            />
+                        </div>
+
+                        <div class="campo">
+                            <label for="picoEspectadores">
+                                Pico de espectadores *
+                            </label>
+                            <input
+                                type="number"
+                                id="picoEspectadores"
+                                name="picoEspectadores"
+                                min="0"
+                                step="1"
+                                placeholder="Ex.: 280"
+                                required
+                            />
+                        </div>
+
+                        <div class="campo">
+                            <label for="visualizacoes"
+                                >Visualizações totais</label
+                            >
+                            <input
+                                type="number"
+                                id="visualizacoes"
+                                name="visualizacoes"
+                                min="0"
+                                step="1"
+                                placeholder="Ex.: 3450"
+                            />
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Ações -->
+                <footer class="cadastro-acoes">
+                    <p class="campos-obrigatorios">* Campos obrigatórios</p>
+
+                    <div class="botoes-acoes">
+                        <button
+                            type="button"
+                            class="btn-cancelar"
+                            id="cancelarCadastro"
+                        >
+                            Cancelar
+                        </button>
+
+                        <button type="submit" class="btn-salvar">
+                            Salvar Live
+                        </button>
+                    </div>
+                </footer>
+            </form>
+        </main>
+
+        <script src="./JS/CadastrarLive.js"></script>
+    </body>
+</html>

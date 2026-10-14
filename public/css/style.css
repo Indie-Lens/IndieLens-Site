@@ -3,4 +3,56 @@
     --verde-primario: #9cff00;
     --verde-secundario: #ccff00;
     --preto-primario: #111111;
+    --fundo-conteudo: #0b0c10;
+    --fundo-elementos: #13141c;
+    --borda-suave: #222330;
+    --texto-branco: #ffffff;
+    --texto-cinza: #8c8d9e;
+}
+
+.sidebar {
+    width: 250px;
+    background-color: var(--fundo-elementos);
+    border-right: 1px solid var(--borda-suave);
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+}
+
+.sidebar-logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--roxo-primario);
+    margin-bottom: 40px;
+    text-align: center;
+    letter-spacing: 2px;
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.sidebar-nav a {
+    text-decoration: none;
+    color: var(--texto-cinza);
+    padding: 12px 15px;
+    border-radius: 8px;
+    transition: 0.3s ease;
+    font-size: 1rem;
+}
+
+.sidebar-nav a:hover {
+    background-color: var(--glow-roxo);
+    color: var(--texto-branco);
+}
+
+.sidebar-nav a.active {
+    background-color: var(--roxo-primario);
+    color: var(--texto-branco);
+    font-weight: bold;
 }

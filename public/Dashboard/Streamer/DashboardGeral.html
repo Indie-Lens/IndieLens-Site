@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Geral - Streamer</title>
+    <link rel="stylesheet" href="CSS/dashboardGeral.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    
+    <div class="container">
+        
+        <aside class="sidebar">
+            <div class="sidebar-logo">Streamer</div>
+            <nav class="sidebar-nav">
+                <a href="DashboardGeral.html" class="active">Dashboard</a>
+                <a href="selecionarLive.html">Lives</a>
+            </nav>
+        </aside>
+
+        <main class="conteudo-principal">
+            <div class="painel-geral">
+                
+                <div class="linha-indicadores">
+                    <div class="cartao cartao-indicador">
+                        <div class="cabecalho-indicador">
+                          
+                            <span>Total de Lives</span>
+                        </div>
+                        <h2>18</h2>
+                        <span class="tendencia positiva">↑ 20% vs. período anterior</span>
+                    </div>
+                    
+                    <div class="cartao cartao-indicador">
+                        <div class="cabecalho-indicador">
+                           
+                            <span>Média de Espectadores</span>
+                        </div>
+                        <h2>124</h2>
+                        <span class="tendencia positiva">↑ 42% vs. período anterior</span>
+                    </div>
+
+                    <div class="cartao cartao-indicador">
+                        <div class="cabecalho-indicador">
+                          
+                            <span>Pico de Espectadores</span>
+                        </div>
+                        <h2>342</h2>
+                        <span class="tendencia positiva">↑ 67% vs. período anterior</span>
+                    </div>
+
+                    <div class="cartao cartao-indicador">
+                        <div class="cabecalho-indicador">
+                          
+                            <span>Horas Transmitidas</span>
+                        </div>
+                        <h2>56h 32min</h2>
+                        <span class="tendencia positiva">↑ 30% vs. período anterior</span>
+                    </div>
+
+                    <div class="cartao cartao-destaque">
+                        <div class="cabecalho-indicador">
+                           
+                            <span>Melhor Live</span>
+                        </div>
+                        <h2>Hades</h2>
+                        <p>342 espectadores (pico)</p>
+                        <small>12/08 • 20:15</small>
+                    </div>
+                </div>
+
+                <div class="linha-graficos">
+                    <div class="cartao grafico-grande">
+                        <h3>Evolução de Espectadores</h3>
+                        <div class="container-grafico">
+                            <canvas id="graficoEvolucao"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="cartao grafico-medio">
+                        <h3>Melhores Horários para Transmitir</h3>
+                        <div class="container-grafico">
+                            <canvas id="graficoHorarios"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="cartao grafico-pequeno">
+                        <h3>Jogos que Mais Trazem Viewers</h3>
+                        <div class="container-grafico">
+                            <canvas id="graficoJogos"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="linha-inferior">
+                    <div class="cartao cartao-desempenho">
+                        <h3>Desempenho por Categoria</h3>
+                        <div class="grade-categorias">
+                            <div class="caixa-categoria caixa-roxa">
+                               
+                                <h4>RPG</h4>
+                                <h2>168</h2>
+                                <span class="tendencia positiva">↑ 53%</span>
+                            </div>
+                            <div class="caixa-categoria caixa-verde">
+                               
+                                <h4>Indie</h4>
+                                <h2>142</h2>
+                                <span class="tendencia positiva">↑ 30%</span>
+                            </div>
+                            <div class="caixa-categoria caixa-roxa">
+                                
+                                <h4>Aventura</h4>
+                                <h2>96</h2>
+                                <span class="tendencia positiva">↑ 21%</span>
+                            </div>
+                            <div class="caixa-categoria caixa-verde">
+                                
+                                <h4>Simulação</h4>
+                                <h2>78</h2>
+                                <span class="tendencia positiva">↑ 12%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="cartao cartao-ultimas-lives">
+                        <div class="cabecalho-flexivel">
+                            <h3>Últimas Lives</h3>
+                            <a href="selecionarLive.html" class="link-ver-todos">Ver todas</a>
+                        </div>
+                        <table class="tabela-recentes">
+                            <thead>
+                                <tr>
+                                    <th>Jogo</th>
+                                    <th>Data e Hora</th>
+                                    <th>Duração</th>
+                                    <th>Média</th>
+                                    <th>Pico</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Hades</td>
+                                    <td>12/08 • 20:15</td>
+                                    <td>3h 42min</td>
+                                    <td>186</td>
+                                    <td>342</td>
+                                </tr>
+                                <tr>
+                                    <td>Stardew Valley</td>
+                                    <td>08/08 • 18:03</td>
+                                    <td>2h 17min</td>
+                                    <td>142</td>
+                                    <td>251</td>
+                                </tr>
+                                <tr>
+                                    <td>Hollow Knight</td>
+                                    <td>05/08 • 21:40</td>
+                                    <td>2h 58min</td>
+                                    <td>98</td>
+                                    <td>175</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <script>
+        Chart.defaults.color = '#8c8d9e'; 
+        Chart.defaults.font.family = "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif";
+
+        const corRoxo = '#9749e0';
+        const corVerde = '#9cff00';
+        const corBorda = '#222330';
+
+        // Gráfico de Evolução
+        const ctxEvolucao = document.getElementById('graficoEvolucao').getContext('2d');
+        const gradienteRoxo = ctxEvolucao.createLinearGradient(0, 0, 0, 400);
+        gradienteRoxo.addColorStop(0, 'rgba(151, 73, 224, 0.5)'); 
+        gradienteRoxo.addColorStop(1, 'rgba(151, 73, 224, 0.0)'); 
+
+        const gradienteVerde = ctxEvolucao.createLinearGradient(0, 0, 0, 400);
+        gradienteVerde.addColorStop(0, 'rgba(156, 255, 0, 0.3)');
+        gradienteVerde.addColorStop(1, 'rgba(156, 255, 0, 0.0)');
+
+        new Chart(ctxEvolucao, {
+            type: 'line',
+            data: {
+                labels: ['01/09', '04/09', '07/09', '10/09', '13/09', '16/09', '19/09', '22/09', '25/09', '28/09', '30/09'],
+                datasets: [
+                    {
+                        label: 'Pico',
+                        data: [150, 130, 180, 140, 290, 200, 180, 220, 190, 210, 180],
+                        borderColor: corVerde,
+                        backgroundColor: gradienteVerde,
+                        borderWidth: 2,
+                        tension: 0.4, 
+                        fill: true,
+                        pointRadius: 0
+                    },
+                    {
+                        label: 'Média',
+                        data: [100, 80, 120, 90, 190, 140, 110, 150, 120, 140, 110],
+                        borderColor: corRoxo,
+                        backgroundColor: gradienteRoxo,
+                        borderWidth: 2,
+                        tension: 0.4,
+                        fill: true,
+                        pointRadius: 0
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: { beginAtZero: true, grid: { color: corBorda } },
+                    x: { grid: { display: false } }
+                },
+                plugins: { legend: { position: 'top', align: 'end', labels: { usePointStyle: true, boxWidth: 8 } } }
+            }
+        });
+
+        // Gráfico de Horários
+        const ctxHorarios = document.getElementById('graficoHorarios').getContext('2d');
+        new Chart(ctxHorarios, {
+            type: 'bar',
+            data: {
+                labels: ['00h', '03h', '06h', '09h', '12h', '15h', '18h', '21h'],
+                datasets: [{
+                    label: 'Espectadores por horário',
+                    data: [50, 45, 60, 90, 130, 150, 250, 210],
+                    backgroundColor: ['#4a246e', '#592b84', '#68329a', '#7739af', '#8641c5', corRoxo, corVerde, corVerde],
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    y: { beginAtZero: true, grid: { color: corBorda } },
+                    x: { grid: { display: false } }
+                }
+            }
+        });
+
+        // Gráfico de Jogos
+        const ctxJogos = document.getElementById('graficoJogos').getContext('2d');
+        new Chart(ctxJogos, {
+            type: 'doughnut',
+            data: {
+                labels: ['Hades', 'Stardew Valley', 'Hollow Knight', 'Cuphead', 'Outros'],
+                datasets: [{
+                    data: [27.8, 22.2, 16.7, 11.1, 22.2],
+                    backgroundColor: [corVerde, corRoxo, '#8c8d9e', '#36374a', '#1a1b24'],
+                    borderWidth: 0,
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '70%',
+                plugins: { legend: { position: 'right', labels: { usePointStyle: true, color: '#8c8d9e', padding: 15 } } }
+            }
+        });
+    </script>
+</body>
+</html>

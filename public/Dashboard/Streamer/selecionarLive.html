@@ -9,11 +9,11 @@
     </head>
     <body>
         <aside class="sidebar">
-            <div class="logo"></div>
-
-            <nav class="menu-navegacao"></nav>
-
-            <nav class="menu-streamer"></nav>
+            <div class="sidebar-logo">Streamer</div>
+            <nav class="sidebar-nav">
+                <a href="DashboardGeral.html" class="active">Dashboard</a>
+                <a href="selecionarLive.html">Lives</a>
+            </nav>
         </aside>
 
         <main class="conteudo-principal">
@@ -274,9 +274,54 @@
 
             </section>
 
-            <button class="btn-adicionar-live">
- Adicionar Live
+            <button class="btn-adicionar-live" id="abrirCadastro">
+                <i class="fa-solid fa-plus"></i>
+                Adicionar Live
             </button>
+            
+            <div class="modal-overlay" id="modalCadastro">
+                <div class="modal-container">
+                    <button
+                        class="fechar-modal"
+                        id="fecharCadastro"
+                        aria-label="Fechar cadastro"
+                    >
+                        &times;
+                    </button>
+            
+                    <iframe
+                        src="./CadastrarLive.html"
+                        title="Cadastrar nova live"
+                    ></iframe>
+                </div>
+            </div>
         </main>
     </body>
+
+<script>
+    const modal = document.getElementById("modalCadastro");
+const abrir = document.getElementById("abrirCadastro");
+const fechar = document.getElementById("fecharCadastro");
+
+abrir.addEventListener("click", () => {
+    modal.classList.add("ativo");
+});
+
+fechar.addEventListener("click", () => {
+    modal.classList.remove("ativo");
+});
+
+modal.addEventListener("click", (event) => {
+    if (event.target === modal) {
+        modal.classList.remove("ativo");
+    }
+});
+
+document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+        modal.classList.remove("ativo");
+    }
+});
+</script>
+
 </html>
