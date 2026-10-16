@@ -18,10 +18,11 @@
     justify-content: end;
     flex-direction: column;
     align-items: end;
-}
 
-.header img {
-    opacity: 31%;
+
+    img {
+        opacity: 31%;
+    }
 }
 
 .conteudo-imagem {
@@ -58,13 +59,14 @@
 
 .header-descricao {
     width: 60%;
-}
 
-.header-descricao p {
-    color: #fff;
-    font-size: 15px;
-    line-height: 1.4;
-    margin: 0;
+
+    p {
+        color: #ffffff;
+        font-size: 15px;
+        line-height: 1.4;
+        margin: 0;
+    }
 }
 
 .streamers-que-recomendam p {
@@ -178,12 +180,12 @@
     flex-direction: row;
     font-size: 16px;
     white-space: nowrap;
-}
-
-.div-infos a {
-    color: #aaff00;
-    cursor: pointer;
-    text-decoration: none;
+    
+    a {
+        color: #aaff00;
+        cursor: pointer;
+        text-decoration: none;
+    }
 }
 
 .label {
@@ -213,7 +215,8 @@
     align-self: flex-end;
 }
 
-.card03 .div-infos {
+
+.card03 .div-infos{
     justify-content: flex-end;
     text-align: right;
 }

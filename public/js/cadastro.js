@@ -15,6 +15,23 @@ function cadastrar(){
     let nomeValido = (nome.length >= 1 && nome.length <= 50) ? true : false;
     let senhasValidas = (senha === senhaConfirmacao) ? true : false;
 
+    esconderErros();
+
+    // MOSTRA O ERRO DO NOME
+    if(!nomeValido){
+        exibirErro("nome");
+    }
+
+    // MOSTRA O ERRO DA SENHA
+    if(!validarSenha(senha)){
+        exibirErro("senha");
+    }
+
+    // MOSTRA O ERRO DE CONFIRMAÇÃO
+    if(!senhasValidas){
+        exibirErro("distintas");
+    }
+
     if(nomeValido && validarEmail(email) && validarSenha(senha) && senhasValidas){
         fetch("/usuarios/cadastrarUsuario",
             {
@@ -88,8 +105,6 @@ function validarSenha(senha){
         }
     }
 
-    //TODO fazer retorno baseado em o que está faltando
-    //se bem que podemos dar uma tabela para o usuario validar o que está de errado né
     return false;
 }
 
@@ -101,6 +116,7 @@ function validarEmail(email){
     if (email.indexOf("@") != -1) {
         especial = true;
         let posicaoPonto = email.indexOf(".", email.indexOf("@"));
+
         if(posicaoPonto != -1){
             pontoDepois = true;
         }
@@ -109,8 +125,36 @@ function validarEmail(email){
     if (especial && pontoDepois){
         return true
     } else {
-        // TODO returno onde está o erro
+        exibirErro("email");
     }
 
     return false;
 }
+
+function esconderErros(){
+    document.getElementById("erro_nome").style.display = "none";
+    document.getElementById("erro_email").style.display = "none";
+    document.getElementById("erro_senha").style.display = "none";
+    document.getElementById("erro_confirmacao").style.display = "none";
+}
+
+function exibirErro(campo){
+    switch (campo) {
+        case "email" : 
+            document.getElementById("erro_email").style.display = "block";
+            break;
+        
+        case "nome" : 
+            document.getElementById("erro_nome").style.display = "block";
+            break;
+
+        case "senha" :
+            document.getElementById("erro_senha").style.display = "block";
+            document.querySelector("#erro_senha .mensagem-erro").innerText = "Senha inválida";
+            break;
+
+        case "distintas" : 
+            document.getElementById("erro_confirmacao").style.display = "block";
+    }
+}
+
