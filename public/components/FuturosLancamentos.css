@@ -1,0 +1,222 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+
+.futuros-lancamentos {
+    --fl-roxo: #922cff;
+    --fl-verde: #aaff00;
+    --fl-card: #242424;
+    width: 100%;
+    color: #fff;
+    font-family: Inter, sans-serif;
+}
+.fl-cabecalho {
+    margin-bottom: 22px;
+    display: flex;
+    align-items: center;
+}
+.fl-cabecalho h2 {
+    display: inline-block;
+    margin: 0 0 12px;
+    padding: 8px 24px 8px 18px;
+    background: var(--fl-roxo);
+    clip-path: polygon(12% 0, 100% 0, 100% 100%, 0 100%, 0 72%);
+    font-size: 16px;
+    font-weight: 800;
+}
+.fl-cabecalho p {
+    margin: 0;
+    color: #e7e7e7;
+    font-size: 12px;
+    font-weight: 500;
+}
+.fl-painel {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(260px, 0.8fr);
+    max-width: 1000px;
+    min-height: 400px;
+    margin: 0 auto;
+    background: var(--fl-card);
+}
+.fl-calendario {
+    padding: 20px 30px 30px;
+    background: #fff;
+    color: #101010;
+}
+.fl-controle-mes {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+}
+.fl-mes-atual {
+    margin: 0;
+    color: var(--fl-roxo);
+    font-size: 14px;
+    font-weight: 800;
+    text-transform: capitalize;
+}
+.fl-seta {
+    width: 28px;
+    height: 28px;
+    border: 0;
+    border-radius: 6px;
+    background: transparent;
+    color: var(--fl-roxo);
+    font-size: 25px;
+    line-height: 1;
+    cursor: pointer;
+}
+.fl-seta:hover {
+    background: #f1e6ff;
+}
+.fl-dias-semana,
+.fl-dias {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    text-align: center;
+}
+.fl-dias-semana {
+    padding-bottom: 7px;
+    border-bottom: 1px solid var(--fl-verde);
+    color: var(--fl-roxo);
+    font-size: 12px;
+    font-weight: 800;
+}
+.fl-dias {
+    padding-top: 5px;
+    row-gap: 2px;
+}
+.fl-dia {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    height: 48px;
+    border: 0;
+    border-radius: 6px;
+    background: transparent;
+    color: #101010;
+    font: inherit;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+}
+.fl-dia:not(:disabled):hover,
+.fl-dia.fl-selecionado {
+    background: #eee0ff;
+    color: #7620d6;
+}
+.fl-dia.fl-tem-lancamento::after {
+    position: absolute;
+    bottom: 3px;
+    left: 50%;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--fl-verde);
+    content: "";
+    transform: translateX(-50%);
+}
+.fl-dia.fl-selecionado::after {
+    background: var(--fl-roxo);
+}
+.fl-dia.fl-vazio {
+    cursor: default;
+}
+.fl-lista {
+    padding: 22px 14px;
+    background: var(--fl-card);
+}
+.fl-lista h3 {
+    margin: 0 0 20px 10px;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.35;
+}
+.fl-lista h3 span {
+    display: block;
+    color: var(--fl-verde);
+}
+.fl-itens {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.fl-jogo {
+    display: grid;
+    grid-template-columns: 46px minmax(0, 1fr) 66px;
+    align-items: stretch;
+    min-height: 40px;
+    overflow: hidden;
+    border-radius: 3px;
+    background: var(--fl-roxo);
+}
+.fl-data {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--fl-verde);
+    color: #101010;
+    clip-path: polygon(0 0, 100% 0, 78% 100%, 0 100%);
+}
+.fl-data span {
+    font-size: 7px;
+    font-weight: 800;
+}
+.fl-data strong {
+    font-size: 17px;
+    line-height: 1.1;
+}
+.fl-nome-jogo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 7px;
+    color: #fff;
+    font-size: 9px;
+    font-weight: 700;
+    text-align: center;
+}
+.fl-capa {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+    overflow: hidden;
+    text-align: center;
+}
+.fl-capa span {
+    font-size: 9px;
+    font-weight: 800;
+    line-height: 1.05;
+}
+.fl-capa-stardew {
+    background: linear-gradient(135deg, #77c9f4, #1f7dbb);
+    color: #ffe34d;
+    text-shadow: 1px 1px #1d4d77;
+}
+.fl-capa-yakuza {
+    background: linear-gradient(135deg, #d5d5d5, #454545 55%, #101010);
+    color: #fff;
+    font-size: 16px;
+}
+.fl-capa-hollow {
+    background: linear-gradient(135deg, #80b7ce, #273e57 60%, #111a28);
+    color: #f5f5f5;
+    text-shadow: 1px 1px #111;
+}
+@media (max-width: 650px) {
+    .fl-painel {
+        grid-template-columns: 1fr;
+    }
+    .fl-calendario {
+        padding: 16px;
+    }
+    .fl-dia {
+        height: 38px;
+    }
+    .fl-lista {
+        padding: 20px 14px;
+    }
+}

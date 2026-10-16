@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Indie Lens - Home</title>
         <link rel="stylesheet" href="./css/landingPage.css" />
-
+        <link rel="stylesheet" href="./components/FuturosLancamentos.css" />
         <link
             href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap"
             rel="stylesheet"
@@ -330,6 +330,10 @@
                 </div>
             </section>
 
+            <section class="sessao-futuro">
+                <div id="futurosLancamentos"></div>
+            </section>
+
             <section class="sessao-sobre" id="sobre-nos">
                 <div class="sobre-bloco">
                     <div class="sobre-titulo">
@@ -424,7 +428,6 @@
                 </div>
             </section>
 
-         
             <footer class="footer-main" id="contato">
                 <div class="footer-container">
                     <div class="footer-colunaT">
@@ -456,7 +459,28 @@
                     </div>
                 </div>
             </footer>
-        
         </div>
+
+        <script>
+            fetch("./components/FuturosLancamentos.html")
+                .then((res) => {
+                    if (!res.ok) {
+                        throw new Error(
+                            "Não foi possível carregar o componente"
+                        );
+                    }
+                    return res.text();
+                })
+                .then((data) => {
+                    document.getElementById("futurosLancamentos").innerHTML =
+                        data;
+                    inicializarFuturosLancamentos(
+                        document.getElementById("futurosLancamentos")
+                    );
+                })
+                .catch((erro) => console.log(erro));
+        </script>
+
+        <script src="./components/FuturosLancamentos.js"></script>
     </body>
 </html>
