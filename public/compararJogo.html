@@ -1,0 +1,138 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>IndieLens - Protótipos</title>
+
+    <link rel="stylesheet" href="css/CompararJogo.css">
+</head>
+
+<body>
+
+    <!-- BARRA SUPERIOR -->
+    <header class="topbar">
+        <span class="logo">IndieLens</span>
+    </header>
+
+    <div class="layout">
+
+        
+<aside class="sidebar">
+
+    <div class="sidebar-top">
+        <div class="logo">
+            <span class="logo-icon">I</span>
+            <span>IndieLens</span>
+        </div>
+    </div>
+
+    <nav class="menu">
+        <a href="AnaliseJogo.html" class="menu-item">
+            Dashboard
+        </a>
+
+        <a href="#" class="menu-item">
+            Outro
+        </a>
+
+        <a href="prototipos.html" class="menu-item ativo">
+            Protótipos
+        </a>
+    </nav>
+
+    <div class="sidebar-bottom">
+        <div class="usuario">
+            <img
+                class="avatar"
+                src=""
+                alt="Foto do usuário"
+                id="avatar"
+            >
+            <span id="perfilNome">teste</span>
+        </div>
+
+        <button type="button" class="btn-sair" id="btnSair">
+            Sair
+        </button>
+    </div>
+
+</aside>
+
+
+
+        <main class="conteudo">
+
+            <div class="conteudo-topo">
+                <h1>Protótipos</h1>
+
+                <button
+                    class="btn-cadastrar"
+                    id="btnCadastrar"
+                    type="button"
+                >
+                    Cadastrar Jogo +
+                </button>
+            </div>
+
+  
+            <section class="grid" id="grid"></section>
+
+            <p class="vazio" id="vazio">
+                Nenhum protótipo cadastrado ainda.
+            </p>
+
+        </main>
+
+    </div>
+
+
+
+    <div class="modal" id="modal" hidden>
+
+        <form class="modal-box" id="form">
+
+            <h2 id="modalTitulo">Cadastrar Jogo</h2>
+
+            <label>
+                Nome
+                <input name="nome" required>
+            </label>
+
+            <label>
+                Gênero
+                <input name="genero" required>
+            </label>
+
+            <label>
+                Orçamento (ex: 250k)
+                <input name="orcamento" required>
+            </label>
+
+            <div class="modal-acoes">
+
+                <button
+                    type="button"
+                    class="btn-cancelar"
+                    id="btnCancelar"
+                >
+                    Cancelar
+                </button>
+
+                <button type="submit" class="btn-cadastrar">
+                    Salvar
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+    <script src="js/dashDesenvolvedor.js"></script>
+
+</body>
+</html>
