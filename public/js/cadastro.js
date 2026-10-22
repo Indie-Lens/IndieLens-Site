@@ -8,8 +8,7 @@ function cadastrar(){
     let senha = senha_input.value;
     let senhaConfirmacao = confirmacao_senha_input.value;
 
-    //ALTERAR P/REQUISITO DE TIPO, HARDCODED NO MOMENTO
-    let tipo = 1;
+    let perfil = document.querySelector('input[name="tipo_usuario"]:checked').value;
 
     //validações simples
     let nomeValido = (nome.length >= 1 && nome.length <= 50) ? true : false;
@@ -32,33 +31,14 @@ function cadastrar(){
         exibirErro("distintas");
     }
 
-    if(nomeValido && validarEmail(email) && validarSenha(senha) && senhasValidas){
-        fetch("/usuarios/cadastrarUsuario",
-            {
-                method : "POST",
-                headers : { "Content-Type" : "application/json"},
+       if(nomeValido && validarEmail(email) && validarSenha(senha) && senhasValidas){
+        sessionStorage.setItem("cadastro", JSON.stringify({ nome, email, senha, perfil }));
 
-                body : JSON.stringify({
-                    nomeServer : nome,
-                    emailServer : email,
-                    senhaServer : senha,
-                    tipoServer : tipo
-                }),
-            }
-        ).then(
-            function (resposta) {
-                console.log("resposta: ", resposta);
-
-                if(resposta.ok){
-                    setTimeout(() => { window.location = "login.html";}, "1000");
-                }
-            }
-        ).catch(
-            function(erro){
-                console.log(`Ocorreu um erro: ${erro}`);
-            }
-        );
+        window.location.href = perfil === "streamer"
+            ? "cadastro2-streamer.html"
+            : "cadastro2-desenvolvedor.html";
     }
+
 
 }
 
