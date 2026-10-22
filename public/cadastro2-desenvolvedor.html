@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Cadastro Desenvolvedor</title>
+
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/cadastro2-desenvolvedor.css">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+
+    <main class="container">
+
+        <section class="lado-formulario">
+
+            <header class="cabecalho">
+                <h1>Olá, Desenvolvedor</h1>
+                <h2>precisamos de mais algumas informações</h2>
+            </header>
+
+            <div class="avatar">
+                <img src="assets/imgs/avatar-desenvolvedor.png"
+                     alt="Avatar do desenvolvedor">
+            </div>
+
+            <form id="form-desenvolvedor">
+
+                <div class="campo">
+                    <input
+                        type="text"
+                        id="nome_estudio"
+                        name="nome_estudio"
+                        placeholder="Nome do estúdio"
+                        required
+                    >
+
+                    <i class="fa-solid fa-building"></i>
+                </div>
+
+                <div class="campo">
+                    <input
+                        type="url"
+                        id="url_estudio"
+                        name="url_estudio"
+                        placeholder="URL do estúdio"
+                        required
+                    >
+
+                    <i class="fa-brands fa-steam"></i>
+                </div>
+
+                <div class="campo campo-select">
+                    <select id="tipo_jogo" name="tipo_jogo" required>
+                        <option value="" selected disabled>
+                            Tipo de jogo Produzido
+                        </option>
+
+                        <option value="RPG">RPG</option>
+                        <option value="FPS">FPS</option>
+                        <option value="Acao">Ação</option>
+                        <option value="Aventura">Aventura</option>
+                        <option value="Terror">Terror</option>
+                        <option value="Estrategia">Estratégia</option>
+                        <option value="Simulacao">Simulação</option>
+                        <option value="Plataforma">Plataforma</option>
+                        <option value="Esportes">Esportes</option>
+                        <option value="Outro">Outro</option>
+                    </select>
+
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+
+                <button type="submit" class="botao">
+                    CADASTRAR
+                </button>
+
+            </form>
+
+        </section>
+
+        <div class="lado-imagem">
+            <div class="circulo-roxo"></div>
+
+            <img
+                class="personagem"
+                src="assets/imgs/desenvolvedor.png"
+                alt="Personagem de jogo"
+            >
+        </div>
+
+    </main>
+
+    <script src="js/cadastro2-desenvolvedor.js"></script>
+
+</body>
+</html>

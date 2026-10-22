@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Cadastro Streamer</title>
+
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/cadastro2-streamer.css">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+
+    <main class="container">
+
+        <section class="lado-formulario">
+
+            <header class="cabecalho">
+                <h1>Olá, Streamer</h1>
+                <h2>precisamos de mais algumas informações</h2>
+            </header>
+
+            <div class="avatar">
+                <img src="assets/imgs/avatar-streamer.png"
+                     alt="Avatar do streamer">
+            </div>
+
+            <form id="form-streamer">
+
+                <div class="campo">
+                    <input
+                        type="text"
+                        id="nickname"
+                        name="nickname"
+                        placeholder="Nickname"
+                        required
+                    >
+
+                    <i class="fa-solid fa-user"></i>
+                </div>
+
+                <div class="campo">
+                    <input
+                        type="text"
+                        id="nome_twitch"
+                        name="nome_twitch"
+                        placeholder="Nome da Twitch"
+                        required
+                    >
+
+                    <i class="fa-brands fa-twitch"></i>
+                </div>
+
+                <div class="campo">
+                    <input
+                        type="url"
+                        id="url_canal"
+                        name="url_canal"
+                        placeholder="URL do canal"
+                        required
+                    >
+
+                    <i class="fa-solid fa-link"></i>
+                </div>
+
+                <button type="submit" class="botao">
+                    CADASTRAR
+                </button>
+
+            </form>
+
+        </section>
+
+        <div class="lado-imagem">
+            <div class="circulo-verde"></div>
+
+            <img
+                class="personagem"
+                src="assets/imgs/desenvolvedor.png"
+                alt="Personagem gamer"
+            >
+        </div>
+
+    </main>
+
+    <script src="js/cadastro2-streamer.js"></script>
+
+</body>
+</html>
