@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IndieLens | Painéis Gerais</title>
+    <link rel="stylesheet" href="../../components/sidebar.css">
+    <link rel="stylesheet" href="./CSS/paineis.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="layout">
+        <div class="left-container" id="sidebar">
+
+        </div>
+        <div class="barra-notificacoes" id="barraNotificacoes">
+
+            <div class="notificacoes-topo">
+                <h2>Notificações</h2>
+
+                <button type="button" onclick="fecharNotificacoes()">X</button>
+            </div>
+
+            <div class="notificacao">
+                <h3> Jogo em promoção!</h3>
+                <p>Hades está com 50% de desconto.</p>
+                <span>Promoção</span>
+            </div>
+
+            <div class="notificacao">
+                <h3> Novo lançamento</h3>
+                <p>Um novo jogo de RPG foi lançado na plataforma.</p>
+                <span>Lançamento</span>
+            </div>
+
+            <div class="notificacao">
+                <h3> Jogo da sua lista de favoritos</h3>
+                <p>Hollow Knight entrou em promoção!</p>
+                <span>Favoritos</span>
+            </div>
+
+            <div class="notificacao">
+                <h3> Novidade na plataforma</h3>
+                <p>Confira os jogos recém-lançados.</p>
+                <span>Novidades</span>
+            </div>
+
+        </div>
+        <main class="conteudo" id="dashboard">
+            <header class="topo">
+                <div>
+                    <h1><span>DASHBOARD</span> — Painel Geral</h1>
+                    <p>Acompanhe o desempenho dos seus jogos independentes.</p>
+                </div>
+            </header>
+
+            <section class="metricas">
+                <article class="metrica verde">
+                    <div class="metrica-topo"><span>Jogos publicados</span></div><strong>4</strong>
+                </article>
+                <article class="metrica roxa">
+                    <div class="metrica-topo"><span>Média de avaliações</span></span></div><strong>79%</strong>
+                </article>
+                <article class="metrica verde">
+                    <div class="metrica-topo"><span>Jogadores estimados</span></span></div><strong>356 mil</strong>
+                </article>
+                <article class="metrica roxa">
+                    <div class="metrica-topo"><span>Preço médio</span></span></div><strong>R$ 14,99</strong>
+                </article>
+            </section>
+
+            <section class="grade">
+                <article class="painel" id="desempenho">
+                    <h2 class="painel-titulo">Desempenho dos seus jogos</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Jogo</th>
+                                <th>Avaliações positivas</th>
+                                <th>Total jogadores</th>
+                                <th>Preço</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Jogo A</td>
+                                <td class="valor-verde">82%</td>
+                                <td>312 mil</td>
+                                <td>R$ 31,54</td>
+                            </tr>
+                            <tr>
+                                <td>Jogo B</td>
+                                <td class="valor-verde">67%</td>
+                                <td>312 mil</td>
+                                <td>R$ 61,54</td>
+                            </tr>
+                            <tr>
+                                <td>Jogo C</td>
+                                <td>32%</td>
+                                <td>150 mil</td>
+                                <td>R$ 41,54</td>
+                            </tr>
+                            <tr>
+                                <td>Jogo D</td>
+                                <td class="valor-verde">84%</td>
+                                <td>110 mil</td>
+                                <td>R$ 11,54</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </article>
+
+                <article class="painel" id="lancamentos">
+                    <h2 class="painel-titulo">Evolução dos seus lançamentos</h2>
+                    <p class="subtitulo">Percepção dos jogos através de avaliações positivas — %</p>
+                    <div class="grafico">
+                        <div class="eixo-y">
+                            <span>100</span><span>80</span><span>60</span><span>40</span><span>20</span><span>0</span>
+                        </div>
+                        <div class="area-grafico">
+                            <div class="linhas-grafico">
+                                <div class="coluna-grafico roxa" style="height:82%"><span>82%</span></div>
+                                <div class="coluna-grafico verde" style="height:67%"><span>67%</span></div>
+                                <div class="coluna-grafico cinza" style="height:32%"><span>32%</span></div>
+                                <div class="coluna-grafico roxa" style="height:84%"><span>84%</span></div>
+                            </div>
+                            <div class="rotulos-grafico"><span>Jogo A</span><span>Jogo B</span><span>Jogo
+                                    C</span><span>Jogo D</span></div>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="painel" id="mercado">
+                    <h2 class="painel-titulo">Oportunidades de mercado</h2>
+                    <p class="subtitulo">Possíveis nichos com pouca concorrência</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Gênero</th>
+                                <th>Jogos concorrentes</th>
+                                <th>Média de avaliações positivas</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Puzzle</td>
+                                <td>320</td>
+                                <td class="valor-verde">88%</td>
+                            </tr>
+                            <tr>
+                                <td>Simulação</td>
+                                <td>450</td>
+                                <td class="valor-verde">84%</td>
+                            </tr>
+                            <tr>
+                                <td>RPG</td>
+                                <td>1.240</td>
+                                <td>82%</td>
+                            </tr>
+                            <tr>
+                                <td>Ação</td>
+                                <td>2.100</td>
+                                <td>79%</td>
+                            </tr>
+                            <tr>
+                                <td>Aventura</td>
+                                <td>1.800</td>
+                                <td>77%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </article>
+
+                <article class="painel">
+                    <div class="cabecalho-posicao">
+                        <h2 class="painel-titulo">Posição no mercado</h2>
+                        <label class="seletor-genero">Gênero:
+                            <select id="generoSelecionado" onchange="alterarGenero()">
+                                <option value="Aventura">Aventura</option>
+                                <option value="RPG">RPG</option>
+                                <option value="Ação">Ação</option>
+                                <option value="Puzzle">Puzzle</option>
+                                <option value="Simulação">Simulação</option>
+                            </select>
+                        </label>
+                    </div>
+                    <p class="subtitulo">Colocação de seus jogos conforme gênero</p>
+                    <div class="ranking">
+                        <div class="ranking-linha"><span class="ranking-nome">Jogo A</span>
+                            <div class="ranking-trilho">
+                                <div id="barra1" class="ranking-barra" style="width:12%"></div>
+                            </div><strong id="posicao1" class="ranking-numero">12º</strong>
+                        </div>
+                        <div class="ranking-linha"><span class="ranking-nome">Jogo B</span>
+                            <div class="ranking-trilho">
+                                <div id="barra2" class="ranking-barra" style="width:87%"></div>
+                            </div><strong id="posicao2" class="ranking-numero">87º</strong>
+                        </div>
+                        <div class="ranking-linha"><span class="ranking-nome">Jogo C</span>
+                            <div class="ranking-trilho">
+                                <div id="barra3" class="ranking-barra" style="width:26%"></div>
+                            </div><strong id="posicao3" class="ranking-numero">26º</strong>
+                        </div>
+                        <div class="ranking-linha"><span class="ranking-nome">Jogo D</span>
+                            <div class="ranking-trilho">
+                                <div id="barra4" class="ranking-barra" style="width:5%"></div>
+                            </div><strong id="posicao4" class="ranking-numero">5º</strong>
+                        </div>
+                    </div>
+                </article>
+            </section>
+        </main>
+    </div>
+
+</body>
+<script>
+    function alterarGenero() {
+        var genero = document.getElementById("generoSelecionado").value;
+        if (genero == "Aventura") {
+            document.getElementById("barra1").style.width = "12%";
+            document.getElementById("barra2").style.width = "87%";
+            document.getElementById("barra3").style.width = "26%";
+            document.getElementById("barra4").style.width = "5%";
+            document.getElementById("posicao1").innerHTML = "12º";
+            document.getElementById("posicao2").innerHTML = "87º";
+            document.getElementById("posicao3").innerHTML = "26º";
+            document.getElementById("posicao4").innerHTML = "5º";
+        } else if (genero == "RPG") {
+            document.getElementById("barra1").style.width = "35%";
+            document.getElementById("barra2").style.width = "62%";
+            document.getElementById("barra3").style.width = "18%";
+            document.getElementById("barra4").style.width = "42%";
+            document.getElementById("posicao1").innerHTML = "35º";
+            document.getElementById("posicao2").innerHTML = "62º";
+            document.getElementById("posicao3").innerHTML = "18º";
+            document.getElementById("posicao4").innerHTML = "42º";
+        } else if (genero == "Ação") {
+            document.getElementById("barra1").style.width = "56%";
+            document.getElementById("barra2").style.width = "23%";
+            document.getElementById("barra3").style.width = "72%";
+            document.getElementById("barra4").style.width = "15%";
+            document.getElementById("posicao1").innerHTML = "56º";
+            document.getElementById("posicao2").innerHTML = "23º";
+            document.getElementById("posicao3").innerHTML = "72º";
+            document.getElementById("posicao4").innerHTML = "15º";
+        } else if (genero == "Puzzle") {
+            document.getElementById("barra1").style.width = "22%";
+            document.getElementById("barra2").style.width = "14%";
+            document.getElementById("barra3").style.width = "48%";
+            document.getElementById("barra4").style.width = "31%";
+            document.getElementById("posicao1").innerHTML = "22º";
+            document.getElementById("posicao2").innerHTML = "14º";
+            document.getElementById("posicao3").innerHTML = "48º";
+            document.getElementById("posicao4").innerHTML = "31º";
+        } else if (genero == "Simulação") {
+            document.getElementById("barra1").style.width = "41%";
+            document.getElementById("barra2").style.width = "52%";
+            document.getElementById("barra3").style.width = "29%";
+            document.getElementById("barra4").style.width = "9%";
+            document.getElementById("posicao1").innerHTML = "41º";
+            document.getElementById("posicao2").innerHTML = "52º";
+            document.getElementById("posicao3").innerHTML = "29º";
+            document.getElementById("posicao4").innerHTML = "9º";
+        }
+    }
+
+    function abrirNotificacoes() {
+        document.getElementById("barraNotificacoes").style.display = "block";
+    }
+
+    function fecharNotificacoes() {
+        document.getElementById("barraNotificacoes").style.display = "none";
+    }
+</script>
+
+<script>
+    fetch("../../components/sidebar.html")
+        .then((res) => {
+            if (!res.ok) {
+                throw new Error(
+                    "Não foi possível carregar o componente"
+                );
+            }
+            return res.text();
+        })
+        .then((data) => {
+            document.getElementById("sidebar").innerHTML =
+                data;
+            inicializarFuturosLancamentos(
+                document.getElementById("sidebar")
+            );
+        })
+        .catch((erro) => console.log(erro));
+</script>
+
+</html>

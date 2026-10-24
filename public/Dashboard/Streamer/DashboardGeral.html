@@ -5,18 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Geral - Streamer</title>
     <link rel="stylesheet" href="CSS/dashboardGeral.css">
+    <link rel="stylesheet" href="../../components/sidebar.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     
     <div class="container">
         
-        <aside class="sidebar">
-            <div class="sidebar-logo">Streamer</div>
-            <nav class="sidebar-nav">
-                <a href="DashboardGeral.html" class="active">Dashboard</a>
-                <a href="selecionarLive.html">Lives</a>
-            </nav>
+        <aside class="sidebar" id="sidebar">
+
         </aside>
 
         <main class="conteudo-principal">
@@ -169,7 +166,7 @@
             </div>
         </main>
     </div>
-
+    <script src="./JS/global.js"></script>
     <script>
         Chart.defaults.color = '#8c8d9e'; 
         Chart.defaults.font.family = "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif";
@@ -271,5 +268,26 @@
             }
         });
     </script>
+
+    <script>
+        fetch("../../components/sidebar.html")
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error(
+                        "Não foi possível carregar o componente"
+                    );
+                }
+                return res.text();
+            })
+            .then((data) => {
+                document.getElementById("sidebar").innerHTML =
+                    data;
+                inicializarFuturosLancamentos(
+                    document.getElementById("sidebar")
+                );
+            })
+            .catch((erro) => console.log(erro));
+    </script>
+
 </body>
 </html>

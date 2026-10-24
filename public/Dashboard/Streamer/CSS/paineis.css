@@ -1,12 +1,7 @@
-    :root {
-            --verde-primario: #aaff00;
-            --roxo-primario: #a445f5;
-            --fundo: #080b10;
-            --painel: #0d121a;
-            --borda: #263142;
-            --texto: #f4f6fb;
-            --texto-secundario: #aab5c7;
-        }
+    
+    @import url("../../../css/style.css");
+    
+
 
         * { 
             margin: 0; 

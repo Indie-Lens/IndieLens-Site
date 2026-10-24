@@ -5,15 +5,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="../../css/style.css" />
         <link rel="stylesheet" href="./CSS/SelecionarLives.css" />
+        <link rel="stylesheet" href="../../components/sidebar.css">
         <title>Document</title>
     </head>
     <body>
-        <aside class="sidebar">
-            <div class="sidebar-logo">Streamer</div>
-            <nav class="sidebar-nav">
-                <a href="DashboardGeral.html" class="active">Dashboard</a>
-                <a href="selecionarLive.html">Lives</a>
-            </nav>
+        <aside class="sidebar" id="sidebar">
         </aside>
 
         <main class="conteudo-principal">
@@ -83,6 +79,7 @@
             </section>
 
             <section class="grid-lives">
+                <a href="./DashboardGeral.html">
                 <article class="card-live">
                     <div class="card-header">
                         <div class="thumb-container">
@@ -143,6 +140,7 @@
                         <span class="tag">Rogue-like</span>
                     </div>
                 </article>
+            </a>
 
                 <article class="card-live">
                     <div class="card-header">
@@ -324,4 +322,26 @@ document.addEventListener("keydown", (event) => {
 });
 </script>
 
+
+
+<script>
+    fetch("../../components/sidebar.html")
+        .then((res) => {
+            if (!res.ok) {
+                throw new Error(
+                    "Não foi possível carregar o componente"
+                );
+            }
+            return res.text();
+        })
+        .then((data) => {
+            document.getElementById("sidebar").innerHTML =
+                data;
+            inicializarFuturosLancamentos(
+                document.getElementById("sidebar")
+            );
+        })
+        .catch((erro) => console.log(erro));
+</script>
+<script src="./JS/global.js"></script>
 </html>

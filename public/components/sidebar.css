@@ -1,4 +1,4 @@
-body{
+body {
     margin: 0;
 }
 
@@ -11,9 +11,20 @@ body{
     justify-content: space-between;
     width: 260px;
     height: 100vh;
-    background-color:#14141C;
+    background-color: #14141c;
 }
 
+.sidebar {
+    width: 250px;
+    background-color: var(--fundo-elementos);
+    border-right: 1px solid var(--borda-suave);
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+}
 
 .top-content {
     display: flex;
@@ -22,9 +33,7 @@ body{
     justify-content: space-around;
     width: 100%;
     min-height: 15vh;
-    
 }
-
 
 .empresa {
     display: flex;
@@ -35,11 +44,11 @@ body{
     min-height: 50px;
     margin-top: 10px;
     color: #fff;
-     font-family: "Inter", sans-serif;
+    font-family: "Inter", sans-serif;
 }
 
 .empresa img {
-      display: block;
+    display: block;
     width: 200px;
     height: 59px;
     object-fit: contain;
@@ -50,7 +59,6 @@ body{
     display: flex;
     flex-direction: column;
     width: 100%;
-    
 }
 
 .menu-title {
@@ -60,8 +68,7 @@ body{
     font-size: 17px;
 }
 
-.opcoes-btns{
-    
+.opcoes-btns {
     font-size: 12px;
     display: flex;
     flex-direction: column;
@@ -81,7 +88,7 @@ body{
     min-height: 50px;
     padding: 0 15px;
     text-decoration: none;
-     font-family: "Inter", sans-serif;
+    font-family: "Inter", sans-serif;
     background-color: #111925;
 }
 
@@ -89,7 +96,7 @@ body{
     font-size: 15px;
 }
 
-.opcao img{
+.opcao img {
     width: 19px;
 }
 
@@ -99,8 +106,6 @@ body{
     width: 100%;
     margin-top: auto;
 }
-
-
 
 .usuario {
     display: flex;
@@ -113,8 +118,6 @@ body{
     background-color: #1c1c26;
     color: #ffffff;
 }
-
-
 
 .icon-foto {
     width: 40px;
@@ -130,7 +133,6 @@ body{
     height: 100%;
     object-fit: cover;
 }
-
 
 .sobre-usuario {
     display: flex;
@@ -153,12 +155,11 @@ body{
     font-size: 12px;
 }
 
-
 .btn-perfil {
     display: flex;
     align-items: center;
     justify-content: center;
-   
+
     height: 32px;
     padding: 7px;
 
@@ -190,7 +191,6 @@ body{
     }
 }
 
-
 .painel-notificacoes {
     display: none;
     position: fixed;
@@ -212,14 +212,17 @@ body{
     display: none;
     position: fixed;
     top: 0;
-    left: 245px;
+    left: 260px;
     width: 320px;
     height: 100vh;
-    background: var(--painel);
-    border-right: 1px solid var(--borda);
     padding: 20px;
+    box-sizing: border-box;
     overflow-y: auto;
-    z-index: 10;
+
+    background-color: #0d121a;
+    opacity: 1;
+    z-index: 9999;
+    isolation: isolate;
 }
 
 .notificacoes-topo {
@@ -268,7 +271,6 @@ body{
     font-size: 0.75rem;
     font-weight: bold;
 }
-
 
 @media (max-width: 1100px) {
     .barra-notificacoes {
