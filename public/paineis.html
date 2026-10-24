@@ -33,10 +33,10 @@
                         <img src="assets/imgs/analiseEspecifica.png" alt="">
                     </a>
 
-                    <a href="#" class="opcao">
+                    <button class="opcao" onclick="abrirNotificacoes()">
                         <span>Notificações</span>
                         <img src="assets/imgs/notificacoes.png" alt="">
-                    </a>
+                    </button>
 
                     <a href="#" class="opcao">
                         <span>Análise de mercado</span>
@@ -52,10 +52,6 @@
                         <span>Sair</span>
                         <img src="assets/imgs/voltar.png" alt="">
                     </a>
-
-
-
-
                 </nav>
             </div>
 
@@ -76,6 +72,39 @@
                         <img src="assets/imgs/configuracoes.png" alt="">
                     </button>
                 </div>
+            </div>
+
+        </div>
+        <div class="barra-notificacoes" id="barraNotificacoes">
+
+            <div class="notificacoes-topo">
+                <h2>Notificações</h2>
+
+                <button type="button" onclick="fecharNotificacoes()">X</button>
+            </div>
+
+            <div class="notificacao">
+                <h3> Jogo em promoção!</h3>
+                <p>Hades está com 50% de desconto.</p>
+                <span>Promoção</span>
+            </div>
+
+            <div class="notificacao">
+                <h3> Novo lançamento</h3>
+                <p>Um novo jogo de RPG foi lançado na plataforma.</p>
+                <span>Lançamento</span>
+            </div>
+
+            <div class="notificacao">
+                <h3> Jogo da sua lista de favoritos</h3>
+                <p>Hollow Knight entrou em promoção!</p>
+                <span>Favoritos</span>
+            </div>
+
+            <div class="notificacao">
+                <h3> Novidade na plataforma</h3>
+                <p>Confira os jogos recém-lançados.</p>
+                <span>Novidades</span>
             </div>
 
         </div>
@@ -297,6 +326,13 @@
         }
     }
 
+    function abrirNotificacoes() {
+        document.getElementById("barraNotificacoes").style.display = "block";
+    }
+
+    function fecharNotificacoes() {
+        document.getElementById("barraNotificacoes").style.display = "none";
+    }
 </script>
 
 </html>
