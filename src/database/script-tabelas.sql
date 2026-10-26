@@ -88,6 +88,23 @@ CREATE TABLE IF NOT EXISTS jogo_main (
     REFERENCES Registro (id_registro)
 );
 
+-- Notificações
+CREATE TABLE IF NOT EXISTS notificacao (
+    id_notificacao INT AUTO_INCREMENT PRIMARY KEY,
+    id_usuario INT NOT NULL,
+    id_jogo INT NOT NULL,
+    tipo VARCHAR(30) NOT NULL,
+    titulo VARCHAR(100) NOT NULL,
+    mensagem VARCHAR(255) NOT NULL,
+    data_criacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    lida TINYINT(1) NOT NULL DEFAULT 0,
+    data_leitura DATETIME NULL,
+
+    CONSTRAINT fk_notificacao_usuario
+        FOREIGN KEY (id_usuario)
+        REFERENCES usuario (id_usuario)
+);
+
 -- Jogo Suporte
 CREATE TABLE IF NOT EXISTS jogo_suporte (
   id_jogo INT NOT NULL,
@@ -237,6 +254,44 @@ INSERT INTO perfil (id_perfil, tipo, descricao) VALUES
 
 -- Inserindo usuario
 INSERT INTO usuario (id_perfil, nome, email, senha) VALUES
-(1, 'UsuarioTeste', 'Teste@Teste.com', 'Senha123');
+(1, "UsuarioTeste", "Teste@Teste.com", "Senha123");
+
+-- VERIFICANDO SE O JOGO EXISTEs
+SELECT COUNT(*) AS quantidade
+FROM jogo_main
+WHERE id_jogo = 100;
+
+-- INSERINDO NOTIFICAÇÃO
+INSERT INTO notificacao (
+    id_usuario,
+    id_jogo,
+    tipo,
+    titulo,
+    mensagem )
+VALUES (
+    1,
+    1,
+    'JOGO_NOVO',
+    'Novo jogo disponível!',
+    'Um novo jogo foi adicionado à plataforma.');
+
+-- MARCANDO UMA NOTIFICAÇÃO COMO LIDA
+UPDATE notificacao
+SET
+    lida = 1,
+    data_leitura = CURRENT_TIMESTAMP
+WHERE id_notificacao = 1
+  AND id_usuario = 1;
+  
+-- SELECIONANDO QUANTIDADE DE NOTIFICACOES NAO LIDAS (USAR NO CONTADOR)
+SELECT COUNT(*) AS total_notificacoes
+FROM notificacao
+WHERE id_usuario = 1
+  AND lida = 0;
+  
+-- APAGANDO TODAS AS NOTIFICAÇÕES DO USUÁRIO 
+DELETE FROM notificacao
+WHERE id_usuario = 1;
+
 -- CASO DE ALGUM BO
 -- DROP DATABASE indieLens;
