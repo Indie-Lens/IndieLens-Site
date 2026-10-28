@@ -19,7 +19,14 @@ body {
     min-height: 100vh;
 }
 
+.topo h1 {
+    font-size: 1.65rem;
+    font-weight: 800;
+}
 
+.topo h1 span {
+    color: var(--verde-primario);
+}
 
 .conteudo-principal {
     flex: 1;
@@ -72,9 +79,17 @@ body {
     background: linear-gradient(145deg, var(--fundo-elementos), #17151f);
 }
 
-.icone.roxo { color: var(--roxo-primario); }
-.icone.verde { color: var(--verde-primario); }
-.icone.amarelo { color: var(--verde-secundario); }
+.icone.roxo {
+    color: var(--roxo-primario);
+}
+
+.icone.verde {
+    color: var(--verde-primario);
+}
+
+.icone.amarelo {
+    color: var(--verde-secundario);
+}
 
 .linha-graficos {
     display: grid;
@@ -82,7 +97,8 @@ body {
     gap: 15px;
 }
 
-.linha-graficos h3, .linha-inferior h3 {
+.linha-graficos h3,
+.linha-inferior h3 {
     font-size: 1rem;
     margin-bottom: 20px;
 }
@@ -119,8 +135,14 @@ body {
     margin: 10px 0;
 }
 
-.caixa-roxa:hover { border-color: var(--roxo-primario); box-shadow: 0 0 10px var(--glow-roxo); }
-.caixa-verde:hover { border-color: var(--verde-primario); }
+.caixa-roxa:hover {
+    border-color: var(--roxo-primario);
+    box-shadow: 0 0 10px var(--glow-roxo);
+}
+
+.caixa-verde:hover {
+    border-color: var(--verde-primario);
+}
 
 .cabecalho-flexivel {
     display: flex;

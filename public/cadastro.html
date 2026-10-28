@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,10 +24,10 @@
       <!-- ESCOLHA DO PERFIL -->
       <div class="tipo-usuario">
 
-        <input type="radio" name="tipo_usuario" id="streamer" value="streamer" checked>
+        <input type="radio" name="tipo_usuario" id="streamer" value="4" checked>
         <label for="streamer">Streamer</label>
 
-        <input type="radio" name="tipo_usuario" id="desenvolvedor" value="desenvolvedor">
+        <input type="radio" name="tipo_usuario" id="desenvolvedor" value="3">
         <label for="desenvolvedor">Desenvolvedor</label>
 
         <div class="seletor"></div>
@@ -39,49 +40,49 @@
 
       <div class="formulario">
 
-        
-<div class="campo">
-    <input id="nome_input" type="text" placeholder="Nome completo">
-    <i class="fa-solid fa-user"></i>
 
-    <span class="erro" id="erro_nome">
-        <i class="fa-solid fa-circle-exclamation"></i>
-        <span class="mensagem-erro">Nome inválido</span>
-    </span>
-</div>
+        <div class="campo">
+          <input id="nome_input" type="text" placeholder="Nome completo">
+          <i class="fa-solid fa-user"></i>
 
-
-<div class="campo">
-    <input id="email_input" type="text" placeholder="Email">
-    <i class="fa-solid fa-envelope"></i>
-
-    <span class="erro" id="erro_email">
-        <i class="fa-solid fa-circle-exclamation"></i>
-        <span class="mensagem-erro">Email inválido</span>
-    </span>
-</div>
+          <span class="erro" id="erro_nome">
+            <i class="fa-solid fa-circle-exclamation"></i>
+            <span class="mensagem-erro">Nome inválido</span>
+          </span>
+        </div>
 
 
-<div class="campo">
-    <input id="senha_input" type="password" placeholder="Senha">
-    <i class="fa-solid fa-circle-info"></i>
+        <div class="campo">
+          <input id="email_input" type="text" placeholder="Email">
+          <i class="fa-solid fa-envelope"></i>
 
-    <span class="erro" id="erro_senha">
-        <i class="fa-solid fa-circle-exclamation"></i>
-        <span class="mensagem-erro">Senha inválida</span>
-    </span>
-</div>
+          <span class="erro" id="erro_email">
+            <i class="fa-solid fa-circle-exclamation"></i>
+            <span class="mensagem-erro">Email inválido</span>
+          </span>
+        </div>
 
 
-<div class="campo">
-    <input id="confirmacao_senha_input" type="password" placeholder="Confirmar Senha">
-    <i class="fa-solid fa-circle-info"></i>
+        <div class="campo">
+          <input id="senha_input" type="password" placeholder="Senha">
+          <i class="fa-solid fa-circle-info"></i>
 
-    <span class="erro" id="erro_confirmacao">
-        <i class="fa-solid fa-circle-exclamation"></i>
-        <span class="mensagem-erro">As senhas não coincidem</span>
-    </span>
-</div>
+          <span class="erro" id="erro_senha">
+            <i class="fa-solid fa-circle-exclamation"></i>
+            <span class="mensagem-erro">Senha inválida</span>
+          </span>
+        </div>
+
+
+        <div class="campo">
+          <input id="confirmacao_senha_input" type="password" placeholder="Confirmar Senha">
+          <i class="fa-solid fa-circle-info"></i>
+
+          <span class="erro" id="erro_confirmacao">
+            <i class="fa-solid fa-circle-exclamation"></i>
+            <span class="mensagem-erro">As senhas não coincidem</span>
+          </span>
+        </div>
 
 
         <button class="botao" onclick="cadastrar()">CADASTRAR</button>
@@ -101,5 +102,5 @@
   </div>
 
 </body>
-</html>
 
+</html>

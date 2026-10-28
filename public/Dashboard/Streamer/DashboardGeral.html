@@ -18,7 +18,12 @@
 
         <main class="conteudo-principal">
             <div class="painel-geral">
-                
+                  <header class="topo">
+                <div>
+                    <h1><span>DASHBOARD</span> — Painel Geral</h1>
+
+                </div>
+            </header>
                 <div class="linha-indicadores">
                     <div class="cartao cartao-indicador">
                         <div class="cabecalho-indicador">
@@ -270,7 +275,7 @@
     </script>
 
     <script>
-        fetch("../../components/sidebar.html")
+        fetch("./sidebarStreamer.html")
             .then((res) => {
                 if (!res.ok) {
                     throw new Error(

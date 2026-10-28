@@ -69,8 +69,17 @@
     }
 }
 
+.card-Btn-lista {
+    background-color: var(--roxo-primario);
+        clip-path: none;
+        padding: 12px 20px;
+        border-radius: 4px;
+        color: var(--texto-branco);
+        border: 0px;
+        cursor: pointer;
+    }
 .streamers-que-recomendam p {
-    color: #aaff00;
+    color: var(--verde-primario);
     font-weight: bold;
     font-size: 14px;
     margin: 0;

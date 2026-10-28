@@ -9,23 +9,32 @@
     font-family: Inter, sans-serif;
 }
 .fl-cabecalho {
+    margin-top: 20px;
+    width: 40%;
+    
     margin-bottom: 22px;
     display: flex;
+    height: 100px;
     align-items: center;
+    justify-content: center;
+    
+    padding-left: 10%;
 }
+
 .fl-cabecalho h2 {
     display: inline-block;
     margin: 0 0 12px;
-    padding: 8px 24px 8px 18px;
+    padding: 8px 24px 8px 30px;
     background: var(--fl-roxo);
-    clip-path: polygon(12% 0, 100% 0, 100% 100%, 0 100%, 0 72%);
-    font-size: 16px;
+    
+    clip-path: polygon(10% 0, 100% 0, 100% 100%, 0 100%);
+    font-size: 20px;
     font-weight: 800;
 }
 .fl-cabecalho p {
     margin: 0;
     color: #e7e7e7;
-    font-size: 12px;
+    font-size: 20px;
     font-weight: 500;
 }
 .fl-painel {
@@ -144,9 +153,9 @@
 }
 .fl-jogo {
     display: grid;
-    grid-template-columns: 46px minmax(0, 1fr) 66px;
+    grid-template-columns: 55px minmax(0, 1fr) 100px;
     align-items: stretch;
-    min-height: 40px;
+    min-height: 50px;
     overflow: hidden;
     border-radius: 3px;
     background: var(--fl-roxo);
@@ -161,7 +170,7 @@
     clip-path: polygon(0 0, 100% 0, 78% 100%, 0 100%);
 }
 .fl-data span {
-    font-size: 7px;
+    font-size: 8px;
     font-weight: 800;
 }
 .fl-data strong {
@@ -174,7 +183,7 @@
     justify-content: center;
     padding: 5px 7px;
     color: #fff;
-    font-size: 9px;
+    font-size: 15px;
     font-weight: 700;
     text-align: center;
 }
