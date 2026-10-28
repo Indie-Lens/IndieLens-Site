@@ -51,7 +51,7 @@
 }
 
 .header-titulo p {
-    color: #fff;
+    color: var(--texto-branco);
     font-size: 36px;
     font-weight: bold;
     margin: 0;
@@ -62,7 +62,7 @@
 
 
     p {
-        color: #ffffff;
+        color: var(--texto-branco);
         font-size: 15px;
         line-height: 1.4;
         margin: 0;
@@ -86,14 +86,14 @@
 }
 
 .preco-valor {
-    color: #fff;
+    color: var(--texto-branco);
     font-size: 28px;
     font-weight: bold;
     margin: 0;
 }
 
 .preco-loja {
-    color: #ddd;
+    color: var(--texto-branco);
     font-size: 13px;
     margin: 0;
     font-style: italic;
@@ -127,20 +127,20 @@
 .btn-opcao {
     font-size: 21px;
     width: 250px;
-    color: #fff;
-    background-color: black;
+    color: var(--texto-branco);
+    background-color: var(--fundo-preto);
     border: 0;
     cursor: pointer;
 }
 
 .btn-opcao.active {
-    background-color: #8a2be2;
+    background-color: var(--roxo-primario);
 }
 
 .container-informacoes {
     height: 85%;
-    border-top: 4px solid #aaff00;
-    background-color: #252525;
+    border-top: 4px solid var(--verde-primario);
+    background-color: var(--fundo-campo);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -171,7 +171,7 @@
 }
 
 .card01, .card02, .card03 {
-    color: #fff;
+    color: var(--texto-branco);
     padding: 10px;
     display: flex;
     flex-direction: column;
@@ -191,7 +191,7 @@
     white-space: nowrap;
     
     a {
-        color: #aaff00;
+        color: var(--verde-primario);
         cursor: pointer;
         text-decoration: none;
     }
@@ -236,7 +236,7 @@
 }
 
 .card04 {
-    color: #fff;
+    color: var(--texto-branco);
     display: flex;
     flex-direction: column;
     height: auto;
@@ -261,7 +261,7 @@
     height: 100%;
     min-height: 0;
     gap: 25px;
-    color: #fff;
+    color: var(--texto-branco);
 }
 
 /* Linha de cima */
@@ -298,8 +298,8 @@
     height: 22px;
 }
 
-.stat-icone.positivo { background-color: #1e8a3e; }
-.stat-icone.negativo { background-color: #d62020; }
+.stat-icone.positivo { background-color: var(--icone-positivo); }
+.stat-icone.negativo { background-color: var(--icone-negativo); }
 .stat-icone.negativo svg { transform: rotate(180deg); }
 
 .stat-label {
@@ -362,7 +362,7 @@
 }
 
 .review-card {
-    background-color: #000;
+    background-color: var(--fundo-preto);
     border-radius: 10px;
     padding: 15px 20px;
 }

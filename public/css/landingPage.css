@@ -8,7 +8,7 @@
 }
 
 body {
-    background-color: black;
+    background-color: var(--fundo-navbar);
     overflow-x: hidden;
 }
 
@@ -27,14 +27,14 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #000000;
+    background-color: var(--fundo-navbar);
     padding: 15px 50px;
     min-height: 90px;
 }
 
 .logo {
     a {
-        color: #ffffff;
+        color: var(--texto-branco);
         text-decoration: none;
         font-size: 1.1rem;
         font-weight: 700;
@@ -56,7 +56,7 @@ body {
     list-style: none;
 
     li a {
-        color: #ffffff;
+        color: var(--texto-branco);
         text-decoration: none;
         font-size: 0.95rem;
         font-weight: 700;
@@ -125,12 +125,12 @@ body {
     text-align: left;
     justify-content: flex-end;
     gap: 20px;
-    color: white;
+    color: var(--texto-branco);
     padding: 20px 0;
 }
 
 .texto-destaque-verde {
-    color: #aaff00;
+    color: var(--verde-primario);
 }
 
 .header-para {
@@ -146,7 +146,7 @@ body {
 .header-btn {
     display: inline-block;
     background-color: var(--roxo-primario);
-    color: white;
+    color: var(--texto-branco);
     text-decoration: none;
     font-weight: 700;
     font-size: 1rem;
@@ -167,7 +167,7 @@ body {
     position: relative;
     width: 100%;
     min-height: 550px;
-    background-color: #0d0d0d;
+    background-color: var(--preto-primario);
     overflow: hidden;
     display: flex;
     align-items: center;
@@ -225,7 +225,7 @@ body {
     padding-right: 15%;
 
     h2 {
-        color: #ffffff;
+        color: var(--texto-branco);
         font-size: 2rem;
         font-weight: 900;
         line-height: 1.15;
@@ -250,7 +250,7 @@ body {
 }
 
 .jogosPopulares-titulo {
-    color: white;
+    color: var(--texto-branco);
     margin-bottom: 20px;
 }
 
@@ -266,8 +266,8 @@ body {
     display: flex;
     width: 100%;
     min-height: 70px;
-    background-color: #252525;
-    color: white;
+    background-color: var(--fundo-campo);
+    color: var(--texto-branco);
 }
 
 .card-Ranq {
@@ -338,7 +338,7 @@ body {
 
 .card-Btn2 {
     background-color: var(--roxo-primario);
-    color: #ffffff;
+    color: var(--texto-branco);
     text-decoration: none;
     font-size: 0.85rem;
     font-weight: 900;
@@ -352,7 +352,7 @@ body {
 
 .card-Btn1 {
     background-color: var(--roxo-primario);
-    color: #ffffff;
+    color: var(--texto-branco);
     text-decoration: none;
     font-size: 0.85rem;
     font-weight: 900;
@@ -365,10 +365,10 @@ body {
 
 /* Generos */
 .sessao-generos {
-    background-color: #000000;
+    background-color: var(--fundo-preto);
     padding: 60px 20px;
     text-align: center;
-    color: #ffffff;
+    color: var(--texto-branco);
     margin-bottom: 20px;
 }
 
@@ -396,7 +396,7 @@ body {
     padding: 35px 20px;
     border-radius: 6px;
     text-decoration: none;
-    color: #ffffff;
+    color: var(--texto-branco);
     border: 2px solid transparent;
     transition: border-color 0.3s ease, transform 0.2s ease;
 
@@ -411,7 +411,7 @@ body {
 
     p {
         font-size: 0.75rem;
-        color: #a0a0a0;
+        color: var(--texto-paragrafo);
         line-height: 1.4;
         text-align: center;
     }
@@ -430,8 +430,8 @@ body {
 
 /* Footer */
 .footer-main {
-    
-    background-color: #3b1e5a;
+    margin-top: 50px;
+    background-color: var(--roxo-secundario);
     padding: 40px 20px;
     color: var(--texto-branco);
 }
@@ -480,9 +480,9 @@ body {
 /* Parte do Sobre Nos */
 
 .sessao-sobre {
-    margin-bottom: 50px;
+    margin-bottom: 0px;
     width: 100%;
-    background-color: #0d0d0d;
+    
 }
 
 .sobre-bloco {
@@ -511,7 +511,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background-color: #252525;
+    background-color: var(--fundo-campo);
     padding: 40px;
 }
 

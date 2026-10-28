@@ -2,16 +2,6 @@
     @import url("../../../css/style.css");
     
 
-    :root {
-        --verde-primario: #aaff00;
-        --roxo-primario: #a445f5;
-        --fundo: #080b10;
-        --painel: #0d121a;
-        --borda: #263142;
-        --texto: #f4f6fb;
-        --texto-secundario: #aab5c7;
-    }
-
     * {
         margin: 0;
         padding: 0;
@@ -166,12 +156,12 @@
     th,
     td {
         padding: 11px 10px;
-        border: 1px solid #222d3b;
+        border: 1px solid var(--borda);
         text-align: left;
     }
 
     th {
-        background: #151d29;
+        background: var(--label-painel);
         color: #e4eaf4;
         font-weight: 600;
     }
@@ -181,7 +171,7 @@
     }
 
     tbody tr:hover {
-        background: #151d29;
+        background: var(--label-painel);
     }
 
     .valor-verde {
@@ -218,7 +208,7 @@
         align-items: end;
         justify-content: space-around;
         gap: 14px;
-        border-bottom: 1px solid #445066;
+        border-bottom: 1px solid var(--borda-grafico);
         background: repeating-linear-gradient(to top, transparent 0, transparent calc(25% - 1px), #202a38 25%);
         padding: 0 10px;
     }
@@ -236,7 +226,7 @@
         width: 100%;
         text-align: center;
         font-size: .7rem;
-        color: #e7edf7;
+        color: var(--texto-span);
     }
 
     .coluna-grafico.roxa {
@@ -248,10 +238,11 @@
     }
 
     .coluna-grafico.cinza {
-        background: #596477;
+        background:var(--texto-cinza);
     }
 
     .rotulos-grafico {
+        padding-left: 20px;
         display: flex;
         justify-content: space-around;
         gap: 8px;
@@ -277,9 +268,9 @@
     }
 
     .seletor-genero select {
-        background: #111925;
+        background: var(--fundo-elementos);
         color: white;
-        border: 1px solid #354258;
+        border: 1px solid var(--borda-grafico);
         border-radius: 5px;
         padding: 7px 9px;
     }
@@ -300,18 +291,22 @@
     }
 
     .ranking-nome {
+        
         color: var(--texto-secundario);
     }
 
     .ranking-trilho {
         height: 20px;
+        width: 90%;
         background: #18202c;
         border-radius: 3px;
         overflow: hidden;
+        margin-left: 30px;
     }
 
     .ranking-barra {
         height: 100%;
+        width: 50%;
         background: var(--roxo-primario);
         border-radius: 3px;
     }
@@ -395,8 +390,8 @@
     .notificacoes-acoes button:hover,
     .notificacao button:hover,
     .notificacoes-topo button:hover {
-        border-color: #aaff00;
-        color: #aaff00;
+        border-color: var(--verde-primario);
+        color: var(--verde-primario);
     }
 
     /* Espaçamento entre os botões de cada notificação */
@@ -419,8 +414,8 @@
         padding: 0 5px;
         margin-left: 5px;
         border-radius: 50%;
-        background-color: #aaff00;
-        color: #080b10;
+        background-color: var(--verde-primario);
+        color: var(--painel);
         font-size: 12px;
     }
 

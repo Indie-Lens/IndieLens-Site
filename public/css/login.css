@@ -39,7 +39,7 @@ body {
     margin-bottom: 50px;
 
     h1 {
-        color: white;
+        color: var(--texto-branco);
         font-size: 24px;
         font-weight: 200;
         letter-spacing: 2px;
@@ -64,7 +64,7 @@ body {
     align-items: center;
 
     border: 2px solid var(--verde-primario);
-    background-color: #252525;
+    background-color: var(--fundo-campo);
     transition:0.2s;
 
     &:hover{
@@ -79,12 +79,12 @@ body {
         border: none;
         outline: none;
         background-color: transparent;
-        color: white;
+        color: var(--texto-branco);
         font-size: 13px;
     }
 
     input::placeholder{
-        color: white;
+        color: var(--texto-branco);
     }
 
     i {
@@ -103,7 +103,7 @@ body {
     border: none;
 
     background-color: var(--roxo-primario);
-    color: white;
+    color: var(--texto-branco);
 
     font-size: 18px;
     font-weight: 200;
@@ -140,7 +140,7 @@ body {
     top: 20px;
     left: 20px;
 
-    color: white;
+    color: var(--texto-branco);
     font-size: 22px;
 
     z-index: 10;
@@ -156,7 +156,7 @@ body {
     text-align: center;
 
     p {
-        color: white;
+        color: var(--texto-branco);
         font-size: 13px;
     }
 
@@ -194,7 +194,7 @@ body {
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(2, 2, 2, 0.8);
+            background-color: var(--fundo-preto);
             z-index: 1;
         }
 
@@ -218,7 +218,7 @@ body {
         padding: 30px 20px;
         border-radius: 20px;
 
-        background-color: rgba(255, 255, 255, 0.08);
+        background-color: var(--fundo-cadastro);
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
         border: 1px solid rgba(255, 255, 255, 0.2);
@@ -240,7 +240,7 @@ body {
     }
 
     .campo {
-        background-color: rgba(37, 37, 37, 0.4);
+        background-color: var(--fundo-campo);
     }
     .cadastro-link {
     width: 100%;
