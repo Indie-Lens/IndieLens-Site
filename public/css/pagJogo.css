@@ -1,22 +1,16 @@
+/* ================= BANNER ================= */
 .banner-jogo {
     width: 100%;
     height: 80vh;
-
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
 }
 
-.poster-jogo {
-    width: 35%;
-    height: 30px;
-    background-color: rgb(44, 177, 177);
-}
-
 .header {
     position: relative;
-    margin: 0%;
+    margin: 0;
     height: 100%;
     width: 100%;
     display: flex;
@@ -25,13 +19,14 @@
     flex-direction: column;
     align-items: end;
 
+
     img {
         opacity: 31%;
     }
 }
 
-.conteudo-imagem{
-     position: absolute;
+.conteudo-imagem {
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
@@ -39,8 +34,9 @@
     object-fit: cover;
     z-index: -1;
 }
+
 .header-jogo {
-    margin: 0%;
+    margin: 0;
     width: 45%;
     height: 100%;
     display: flex;
@@ -55,7 +51,7 @@
 }
 
 .header-titulo p {
-    color: #ffff;
+    color: #fff;
     font-size: 36px;
     font-weight: bold;
     margin: 0;
@@ -63,6 +59,7 @@
 
 .header-descricao {
     width: 60%;
+
 
     p {
         color: #ffffff;
@@ -72,17 +69,24 @@
     }
 }
 
+.card-Btn-lista {
+    background-color: var(--roxo-primario);
+        clip-path: none;
+        padding: 12px 20px;
+        border-radius: 4px;
+        color: var(--texto-branco);
+        border: 0px;
+        cursor: pointer;
+    }
 .streamers-que-recomendam p {
-    color: #aaff00;
+    color: var(--verde-primario);
     font-weight: bold;
     font-size: 14px;
     margin: 0;
 }
 
-
-
 .preco-valor {
-    color: #ffff;
+    color: #fff;
     font-size: 28px;
     font-weight: bold;
     margin: 0;
@@ -95,11 +99,10 @@
     font-style: italic;
 }
 
-
+/* ================= ABAS ================= */
 .container-sobre-jogo {
     margin-top: 30px;
     margin-bottom: 30px;
-
     width: 100%;
     height: 70vh;
     display: flex;
@@ -107,7 +110,6 @@
 }
 
 .container-sobre {
-    
     width: 80%;
     height: 90%;
     display: flex;
@@ -125,9 +127,10 @@
 .btn-opcao {
     font-size: 21px;
     width: 250px;
-    color: #ffff;
+    color: #fff;
     background-color: black;
-    border: 0px;
+    border: 0;
+    cursor: pointer;
 }
 
 .btn-opcao.active {
@@ -137,40 +140,38 @@
 .container-informacoes {
     height: 85%;
     border-top: 4px solid #aaff00;
-    background-color: rgb(3, 3, 3);
+    background-color: #252525;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 30px;
-    padding: 30px ;
+    padding: 30px;
     box-sizing: border-box;
-    background-color: #252525;
+    overflow: hidden;
 }
 
 .conteudo {
     width: 100%;
     display: flex;
     flex-direction: column;
-    
     justify-content: space-between;
     gap: 30px;
 }
 
+/* ================= ABA: SOBRE ================= */
 .cards {
     width: 100%;
     height: auto;
     display: flex;
     flex-direction: row;
-    justify-content: flex-start; 
+    justify-content: flex-start;
     align-items: stretch;
     gap: 20px;
-    
 }
 
-.card01, .card02, .card03{
-    color: #ffff;
-    
+.card01, .card02, .card03 {
+    color: #fff;
     padding: 10px;
     display: flex;
     flex-direction: column;
@@ -201,6 +202,7 @@
     padding-left: 10px;
     padding-right: 10px;
 }
+
 .div-infos, .titulo-div p {
     margin: 0;
 }
@@ -217,10 +219,11 @@
     flex-direction: column;
 }
 
-.card03 .titulo-div{
+.card03 .titulo-div {
     justify-content: flex-end;
     align-self: flex-end;
 }
+
 
 .card03 .div-infos{
     justify-content: flex-end;
@@ -233,7 +236,7 @@
 }
 
 .card04 {
-    color: #ffff;
+    color: #fff;
     display: flex;
     flex-direction: column;
     height: auto;
@@ -242,14 +245,132 @@
     padding: 10px;
     font-size: 16px;
     width: 20%;
+}
 
-    .titulo-div{
-        align-self: flex-start;
-    }
+.card04 .titulo-div {
+    align-self: flex-start;
+}
 
-    .div-infos {
-        justify-content: flex-start;
-        text-align: left;
-    }
-    
+.card04 .div-infos {
+    justify-content: flex-start;
+    text-align: left;
+}
+
+/* ================= ABA: REVIEWS ================= */
+#conteudo-reviews {
+    height: 100%;
+    min-height: 0;
+    gap: 25px;
+    color: #fff;
+}
+
+/* Linha de cima */
+.reviews-topo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.reviews-stats {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+
+.stat {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.stat-icone {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.stat-icone svg {
+    width: 22px;
+    height: 22px;
+}
+
+.stat-icone.positivo { background-color: #1e8a3e; }
+.stat-icone.negativo { background-color: #d62020; }
+.stat-icone.negativo svg { transform: rotate(180deg); }
+
+.stat-label {
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 1.1;
+}
+
+.stat-numero {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Rank */
+.rank {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-right: 40px;
+}
+
+.rank-icone {
+    width: 36px;
+    height: auto;
+}
+
+.rank-texto {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+}
+
+.rank-label {
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.rank-numero {
+    font-size: 26px;
+    font-weight: bold;
+}
+
+/* Lista de reviews */
+.reviews-titulo {
+    margin: 0;
+    padding-left: 35px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.reviews-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    width: 65%;
+    padding-left: 20px;
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+}
+
+.review-card {
+    background-color: #000;
+    border-radius: 10px;
+    padding: 15px 20px;
+}
+
+.review-card p {
+    margin: 0;
+    font-size: 12px;
+    font-style: italic;
+    font-weight: bold;
+    line-height: 1.3;
 }

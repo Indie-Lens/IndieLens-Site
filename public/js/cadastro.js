@@ -8,8 +8,8 @@ function cadastrar(){
     let senha = senha_input.value;
     let senhaConfirmacao = confirmacao_senha_input.value;
 
-    //ALTERAR P/REQUISITO DE TIPO, HARDCODED NO MOMENTO
-    let tipo = 1;
+    //ALTERAR P/REQUISITO DE TIPO, HARDCODED NO MOMENTO  --- JA ALTERADO
+    let tipo = document.querySelector('input[name="tipo_usuario"]:checked').value;
 
     //validações simples
     let nomeValido = (nome.length >= 1 && nome.length <= 50) ? true : false;

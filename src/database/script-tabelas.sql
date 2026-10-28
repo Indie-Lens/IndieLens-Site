@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS usuario (
   id_perfil INT NOT NULL,
   nome VARCHAR(50) NULL,
   email VARCHAR(100) NULL,
-  senha VARCHAR(45) NULL,
+  senha VARCHAR(255) NULL,
   CONSTRAINT fk_usuario_perfil1
     FOREIGN KEY (id_perfil)
     REFERENCES perfil (id_perfil)
@@ -35,8 +35,8 @@ CREATE TABLE IF NOT EXISTS sessao_usuario (
 -- Log Usuario
 CREATE TABLE IF NOT EXISTS log_usuario (
   id_log INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  id_usuario INT NOT NULL,
   id_sessao INT NOT NULL,
+  id_usuario INT NOT NULL,
   tipo_evento VARCHAR(50) NULL,
   descricao_evento VARCHAR(200) NULL,
   CONSTRAINT fk_log_usuario_sessao_usuario1
@@ -48,14 +48,14 @@ CREATE TABLE IF NOT EXISTS log_usuario (
 CREATE TABLE IF NOT EXISTS projeto_simulacao (
   id_simulacao INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
   id_usuario INT NOT NULL,
+  tags VARCHAR(100) NULL,
+  generos VARCHAR(100) NULL,
   nome_projeto VARCHAR(100) NOT NULL,
   data_lancamento DATE NOT NULL,
   preco_estimado DECIMAL(8,2) NOT NULL,
-  generos VARCHAR(100) NULL,
-  tags VARCHAR(100) NULL,
+  preco_sugerido DECIMAL(8,2) NULL,
   score_viabilidade DECIMAL(5,2) NULL,
   score_concorrencia DECIMAL(5,2) NULL,
-  preco_sugerido DECIMAL(8,2) NULL,
   data_simulacao DATETIME NULL,
   CONSTRAINT fk_projeto_simulacao_usuario1
     FOREIGN KEY (id_usuario)
@@ -75,11 +75,11 @@ CREATE TABLE IF NOT EXISTS jogo_main (
   id_jogo INT NOT NULL,
   id_registro INT NOT NULL,
   nome VARCHAR(255) NULL,
-  data_lancamento DATE NULL,
-  preco DECIMAL(8,2) NULL,
-  proprietarios_estimados INT NULL,
+  desenvolvedor VARCHAR(100) NULL,
   idade_minima INT NULL,
-  desenvolvedor VARCHAR(45) NULL,
+  proprietarios_estimados INT NULL,
+  preco DECIMAL(8,2) NULL,
+  data_lancamento DATE NULL,
   PRIMARY KEY (id_jogo_rastreavel),
   CONSTRAINT uq_jogo_main_jogo_registro
     UNIQUE (id_jogo, id_registro),
@@ -88,13 +88,30 @@ CREATE TABLE IF NOT EXISTS jogo_main (
     REFERENCES Registro (id_registro)
 );
 
+-- Notificações
+CREATE TABLE IF NOT EXISTS notificacao (
+    id_notificacao INT AUTO_INCREMENT PRIMARY KEY,
+    id_usuario INT NOT NULL,
+    id_jogo INT NOT NULL,
+    tipo VARCHAR(30) NOT NULL,
+    titulo VARCHAR(100) NOT NULL,
+    mensagem VARCHAR(255) NOT NULL,
+    data_criacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    lida TINYINT(1) NOT NULL DEFAULT 0,
+    data_leitura DATETIME NULL,
+
+    CONSTRAINT fk_notificacao_usuario
+        FOREIGN KEY (id_usuario)
+        REFERENCES usuario (id_usuario)
+);
+
 -- Jogo Suporte
 CREATE TABLE IF NOT EXISTS jogo_suporte (
   id_jogo INT NOT NULL,
   id_registro INT NOT NULL,
-  suporte_windows TINYINT NULL,
   suporte_MAC TINYINT NULL,
   suporte_linux TINYINT NULL,
+  suporte_windows TINYINT NULL,
   idiomas_suportados TEXT NULL,
   idiomas_suportados_audio TEXT NULL,
   PRIMARY KEY (id_jogo, id_registro),
@@ -108,14 +125,15 @@ CREATE TABLE IF NOT EXISTS jogo_metricas (
   id_jogo INT NOT NULL,
   id_registro INT NOT NULL,
   peak_CCU INT NULL,
+  qtd_donos INT NULL,
+  nota_score INT NULL,
+  nota_usuarios INT NULL,
+  nota_metacritic INT NULL,
+  qtd_dlc INT NULL,
+  qtd_conquistas INT NULL,
+  qtd_recomendacoes INT NULL,
   avaliacoes_positivas INT NULL,
   avaliacoes_negativas INT NULL,
-  taxa_aprovacao DECIMAL(5,2) NULL,
-  nota_metacritic DECIMAL(5,2) NULL,
-  nota_usuarios DECIMAL(5,2) NULL,
-  qtd_dlc INT NULL,
-  qtd_recomendacoes INT NULL,
-  qtd_conquistas INT NULL,
   PRIMARY KEY (id_jogo, id_registro),
   CONSTRAINT fk_jogo_metricas_jogo_main1
     FOREIGN KEY (id_jogo, id_registro)
@@ -140,12 +158,12 @@ CREATE TABLE IF NOT EXISTS jogo_playtime (
 CREATE TABLE IF NOT EXISTS jogo_detalhes (
   id_registro INT NOT NULL,
   id_jogo INT NOT NULL,
-  jogo_anotacoes VARCHAR(45) NULL,
-  publicante VARCHAR(45) NULL,
+  tags TEXT NULL,
+  generos TEXT NULL,
   descricao TEXT NULL,
-  tags VARCHAR(45) NULL,
-  generos VARCHAR(45) NULL,
   categorias TEXT NULL,
+  publicante TEXT NULL,
+  jogo_anotacoes TEXT NULL,
   PRIMARY KEY (id_registro, id_jogo),
   CONSTRAINT fk_jogo_detalhes_jogo_main1
     FOREIGN KEY (id_jogo, id_registro)
@@ -156,10 +174,11 @@ CREATE TABLE IF NOT EXISTS jogo_detalhes (
 CREATE TABLE IF NOT EXISTS jogo_auxiliar (
   id_jogo INT NOT NULL,
   id_registro INT NOT NULL,
-  site_oficial VARCHAR(100) NULL,
-  email_suporte VARCHAR(100) NULL,
-  url_metacritic VARCHAR(100) NULL,
-  usuario_review VARCHAR(255) NULL,
+  url_suporte TEXT NULL,
+  site_oficial TEXT NULL,
+  email_suporte TEXT NULL,
+  url_metacritic TEXT NULL,
+  usuario_review TEXT NULL,
   desconto_pct INT NULL,
   PRIMARY KEY (id_jogo, id_registro),
   CONSTRAINT fk_jogo_auxiliar_jogo_main1
@@ -170,9 +189,9 @@ CREATE TABLE IF NOT EXISTS jogo_auxiliar (
 -- Analise Jogo
 CREATE TABLE IF NOT EXISTS analise_jogo (
   id_analise INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  id_registro INT NOT NULL,
   id_jogo INT NOT NULL,
   id_usuario INT NOT NULL,
+  id_registro INT NOT NULL,
   media_CCU_concorrencia INT NULL,
   preco_media_nicho DECIMAL(8,2) NULL,
   taxa_aprovacao_nicho DECIMAL(5,2) NULL,
@@ -190,9 +209,9 @@ CREATE TABLE IF NOT EXISTS analise_jogo (
 CREATE TABLE IF NOT EXISTS jogo_midia (
   id_jogo INT NOT NULL,
   id_registro INT NOT NULL,
+  videos_URL TEXT NULL,
   imagem_cabecalho TEXT NULL,
   capturas_tela_URL TEXT NULL,
-  videos_URL TEXT NULL,
   PRIMARY KEY (id_jogo, id_registro),
   CONSTRAINT fk_jogo_midia_jogo_main1
     FOREIGN KEY (id_jogo, id_registro)
@@ -215,7 +234,7 @@ CREATE TABLE IF NOT EXISTS avaliacao_simulacao (
     REFERENCES projeto_simulacao (id_simulacao)
 );
 
--- visualizando os dados da TABELA
+-- Visualizando os dados das tabelas
 SELECT * FROM perfil;
 SELECT * FROM usuario;
 SELECT * FROM sessao_usuario;
@@ -226,16 +245,53 @@ SELECT * FROM jogo_metricas;
 SELECT * FROM jogo_suporte;
 SELECT * FROM projeto_simulacao;
 
--- INSERINDO DADOS PARAR PREENCHRE A TABELA
-INSERT INTO perfil VALUES
-(1 , "USUARIO_TESTE", "Usuário com tipo de teste para que seja possivel realizar testes dentro do database"),
-(2 , "ADMIN", "Usuário com permissões administrativas de sistema, utilizado pelos desenvolvedores da aplicação"),
-(3 , "DESENVOLVEDOR", "Usuário com acessos envolvendo publicar, escanear e visualizar jogos de forma mais aprofundada"),
-(4 , "STREAMER", "Usuário com permissões mais básicas, tendo foco em uma HUD limpa e de fácil uso");
+-- Inserindo perfis
+INSERT INTO perfil (id_perfil, tipo, descricao) VALUES
+(1, 'USUARIO_TESTE', 'Usuário com tipo de teste para que seja possivel realizar testes dentro do database'),
+(2, 'ADMIN', 'Usuário com permissões administrativas de sistema, utilizado pelos desenvolvedores da aplicação'),
+(3, 'DESENVOLVEDOR', 'Usuário com acessos envolvendo publicar, escanear e visualizar jogos de forma mais aprofundada'),
+(4, 'STREAMER', 'Usuário com permissões mais básicas, tendo foco em uma HUD limpa e de fácil uso');
 
--- INSERINDO USUARIOS
+-- Inserindo usuario
 INSERT INTO usuario (id_perfil, nome, email, senha) VALUES
 (1, "UsuarioTeste", "Teste@Teste.com", "Senha123");
+
+-- VERIFICANDO SE O JOGO EXISTEs
+SELECT COUNT(*) AS quantidade
+FROM jogo_main
+WHERE id_jogo = 100;
+
+-- INSERINDO NOTIFICAÇÃO
+INSERT INTO notificacao (
+    id_usuario,
+    id_jogo,
+    tipo,
+    titulo,
+    mensagem )
+VALUES (
+    1,
+    1,
+    'JOGO_NOVO',
+    'Novo jogo disponível!',
+    'Um novo jogo foi adicionado à plataforma.');
+
+-- MARCANDO UMA NOTIFICAÇÃO COMO LIDA
+UPDATE notificacao
+SET
+    lida = 1,
+    data_leitura = CURRENT_TIMESTAMP
+WHERE id_notificacao = 1
+  AND id_usuario = 1;
+  
+-- SELECIONANDO QUANTIDADE DE NOTIFICACOES NAO LIDAS (USAR NO CONTADOR)
+SELECT COUNT(*) AS total_notificacoes
+FROM notificacao
+WHERE id_usuario = 1
+  AND lida = 0;
+  
+-- APAGANDO TODAS AS NOTIFICAÇÕES DO USUÁRIO 
+DELETE FROM notificacao
+WHERE id_usuario = 1;
 
 -- CASO DE ALGUM BO
 -- DROP DATABASE indieLens;
