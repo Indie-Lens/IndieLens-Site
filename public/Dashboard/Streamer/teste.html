@@ -75,39 +75,54 @@
             </div>
 
         </div>
+
         <div class="barra-notificacoes" id="barraNotificacoes">
 
             <div class="notificacoes-topo">
-                <h2>Notificações</h2>
-
+                <h2>Notificações
+                    <span id="contadorNotificacoes">2</span>
+                </h2>
                 <button type="button" onclick="fecharNotificacoes()">X</button>
             </div>
 
-            <div class="notificacao">
-                <h3> Jogo em promoção!</h3>
-                <p>Hades está com 50% de desconto.</p>
-                <span>Promoção</span>
+            <div class="notificacoes-acoes">
+                <button type="button" onclick="lerTodasNotificacoes()">
+                    Ler todas
+                </button>
+
+                <button type="button" onclick="excluirTodasNotificacoes()">
+                    Excluir todas
+                </button>
             </div>
 
-            <div class="notificacao">
-                <h3> Novo lançamento</h3>
-                <p>Um novo jogo de RPG foi lançado na plataforma.</p>
-                <span>Lançamento</span>
+            <div class="notificacao" id="notificacao1">
+                <h3>Novidade!</h3>
+                <p>Hades foi lançado na plataforma.</p>
+
+                <button type="button" onclick="lerNotificacao(1)">
+                    Marcar como lida
+                </button>
+
+                <button type="button" onclick="excluirNotificacao(1)">
+                    Excluir
+                </button>
             </div>
 
-            <div class="notificacao">
-                <h3> Jogo da sua lista de favoritos</h3>
-                <p>Hollow Knight entrou em promoção!</p>
-                <span>Favoritos</span>
-            </div>
+            <div class="notificacao" id="notificacao2">
+                <h3>Novidade!</h3>
+                <p>Hollow Knight foi lançado na plataforma.</p>
 
-            <div class="notificacao">
-                <h3> Novidade na plataforma</h3>
-                <p>Confira os jogos recém-lançados.</p>
-                <span>Novidades</span>
+                <button type="button" onclick="lerNotificacao(2)">
+                    Marcar como lida
+                </button>
+
+                <button type="button" onclick="excluirNotificacao(2)">
+                    Excluir
+                </button>
             </div>
 
         </div>
+
         <main class="conteudo" id="dashboard">
             <header class="topo">
                 <div>
@@ -333,6 +348,62 @@
     function fecharNotificacoes() {
         document.getElementById("barraNotificacoes").style.display = "none";
     }
+
+    function lerNotificacao(id) {
+        var notificacao = document.getElementById("notificacao" + id);
+
+        notificacao.style.opacity = "0.5";
+
+        atualizarContador();
+    }
+
+    function lerTodasNotificacoes() {
+        var notificacao1 = document.getElementById("notificacao1");
+        var notificacao2 = document.getElementById("notificacao2");
+
+        notificacao1.style.opacity = "0.5";
+        notificacao2.style.opacity = "0.5";
+
+        atualizarContador();
+    }
+
+    function excluirNotificacao(id) {
+        var notificacao = document.getElementById("notificacao" + id);
+
+        notificacao.style.display = "none";
+
+        atualizarContador();
+    }
+
+    function excluirTodasNotificacoes() {
+        var notificacao1 = document.getElementById("notificacao1");
+        var notificacao2 = document.getElementById("notificacao2");
+
+        notificacao1.style.display = "none";
+        notificacao2.style.display = "none";
+
+        atualizarContador();
+    }
+
+    function atualizarContador() {
+        var contador = 0;
+        var notificacao1 = document.getElementById("notificacao1");
+        var notificacao2 = document.getElementById("notificacao2");
+
+        if (notificacao1.style.display != "none" &&
+            notificacao1.style.opacity != "0.5") {
+            contador++;
+        }
+
+        if (notificacao2.style.display != "none" &&
+            notificacao2.style.opacity != "0.5") {
+            contador++;
+        }
+
+        document.getElementById("contadorNotificacoes").innerHTML = contador;
+    }
+
+
 </script>
 
 </html>
