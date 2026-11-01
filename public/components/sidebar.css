@@ -292,3 +292,5 @@ body {
     border-top: none;
     cursor: pointer;
 }
+
+.opcao.active { background-color: var(--roxo-primario); border-radius: 8px; }
