@@ -3,83 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Geral - Streamer</title>
+    <title>Dashboard Geral | INDIE LENS</title>
     <link rel="stylesheet" href="CSS/dashboardGeral.css">
     <link rel="stylesheet" href="../../components/sidebar.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    
-    <div class="container">
-        
-        <aside class="sidebar" id="sidebar">
 
-        </aside>
+    <div class="container">
+
+        <aside class="sidebar" id="sidebar"></aside>
 
         <main class="conteudo-principal">
             <div class="painel-geral">
-                  <header class="topo">
-                <div>
-                    <h1><span>DASHBOARD</span> — Painel Geral</h1>
 
+                <div class="topo-pagina">
+                    <div>
+                        <h1><span>DASHBOARD</span> — Visão Geral</h1>
+                        <p>Acompanhe o desempenho consolidado de todas as suas lives.</p>
+                    </div>
+                    <div class="topo-direita">
+                        <button class="btn-notificacao" aria-label="Notificações" onclick="abrirNotificacoes()">
+                            <i class="fa-regular fa-bell"></i>
+                        </button>
+                        <div class="perfil">
+                            <img src="../../assets/imgs/Hades.jpg" alt="Avatar" class="avatar">
+                            <span class="nome">Guilherme</span>
+                        </div>
+                    </div>
                 </div>
-            </header>
+
                 <div class="linha-indicadores">
+
                     <div class="cartao cartao-indicador">
                         <div class="cabecalho-indicador">
-                          
                             <span>Total de Lives</span>
                         </div>
                         <h2>18</h2>
-                        <span class="tendencia positiva">↑ 20% vs. período anterior</span>
+                        <span class="tendencia positiva">↑ 3 lives este mês</span>
                     </div>
-                    
+
                     <div class="cartao cartao-indicador">
                         <div class="cabecalho-indicador">
-                           
                             <span>Média de Espectadores</span>
                         </div>
                         <h2>124</h2>
-                        <span class="tendencia positiva">↑ 42% vs. período anterior</span>
+                        <span class="tendencia positiva">↑ 42% vs. mês anterior</span>
                     </div>
 
                     <div class="cartao cartao-indicador">
                         <div class="cabecalho-indicador">
-                          
-                            <span>Pico de Espectadores</span>
+                            <span>Maior Pico Registrado</span>
                         </div>
                         <h2>342</h2>
-                        <span class="tendencia positiva">↑ 67% vs. período anterior</span>
+                        <span class="tendencia positiva">↑ 67% vs. mês anterior</span>
                     </div>
 
                     <div class="cartao cartao-indicador">
                         <div class="cabecalho-indicador">
-                          
-                            <span>Horas Transmitidas</span>
+                            <span>Seguidores Ganhos</span>
                         </div>
-                        <h2>56h 32min</h2>
-                        <span class="tendencia positiva">↑ 30% vs. período anterior</span>
+                        <h2>98</h2>
+                        <span class="tendencia positiva">↑ 24% vs. mês anterior</span>
                     </div>
 
                     <div class="cartao cartao-destaque">
                         <div class="cabecalho-indicador">
-                           
                             <span>Melhor Live</span>
                         </div>
                         <h2>Hades</h2>
                         <p>342 espectadores (pico)</p>
-                        <small>12/08 • 20:15</small>
+                        <small>12/08 • 20:15 &nbsp;·&nbsp; nota ★ 4</small>
                     </div>
+
                 </div>
 
                 <div class="linha-graficos">
+
                     <div class="cartao grafico-grande">
                         <h3>Evolução de Espectadores</h3>
                         <div class="container-grafico">
                             <canvas id="graficoEvolucao"></canvas>
                         </div>
                     </div>
-                    
+
                     <div class="cartao grafico-medio">
                         <h3>Melhores Horários para Transmitir</h3>
                         <div class="container-grafico">
@@ -88,41 +97,44 @@
                     </div>
 
                     <div class="cartao grafico-pequeno">
-                        <h3>Jogos que Mais Trazem Viewers</h3>
+                        <h3>Jogos Mais Transmitidos</h3>
                         <div class="container-grafico">
                             <canvas id="graficoJogos"></canvas>
                         </div>
                     </div>
+
                 </div>
 
                 <div class="linha-inferior">
+
                     <div class="cartao cartao-desempenho">
                         <h3>Desempenho por Categoria</h3>
                         <div class="grade-categorias">
+
                             <div class="caixa-categoria caixa-roxa">
-                               
-                                <h4>RPG</h4>
-                                <h2>168</h2>
+                                <h4>Roguelike</h4>
+                                <h2>186</h2>
                                 <span class="tendencia positiva">↑ 53%</span>
                             </div>
+
                             <div class="caixa-categoria caixa-verde">
-                               
-                                <h4>Indie</h4>
+                                <h4>Simulação</h4>
                                 <h2>142</h2>
                                 <span class="tendencia positiva">↑ 30%</span>
                             </div>
+
                             <div class="caixa-categoria caixa-roxa">
-                                
                                 <h4>Aventura</h4>
-                                <h2>96</h2>
+                                <h2>98</h2>
                                 <span class="tendencia positiva">↑ 21%</span>
                             </div>
+
                             <div class="caixa-categoria caixa-verde">
-                                
-                                <h4>Simulação</h4>
-                                <h2>78</h2>
+                                <h4>Ação</h4>
+                                <h2>89</h2>
                                 <span class="tendencia positiva">↑ 12%</span>
                             </div>
+
                         </div>
                     </div>
 
@@ -139,136 +151,126 @@
                                     <th>Duração</th>
                                     <th>Média</th>
                                     <th>Pico</th>
+                                    <th>+Seg.</th>
+                                    <th>Nota</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
+                                <tr onclick="location.href='dashboardLive.html'">
                                     <td>Hades</td>
                                     <td>12/08 • 20:15</td>
                                     <td>3h 42min</td>
-                                    <td>186</td>
+                                    <td>185</td>
                                     <td>342</td>
+                                    <td>+24</td>
+                                    <td>★ 4</td>
                                 </tr>
-                                <tr>
+                                <tr onclick="location.href='dashboardLive.html'">
                                     <td>Stardew Valley</td>
-                                    <td>08/08 • 18:03</td>
-                                    <td>2h 17min</td>
+                                    <td>09/08 • 19:00</td>
+                                    <td>3h 15min</td>
                                     <td>142</td>
-                                    <td>251</td>
+                                    <td>231</td>
+                                    <td>+16</td>
+                                    <td>★ 4</td>
                                 </tr>
-                                <tr>
+                                <tr onclick="location.href='dashboardLive.html'">
                                     <td>Hollow Knight</td>
                                     <td>05/08 • 21:40</td>
-                                    <td>2h 58min</td>
+                                    <td>3h 33min</td>
                                     <td>98</td>
-                                    <td>175</td>
+                                    <td>176</td>
+                                    <td>+9</td>
+                                    <td>★ 3</td>
+                                </tr>
+                                <tr onclick="location.href='dashboardLive.html'">
+                                    <td>Hades</td>
+                                    <td>01/08 • 20:00</td>
+                                    <td>2h 50min</td>
+                                    <td>112</td>
+                                    <td>198</td>
+                                    <td>+12</td>
+                                    <td>★ 3</td>
+                                </tr>
+                                <tr onclick="location.href='dashboardLive.html'">
+                                    <td>Cuphead</td>
+                                    <td>28/07 • 18:30</td>
+                                    <td>2h 10min</td>
+                                    <td>89</td>
+                                    <td>154</td>
+                                    <td>+7</td>
+                                    <td>★ 5</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
+
                 </div>
 
             </div>
         </main>
     </div>
-    <script src="./JS/global.js"></script>
+
     <script>
-        Chart.defaults.color = '#8c8d9e'; 
-        Chart.defaults.font.family = "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif";
+        Chart.defaults.color = '#8c8d9e';
+        Chart.defaults.font.family = 'Inter, sans-serif';
+        const corRoxo = '#9749e0', corVerde = '#9cff00', corBorda = '#222330';
 
-        const corRoxo = '#9749e0';
-        const corVerde = '#9cff00';
-        const corBorda = '#222330';
+        const ctxEv = document.getElementById('graficoEvolucao').getContext('2d');
+        const gV = ctxEv.createLinearGradient(0, 0, 0, 400);
+        gV.addColorStop(0, 'rgba(156,255,0,0.3)');
+        gV.addColorStop(1, 'rgba(156,255,0,0.0)');
+        const gR = ctxEv.createLinearGradient(0, 0, 0, 400);
+        gR.addColorStop(0, 'rgba(151,73,224,0.5)');
+        gR.addColorStop(1, 'rgba(151,73,224,0.0)');
 
-        // Gráfico de Evolução
-        const ctxEvolucao = document.getElementById('graficoEvolucao').getContext('2d');
-        const gradienteRoxo = ctxEvolucao.createLinearGradient(0, 0, 0, 400);
-        gradienteRoxo.addColorStop(0, 'rgba(151, 73, 224, 0.5)'); 
-        gradienteRoxo.addColorStop(1, 'rgba(151, 73, 224, 0.0)'); 
-
-        const gradienteVerde = ctxEvolucao.createLinearGradient(0, 0, 0, 400);
-        gradienteVerde.addColorStop(0, 'rgba(156, 255, 0, 0.3)');
-        gradienteVerde.addColorStop(1, 'rgba(156, 255, 0, 0.0)');
-
-        new Chart(ctxEvolucao, {
+        new Chart(ctxEv, {
             type: 'line',
             data: {
-                labels: ['01/09', '04/09', '07/09', '10/09', '13/09', '16/09', '19/09', '22/09', '25/09', '28/09', '30/09'],
+                labels: ['28/07','01/08','05/08','09/08','12/08'],
                 datasets: [
-                    {
-                        label: 'Pico',
-                        data: [150, 130, 180, 140, 290, 200, 180, 220, 190, 210, 180],
-                        borderColor: corVerde,
-                        backgroundColor: gradienteVerde,
-                        borderWidth: 2,
-                        tension: 0.4, 
-                        fill: true,
-                        pointRadius: 0
-                    },
-                    {
-                        label: 'Média',
-                        data: [100, 80, 120, 90, 190, 140, 110, 150, 120, 140, 110],
-                        borderColor: corRoxo,
-                        backgroundColor: gradienteRoxo,
-                        borderWidth: 2,
-                        tension: 0.4,
-                        fill: true,
-                        pointRadius: 0
-                    }
+                    { label: 'Pico',  data: [154,198,176,231,342], borderColor: corVerde, backgroundColor: gV, borderWidth: 2, tension: 0.4, fill: true, pointRadius: 0 },
+                    { label: 'Média', data: [89, 112, 98,142,185], borderColor: corRoxo,  backgroundColor: gR, borderWidth: 2, tension: 0.4, fill: true, pointRadius: 0 }
                 ]
             },
             options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    y: { beginAtZero: true, grid: { color: corBorda } },
-                    x: { grid: { display: false } }
-                },
+                responsive: true, maintainAspectRatio: false,
+                scales: { y: { beginAtZero: true, grid: { color: corBorda } }, x: { grid: { display: false } } },
                 plugins: { legend: { position: 'top', align: 'end', labels: { usePointStyle: true, boxWidth: 8 } } }
             }
         });
 
-        // Gráfico de Horários
-        const ctxHorarios = document.getElementById('graficoHorarios').getContext('2d');
-        new Chart(ctxHorarios, {
+        new Chart(document.getElementById('graficoHorarios'), {
             type: 'bar',
             data: {
-                labels: ['00h', '03h', '06h', '09h', '12h', '15h', '18h', '21h'],
+                labels: ['18h–19h','19h–20h','20h–21h','21h–22h'],
                 datasets: [{
-                    label: 'Espectadores por horário',
-                    data: [50, 45, 60, 90, 130, 150, 250, 210],
-                    backgroundColor: ['#4a246e', '#592b84', '#68329a', '#7739af', '#8641c5', corRoxo, corVerde, corVerde],
+                    label: 'Pico médio',
+                    data: [154, 165, 265, 231],
+                    backgroundColor: ['#4a246e','#592b84', corVerde, corRoxo],
                     borderRadius: 4
                 }]
             },
             options: {
-                responsive: true,
-                maintainAspectRatio: false,
+                responsive: true, maintainAspectRatio: false,
                 plugins: { legend: { display: false } },
-                scales: {
-                    y: { beginAtZero: true, grid: { color: corBorda } },
-                    x: { grid: { display: false } }
-                }
+                scales: { y: { beginAtZero: true, grid: { color: corBorda } }, x: { grid: { display: false } } }
             }
         });
 
-        // Gráfico de Jogos
-        const ctxJogos = document.getElementById('graficoJogos').getContext('2d');
-        new Chart(ctxJogos, {
+        new Chart(document.getElementById('graficoJogos'), {
             type: 'doughnut',
             data: {
-                labels: ['Hades', 'Stardew Valley', 'Hollow Knight', 'Cuphead', 'Outros'],
+                labels: ['Hades','Stardew Valley','Hollow Knight','Cuphead','Outros'],
                 datasets: [{
-                    data: [27.8, 22.2, 16.7, 11.1, 22.2],
+                    data: [7, 4, 3, 2, 2],
                     backgroundColor: [corVerde, corRoxo, '#8c8d9e', '#36374a', '#1a1b24'],
                     borderWidth: 0,
                     hoverOffset: 4
                 }]
             },
             options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                cutout: '70%',
+                responsive: true, maintainAspectRatio: false, cutout: '70%',
                 plugins: { legend: { position: 'right', labels: { usePointStyle: true, color: '#8c8d9e', padding: 15 } } }
             }
         });
@@ -276,23 +278,11 @@
 
     <script>
         fetch("./sidebarStreamer.html")
-            .then((res) => {
-                if (!res.ok) {
-                    throw new Error(
-                        "Não foi possível carregar o componente"
-                    );
-                }
-                return res.text();
-            })
-            .then((data) => {
-                document.getElementById("sidebar").innerHTML =
-                    data;
-                inicializarFuturosLancamentos(
-                    document.getElementById("sidebar")
-                );
-            })
-            .catch((erro) => console.log(erro));
+            .then(res => { if (!res.ok) throw new Error(); return res.text(); })
+            .then(data => { document.getElementById("sidebar").innerHTML = data; })
+            .catch(e => console.log(e));
     </script>
+    <script src="./JS/global.js"></script>
 
 </body>
 </html>

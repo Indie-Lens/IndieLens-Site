@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informações do Jogo | INDIE LENS</title>
+    <link rel="stylesheet" href="../../components/sidebar.css">
+    <link rel="stylesheet" href="./CSS/pagJogo.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+
+        <aside class="sidebar" id="sidebar"></aside>
+
+        <main class="conteudo-principal">
+
+            <div class="cabecalho-topo">
+                <div class="cabecalho-esquerda">
+                    <a href="./explorarJogos.html" class="btn-voltar" title="Voltar para Explorar Jogos">
+                        <i class="fa-solid fa-arrow-left"></i>
+                    </a>
+                    <div>
+                        <h1 id="titulo-pagina">Carregando...</h1>
+                        <p>Informações, métricas e avaliações do jogo.</p>
+                    </div>
+                </div>
+                <div class="acoes-usuario">
+                    <button class="btn-notificacao" aria-label="Notificações" onclick="abrirNotificacoes()">
+                        <i class="fa-regular fa-bell"></i>
+                    </button>
+                    <div class="perfil">
+                        <img src="../../assets/imgs/Hades.jpg" alt="Avatar" class="avatar">
+                        <span class="nome">Guilherme</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="banner-jogo">
+                <img id="banner-bg" src="../../assets/imgs/Hades.jpg" alt="" class="banner-bg">
+                <div class="banner-conteudo">
+                    <p class="banner-titulo" id="banner-titulo">HADES</p>
+                    <div class="banner-desc" id="banner-desc"></div>
+                    <div class="banner-streamers" id="banner-streamers"></div>
+                    <div>
+                        <p class="banner-preco-valor" id="banner-preco"></p>
+                        <p class="banner-preco-loja" id="banner-loja"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container-sobre-jogo">
+                <div class="container-sobre">
+
+                    <div class="opcoes-buttons">
+                        <button class="btn-opcao active" id="btn-sobre"   onclick="mostrarAba('sobre')">Sobre o jogo</button>
+                        <button class="btn-opcao"        id="btn-reviews" onclick="mostrarAba('reviews')">Reviews</button>
+                    </div>
+
+                    <div class="container-informacoes">
+
+                        <div class="conteudo" id="conteudo-sobre">
+                            <div class="cards">
+
+                                <div class="card01">
+                                    <div class="div-infos">
+                                        <span class="label">Título:</span>
+                                        <p id="info-titulo">—</p>
+                                    </div>
+                                    <div class="div-infos">
+                                        <span class="label">Gênero:</span>
+                                        <p id="info-genero">—</p>
+                                    </div>
+                                    <div class="div-infos">
+                                        <span class="label">Desenvolvedor:</span>
+                                        <p id="info-dev">—</p>
+                                    </div>
+                                    <div class="div-infos">
+                                        <span class="label">Data de Lançamento:</span>
+                                        <p id="info-lancamento">—</p>
+                                    </div>
+                                    <div class="div-infos">
+                                        <span class="label">Site Oficial:</span>
+                                        <a href="#" id="info-site">—</a>
+                                    </div>
+                                    <div class="div-infos">
+                                        <span class="label">Total de Conquistas:</span>
+                                        <p id="info-conquistas">—</p>
+                                    </div>
+                                </div>
+
+                                <div class="card02">
+                                    <div class="titulo-div">
+                                        <span class="label">Disponível em:</span>
+                                    </div>
+                                    <div class="div-infos" id="info-idiomas-lista"></div>
+                                    <div class="titulo-div" style="margin-top: 14px;">
+                                        <span class="label">Plataformas:</span>
+                                    </div>
+                                    <div class="div-infos" id="info-plataformas-lista"></div>
+                                </div>
+
+                                <div class="card04-dashboard">
+                                    <div class="titulo-div">AVG. VIEWERS / LIVE</div>
+                                    <div class="metrica-destaque" id="info-avg">—</div>
+                                    <div class="metrica-sublabel">viewers médios por transmissão</div>
+                                    <div class="titulo-div" style="margin-top: 16px;">CCU MÉDIO NA TWITCH</div>
+                                    <div class="metrica-destaque" id="info-ccu">—</div>
+                                    <div class="metrica-sublabel">espectadores simultâneos</div>
+                                    <div class="titulo-div" style="margin-top: 16px;">HORAS MEDIANAS</div>
+                                    <div class="metrica-destaque" style="color: #9749e0;" id="info-horas">—</div>
+                                    <div class="metrica-sublabel">horas por jogador</div>
+                                </div>
+
+                            </div>
+
+                            <div class="card-suporte">
+                                <div class="card04">
+                                    <div class="titulo-div">Classificação Indicativa:</div>
+                                    <div class="div-infos">
+                                        <p id="info-classif">—</p>
+                                    </div>
+                                </div>
+                                <div class="separador-vertical"></div>
+                                <div class="card04">
+                                    <div class="titulo-div">Avaliação Steam:</div>
+                                    <div class="div-infos">
+                                        <p style="color: #aaff00;" id="info-avaliacoes">—</p>
+                                    </div>
+                                </div>
+                                <div class="separador-vertical"></div>
+                                <div class="card04">
+                                    <div class="titulo-div">Jogadores estimados:</div>
+                                    <div class="div-infos">
+                                        <p id="info-jogadores">—</p>
+                                    </div>
+                                </div>
+                                <div class="separador-vertical"></div>
+                                <div class="card04">
+                                    <div class="titulo-div">Tags:</div>
+                                    <div class="div-infos">
+                                        <p id="info-tags">—</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="conteudo" id="conteudo-reviews" style="display: none;">
+                            <div class="reviews-topo">
+                                <div class="reviews-stats">
+                                    <div class="stat">
+                                        <div class="stat-icone positivo">
+                                            <svg viewBox="0 0 24 24" fill="#fff"><path d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/></svg>
+                                        </div>
+                                        <span class="stat-label">Total<br>Positivos</span>
+                                        <span class="stat-numero" id="rev-pos">—</span>
+                                    </div>
+                                    <div class="stat">
+                                        <div class="stat-icone negativo">
+                                            <svg viewBox="0 0 24 24" fill="#fff"><path d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/></svg>
+                                        </div>
+                                        <span class="stat-label">Total<br>Negativas</span>
+                                        <span class="stat-numero" id="rev-neg">—</span>
+                                    </div>
+                                </div>
+                                <div class="rank">
+                                    <img src="../../assets/imgs/rank.png" alt="Rank" class="rank-icone">
+                                    <div class="rank-texto">
+                                        <span class="rank-label">Rank do jogo</span>
+                                        <span class="rank-numero" id="rev-rank">—</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="reviews-titulo">Veja o que estão falando:</p>
+                            <div class="reviews-lista" id="reviews-lista"></div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script>
+        const jogos = {
+            hades: {
+                titulo: 'HADES',
+                banner: '../../assets/imgs/Hades.jpg',
+                desc: 'Desafie o deus da morte em batalhas roguelike frenéticas. Combine armas e habilidades únicas, aprofunde relações com personagens memoráveis e descubra os segredos da família do Olimpo.',
+                streamers: '98% DOS STREAMERS RECOMENDAM ESSE JOGO',
+                preco: 'R$ 44,99', loja: 'Disponível para comprar em: Steam',
+                genero: 'Roguelike, Ação', dev: 'Supergiant Games', lancamento: '17/09/2020',
+                site: 'supergiantgames.com', conquistas: '49',
+                idiomas: ['Inglês', 'Português', 'Espanhol', 'Francês'],
+                plataformas: ['PC', 'PS4/PS5', 'Xbox', 'Nintendo Switch'],
+                avg: '2.400', ccu: '12.000', horas: '48h', classif: '16 anos',
+                avaliacoes: 'Extremamente positivo', jogadores: '4 milhões+',
+                tags: 'Roguelike, Ação, Indie, RPG',
+                revPos: '129.800', revNeg: '2.600', rank: '#1',
+                reviews: [
+                    '"Simplesmente um dos melhores roguelikes que já joguei. A narrativa se mistura perfeitamente com o gameplay e cada run parece diferente."',
+                    '"Excelente para stream. O chat fica engajado o tempo todo, especialmente nas runs mais difíceis. Recomendo muito para streamers."',
+                    '"A trilha sonora, os personagens, o combate... tudo é perfeito. Supergiant acertou em cheio com esse título."'
+                ]
+            },
+            stardew: {
+                titulo: 'STARDEW VALLEY',
+                banner: '../../assets/imgs/StardewValleyBanner.png',
+                desc: 'Gerencie sua fazenda, cultive amizades e explore masmorras em um RPG de simulação relaxante criado inteiramente por uma única pessoa.',
+                streamers: '97% DOS STREAMERS RECOMENDAM ESSE JOGO',
+                preco: 'R$ 24,99', loja: 'Disponível para comprar em: Steam',
+                genero: 'Simulação, RPG', dev: 'ConcernedApe', lancamento: '26/02/2016',
+                site: 'stardewvalley.net', conquistas: '40',
+                idiomas: ['Inglês', 'Português', 'Espanhol', 'Japonês'],
+                plataformas: ['PC', 'PS4/PS5', 'Xbox', 'Switch', 'Mobile'],
+                avg: '1.800', ccu: '8.200', horas: '130h', classif: 'Livre',
+                avaliacoes: 'Extremamente positivo', jogadores: '30 milhões+',
+                tags: 'Fazenda, Simulação, RPG, Relaxante',
+                revPos: '756.600', revNeg: '23.400', rank: '#3',
+                reviews: [
+                    '"Impossível parar de jogar. Cada dia in-game é diferente e a progressão é muito satisfatória."',
+                    '"Perfeito para streams longas e relaxantes. Meu chat adora quando eu faço fazenda e converso."',
+                    '"Um dos jogos mais completos do mercado indie. Vale cada centavo."'
+                ]
+            },
+            hollow: {
+                titulo: 'HOLLOW KNIGHT',
+                banner: '../../assets/imgs/Hollow.jpg',
+                desc: 'Explore um enorme reino de insetos subterrâneo em um metroidvania desafiador com combate preciso, mundo vasto e atmosfera única.',
+                streamers: '95% DOS STREAMERS RECOMENDAM ESSE JOGO',
+                preco: 'R$ 22,99', loja: 'Disponível para comprar em: Steam',
+                genero: 'Metroidvania, Aventura', dev: 'Team Cherry', lancamento: '24/02/2017',
+                site: 'hollowknight.com', conquistas: '63',
+                idiomas: ['Inglês', 'Português', 'Espanhol', 'Francês'],
+                plataformas: ['PC', 'PS4/PS5', 'Xbox', 'Nintendo Switch'],
+                avg: '1.200', ccu: '5.600', horas: '52h', classif: '10 anos',
+                avaliacoes: 'Extremamente positivo', jogadores: '3 milhões+',
+                tags: 'Metroidvania, Plataforma, Indie, Difícil',
+                revPos: '201.400', revNeg: '10.600', rank: '#5',
+                reviews: [
+                    '"Uma obra de arte. O mundo é denso, o combate é preciso e cada nova área é uma descoberta."',
+                    '"Difícil mas completamente justo. Stream perfeita para quem gosta de ver o streamer sofrendo."',
+                    '"O melhor metroidvania indie que existe. Team Cherry entregou um jogo perfeito."'
+                ]
+            },
+            cuphead: {
+                titulo: 'CUPHEAD',
+                banner: '../../assets/imgs/Cuphead.jpg',
+                desc: 'Run-and-gun com arte estilo animação dos anos 30 e chefes extremamente desafiadores. Alta dificuldade com visual único e trilha de jazz ao vivo.',
+                streamers: '93% DOS STREAMERS RECOMENDAM ESSE JOGO',
+                preco: 'R$ 39,99', loja: 'Disponível para comprar em: Steam',
+                genero: 'Ação, Run & Gun', dev: 'Studio MDHR', lancamento: '29/09/2017',
+                site: 'cupheadgame.com', conquistas: '34',
+                idiomas: ['Inglês', 'Português', 'Espanhol'],
+                plataformas: ['PC', 'PS4', 'Xbox', 'Nintendo Switch'],
+                avg: '980', ccu: '3.100', horas: '16h', classif: '12 anos',
+                avaliacoes: 'Muito positivo', jogadores: '6 milhões+',
+                tags: 'Run & Gun, Difícil, Ação, Arte Única',
+                revPos: '91.300', revNeg: '6.900', rank: '#7',
+                reviews: [
+                    '"Visual inacreditável. Cada fase parece um episódio de desenho animado dos anos 30."',
+                    '"Streamer material dos bons. Meu chat enlouquece quando eu bato a cabeça nos chefes."',
+                    '"A trilha sonora de jazz ao vivo é de cair o queixo. Jogo imperdível."'
+                ]
+            },
+            dave: {
+                titulo: 'DAVE THE DIVER',
+                banner: '../../assets/imgs/DaveTheDiver.jpg',
+                desc: 'Mergulhe no oceano de dia capturando peixes e gerencie um restaurante de sushi à noite. Um híbrido casual irresistível com toneladas de conteúdo.',
+                streamers: '96% DOS STREAMERS RECOMENDAM ESSE JOGO',
+                preco: 'R$ 59,99', loja: 'Disponível para comprar em: Steam',
+                genero: 'Aventura, Casual', dev: 'MINTROCKET (Nexon)', lancamento: '28/06/2023',
+                site: 'mintrocket.nexon.com', conquistas: '52',
+                idiomas: ['Inglês', 'Português', 'Coreano', 'Japonês'],
+                plataformas: ['PC', 'PS4/PS5', 'Nintendo Switch'],
+                avg: '1.500', ccu: '6.800', horas: '38h', classif: 'Livre',
+                avaliacoes: 'Extremamente positivo', jogadores: '3 milhões+',
+                tags: 'Casual, Aventura, Culinária, Exploração',
+                revPos: '84.900', revNeg: '3.500', rank: '#4',
+                reviews: [
+                    '"Impossível largar. A loop de mergulhar de dia e servir sushi à noite é viciante demais."',
+                    '"Meu chat amou. Muito carisma, muito conteúdo. Recomendo para qualquer streamer."',
+                    '"Surpreendeu muito. Pensava que era simples mas tem uma profundidade absurda."'
+                ]
+            },
+            celeste: {
+                titulo: 'CELESTE',
+                banner: '../../assets/imgs/celeste-e1534205369647.jpg',
+                desc: 'Ajude Madeline a escalar uma montanha enquanto enfrenta seus próprios medos. Plataforma de precisão com narrativa emocional impactante.',
+                streamers: '99% DOS STREAMERS RECOMENDAM ESSE JOGO',
+                preco: 'R$ 34,99', loja: 'Disponível para comprar em: Steam',
+                genero: 'Plataforma, Indie', dev: 'Maddy Makes Games', lancamento: '25/01/2018',
+                site: 'celestegame.com', conquistas: '25',
+                idiomas: ['Inglês', 'Português', 'Espanhol', 'Francês'],
+                plataformas: ['PC', 'PS4', 'Xbox', 'Nintendo Switch'],
+                avg: '870', ccu: '2.400', horas: '10h', classif: 'Livre',
+                avaliacoes: 'Extremamente positivo', jogadores: '1 milhão+',
+                tags: 'Plataforma, Difícil, Narrativo, Indie',
+                revPos: '101.500', revNeg: '1.000', rank: '#2',
+                reviews: [
+                    '"Chorei jogando. A história é linda e o gameplay é extremamente satisfatório."',
+                    '"O jogo mais bem avaliado do catálogo e merece cada nota. Stream emocionante."',
+                    '"Curto, mas denso. A sensação de superar cada fase é incomparável."'
+                ]
+            },
+            undertale: {
+                titulo: 'UNDERTALE',
+                banner: '../../assets/imgs/tela.jpg',
+                desc: 'RPG onde você não precisa matar ninguém. Cada escolha altera o jogo completamente, revelando narrativas diferentes e fins inesquecíveis.',
+                streamers: '98% DOS STREAMERS RECOMENDAM ESSE JOGO',
+                preco: 'R$ 19,99', loja: 'Disponível para comprar em: Steam',
+                genero: 'RPG, Indie', dev: 'Toby Fox', lancamento: '15/09/2015',
+                site: 'undertale.com', conquistas: '10',
+                idiomas: ['Inglês', 'Português', 'Espanhol', 'Japonês'],
+                plataformas: ['PC', 'PS4', 'Xbox', 'Nintendo Switch'],
+                avg: '1.100', ccu: '4.200', horas: '8h', classif: '10 anos',
+                avaliacoes: 'Extremamente positivo', jogadores: '5 milhões+',
+                tags: 'RPG, Narrativo, Indie, Cult',
+                revPos: '215.600', revNeg: '4.400', rank: '#2',
+                reviews: [
+                    '"Mudou minha visão sobre jogos. Cada decisão tem peso e as reações do chat são impagáveis."',
+                    '"Impossível fazer stream sem spoiler. Mas vale cada momento de reação autêntica."',
+                    '"Toby Fox fez isso sozinho. Incrível do começo ao fim."'
+                ]
+            },
+            deadcells: {
+                titulo: 'DEAD CELLS',
+                banner: '../../assets/imgs/MeninaJogando.jpg',
+                desc: 'Metroidvania roguelike de ação frenética com progressão permanente, combinações de armas infinitas e dificuldade crescente a cada run.',
+                streamers: '94% DOS STREAMERS RECOMENDAM ESSE JOGO',
+                preco: 'R$ 44,99', loja: 'Disponível para comprar em: Steam',
+                genero: 'Roguelike, Metroidvania', dev: 'Motion Twin', lancamento: '07/08/2018',
+                site: 'deadcells.com', conquistas: '60',
+                idiomas: ['Inglês', 'Português', 'Espanhol', 'Francês'],
+                plataformas: ['PC', 'PS4/PS5', 'Xbox', 'Nintendo Switch'],
+                avg: '760', ccu: '2.900', horas: '35h', classif: '16 anos',
+                avaliacoes: 'Muito positivo', jogadores: '5 milhões+',
+                tags: 'Roguelike, Ação, Metroidvania, Difícil',
+                revPos: '136.300', revNeg: '8.700', rank: '#6',
+                reviews: [
+                    '"Cada run é única. A variedade de builds e armas mantém o jogo fresco por horas."',
+                    '"Ótimo para stream. Combate fluido e momentos de adrenalina frequentes."',
+                    '"Motion Twin capricha nas atualizações. O jogo só melhorou desde o lançamento."'
+                ]
+            }
+        };
+
+        function carregarJogo(id) {
+            const j = jogos[id] || jogos['hades'];
+            document.title = j.titulo + ' | INDIE LENS';
+            document.getElementById('titulo-pagina').textContent    = j.titulo;
+            document.getElementById('banner-bg').src                = j.banner;
+            document.getElementById('banner-titulo').textContent    = j.titulo;
+            document.getElementById('banner-desc').textContent      = j.desc;
+            document.getElementById('banner-streamers').textContent = j.streamers;
+            document.getElementById('banner-preco').textContent     = j.preco;
+            document.getElementById('banner-loja').textContent      = j.loja;
+            document.getElementById('info-titulo').textContent      = j.titulo.toLowerCase().replace(/\b\w/g, c => c.toUpperCase());
+            document.getElementById('info-genero').textContent      = j.genero;
+            document.getElementById('info-dev').textContent         = j.dev;
+            document.getElementById('info-lancamento').textContent  = j.lancamento;
+            document.getElementById('info-site').textContent        = j.site;
+            document.getElementById('info-site').href               = 'https://' + j.site;
+            document.getElementById('info-conquistas').textContent  = j.conquistas;
+            document.getElementById('info-classif').textContent     = j.classif;
+            document.getElementById('info-avaliacoes').textContent  = j.avaliacoes;
+            document.getElementById('info-jogadores').textContent   = j.jogadores;
+            document.getElementById('info-tags').textContent        = j.tags;
+            document.getElementById('info-avg').textContent         = j.avg;
+            document.getElementById('info-ccu').textContent         = j.ccu;
+            document.getElementById('info-horas').textContent       = j.horas;
+            document.getElementById('info-idiomas-lista').innerHTML    = j.idiomas.map(i => `<p>${i}</p>`).join('');
+            document.getElementById('info-plataformas-lista').innerHTML = j.plataformas.map(p => `<p>${p}</p>`).join('');
+            document.getElementById('rev-pos').textContent  = j.revPos;
+            document.getElementById('rev-neg').textContent  = j.revNeg;
+            document.getElementById('rev-rank').textContent = j.rank;
+            document.getElementById('reviews-lista').innerHTML = j.reviews.map(r => `<div class="review-card"><p>${r}</p></div>`).join('');
+        }
+
+        function mostrarAba(aba) {
+            document.getElementById('conteudo-sobre').style.display   = aba === 'sobre'   ? 'flex' : 'none';
+            document.getElementById('conteudo-reviews').style.display = aba === 'reviews' ? 'flex' : 'none';
+            document.getElementById('btn-sobre').classList.toggle('active',   aba === 'sobre');
+            document.getElementById('btn-reviews').classList.toggle('active', aba === 'reviews');
+        }
+
+        const params = new URLSearchParams(window.location.search);
+        carregarJogo(params.get('jogo') || 'hades');
+    </script>
+
+    <script>
+        fetch("./sidebarStreamer.html")
+            .then(res => {
+                if (!res.ok) throw new Error("Não foi possível carregar o componente");
+                return res.text();
+            })
+            .then(data => { document.getElementById("sidebar").innerHTML = data; })
+            .catch(erro => console.log(erro));
+    </script>
+    <script src="./JS/global.js"></script>
+</body>
+</html>

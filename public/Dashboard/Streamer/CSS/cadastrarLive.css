@@ -1,5 +1,3 @@
-
-
 @import url("../../../css/style.css");
 
 * {
@@ -17,81 +15,134 @@ body.pagina-cadastro {
 }
 
 .cadastro-container {
-    padding: 30px;
+    padding: 32px 40px;
     display: flex;
     flex-direction: column;
-    gap: 25px;
+    gap: 28px;
+    max-width: 860px;
+    margin: 0 auto;
 }
 
 .cadastro-header {
-    padding-bottom: 20px;
     border-bottom: 1px solid var(--borda-suave);
+    padding-bottom: 18px;
 }
 
-.cadastro-titulo {
-    display: flex;
-    align-items: center;
-    gap: 15px;
+.cadastro-header h1 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 3px;
 }
 
-.icone-titulo {
-    width: 48px;
-    height: 48px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--roxo-terciario);
-    color: var(--roxo-primario);
-    border: 1px solid rgba(151, 73, 224, 0.3);
-    border-radius: 12px;
-    font-size: 20px;
-}
-
-.cadastro-titulo h1 {
-    font-size: 22px;
-    margin-bottom: 5px;
-}
-
-.cadastro-titulo p {
-    font-size: 13px;
+.cadastro-header p {
+    font-size: 12px;
     color: var(--texto-cinza);
 }
 
-#formCadastroLive {
+.stepper {
+    display: flex;
+    align-items: flex-start;
+    position: relative;
+}
+
+.stepper-etapa {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    flex: 1;
+    position: relative;
+    gap: 6px;
+}
+
+.stepper-etapa:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    top: 13px;
+    left: 50%;
+    width: 100%;
+    height: 1px;
+    background-color: var(--borda-suave);
+    z-index: 0;
+    transition: background-color 0.3s;
+}
+
+.stepper-etapa.concluida:not(:last-child)::after {
+    background-color: var(--roxo-primario);
+}
+
+.stepper-circulo {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    border: 1px solid var(--borda-suave);
+    background-color: var(--fundo-conteudo);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--texto-cinza);
+    position: relative;
+    z-index: 1;
+    transition: all 0.25s;
+}
+
+.stepper-etapa.ativa .stepper-circulo,
+.stepper-etapa.concluida .stepper-circulo {
+    border-color: var(--roxo-primario);
+    background-color: var(--roxo-primario);
+    color: #fff;
+}
+
+.stepper-label {
+    font-size: 10px;
+    color: var(--texto-cinza);
+    text-align: center;
+    line-height: 1.3;
+}
+
+.stepper-etapa.ativa .stepper-label,
+.stepper-etapa.concluida .stepper-label {
+    color: var(--texto-branco);
+}
+
+.barra-progresso-wrap {
+    height: 3px;
+    background-color: var(--borda-suave);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-top: -8px;
+}
+
+.barra-progresso-fill {
+    height: 100%;
+    border-radius: 3px;
+    background-color: var(--roxo-primario);
+    transition: width 0.35s ease;
+    width: 0%;
+}
+
+.etapa-form {
+    display: none;
+    flex-direction: column;
     gap: 20px;
+}
+
+.etapa-form.ativa {
+    display: flex;
+}
+
+.etapa-titulo {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--texto-branco);
 }
 
 .form-secao {
     background-color: var(--fundo-elementos);
     border: 1px solid var(--borda-suave);
-    border-radius: 12px;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-}
-
-.secao-titulo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding-bottom: 12px;
-    border-bottom: 1px solid var(--borda-suave);
-}
-
-.secao-titulo i {
-    color: var(--roxo-primario);
-}
-
-.secao-titulo h2 {
-    font-size: 15px;
-}
-
-.secao-descricao {
-    font-size: 12px;
-    color: var(--texto-cinza);
+    border-radius: 10px;
+    padding: 24px;
 }
 
 .form-grid {
@@ -103,7 +154,7 @@ body.pagina-cadastro {
 .campo {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 6px;
 }
 
 .campo-completo {
@@ -112,6 +163,7 @@ body.pagina-cadastro {
 
 .campo label {
     font-size: 12px;
+    font-weight: 600;
     color: var(--texto-branco);
 }
 
@@ -119,92 +171,121 @@ body.pagina-cadastro {
 .campo select,
 .campo textarea {
     width: 100%;
-    padding: 12px;
+    padding: 12px 14px;
     background-color: var(--fundo-conteudo);
     color: var(--texto-branco);
     border: 1px solid var(--borda-suave);
     border-radius: 7px;
     outline: none;
-    font-size: 12px;
+    font-size: 13px;
+    font-family: "Inter", sans-serif;
+    transition: border-color 0.2s;
 }
 
 .campo input,
-.campo select {
-    height: 42px;
-}
+.campo select { height: 44px; }
 
 .campo input::placeholder,
-.campo textarea::placeholder {
-    color: var(--texto-cinza);
-}
+.campo textarea::placeholder { color: var(--texto-cinza); }
 
 .campo input:focus,
 .campo select:focus,
-.campo textarea:focus {
-    border-color: var(--roxo-primario);
-}
+.campo textarea:focus { border-color: var(--roxo-primario); }
 
-.campo select {
-    cursor: pointer;
-}
-
-.campo textarea {
-    resize: vertical;
-}
+.campo select    { cursor: pointer; }
+.campo textarea  { resize: vertical; }
 
 .campo input[type="date"],
-.campo input[type="time"] {
-    color-scheme: dark;
-}
+.campo input[type="time"] { color-scheme: dark; }
 
 .campo input[readonly] {
     color: var(--verde-primario);
+    cursor: default;
 }
 
-.cadastro-acoes {
+.estrelas-wrapper {
+    display: flex;
+    gap: 6px;
+    margin-top: 2px;
+}
+
+.estrela-btn {
+    background: none;
+    border: none;
+    font-size: 26px;
+    cursor: pointer;
+    color: var(--borda-suave);
+    transition: color 0.12s, transform 0.12s;
+    line-height: 1;
+}
+
+.estrela-btn:hover,
+.estrela-btn.ativa {
+    color: var(--verde-primario);
+    transform: scale(1.1);
+}
+
+.nota-label {
+    font-size: 12px;
+    color: var(--texto-cinza);
+    margin-top: 4px;
+}
+
+.navegacao-wizard {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 15px;
 }
 
-.campos-obrigatorios {
-    font-size: 11px;
-    color: var(--texto-cinza);
-}
-
-.botoes-acoes {
-    display: flex;
-    gap: 10px;
-}
-
-.btn-cancelar,
-.btn-salvar {
-    padding: 12px 20px;
-    border-radius: 8px;
-    font-size: 12px;
-    font-weight: 600;
-    cursor: pointer;
-}
-
-.btn-cancelar {
+.btn-anterior {
     background: transparent;
     color: var(--texto-cinza);
     border: 1px solid var(--borda-suave);
+    border-radius: 7px;
+    padding: 9px 20px;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: "Inter", sans-serif;
+    cursor: pointer;
+    transition: 0.2s;
 }
 
-.btn-cancelar:hover {
-    color: var(--texto-branco);
+.btn-anterior:hover {
     border-color: var(--texto-cinza);
+    color: var(--texto-branco);
 }
 
-.btn-salvar {
-    background-color: var(--verde-primario);
-    color: #111111;
+.btn-anterior:disabled {
+    opacity: 0.25;
+    cursor: default;
+}
+
+.btn-proximo {
+    background-color: var(--roxo-primario);
+    color: #fff;
     border: none;
+    border-radius: 7px;
+    padding: 9px 24px;
+    font-size: 13px;
+    font-weight: 700;
+    font-family: "Inter", sans-serif;
+    cursor: pointer;
+    transition: background-color 0.2s;
 }
 
-.btn-salvar:hover {
-    background-color: var(--verde-terciario);
+.btn-proximo:hover { background-color: #a35ced; }
+
+.btn-salvar-final {
+    background-color: var(--verde-primario);
+    color: #111;
+    border: none;
+    border-radius: 7px;
+    padding: 9px 24px;
+    font-size: 13px;
+    font-weight: 700;
+    font-family: "Inter", sans-serif;
+    cursor: pointer;
+    transition: background-color 0.2s;
 }
 
+.btn-salvar-final:hover { background-color: var(--verde-terciario); }

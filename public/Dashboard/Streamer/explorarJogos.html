@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explorar Jogos | INDIE LENS</title>
+    <link rel="stylesheet" href="../../components/sidebar.css">
+    <link rel="stylesheet" href="./CSS/explorarJogos.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+
+        <aside class="sidebar" id="sidebar"></aside>
+
+        <main class="conteudo-principal">
+            <div class="painel-geral">
+
+                <div class="cabecalho-pagina">
+                    <div>
+                        <h1>Explorar Jogos</h1>
+                        <p>Descubra jogos indie com potencial para suas transmissões.</p>
+                    </div>
+                    <div class="acoes-usuario">
+                        <button class="btn-notificacao" aria-label="Notificações" onclick="abrirNotificacoes()">
+                            <i class="fa-regular fa-bell"></i>
+                        </button>
+                        <div class="perfil">
+                            <img src="../../assets/imgs/Hades.jpg" alt="Avatar" class="avatar">
+                            <span class="nome">Guilherme</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cartao">
+                    <div class="filtros-wrapper">
+                        <div class="barra-busca">
+                            <div class="input-grupo">
+                                <i class="fa-solid fa-magnifying-glass" style="font-size:12px;"></i>
+                                <input type="text" id="campoBusca" placeholder="Buscar por nome, gênero ou desenvolvedor...">
+                            </div>
+                            <div class="select-grupo">
+                                <select id="filtroOrdem">
+                                    <option value="viewers">Maior avg. viewers</option>
+                                    <option value="avaliacao">Melhor avaliados</option>
+                                    <option value="recentes">Lançamentos recentes</option>
+                                    <option value="horas">Mais horas jogadas</option>
+                                </select>
+                            </div>
+                            <div class="select-grupo">
+                                <select id="filtroPlataforma">
+                                    <option value="">Todas as plataformas</option>
+                                    <option value="pc">PC</option>
+                                    <option value="console">Console</option>
+                                    <option value="switch">Nintendo Switch</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="chips-genero">
+                            <span>Gênero:</span>
+                            <button class="chip ativo" data-genero="todos">Todos</button>
+                            <button class="chip" data-genero="RPG">RPG</button>
+                            <button class="chip" data-genero="Roguelike">Roguelike</button>
+                            <button class="chip" data-genero="Aventura">Aventura</button>
+                            <button class="chip" data-genero="Simulação">Simulação</button>
+                            <button class="chip" data-genero="Plataforma">Plataforma</button>
+                            <button class="chip" data-genero="Ação">Ação</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid-jogos" id="gridJogos">
+
+                    <a class="card-jogo" href="pagJogo.html?jogo=hades" data-genero="Roguelike">
+                        <div class="card-capa">
+                            <img src="../../assets/imgs/Hades.jpg" alt="Hades">
+                            <span class="badge-genero">Roguelike</span>
+                            <span class="badge-alta">↑ Em alta</span>
+                        </div>
+                        <div class="card-corpo">
+                            <div class="card-topo-info">
+                                <h3>Hades</h3>
+                                <span class="card-avaliacao">98%</span>
+                            </div>
+                            <p class="card-desc">Desafie o deus da morte em batalhas frenéticas com história envolvente e progressão permanente.</p>
+                        </div>
+                        <div class="card-metricas">
+                            <div class="card-stat">
+                                <span class="card-stat-label">Avg. viewers</span>
+                                <span class="card-stat-valor verde">2.4k</span>
+                            </div>
+                            <div class="card-stat">
+                                <span class="card-stat-label">Horas median.</span>
+                                <span class="card-stat-valor">48h</span>
+                            </div>
+                            <div class="card-stat">
+                                <span class="card-stat-label">CCU médio</span>
+                                <span class="card-stat-valor roxo">12k</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a class="card-jogo" href="pagJogo.html?jogo=stardew" data-genero="Simulação">
+                        <div class="card-capa">
+                            <img src="../../assets/imgs/StardewValleyBanner.png" alt="Stardew Valley">
+                            <span class="badge-genero">Simulação</span>
+                        </div>
+                        <div class="card-corpo">
+                            <div class="card-topo-info">
+                                <h3>Stardew Valley</h3>
+                                <span class="card-avaliacao">97%</span>
+                            </div>
+                            <p class="card-desc">Gerencie sua fazenda, cultive amizades e explore masmorras em um RPG relaxante e profundo.</p>
+                        </div>
+                        <div class="card-metricas">
+                            <div class="card-stat">
+                                <span class="card-stat-label">Avg. viewers</span>
+                                <span class="card-stat-valor verde">1.8k</span>
+                            </div>
+                            <div class="card-stat">
+                                <span class="card-stat-label">Horas median.</span>
+                                <span class="card-stat-valor">130h</span>
+                            </div>
+                            <div class="card-stat">
+                                <span class="card-stat-label">CCU médio</span>
+                                <span class="card-stat-valor roxo">8.2k</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a class="card-jogo" href="pagJogo.html?jogo=hollow" data-genero="Aventura">
+                        <div class="card-capa">
+                            <img src="../../assets/imgs/Hollow.jpg" alt="Hollow Knight">
+                            <span class="badge-genero">Aventura</span>
+                        </div>
+                        <div class="card-corpo">
+                            <div class="card-topo-info">
+                                <h3>Hollow Knight</h3>
+                                <span class="card-avaliacao">95%</span>
+                            </div>
+                            <p class="card-desc">Explore um reino subterrâneo em um metroidvania desafiador com combate preciso e mundo vasto.</p>
+                        </div>
+                        <div class="card-metricas">
+                            <div class="card-stat">
+                                <span class="card-stat-label">Avg. viewers</span>
+                                <span class="card-stat-valor verde">1.2k</span>
+                            </div>
+                            <div class="card-stat">
+                                <span class="card-stat-label">Horas median.</span>
+                                <span class="card-stat-valor">52h</span>
+                            </div>
+                            <div class="card-stat">
+                                <span class="card-stat-label">CCU médio</span>
+                                <span class="card-stat-valor roxo">5.6k</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a class="card-jogo" href="pagJogo.html?jogo=cuphead" data-genero="Ação">
+                        <div class="card-capa">
+                            <img src="../../assets/imgs/Cuphead.jpg" alt="Cuphead">
+                            <span class="badge-genero">Ação</span>
+                            <span class="badge-alta">↑ Em alta</span>
+                        </div>
+                        <div class="card-corpo">
+                            <div class="card-topo-info">
+                                <h3>Cuphead</h3>
+                                <span class="card-avaliacao">93%</span>
+                            </div>
+                            <p class="card-desc">Run-and-gun com arte estilo anos 30 e chefes desafiadores. Alta dificuldade, visual único.</p>
+                        </div>
+                        <div class="card-metricas">
+                            <div class="card-stat">
+                                <span class="card-stat-label">Avg. viewers</span>
+                                <span class="card-stat-valor verde">980</span>
+                            </div>
+                            <div class="card-stat">
+                                <span class="card-stat-label">Horas median.</span>
+                                <span class="card-stat-valor">16h</span>
+                            </div>
+                            <div class="card-stat">
+                                <span class="card-stat-label">CCU médio</span>
+                                <span class="card-stat-valor roxo">3.1k</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a class="card-jogo" href="pagJogo.html?jogo=dave" data-genero="Aventura">
+                        <div class="card-capa">
+                            <img src="../../assets/imgs/DaveTheDiver.jpg" alt="Dave the Diver">
+                            <span class="badge-genero">Aventura</span>
+                        </div>
+                        <div class="card-corpo">
+                            <div class="card-topo-info">
+                                <h3>Dave the Diver</h3>
+                                <span class="card-avaliacao">96%</span>
+                            </div>
+                            <p class="card-desc">Mergulhe no oceano de dia e gerencie um restaurante de sushi à noite. Híbrido casual irresistível.</p>
+                        </div>
+                        <div class="card-metricas">
+                            <div class="card-stat">
+                                <span class="card-stat-label">Avg. viewers</span>
+                                <span class="card-stat-valor verde">1.5k</span>
+                            </div>
+                            <div class="card-stat">
+                                <span class="card-stat-label">Horas median.</span>
+                                <span class="card-stat-valor">38h</span>
+                            </div>
+                            <div class="card-stat">
+                                <span class="card-stat-label">CCU médio</span>
+                                <span class="card-stat-valor roxo">6.8k</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a class="card-jogo" href="pagJogo.html?jogo=celeste" data-genero="Plataforma">
+                        <div class="card-capa">
+                            <img src="../../assets/imgs/celeste-e1534205369647.jpg" alt="Celeste">
+                            <span class="badge-genero">Plataforma</span>
+                        </div>
+                        <div class="card-corpo">
+                            <div class="card-topo-info">
+                                <h3>Celeste</h3>
+                                <span class="card-avaliacao">99%</span>
+                            </div>
+                            <p class="card-desc">Plataforma de precisão com narrativa emocional. Melhor avaliado do catálogo.</p>
+                        </div>
+                        <div class="card-metricas">
+                            <div class="card-stat">
+                                <span class="card-stat-label">Avg. viewers</span>
+                                <span class="card-stat-valor verde">870</span>
+                            </div>
+                            <div class="card-stat">
+                                <span class="card-stat-label">Horas median.</span>
+                                <span class="card-stat-valor">10h</span>
+                            </div>
+                            <div class="card-stat">
+                                <span class="card-stat-label">CCU médio</span>
+                                <span class="card-stat-valor roxo">2.4k</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a class="card-jogo" href="pagJogo.html?jogo=undertale" data-genero="RPG">
+                        <div class="card-capa">
+                            <img src="../../assets/imgs/tela.jpg" alt="Undertale">
+                            <span class="badge-genero">RPG</span>
+                            <span class="badge-alta">↑ Em alta</span>
+                        </div>
+                        <div class="card-corpo">
+                            <div class="card-topo-info">
+                                <h3>Undertale</h3>
+                                <span class="card-avaliacao">98%</span>
+                            </div>
+                            <p class="card-desc">RPG onde cada escolha muda o jogo. Narrativa impactante e comunidade fiel.</p>
+                        </div>
+                        <div class="card-metricas">
+                            <div class="card-stat">
+                                <span class="card-stat-label">Avg. viewers</span>
+                                <span class="card-stat-valor verde">1.1k</span>
+                            </div>
+                            <div class="card-stat">
+                                <span class="card-stat-label">Horas median.</span>
+                                <span class="card-stat-valor">8h</span>
+                            </div>
+                            <div class="card-stat">
+                                <span class="card-stat-label">CCU médio</span>
+                                <span class="card-stat-valor roxo">4.2k</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a class="card-jogo" href="pagJogo.html?jogo=deadcells" data-genero="Roguelike">
+                        <div class="card-capa">
+                            <img src="../../assets/imgs/MeninaJogando.jpg" alt="Dead Cells">
+                            <span class="badge-genero">Roguelike</span>
+                        </div>
+                        <div class="card-corpo">
+                            <div class="card-topo-info">
+                                <h3>Dead Cells</h3>
+                                <span class="card-avaliacao">94%</span>
+                            </div>
+                            <p class="card-desc">Metroidvania roguelike com combate frenético e progressão permanente entre runs.</p>
+                        </div>
+                        <div class="card-metricas">
+                            <div class="card-stat">
+                                <span class="card-stat-label">Avg. viewers</span>
+                                <span class="card-stat-valor verde">760</span>
+                            </div>
+                            <div class="card-stat">
+                                <span class="card-stat-label">Horas median.</span>
+                                <span class="card-stat-valor">35h</span>
+                            </div>
+                            <div class="card-stat">
+                                <span class="card-stat-label">CCU médio</span>
+                                <span class="card-stat-valor roxo">2.9k</span>
+                            </div>
+                        </div>
+                    </a>
+
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.querySelectorAll('.chip').forEach(chip => {
+            chip.addEventListener('click', () => {
+                document.querySelectorAll('.chip').forEach(c => c.classList.remove('ativo'));
+                chip.classList.add('ativo');
+                const genero = chip.dataset.genero;
+                document.querySelectorAll('.card-jogo').forEach(card => {
+                    card.style.display = (genero === 'todos' || card.dataset.genero === genero) ? '' : 'none';
+                });
+            });
+        });
+
+        document.getElementById('campoBusca').addEventListener('input', function () {
+            const termo = this.value.toLowerCase();
+            document.querySelectorAll('.card-jogo').forEach(card => {
+                const nome = card.querySelector('h3').textContent.toLowerCase();
+                card.style.display = nome.includes(termo) ? '' : 'none';
+            });
+        });
+    </script>
+
+    <script>
+        fetch("./sidebarStreamer.html")
+            .then(res => {
+                if (!res.ok) throw new Error("Não foi possível carregar o componente");
+                return res.text();
+            })
+            .then(data => { document.getElementById("sidebar").innerHTML = data; })
+            .catch(erro => console.log(erro));
+    </script>
+    <script src="./JS/global.js"></script>
+</body>
+</html>

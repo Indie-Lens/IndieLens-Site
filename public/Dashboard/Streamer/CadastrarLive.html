@@ -3,225 +3,325 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
         <link rel="stylesheet" href="../../css/style.css" />
-        <link rel="stylesheet" href="./CSS/CadastrarLive.css" />
-
+        <link rel="stylesheet" href="./CSS/cadastrarLive.css" />
         <title>Cadastrar Live | INDIE LENS</title>
     </head>
 
     <body class="pagina-cadastro">
         <main class="cadastro-container">
-            <!-- Cabeçalho do formulário -->
+
             <header class="cadastro-header">
-                <div class="cadastro-titulo">
-                    <div>
-                        <h1>Cadastrar Nova Live</h1>
-                        <p>
-                            Registre sua transmissão e acompanhe seu desempenho.
-                        </p>
-                    </div>
-                </div>
+                <h1>Cadastrar Nova Live</h1>
+                <p>Registre sua transmissão para gerar análises do seu desempenho.</p>
             </header>
 
-            <form id="formCadastroLive">
-                <!-- Informações principais -->
-                <section class="form-secao">
-                    <div class="secao-titulo">
-                        <h2>Informações da Live</h2>
+            <div class="stepper" id="stepper">
+                <div class="stepper-etapa ativa" data-etapa="1">
+                    <div class="stepper-circulo">1</div>
+                    <span class="stepper-label">Sobre a Live</span>
+                </div>
+                <div class="stepper-etapa" data-etapa="2">
+                    <div class="stepper-circulo">2</div>
+                    <span class="stepper-label">Data e Horário</span>
+                </div>
+                <div class="stepper-etapa" data-etapa="3">
+                    <div class="stepper-circulo">3</div>
+                    <span class="stepper-label">Métricas</span>
+                </div>
+                <div class="stepper-etapa" data-etapa="4">
+                    <div class="stepper-circulo">4</div>
+                    <span class="stepper-label">Avaliação</span>
+                </div>
+            </div>
+
+            <div class="barra-progresso-wrap">
+                <div class="barra-progresso-fill" id="barraProgresso"></div>
+            </div>
+
+            <form id="formCadastroLive" novalidate>
+
+                <div class="etapa-form ativa" id="etapa-1">
+                    <h2 class="etapa-titulo">Sobre a Live</h2>
+                    <section class="form-secao">
+                        <div class="form-grid">
+                            <div class="campo">
+                                <label for="jogo">Jogo *</label>
+                                <select id="jogo" name="jogo" required>
+                                    <option value="">Selecione um jogo</option>
+                                    <option>Hades</option>
+                                    <option>Stardew Valley</option>
+                                    <option>Hollow Knight</option>
+                                    <option>Cuphead</option>
+                                    <option>Dave the Diver</option>
+                                    <option>Celeste</option>
+                                    <option>Undertale</option>
+                                    <option>Dead Cells</option>
+                                    <option>Outro</option>
+                                </select>
+                            </div>
+                            <div class="campo">
+                                <label for="categoria">Categoria *</label>
+                                <select id="categoria" name="categoria" required>
+                                    <option value="">Selecione uma categoria</option>
+                                    <option>RPG</option>
+                                    <option>Roguelike</option>
+                                    <option>Aventura</option>
+                                    <option>Simulação</option>
+                                    <option>Plataforma</option>
+                                    <option>Ação</option>
+                                    <option>Puzzle</option>
+                                    <option>Outros</option>
+                                </select>
+                            </div>
+                            <div class="campo campo-completo">
+                                <label for="tituloLive">Título da transmissão *</label>
+                                <input
+                                    type="text" id="tituloLive" name="tituloLive"
+                                    placeholder="Ex.: Tentando zerar Hades pela primeira vez"
+                                    maxlength="100" required
+                                />
+                            </div>
+                            <div class="campo campo-completo">
+                                <label for="descricao">Descrição</label>
+                                <textarea
+                                    id="descricao" name="descricao" rows="3" maxlength="500"
+                                    placeholder="O que aconteceu durante a transmissão?"
+                                ></textarea>
+                            </div>
+                        </div>
+                    </section>
+                    <div class="navegacao-wizard">
+                        <button type="button" class="btn-anterior" disabled>← Anterior</button>
+                        <button type="button" class="btn-proximo" onclick="avancar(1)">Próximo →</button>
                     </div>
+                </div>
 
-                    <div class="form-grid">
-                        <div class="campo">
-                            <label for="jogo">Jogo *</label>
-                            <select id="jogo" name="jogo" required>
-                                <option value="">Selecione um jogo</option>
-                                <option value="Hades">Hades</option>
-                                <option value="Stardew Valley">
-                                    Stardew Valley
-                                </option>
-                                <option value="Hollow Knight">
-                                    Hollow Knight
-                                </option>
-                                <option value="Cuphead">Cuphead</option>
-                                <option value="Outro">Outro</option>
-                            </select>
+                <div class="etapa-form" id="etapa-2">
+                    <h2 class="etapa-titulo">Data e Horário</h2>
+                    <section class="form-secao">
+                        <div class="form-grid">
+                            <div class="campo campo-completo">
+                                <label for="dataLive">Data *</label>
+                                <input type="date" id="dataLive" name="dataLive" required />
+                            </div>
+                            <div class="campo">
+                                <label for="horaInicio">Início *</label>
+                                <input type="time" id="horaInicio" name="horaInicio" required />
+                            </div>
+                            <div class="campo">
+                                <label for="horaTermino">Término *</label>
+                                <input type="time" id="horaTermino" name="horaTermino" required />
+                            </div>
+                            <div class="campo campo-completo">
+                                <label for="duracao">Duração</label>
+                                <input
+                                    type="text" id="duracao" name="duracao"
+                                    placeholder="Calculada automaticamente"
+                                    readonly
+                                />
+                            </div>
                         </div>
-
-                        <div class="campo">
-                            <label for="categoria">Categoria *</label>
-                            <select id="categoria" name="categoria" required>
-                                <option value="">
-                                    Selecione uma categoria
-                                </option>
-                                <option value="RPG">RPG</option>
-                                <option value="Indie">Indie</option>
-                                <option value="Aventura">Aventura</option>
-                                <option value="Simulação">Simulação</option>
-                                <option value="Plataforma">Plataforma</option>
-                                <option value="Sandbox">Sandbox</option>
-                                <option value="Outros">Outros</option>
-                            </select>
-                        </div>
-
-                        <div class="campo campo-completo">
-                            <label for="tituloLive"
-                                >Título da transmissão *</label
-                            >
-                            <input
-                                type="text"
-                                id="tituloLive"
-                                name="tituloLive"
-                                placeholder="Ex.: Tentando zerar Hades pela primeira vez"
-                                maxlength="100"
-                                required
-                            />
-                        </div>
-
-                        <div class="campo campo-completo">
-                            <label for="descricao">Descrição da live</label>
-                            <textarea
-                                id="descricao"
-                                name="descricao"
-                                rows="3"
-                                maxlength="500"
-                                placeholder="Conte um pouco sobre o que aconteceu na transmissão..."
-                            ></textarea>
-                        </div>
+                    </section>
+                    <div class="navegacao-wizard">
+                        <button type="button" class="btn-anterior" onclick="voltar(2)">← Anterior</button>
+                        <button type="button" class="btn-proximo" onclick="avancar(2)">Próximo →</button>
                     </div>
-                </section>
+                </div>
 
-                <!-- Data e horário -->
-                <section class="form-secao">
-                    <div class="secao-titulo">
-                        <h2>Data e Horário</h2>
+                <div class="etapa-form" id="etapa-3">
+                    <h2 class="etapa-titulo">Métricas de Audiência</h2>
+                    <section class="form-secao">
+                        <div class="form-grid">
+                            <div class="campo">
+                                <label for="mediaEspectadores">Média de espectadores *</label>
+                                <input
+                                    type="number" id="mediaEspectadores" name="mediaEspectadores"
+                                    min="0" step="1" placeholder="Ex.: 120" required
+                                />
+                            </div>
+                            <div class="campo">
+                                <label for="picoEspectadores">Pico de espectadores *</label>
+                                <input
+                                    type="number" id="picoEspectadores" name="picoEspectadores"
+                                    min="0" step="1" placeholder="Ex.: 280" required
+                                />
+                            </div>
+                            <div class="campo">
+                                <label for="visualizacoes">Visualizações totais</label>
+                                <input
+                                    type="number" id="visualizacoes" name="visualizacoes"
+                                    min="0" step="1" placeholder="Ex.: 3.450"
+                                />
+                            </div>
+                            <div class="campo">
+                                <label for="novosSeguidores">Novos seguidores</label>
+                                <input
+                                    type="number" id="novosSeguidores" name="novosSeguidores"
+                                    min="0" step="1" placeholder="Ex.: 18"
+                                />
+                            </div>
+                        </div>
+                    </section>
+                    <div class="navegacao-wizard">
+                        <button type="button" class="btn-anterior" onclick="voltar(3)">← Anterior</button>
+                        <button type="button" class="btn-proximo" onclick="avancar(3)">Próximo →</button>
                     </div>
+                </div>
 
-                    <div class="form-grid">
-                        <div class="campo">
-                            <label for="dataLive">Data da transmissão *</label>
-                            <input
-                                type="date"
-                                id="dataLive"
-                                name="dataLive"
-                                required
-                            />
+                <div class="etapa-form" id="etapa-4">
+                    <h2 class="etapa-titulo">Avaliação Pessoal</h2>
+                    <section class="form-secao">
+                        <div class="form-grid">
+                            <div class="campo campo-completo">
+                                <label>Como foi essa live? *</label>
+                                <div class="estrelas-wrapper" id="estrelasWrapper">
+                                    <button type="button" class="estrela-btn" data-valor="1" aria-label="1 estrela">★</button>
+                                    <button type="button" class="estrela-btn" data-valor="2" aria-label="2 estrelas">★</button>
+                                    <button type="button" class="estrela-btn" data-valor="3" aria-label="3 estrelas">★</button>
+                                    <button type="button" class="estrela-btn" data-valor="4" aria-label="4 estrelas">★</button>
+                                    <button type="button" class="estrela-btn" data-valor="5" aria-label="5 estrelas">★</button>
+                                </div>
+                                <span class="nota-label" id="notaTexto">Clique para avaliar</span>
+                                <input type="hidden" id="notaLive" name="notaLive" />
+                            </div>
+                            <div class="campo campo-completo">
+                                <label for="engajamentoChat">Engajamento do chat</label>
+                                <select id="engajamentoChat" name="engajamentoChat">
+                                    <option value="">Selecione</option>
+                                    <option value="alto">🔥 Alto</option>
+                                    <option value="medio">💬 Médio</option>
+                                    <option value="baixo">😴 Baixo</option>
+                                </select>
+                            </div>
+                            <div class="campo campo-completo">
+                                <label for="pontoAlto">Ponto alto da live</label>
+                                <input
+                                    type="text" id="pontoAlto" name="pontoAlto"
+                                    placeholder="Ex.: Zerou o chefe final depois de 8 tentativas"
+                                    maxlength="150"
+                                />
+                            </div>
+                            <div class="campo campo-completo">
+                                <label for="pontoMelhoria">O que poderia melhorar?</label>
+                                <input
+                                    type="text" id="pontoMelhoria" name="pontoMelhoria"
+                                    placeholder="Ex.: Começar mais cedo, pico sempre às 21h"
+                                    maxlength="150"
+                                />
+                            </div>
                         </div>
-
-                        <div class="campo">
-                            <label for="horaInicio">Horário de início *</label>
-                            <input
-                                type="time"
-                                id="horaInicio"
-                                name="horaInicio"
-                                required
-                            />
-                        </div>
-
-                        <div class="campo">
-                            <label for="horaTermino"
-                                >Horário de término *</label
-                            >
-                            <input
-                                type="time"
-                                id="horaTermino"
-                                name="horaTermino"
-                                required
-                            />
-                        </div>
-
-                        <div class="campo">
-                            <label for="duracao">Duração calculada</label>
-                            <input
-                                type="text"
-                                id="duracao"
-                                name="duracao"
-                                placeholder="Calculada automaticamente"
-                                readonly
-                            />
-                        </div>
+                    </section>
+                    <div class="navegacao-wizard">
+                        <button type="button" class="btn-anterior" onclick="voltar(4)">← Anterior</button>
+                        <button type="submit" class="btn-salvar-final">Salvar Live</button>
                     </div>
-                </section>
+                </div>
 
-                <!-- Métricas -->
-                <section class="form-secao">
-                    <div class="secao-titulo">
-                        <h2>Métricas da Live</h2>
-                    </div>
-
-                    <p class="secao-descricao">
-                        Informe os resultados da transmissão para gerar suas
-                        análises.
-                    </p>
-
-                    <div class="form-grid">
-                        <div class="campo">
-                            <label for="mediaEspectadores">
-                                Média de espectadores *
-                            </label>
-                            <input
-                                type="number"
-                                id="mediaEspectadores"
-                                name="mediaEspectadores"
-                                min="0"
-                                step="1"
-                                placeholder="Ex.: 120"
-                                required
-                            />
-                        </div>
-
-                        <div class="campo">
-                            <label for="picoEspectadores">
-                                Pico de espectadores *
-                            </label>
-                            <input
-                                type="number"
-                                id="picoEspectadores"
-                                name="picoEspectadores"
-                                min="0"
-                                step="1"
-                                placeholder="Ex.: 280"
-                                required
-                            />
-                        </div>
-
-                        <div class="campo">
-                            <label for="visualizacoes"
-                                >Visualizações totais</label
-                            >
-                            <input
-                                type="number"
-                                id="visualizacoes"
-                                name="visualizacoes"
-                                min="0"
-                                step="1"
-                                placeholder="Ex.: 3450"
-                            />
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Ações -->
-                <footer class="cadastro-acoes">
-                    <p class="campos-obrigatorios">* Campos obrigatórios</p>
-
-                    <div class="botoes-acoes">
-                        <button
-                            type="button"
-                            class="btn-cancelar"
-                            id="cancelarCadastro"
-                        >
-                            Cancelar
-                        </button>
-
-                        <button type="submit" class="btn-salvar">
-                            Salvar Live
-                        </button>
-                    </div>
-                </footer>
             </form>
         </main>
 
+        <script>
+            let etapaAtual = 1;
+            const totalEtapas = 4;
+            const notasTexto = ['', 'Fraca', 'Abaixo do esperado', 'Regular', 'Boa', 'Excelente'];
+
+            function atualizarStepper() {
+                document.querySelectorAll('.stepper-etapa').forEach(el => {
+                    const n = parseInt(el.dataset.etapa);
+                    el.classList.toggle('ativa',     n === etapaAtual);
+                    el.classList.toggle('concluida', n < etapaAtual);
+                    el.querySelector('.stepper-circulo').textContent = n < etapaAtual ? '✓' : n;
+                });
+                const pct = ((etapaAtual - 1) / (totalEtapas - 1)) * 100;
+                document.getElementById('barraProgresso').style.width = pct + '%';
+            }
+
+            function mostrarEtapa(n) {
+                document.querySelectorAll('.etapa-form').forEach(el => el.classList.remove('ativa'));
+                document.getElementById('etapa-' + n).classList.add('ativa');
+                etapaAtual = n;
+                atualizarStepper();
+            }
+
+            function avancar(de) {
+                if (!validarEtapa(de)) return;
+                mostrarEtapa(de + 1);
+            }
+
+            function voltar(de) {
+                if (de > 1) mostrarEtapa(de - 1);
+            }
+
+            function validarEtapa(n) {
+                if (n === 1) {
+                    if (!document.getElementById('jogo').value)
+                        return alert('Selecione o jogo.'), false;
+                    if (!document.getElementById('categoria').value)
+                        return alert('Selecione a categoria.'), false;
+                    if (!document.getElementById('tituloLive').value.trim())
+                        return alert('Informe o título da live.'), false;
+                }
+                if (n === 2) {
+                    if (!document.getElementById('dataLive').value)
+                        return alert('Informe a data.'), false;
+                    if (!document.getElementById('horaInicio').value)
+                        return alert('Informe o horário de início.'), false;
+                    if (!document.getElementById('horaTermino').value)
+                        return alert('Informe o horário de término.'), false;
+                }
+                if (n === 3) {
+                    const media = +document.getElementById('mediaEspectadores').value;
+                    const pico  = +document.getElementById('picoEspectadores').value;
+                    if (!media) return alert('Informe a média de espectadores.'), false;
+                    if (!pico)  return alert('Informe o pico de espectadores.'), false;
+                    if (pico < media) return alert('O pico não pode ser menor que a média.'), false;
+                }
+                return true;
+            }
+
+            ['horaInicio', 'horaTermino'].forEach(id =>
+                document.getElementById(id).addEventListener('change', () => {
+                    const ini = document.getElementById('horaInicio').value;
+                    const fim = document.getElementById('horaTermino').value;
+                    if (!ini || !fim) return;
+                    const [hI, mI] = ini.split(':').map(Number);
+                    const [hF, mF] = fim.split(':').map(Number);
+                    let total = (hF * 60 + mF) - (hI * 60 + mI);
+                    if (total < 0) total += 1440;
+                    const h = Math.floor(total / 60), m = total % 60;
+                    document.getElementById('duracao').value =
+                        h > 0 ? `${h}h ${String(m).padStart(2,'0')}min` : `${m}min`;
+                })
+            );
+
+            const notaInput = document.getElementById('notaLive');
+            const notaEl    = document.getElementById('notaTexto');
+            document.querySelectorAll('.estrela-btn').forEach(btn => {
+                btn.addEventListener('mouseover', () => iluminar(+btn.dataset.valor));
+                btn.addEventListener('mouseout',  () => iluminar(+notaInput.value || 0));
+                btn.addEventListener('click',     () => {
+                    notaInput.value = btn.dataset.valor;
+                    notaEl.textContent = notasTexto[btn.dataset.valor];
+                    iluminar(+btn.dataset.valor);
+                });
+            });
+
+            function iluminar(n) {
+                document.querySelectorAll('.estrela-btn').forEach(b =>
+                    b.classList.toggle('ativa', +b.dataset.valor <= n)
+                );
+            }
+
+            document.getElementById('formCadastroLive').addEventListener('submit', e => {
+                e.preventDefault();
+                if (!notaInput.value)
+                    return alert('Avalie a live antes de salvar.');
+                console.log('Salvo!');
+            });
+
+            atualizarStepper();
+        </script>
 
         <script src="./JS/global.js"></script>
     </body>
