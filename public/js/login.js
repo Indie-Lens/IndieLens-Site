@@ -24,7 +24,7 @@ function entrar() {
 
                         setTimeout(function () {
                             if (json.perfil == 3) {
-                                window.location = "dashboard/LeadGame/paineis.html";
+                                window.location = "dashboard/LeadGame/dashPrincipalLead.html";
                             } else if (json.perfil == 4) {
                                 window.location = "dashboard/Streamer/DashboardGeral.html";
                             }

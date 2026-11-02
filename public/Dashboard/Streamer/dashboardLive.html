@@ -34,8 +34,8 @@
                             <i class="fa-regular fa-bell"></i>
                         </button>
                         <div class="perfil">
-                            <img src="../../assets/imgs/Hades.jpg" alt="Avatar" class="avatar">
-                            <span class="nome">Guilherme</span>
+                            <img src="https://marketplace.canva.com/Dz63E/MAF4KJDz63E/1/tl/canva-%C3%ADcone-do-usu%C3%A1rio-MAF4KJDz63E.png" alt="Avatar" class="avatar">
+                            <span class="nome">Usuário</span>
                         </div>
                     </div>
                 </div>
@@ -304,6 +304,26 @@
             .then(data => { document.getElementById("sidebar").innerHTML = data; })
             .catch(e => console.log(e));
     </script>
+
+    
+<script>
+    function abrirMenuMobile() {
+    const sidebar = document.querySelector("#sidebar .left-container");
+    const fundo = document.querySelector("#sidebar .fundo-menu");
+
+    sidebar?.classList.add("menu-aberto");
+    fundo?.classList.add("menu-aberto");
+}
+
+function fecharMenuMobile() {
+    const sidebar = document.querySelector("#sidebar .left-container");
+    const fundo = document.querySelector("#sidebar .fundo-menu");
+
+    sidebar?.classList.remove("menu-aberto");
+    fundo?.classList.remove("menu-aberto");
+
+}
+</script>
     <script src="./JS/global.js"></script>
 
 </body>

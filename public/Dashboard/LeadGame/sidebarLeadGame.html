@@ -1,4 +1,17 @@
+
+<button
+    class="btn-menu-mobile"
+    type="button"
+    onclick="abrirMenuMobile()"
+    aria-label="Abrir menu"
+>
+    ⋮
+</button>
+
+<div class="fundo-menu" onclick="fecharMenuMobile()"></div>
+
 <div class="left-container">
+
     <div class="top-content">
         <div class="empresa">
             <img
@@ -10,15 +23,16 @@
 
     <div class="middle-content">
         <p class="menu-title">Menu</p>
+
         <nav class="opcoes-btns">
-            <a href="/Dashboard/LeadGame/paineis.html" class="opcao">
+                <a href="/Dashboard/LeadGame/dashPrincipalLead.html" class="opcao">
                 <span>Visão geral</span>
                 <img src="../../assets/imgs/visaoGeral.png" alt="" />
             </a>
 
             <a href="/Dashboard/Desenvolvedor/Relatorios.html" class="opcao">
                 <span>Relatórios</span>
-                <img src="../../assets/imgs/rank.png" alt="" />
+                <img src="../../assets/imgs/analiseMercado.png" alt="" />
             </a>
 
             <a href="#" class="opcao">
@@ -26,15 +40,16 @@
                 <img src="../../assets/imgs/analiseEspecifica.png" alt="" />
             </a>
 
-            <button class="opcao" onclick="abrirNotificacoes()">
+            <button
+                class="opcao"
+                type="button"
+                onclick="abrirNotificacoes()"
+            >
                 <span>Notificações</span>
                 <img src="../../assets/imgs/notificacoes.png" alt="" />
             </button>
 
-            <a href="#" class="opcao">
-                <span>Análise de mercado</span>
-                <img src="../../assets/imgs/analiseMercado.png" alt="" />
-            </a>
+           
 
             <a href="/Dashboard/Desenvolvedor/Perfil.html" class="opcao">
                 <span>Configurações</span>
@@ -45,11 +60,13 @@
                 <span>Sair</span>
                 <img src="../../assets/imgs/voltar.png" alt="" />
             </a>
+
         </nav>
     </div>
 
     <div class="bottom-content">
         <div class="usuario">
+
             <div class="icon-foto">
                 <img
                     src="https://marketplace.canva.com/Dz63E/MAF4KJDz63E/1/tl/canva-%C3%ADcone-do-usu%C3%A1rio-MAF4KJDz63E.png"
@@ -67,40 +84,44 @@
                 type="button"
                 aria-label="Opções do perfil"
             >
-                  <img src="../../assets/imgs/configuracoes.png" alt="" />
+                <img src="../../assets/imgs/configuracoes.png" alt="" />
             </button>
+
         </div>
     </div>
 
-    <div class="barra-notificacoes" id="barraNotificacoes">
-        <div class="notificacoes-topo">
-            <h2>Notificações</h2>
+</div>
 
-            <button type="button" onclick="fecharNotificacoes()">X</button>
-        </div>
+<div class="barra-notificacoes" id="barraNotificacoes">
 
-        <div class="notificacao">
-            <h3>Jogo em promoção!</h3>
-            <p>Hades está com 50% de desconto.</p>
-            <span>Promoção</span>
-        </div>
+    <div class="notificacoes-topo">
+        <h2>Notificações</h2>
 
-        <div class="notificacao">
-            <h3>Novo lançamento</h3>
-            <p>Um novo jogo de RPG foi lançado na plataforma.</p>
-            <span>Lançamento</span>
-        </div>
-
-        <div class="notificacao">
-            <h3>Jogo da sua lista de favoritos</h3>
-            <p>Hollow Knight entrou em promoção!</p>
-            <span>Favoritos</span>
-        </div>
-
-        <div class="notificacao">
-            <h3>Novidade na plataforma</h3>
-            <p>Confira os jogos recém-lançados.</p>
-            <span>Novidades</span>
-        </div>
+        <button type="button" onclick="fecharNotificacoes()">X</button>
     </div>
+
+    <div class="notificacao">
+        <h3>Jogo em promoção!</h3>
+        <p>Hades está com 50% de desconto.</p>
+        <span>Promoção</span>
+    </div>
+
+    <div class="notificacao">
+        <h3>Novo lançamento</h3>
+        <p>Um novo jogo de RPG foi lançado na plataforma.</p>
+        <span>Lançamento</span>
+    </div>
+
+    <div class="notificacao">
+        <h3>Jogo da sua lista de favoritos</h3>
+        <p>Hollow Knight entrou em promoção!</p>
+        <span>Favoritos</span>
+    </div>
+
+    <div class="notificacao">
+        <h3>Novidade na plataforma</h3>
+        <p>Confira os jogos recém-lançados.</p>
+        <span>Novidades</span>
+    </div>
+
 </div>
