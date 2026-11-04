@@ -493,6 +493,359 @@ select {
 }
 
 
+
+/* ================================
+   POPUP DE ANÁLISE DO PROTÓTIPO
+================================ */
+
+.modal-analise {
+    position: fixed;
+    inset: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 24px;
+
+    background: rgba(0, 0, 0, 0.75);
+
+    z-index: 1000;
+}
+
+.modal-analise[hidden] {
+    display: none;
+}
+
+/* Caixa principal */
+
+.analise-box {
+    width: 100%;
+    max-width: 850px;
+
+    max-height: 90vh;
+
+    overflow-y: auto;
+
+    padding: 32px;
+
+    background: #111111;
+
+    border: 1px solid #30233f;
+    border-radius: 18px;
+
+    color: #ffffff;
+
+    box-sizing: border-box;
+}
+
+/* Cabeçalho */
+
+.analise-topo {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 24px;
+
+    margin-bottom: 30px;
+}
+
+.analise-identificacao {
+    display: flex;
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+.analise-etiqueta {
+    color: #9cff00;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    letter-spacing: 2px;
+}
+
+.analise-topo h2 {
+    margin: 0;
+
+    font-size: 28px;
+    font-weight: 700;
+
+    color: #ffffff;
+
+    overflow-wrap: anywhere;
+}
+
+.analise-fechar {
+    flex-shrink: 0;
+
+    width: 38px;
+    height: 38px;
+
+    border: 1px solid #30233f;
+    border-radius: 8px;
+
+    background: #17131d;
+
+    color: #ffffff;
+
+    font-size: 26px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.analise-fechar:hover {
+    background: #30233f;
+    color: #9cff00;
+}
+
+/* Informações do projeto */
+
+.analise-resumo {
+    width: 100%;
+
+    margin-bottom: 36px;
+}
+
+.analise-dados {
+    display: flex;
+    flex-direction: column;
+
+    gap: 20px;
+}
+
+.analise-subtitulo {
+    color: #9cff00;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+}
+
+.analise-info-grid {
+    display: grid;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 16px;
+}
+
+.analise-info {
+    display: flex;
+    flex-direction: column;
+
+    gap: 12px;
+
+    min-height: 85px;
+
+    padding: 20px;
+
+    background: #17131d;
+
+    border: 1px solid #30233f;
+    border-radius: 12px;
+
+    box-sizing: border-box;
+}
+
+.analise-info span {
+    color: #849aaa;
+
+    font-size: 13px;
+}
+
+.analise-info strong {
+    color: #ffffff;
+
+    font-size: 17px;
+    font-weight: 600;
+
+    overflow-wrap: anywhere;
+}
+
+/* Jogos semelhantes */
+
+.jogos-parecidos {
+    margin-top: 10px;
+}
+
+.parecidos-titulo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    margin-bottom: 22px;
+}
+
+.parecidos-titulo h3 {
+    margin: 0 0 8px;
+
+    font-size: 20px;
+}
+
+.parecidos-titulo p {
+    margin: 0;
+
+    color: #849aaa;
+
+    font-size: 13px;
+}
+
+.parecidos-contador {
+    flex-shrink: 0;
+
+    padding: 8px 12px;
+
+    background: #17131d;
+
+    border: 1px solid #30233f;
+    border-radius: 20px;
+
+    color: #9cff00;
+
+    font-size: 12px;
+}
+
+/* Lista de jogos */
+
+.parecidos-lista {
+    display: flex;
+    flex-direction: column;
+
+    gap: 14px;
+}
+
+.jogo-parecido {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 24px;
+
+    padding: 20px;
+
+    background: #17131d;
+
+    border: 1px solid #30233f;
+    border-radius: 12px;
+}
+
+.jogo-parecido > div {
+    display: flex;
+    flex-direction: column;
+
+    gap: 10px;
+
+    min-width: 0;
+}
+
+.jogo-genero {
+    color: #9cff00;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    text-transform: uppercase;
+}
+
+.jogo-parecido h4 {
+    margin: 0;
+
+    font-size: 16px;
+}
+
+.jogo-parecido p {
+    margin: 0;
+
+    color: #849aaa;
+
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.jogo-tag,
+.jogo-data {
+    color: #849aaa;
+
+    font-size: 12px;
+}
+
+.jogo-preco {
+    flex-shrink: 0;
+
+    color: #9cff00;
+
+    font-size: 15px;
+    font-weight: 700;
+}
+
+/* Rodapé */
+
+.analise-rodape {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    margin-top: 30px;
+    padding-top: 24px;
+
+    border-top: 1px solid #30233f;
+}
+
+.analise-rodape span {
+    color: #849aaa;
+
+    font-size: 12px;
+}
+
+/* Responsividade */
+
+@media (max-width: 600px) {
+
+    .modal-analise {
+        padding: 12px;
+    }
+
+    .analise-box {
+        padding: 22px;
+
+        max-height: 94vh;
+    }
+
+    .analise-topo h2 {
+        font-size: 22px;
+    }
+
+    .analise-info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .parecidos-titulo {
+        align-items: flex-start;
+    }
+
+    .jogo-parecido {
+        flex-direction: column;
+    }
+
+    .analise-rodape {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+}
+
+
+
 @media (max-width: 1100px) {
     .conteudo {
         padding: 25px 20px 35px;
