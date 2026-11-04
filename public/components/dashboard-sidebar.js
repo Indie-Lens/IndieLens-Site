@@ -1,4 +1,4 @@
-window.loadDashboardSidebar = async (host, source) => {
+/* window.loadDashboardSidebar = async (host, source) => {
     if (!host) return;
     try {
         const response = await fetch(source);
@@ -23,3 +23,4 @@ window.fecharNotificacoes = () => {
     const panel = document.getElementById('barraNotificacoes');
     if (panel) panel.style.display = 'none';
 };
+ */

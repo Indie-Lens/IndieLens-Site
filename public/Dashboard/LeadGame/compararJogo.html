@@ -8,60 +8,23 @@
 
     <title>IndieLens - Protótipos</title>
 
-    <link rel="stylesheet" href="css/CompararJogo.css">
+    <link rel="stylesheet" href="../../components/sidebar.css">
+    <link rel="stylesheet" href="../Streamer/CSS/CompararJogo.css">
 </head>
 
 <body>
 
-    <header class="topbar">
-        <span class="logo">IndieLens</span>
-    </header>
-
+    
     <div class="layout">
 
-        <aside class="sidebar">
-
-            <div class="sidebar-top">
-                <div class="logo">
-                    <span class="logo-icon">I</span>
-                    <span>IndieLens</span>
-                </div>
-            </div>
-
-            <nav class="menu">
-                <a href="AnaliseJogo.html" class="menu-item">
-                    Dashboard
-                </a>
-
-                <a href="#" class="menu-item">
-                    Outro
-                </a>
-
-                <a href="prototipos.html" class="menu-item ativo">
-                    Protótipos
-                </a>
-            </nav>
-
-            <div class="sidebar-bottom">
-                <div class="usuario">
-                    <img class="avatar" src="" alt="Foto do usuário" id="avatar">
-                    <span id="perfilNome">teste</span>
-                </div>
-
-                <button type="button" class="btn-sair" id="btnSair">
-                    Sair
-                </button>
-            </div>
-
-        </aside>
-
+     <div class="left-container" id="sidebar"></div>
         <main class="conteudo">
 
             <div class="conteudo-topo">
                 <h1>Protótipos</h1>
 
                 <button class="btn-cadastrar" id="btnCadastrar" type="button">
-                    Realizar comparação +
+                    Simular Jogo +
                 </button>
             </div>
 
@@ -257,7 +220,53 @@
 </div>
 
 
-    <script src="js/dashDesenvolvedor.js"></script>
+    <script src="../Streamer/JS/dashDesenvolvedor.js"></script>
+    <script>
+    function abrirNotificacoes() {
+            document.getElementById("barraNotificacoes").style.display = "block";
+        }
+
+        function fecharNotificacoes() {
+            document.getElementById("barraNotificacoes").style.display = "none";
+        }
+    </script>
+
+    <script>
+        fetch("./sidebarLeadGame.html")
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error("Não foi possível carregar o componente");
+                }
+                return res.text();
+            })
+            .then((data) => {
+                document.getElementById("sidebar").innerHTML = data;
+
+                if (typeof inicializarFuturosLancamentos === "function") {
+                    inicializarFuturosLancamentos(document.getElementById("sidebar"));
+                }
+            })
+            .catch((erro) => console.log(erro));
+    </script>
+
+
+    <script>
+        function abrirMenuMobile() {
+    const sidebar = document.querySelector("#sidebar .left-container");
+    const fundo = document.querySelector("#sidebar .fundo-menu");
+
+    sidebar.classList.add("menu-aberto");
+    fundo.classList.add("menu-aberto");
+}
+
+function fecharMenuMobile() {
+    const sidebar = document.querySelector("#sidebar .left-container");
+    const fundo = document.querySelector("#sidebar .fundo-menu");
+
+    sidebar.classList.remove("menu-aberto");
+    fundo.classList.remove("menu-aberto");
+}
+    </script>
 
 </body>
 </html>

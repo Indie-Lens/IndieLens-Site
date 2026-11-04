@@ -177,9 +177,7 @@ body {
     object-fit: contain;
 }
 
-.btn-perfil:hover {
-    background-color: #30303b;
-}
+
 
 
 @media (max-width: 768px) {
