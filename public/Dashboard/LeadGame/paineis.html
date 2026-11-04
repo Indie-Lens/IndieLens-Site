@@ -295,4 +295,22 @@
         .catch((erro) => console.log(erro));
 </script>
 
+<script>
+    function abrirMenuMobile() {
+    const sidebar = document.querySelector("#sidebar .left-container");
+    const fundo = document.querySelector("#sidebar .fundo-menu");
+
+    sidebar.classList.add("menu-aberto");
+    fundo.classList.add("menu-aberto");
+}
+
+function fecharMenuMobile() {
+    const sidebar = document.querySelector("#sidebar .left-container");
+    const fundo = document.querySelector("#sidebar .fundo-menu");
+
+    sidebar.classList.remove("menu-aberto");
+    fundo.classList.remove("menu-aberto");
+}
+</script>
+
 </html>

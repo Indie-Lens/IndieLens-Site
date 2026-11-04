@@ -11,12 +11,13 @@ body {
     justify-content: space-between;
     width: 260px;
     height: 100vh;
-    background-color: var(--fundo-sideBar);
+    z-index: 10000;
+    background-color: var(--fundo-elementos);
 }
 
 .sidebar {
     width: 250px;
-    background-color: var(--fundo-elementos);
+    
     border-right: 1px solid var(--borda-suave);
     padding: 30px 20px;
     display: flex;
@@ -74,7 +75,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: var(--fundo-sideBar);
+    
 }
 
 .opcao {
@@ -180,17 +181,95 @@ body {
     background-color: #30303b;
 }
 
+
 @media (max-width: 768px) {
     .left-container {
-        width: 220px;
+        width: 80px;
+    }
+
+    .empresa {
+        justify-content: center;
+        padding-left: 0;
+    }
+
+    .empresa img {
+        width: 60px;
+        height: auto;
+        object-fit: contain;
+    }
+
+    .menu-title {
+        display: none;
+    }
+
+    .opcao {
+        justify-content: center;
+        width: 100%;
+        padding: 0;
+        min-height: 55px;
+    }
+
+    .opcao span {
+        display: none;
+    }
+
+    .opcao img {
+        width: 22px;
+    }
+
+    .usuario {
+        justify-content: center;
+        padding: 12px 5px;
+    }
+
+    .sobre-usuario,
+    .btn-perfil {
+        display: none;
+    }
+
+    .barra-notificacoes {
+        left: 80px;
+        width: 320px;
+    }
+
+    .conteudo-principal {
+        margin-left: 80px;
     }
 }
 
+
 @media (max-width: 480px) {
     .left-container {
-        width: 180px;
+        width: 65px;
+    }
+
+    .empresa img {
+        width: 48px;
+    }
+
+    .opcao {
+        min-height: 50px;
+    }
+
+    .opcao img {
+        width: 20px;
+    }
+
+    .icon-foto {
+        width: 35px;
+        height: 35px;
+    }
+
+    .barra-notificacoes {
+        left: 0;
+        width: 100%;
+    }
+
+    .conteudo-principal {
+        margin-left: 65px;
     }
 }
+
 
 .painel-notificacoes {
     display: none;
@@ -207,7 +286,7 @@ body {
     z-index: 1001;
 }
 
-/*NOTIFICACOES*/
+
 
 .barra-notificacoes {
     display: none;
@@ -222,7 +301,7 @@ body {
 
     background-color: #0d121a;
     opacity: 1;
-    z-index: 9999;
+    z-index: 10001;
     isolation: isolate;
 }
 
@@ -293,4 +372,110 @@ body {
     cursor: pointer;
 }
 
-.opcao.active { background-color: var(--roxo-primario); border-radius: 8px; }
+.opcao.active {
+    background-color: var(--roxo-primario);
+    border-radius: 8px;
+}
+
+
+.btn-menu-mobile {
+    display: none;
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 10003;
+    background-color: var(--fundo-elementos);
+    color: white;
+    border: none;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+
+.fundo-menu {
+    display: none;
+}
+
+
+@media (max-width: 768px) {
+
+    .btn-menu-mobile {
+        display: block;
+    }
+
+    .left-container {
+        width: 260px;
+        left: -260px;
+        transition: left 0.3s ease;
+        z-index: 10002;
+    }
+
+    .left-container.menu-aberto {
+        left: 0;
+    }
+
+    .fundo-menu.menu-aberto {
+        display: block;
+        position: fixed;
+        inset: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 10001;
+    }
+
+    .barra-notificacoes {
+        left: 0;
+        z-index: 10004;
+    }
+
+    .conteudo-principal {
+        margin-left: 0;
+    }
+}
+
+
+@media (max-width: 768px) {
+
+    .left-container.menu-aberto {
+        width: 260px;
+        left: 0;
+    }
+
+    .left-container.menu-aberto .empresa {
+        justify-content: flex-start;
+        padding-left: 29px;
+    }
+
+    .left-container.menu-aberto .empresa img {
+        width: 200px;
+        height: 59px;
+    }
+
+    .left-container.menu-aberto .menu-title {
+        display: block;
+    }
+
+    .left-container.menu-aberto .opcao {
+        justify-content: space-between;
+        width: 70%;
+        padding: 0 15px;
+        min-height: 50px;
+    }
+
+    .left-container.menu-aberto .opcao span {
+        display: inline;
+    }
+
+    .left-container.menu-aberto .opcao img {
+        width: 19px;
+    }
+
+    .left-container.menu-aberto .usuario {
+        justify-content: flex-start;
+        padding: 16px;
+    }
+
+    .left-container.menu-aberto .sobre-usuario,
+    .left-container.menu-aberto .btn-perfil {
+        display: flex;
+    }
+}
