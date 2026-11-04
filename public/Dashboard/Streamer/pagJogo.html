@@ -50,6 +50,35 @@
                 </div>
             </div>
 
+            <div class="barra-acoes">
+                <div class="acoes-grupo">
+
+                    <button class="btn-acao" id="btn-curtir" onclick="toggleCurtir()" aria-label="Curtir jogo">
+                        <i class="fa-regular fa-heart" id="icone-curtir"></i>
+                        <span>Curtir</span>
+                        <span class="contador-curtidas" id="contador-curtir"></span>
+                    </button>
+
+                    <button class="btn-acao" id="btn-desejos" onclick="toggleDesejos()" aria-label="Adicionar à lista de desejos">
+                        <i class="fa-regular fa-bookmark" id="icone-desejos"></i>
+                        <span id="texto-desejos">Lista de Desejos</span>
+                    </button>
+
+                    <button class="btn-acao" id="btn-transmiti" onclick="toggleTransmiti()" aria-label="Marcar como já transmitido">
+                        <i class="fa-solid fa-video" id="icone-transmiti"></i>
+                        <span id="texto-transmiti">Já Transmiti</span>
+                    </button>
+
+                </div>
+
+                <div class="acoes-grupo">
+                    <button class="btn-acao-nota" id="btn-nota" onclick="abrirModalNota()" aria-label="Adicionar nota pessoal">
+                        <i class="fa-regular fa-note-sticky"></i>
+                        <span id="texto-nota">Nota Pessoal</span>
+                    </button>
+                </div>
+            </div>
+
             <div class="container-sobre-jogo">
                 <div class="container-sobre">
 
@@ -183,7 +212,26 @@
         </main>
     </div>
 
+    <div class="modal-nota-overlay" id="modalNota">
+        <div class="modal-nota">
+            <div>
+                <h3>Nota Pessoal</h3>
+                <p id="modal-nota-subtitulo">Suas anotações sobre este jogo aparecem só para você.</p>
+            </div>
+            <textarea id="textarea-nota" placeholder="Ex.: Ótimo para noites de quinta. Público adora quando eu erro nos chefes..."></textarea>
+            <div class="modal-nota-acoes">
+                <button class="btn-modal-excluir" id="btn-excluir-nota" onclick="excluirNota()" style="display:none;">
+                    <i class="fa-solid fa-trash-can"></i> Excluir
+                </button>
+                <button class="btn-modal-cancelar" onclick="fecharModalNota()">Cancelar</button>
+                <button class="btn-modal-salvar" onclick="salvarNota()">Salvar</button>
+            </div>
+        </div>
+    </div>
+
     <script>
+        let jogoAtual = null;
+
         const jogos = {
             hades: {
                 titulo: 'HADES',
@@ -387,7 +435,130 @@
         }
 
         const params = new URLSearchParams(window.location.search);
-        carregarJogo(params.get('jogo') || 'hades');
+        jogoAtual = params.get('jogo') || 'hades';
+        carregarJogo(jogoAtual);
+        carregarEstado();
+    </script>
+
+    <script>
+        function chave(sufixo) {
+            return 'indielens_' + jogoAtual + '_' + sufixo;
+        }
+
+        function carregarEstado() {
+            const curtido    = localStorage.getItem(chave('curtido')) === 'true';
+            const desejos    = localStorage.getItem(chave('desejos')) === 'true';
+            const transmiti  = localStorage.getItem(chave('transmiti')) === 'true';
+            const nota       = localStorage.getItem(chave('nota')) || '';
+            const curtidas   = parseInt(localStorage.getItem(chave('curtidas')) || '0');
+
+            const btnCurtir   = document.getElementById('btn-curtir');
+            const iconeCurtir = document.getElementById('icone-curtir');
+            const contador    = document.getElementById('contador-curtir');
+
+            if (curtido) {
+                btnCurtir.classList.add('ativo-curtir');
+                iconeCurtir.classList.replace('fa-regular', 'fa-solid');
+            } else {
+                btnCurtir.classList.remove('ativo-curtir');
+                iconeCurtir.classList.replace('fa-solid', 'fa-regular');
+            }
+            contador.textContent = curtidas > 0 ? curtidas : '';
+
+            const btnDesejos   = document.getElementById('btn-desejos');
+            const iconeDesejos = document.getElementById('icone-desejos');
+            const textoDesejos = document.getElementById('texto-desejos');
+            if (desejos) {
+                btnDesejos.classList.add('ativo-desejos');
+                iconeDesejos.classList.replace('fa-regular', 'fa-solid');
+                textoDesejos.textContent = 'Na Lista de Desejos';
+            } else {
+                btnDesejos.classList.remove('ativo-desejos');
+                iconeDesejos.classList.replace('fa-solid', 'fa-regular');
+                textoDesejos.textContent = 'Lista de Desejos';
+            }
+
+            const btnTransmiti  = document.getElementById('btn-transmiti');
+            const textoTransmiti = document.getElementById('texto-transmiti');
+            if (transmiti) {
+                btnTransmiti.classList.add('ativo-transmiti');
+                textoTransmiti.textContent = 'Já Transmiti ✓';
+            } else {
+                btnTransmiti.classList.remove('ativo-transmiti');
+                textoTransmiti.textContent = 'Já Transmiti';
+            }
+
+            const btnNota   = document.getElementById('btn-nota');
+            const textoNota = document.getElementById('texto-nota');
+            if (nota) {
+                btnNota.classList.add('tem-nota');
+                textoNota.textContent = 'Ver Nota';
+            } else {
+                btnNota.classList.remove('tem-nota');
+                textoNota.textContent = 'Nota Pessoal';
+            }
+        }
+
+        function toggleCurtir() {
+            const curtido  = localStorage.getItem(chave('curtido')) === 'true';
+            const curtidas = parseInt(localStorage.getItem(chave('curtidas')) || '0');
+            const novoCurtido  = !curtido;
+            const novoCurtidas = novoCurtido ? curtidas + 1 : Math.max(0, curtidas - 1);
+            localStorage.setItem(chave('curtido'),  novoCurtido);
+            localStorage.setItem(chave('curtidas'), novoCurtidas);
+            carregarEstado();
+        }
+
+        function toggleDesejos() {
+            const atual = localStorage.getItem(chave('desejos')) === 'true';
+            localStorage.setItem(chave('desejos'), !atual);
+            carregarEstado();
+        }
+
+        function toggleTransmiti() {
+            const atual = localStorage.getItem(chave('transmiti')) === 'true';
+            localStorage.setItem(chave('transmiti'), !atual);
+            carregarEstado();
+        }
+
+        function abrirModalNota() {
+            const nota = localStorage.getItem(chave('nota')) || '';
+            document.getElementById('textarea-nota').value = nota;
+            document.getElementById('btn-excluir-nota').style.display = nota ? 'inline-flex' : 'none';
+            document.getElementById('modal-nota-subtitulo').textContent =
+                nota ? 'Edite ou exclua sua anotação sobre este jogo.' : 'Suas anotações aparecem só para você.';
+            document.getElementById('modalNota').classList.add('ativo');
+            setTimeout(() => document.getElementById('textarea-nota').focus(), 50);
+        }
+
+        function fecharModalNota() {
+            document.getElementById('modalNota').classList.remove('ativo');
+        }
+
+        function salvarNota() {
+            const texto = document.getElementById('textarea-nota').value.trim();
+            if (texto) {
+                localStorage.setItem(chave('nota'), texto);
+            } else {
+                localStorage.removeItem(chave('nota'));
+            }
+            fecharModalNota();
+            carregarEstado();
+        }
+
+        function excluirNota() {
+            localStorage.removeItem(chave('nota'));
+            fecharModalNota();
+            carregarEstado();
+        }
+
+        document.getElementById('modalNota').addEventListener('click', function(e) {
+            if (e.target === this) fecharModalNota();
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') fecharModalNota();
+        });
     </script>
 
     <script>

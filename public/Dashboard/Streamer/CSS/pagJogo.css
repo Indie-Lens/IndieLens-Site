@@ -465,3 +465,224 @@ body {
     line-height: 1.3;
     color: #fff;
 }
+
+.barra-acoes {
+    background-color: #111;
+    border-bottom: 1px solid #1e1e1e;
+    padding: 14px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-shrink: 0;
+}
+
+.acoes-grupo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-acao {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #1a1a1a;
+    border: 1px solid #2e2e2e;
+    color: #aaa;
+    border-radius: 8px;
+    padding: 9px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: "Inter", sans-serif;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.btn-acao i {
+    font-size: 15px;
+    transition: transform 0.2s;
+}
+
+.btn-acao:hover {
+    border-color: #555;
+    color: #fff;
+}
+
+.btn-acao.ativo-curtir {
+    background-color: rgba(220, 38, 38, 0.12);
+    border-color: #dc2626;
+    color: #ef4444;
+}
+
+.btn-acao.ativo-curtir i {
+    transform: scale(1.15);
+}
+
+.btn-acao.ativo-desejos {
+    background-color: rgba(151, 73, 224, 0.12);
+    border-color: #9749e0;
+    color: #a855f7;
+}
+
+.btn-acao.ativo-transmiti {
+    background-color: rgba(156, 255, 0, 0.08);
+    border-color: #9cff00;
+    color: #9cff00;
+}
+
+.btn-acao-nota {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #1a1a1a;
+    border: 1px solid #2e2e2e;
+    color: #aaa;
+    border-radius: 8px;
+    padding: 9px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: "Inter", sans-serif;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-acao-nota:hover {
+    border-color: #555;
+    color: #fff;
+}
+
+.btn-acao-nota.tem-nota {
+    border-color: #aaff00;
+    color: #aaff00;
+    background-color: rgba(170, 255, 0, 0.06);
+}
+
+.contador-curtidas {
+    font-size: 12px;
+    font-weight: 700;
+    min-width: 14px;
+    text-align: center;
+}
+
+.modal-nota-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 3000;
+    padding: 20px;
+}
+
+.modal-nota-overlay.ativo {
+    display: flex;
+}
+
+.modal-nota {
+    background-color: #1a1a1a;
+    border: 1px solid #2e2e2e;
+    border-radius: 12px;
+    padding: 24px;
+    width: 100%;
+    max-width: 480px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.modal-nota h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 4px;
+}
+
+.modal-nota p {
+    font-size: 12px;
+    color: #888;
+}
+
+.modal-nota textarea {
+    width: 100%;
+    min-height: 120px;
+    background-color: #111;
+    border: 1px solid #2e2e2e;
+    border-radius: 8px;
+    color: #fff;
+    font-family: "Inter", sans-serif;
+    font-size: 13px;
+    padding: 12px;
+    resize: vertical;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.modal-nota textarea:focus {
+    border-color: #9749e0;
+}
+
+.modal-nota textarea::placeholder {
+    color: #555;
+}
+
+.modal-nota-acoes {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.btn-modal-cancelar {
+    background: transparent;
+    border: 1px solid #2e2e2e;
+    color: #888;
+    border-radius: 7px;
+    padding: 8px 18px;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: "Inter", sans-serif;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-modal-cancelar:hover {
+    border-color: #555;
+    color: #fff;
+}
+
+.btn-modal-salvar {
+    background-color: #aaff00;
+    border: none;
+    color: #111;
+    border-radius: 7px;
+    padding: 8px 18px;
+    font-size: 13px;
+    font-weight: 700;
+    font-family: "Inter", sans-serif;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-modal-salvar:hover {
+    background-color: #bdff45;
+}
+
+.btn-modal-excluir {
+    background: transparent;
+    border: 1px solid #7f1d1d;
+    color: #ef4444;
+    border-radius: 7px;
+    padding: 8px 18px;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: "Inter", sans-serif;
+    cursor: pointer;
+    transition: 0.2s;
+    margin-right: auto;
+}
+
+.btn-modal-excluir:hover {
+    background-color: rgba(220, 38, 38, 0.1);
+}
