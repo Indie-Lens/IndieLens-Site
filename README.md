@@ -8,6 +8,25 @@ _Implementação de Referência para o seu Projeto de Primeiro Semestre_
 
 # Como usar
 
+## Executar com Docker
+
+Na pasta `IndieLens-Site`, execute:
+
+```powershell
+docker build -t indielens-site .
+docker run --rm -p 3333:3333 indielens-site
+```
+
+Acesse http://localhost:3333. Para usar login e cadastro, forneça as configurações do MySQL pelo arquivo `.env.dev`:
+
+```powershell
+docker run --rm -p 3333:3333 --env-file .env.dev -e APP_PORT=3333 indielens-site
+```
+
+O MySQL precisa estar disponível e com as tabelas criadas. Se estiver no seu computador, use `DB_HOST=host.docker.internal` no arquivo de ambiente. Os arquivos `.env*` não são incluídos na imagem.
+
+## Executar localmente
+
 1. Clone este repositório em sua máquina.
 
 
