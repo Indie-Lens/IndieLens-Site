@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS usuario (
   id_perfil INT NOT NULL,
   nome VARCHAR(50) NULL,
   email VARCHAR(100) NULL,
-  senha VARCHAR(255) NULL,
+  senha VARCHAR(45) NULL,
   CONSTRAINT fk_usuario_perfil1
     FOREIGN KEY (id_perfil)
     REFERENCES perfil (id_perfil)
@@ -63,7 +63,7 @@ CREATE TABLE IF NOT EXISTS projeto_simulacao (
 );
 
 -- Registro
-CREATE TABLE IF NOT EXISTS Registro (
+CREATE TABLE IF NOT EXISTS registro (
   id_registro INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
   dataResgistro DATETIME NULL,
   dataMetrica DATE NULL
@@ -74,25 +74,25 @@ CREATE TABLE IF NOT EXISTS jogo_main (
   id_jogo_rastreavel INT NOT NULL AUTO_INCREMENT,
   id_jogo INT NOT NULL,
   id_registro INT NOT NULL,
-  nome VARCHAR(255) NULL,
-  desenvolvedor VARCHAR(100) NULL,
+  nome TEXT NULL,
+  desenvolvedor TEXT NULL,
   idade_minima INT NULL,
   proprietarios_estimados INT NULL,
   preco DECIMAL(8,2) NULL,
   data_lancamento DATE NULL,
-  PRIMARY KEY (id_jogo_rastreavel),
+  PRIMARY KEY (id_jogo_rastreavel, id_jogo, id_registro),
   CONSTRAINT uq_jogo_main_jogo_registro
     UNIQUE (id_jogo, id_registro),
   CONSTRAINT fk_jogo_main_Registro1
     FOREIGN KEY (id_registro)
-    REFERENCES Registro (id_registro)
+    REFERENCES registro (id_registro)
 );
 
 -- Notificações
 CREATE TABLE IF NOT EXISTS notificacao (
     id_notificacao INT AUTO_INCREMENT PRIMARY KEY,
-    id_usuario INT NOT NULL,
-    id_jogo INT NOT NULL,
+    id_usuario INT NULL,
+    id_jogo INT NULL, 
     tipo VARCHAR(30) NOT NULL,
     titulo VARCHAR(100) NOT NULL,
     mensagem VARCHAR(255) NOT NULL,
@@ -125,15 +125,15 @@ CREATE TABLE IF NOT EXISTS jogo_metricas (
   id_jogo INT NOT NULL,
   id_registro INT NOT NULL,
   peak_CCU INT NULL,
-  qtd_donos INT NULL,
-  nota_score INT NULL,
-  nota_usuarios INT NULL,
-  nota_metacritic INT NULL,
-  qtd_dlc INT NULL,
-  qtd_conquistas INT NULL,
-  qtd_recomendacoes INT NULL,
   avaliacoes_positivas INT NULL,
   avaliacoes_negativas INT NULL,
+  taxa_aprovacao DECIMAL(5,2) NULL,
+  nota_metacritic DECIMAL(5,2) NULL,
+  nota_usuarios DECIMAL(5,2) NULL,
+  qtd_dlc INT NULL,
+  qtd_recomendacoes INT NULL,
+  qtd_conquistas INT NULL,
+  nota_score INT NULL,
   PRIMARY KEY (id_jogo, id_registro),
   CONSTRAINT fk_jogo_metricas_jogo_main1
     FOREIGN KEY (id_jogo, id_registro)
@@ -160,7 +160,7 @@ CREATE TABLE IF NOT EXISTS jogo_detalhes (
   id_jogo INT NOT NULL,
   tags TEXT NULL,
   generos TEXT NULL,
-  descricao TEXT NULL,
+  descricao MEDIUMTEXT NULL,
   categorias TEXT NULL,
   publicante TEXT NULL,
   jogo_anotacoes TEXT NULL,
@@ -222,8 +222,8 @@ CREATE TABLE IF NOT EXISTS jogo_midia (
 CREATE TABLE IF NOT EXISTS avaliacao_simulacao (
   id_usuario INT NOT NULL,
   id_simulacao INT NOT NULL,
-  positiva TINYINT NULL,
-  negativa TINYINT NULL,
+  positiva INT NULL,
+  negativa INT NULL,
   comentarios VARCHAR(255) NULL,
   PRIMARY KEY (id_simulacao, id_usuario),
   CONSTRAINT fk_avaliacao_simulacao_usuario1
@@ -255,6 +255,10 @@ INSERT INTO perfil (id_perfil, tipo, descricao) VALUES
 -- Inserindo usuario
 INSERT INTO usuario (id_perfil, nome, email, senha) VALUES
 (1, "UsuarioTeste", "Teste@Teste.com", "Senha123");
+
+INSERT INTO notificacao (id_usuario, id_jogo, tipo, titulo, mensagem) VALUES
+(NULL, NULL, 'GLOBAL', 'nova base de dados!', 'teste de atualização da base de dados foi um sucesso!'),
+(1, NULL, 'INDIVIDUAL', 'Notificação individual de teste', 'O teste da notificação individual foi um sucesso!');
 
 -- VERIFICANDO SE O JOGO EXISTEs
 SELECT COUNT(*) AS quantidade
