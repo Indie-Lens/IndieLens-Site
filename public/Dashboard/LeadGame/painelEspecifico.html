@@ -40,7 +40,6 @@
                     <h1>Painel específico</h1>
                     <p>Compare seu protótipo com jogos do mesmo gênero e preço parecido.</p>
                 </div>
-                <span class="aviso-demo"><span aria-hidden="true"></span> Dados demonstrativos</span>
             </header>
 
             <section class="controles-comparacao" aria-label="Busca de jogos parecidos">
@@ -77,36 +76,22 @@
                 </article>
             </section>
 
-            <section class="indicadores-mercado" aria-label="Indicadores médios dos jogos comparáveis">
-                <article class="indicador"><span>Jogos encontrados</span><strong id="qtdJogos">—</strong><small>com gênero e preço parecidos</small></article>
-                <article class="indicador"><span>Avaliações positivas</span><strong id="mediaAprovacao">—</strong><small>média dos jogos encontrados</small></article>
-                <article class="indicador"><span>Cópias estimadas</span><strong id="mediaProprietarios">—</strong><small>média por jogo</small></article>
-                <article class="indicador"><span>Maior número de jogadores</span><strong id="mediaPico">—</strong><small>média por jogo</small></article>
-            </section>
-
-            <section class="graficos-comparacao" aria-label="Gráficos de comparação">
-                <article class="painel-comparacao painel-preco">
-                    <div class="cabecalho-painel-comparacao"><div><h2>Comparação de preço</h2><p>Preço do protótipo e média dos jogos encontrados</p></div><span class="selo-contexto" id="diferencaPreco">—</span></div>
-                    <div class="barras-preco" id="barrasPreco" role="img" aria-label="Comparação do preço do protótipo com a média do recorte"></div>
-                </article>
-                <article class="painel-comparacao painel-aprovacao">
-                    <div class="cabecalho-painel-comparacao"><div><h2>Avaliações positivas</h2><p>Comparação com os jogos do mesmo gênero</p></div></div>
-                    <div class="barras-aprovacao" id="barrasAprovacao" role="img" aria-label="Comparação da taxa média de avaliações positivas"></div>
-                </article>
+            <section class="indicadores-mercado" aria-label="Resumo dos jogos encontrados">
+                <article class="indicador"><span>Jogos encontrados</span><strong id="qtdJogos">—</strong></article>
+                <article class="indicador"><span>Média de avaliações positivas</span><strong id="mediaAprovacao">—</strong></article>
             </section>
 
             <section class="tabela-referencias">
                 <div class="cabecalho-tabela">
-                    <div><h2>Jogos encontrados</h2><p>Até cinco com mais e cinco com menos avaliações positivas.</p></div>
-                    <span class="contador-referencias">10 jogos</span>
+                    <div><h2>Jogos encontrados</h2><p>Os mais e menos bem avaliados dentro do gênero e preço escolhido.</p></div>
+                    <span class="contador-referencias">— jogos</span>
                 </div>
                 <div class="tabela-scroll">
                     <table>
-                        <thead><tr><th>Jogo</th><th>Preço</th><th>Avaliações positivas</th><th>Cópias estimadas</th><th>Mais jogadores ao mesmo tempo</th><th>Grupo</th></tr></thead>
+                        <thead><tr><th>Jogo</th><th>Preço</th><th>Avaliações positivas</th><th>Grupo</th></tr></thead>
                         <tbody id="tabelaJogos"></tbody>
                     </table>
                 </div>
-                <p class="nota-metodologia">A lista mostra até cinco jogos com mais e cinco com menos avaliações positivas. Valores demonstrativos.</p>
             </section>
             </div>
         </main>
