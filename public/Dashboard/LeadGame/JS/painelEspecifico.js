@@ -201,15 +201,6 @@ function media(lista, campo) {
     return lista.reduce((total, item) => total + Number(item[campo] || 0), 0) / lista.length;
 }
 
-function criarLinhaBarra(rotulo, valor, maximo, classe) {
-    const largura = maximo > 0 ? Math.min((valor / maximo) * 100, 100) : 0;
-    return `<div class="linha-barra"><span class="linha-barra-label">${rotulo}</span><div class="trilho-barra"><div class="preenchimento-barra ${classe}" style="width:${largura}%"></div></div><strong>${formatarMoeda(valor)}</strong></div>`;
-}
-
-function criarLinhaAprovacao(rotulo, valor, classe) {
-    return `<div><div class="aprovacao-cabecalho"><span>${rotulo}</span><strong>${formatarNumero(valor)}%</strong></div><div class="trilho-aprovacao"><div class="preenchimento-aprovacao ${classe}" style="width:${Math.min(valor, 100)}%"></div></div></div>`;
-}
-
 function criarCelula(tag, classe, texto) {
     const elemento = document.createElement(tag);
     if (classe) elemento.className = classe;
@@ -232,7 +223,7 @@ function renderizarTabela(lista) {
     if (!linhas.length) {
         const linha = document.createElement("tr");
         const celula = criarCelula("td", "", "Nenhum jogo encontrado com esse gênero e preço.");
-        celula.colSpan = 6;
+        celula.colSpan = 4;
         linha.append(celula);
         tabela.append(linha);
     }
@@ -240,27 +231,14 @@ function renderizarTabela(lista) {
     linhas.forEach(({ jogo, grupo, menor }, indice) => {
         const linha = document.createElement("tr");
         const celulaJogo = document.createElement("td");
-        const jogoCelula = document.createElement("div");
-        jogoCelula.className = "jogo-celula";
-        jogoCelula.append(
-            criarCelula("span", "jogo-miniatura", jogo.nome.slice(0, 1)),
-            (() => {
-                const nome = document.createElement("span");
-                nome.className = "jogo-nome";
-                nome.append(criarCelula("strong", "", jogo.nome), criarCelula("small", "", `${generoAtivo} · referência ${indice + 1}`));
-                return nome;
-            })()
-        );
-        celulaJogo.append(jogoCelula);
+        celulaJogo.textContent = jogo.nome;
         linha.append(
             celulaJogo,
             criarCelula("td", "", formatarMoeda(jogo.preco)),
-            criarCelula("td", "taxa-avaliacao", `${jogo.aprovacao}%`),
-            criarCelula("td", "", formatarCompacto(jogo.donos)),
-            criarCelula("td", "", formatarCompacto(jogo.pico))
+            criarCelula("td", "taxa-avaliacao", `${jogo.aprovacao}%`)
         );
         const grupoCelula = document.createElement("td");
-        grupoCelula.append(criarCelula("span", `grupo-jogo${menor ? " menor" : ""}`, grupo));
+        grupoCelula.textContent = grupo;
         linha.append(grupoCelula);
         tabela.append(linha);
     });
@@ -274,33 +252,19 @@ function renderizar() {
     const limiteInferior = preco * (1 - margem);
     const limiteSuperior = preco * (1 + margem);
     const jogosGenero = dadosPorGenero[generoAtivo] || [];
-    let recorte = jogosGenero.filter((jogo) => jogo.preco >= limiteInferior && jogo.preco <= limiteSuperior);
+    const recorte = jogosGenero.filter((jogo) => jogo.preco >= limiteInferior && jogo.preco <= limiteSuperior);
 
     const precoMedio = media(recorte, "preco");
     const aprovacaoMedia = media(recorte, "aprovacao");
-    const aprovacaoGenero = media(jogosGenero, "aprovacao");
-    const proprietariosMedios = media(recorte, "donos");
-    const picoMedio = media(recorte, "pico");
-    const diferencaPercentual = precoMedio ? ((preco - precoMedio) / precoMedio) * 100 : 0;
-    const escala = Math.max(preco, precoMedio) * 1.18 || 1;
 
     document.getElementById("nomePrototipo").textContent = prototipo.nome;
     document.getElementById("detalhesPrototipo").textContent = [prototipo.genero, prototipo.tag].filter(Boolean).join(" · ") || "Protótipo simulado";
     document.getElementById("precoPrototipo").textContent = formatarMoeda(preco);
-    document.getElementById("precoMedio").textContent = formatarMoeda(precoMedio);
+    document.getElementById("precoMedio").textContent = recorte.length ? formatarMoeda(precoMedio) : "—";
     document.getElementById("tituloRecorte").textContent = `Jogos de ${generoAtivo}`;
     document.getElementById("contextoRecorte").textContent = `Mesmo gênero · até ${formatarNumero(margem * 100)}% de diferença no preço`;
     document.getElementById("qtdJogos").textContent = formatarNumero(recorte.length);
-    document.getElementById("mediaAprovacao").textContent = `${formatarNumero(aprovacaoMedia)}%`;
-    document.getElementById("mediaProprietarios").textContent = formatarCompacto(proprietariosMedios);
-    document.getElementById("mediaPico").textContent = formatarCompacto(picoMedio);
-    document.getElementById("diferencaPreco").textContent = diferencaPercentual > 0.05
-        ? `+${formatarNumero(diferencaPercentual)}% acima`
-        : diferencaPercentual < -0.05
-            ? `${formatarNumero(diferencaPercentual)}% abaixo`
-            : "Igual à média";
-    document.getElementById("barrasPreco").innerHTML = `${criarLinhaBarra("Seu protótipo", preco, escala, "")}${criarLinhaBarra("Média dos jogos", precoMedio, escala, "media")}<div class="escala-preco"><span>R$ 0</span><span>${formatarMoeda(escala)}</span></div>`;
-    document.getElementById("barrasAprovacao").innerHTML = `${criarLinhaAprovacao("Mesmo gênero e preço parecido", aprovacaoMedia, "")}${criarLinhaAprovacao("Todos os preços do gênero", aprovacaoGenero, "genero")}<div class="aprovacao-legenda"><span><i></i>Gênero e preço parecido</span><span><i></i>Todos os preços</span></div>`;
+    document.getElementById("mediaAprovacao").textContent = recorte.length ? `${formatarNumero(aprovacaoMedia)}%` : "—";
     renderizarTabela(recorte);
     resultados.hidden = false;
     mensagemPainel.hidden = true;
