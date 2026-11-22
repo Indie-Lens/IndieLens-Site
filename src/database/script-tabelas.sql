@@ -15,6 +15,7 @@ CREATE TABLE IF NOT EXISTS usuario (
   nome VARCHAR(50) NULL,
   email VARCHAR(100) NULL,
   senha VARCHAR(45) NULL,
+  receber_notificacoes TINYINT,
   CONSTRAINT fk_usuario_perfil1
     FOREIGN KEY (id_perfil)
     REFERENCES perfil (id_perfil)
@@ -38,6 +39,7 @@ CREATE TABLE IF NOT EXISTS log_usuario (
   id_sessao INT NOT NULL,
   id_usuario INT NOT NULL,
   tipo_evento VARCHAR(50) NULL,
+  data_log DATETIME,
   descricao_evento VARCHAR(200) NULL,
   CONSTRAINT fk_log_usuario_sessao_usuario1
     FOREIGN KEY (id_sessao, id_usuario)
@@ -66,7 +68,8 @@ CREATE TABLE IF NOT EXISTS projeto_simulacao (
 CREATE TABLE IF NOT EXISTS registro (
   id_registro INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
   dataResgistro DATETIME NULL,
-  dataMetrica DATE NULL
+  dataMetrica DATE NULL,
+  statusRegistro TINYINT
 );
 
 -- Jogo Main
@@ -233,7 +236,57 @@ CREATE TABLE IF NOT EXISTS avaliacao_simulacao (
     FOREIGN KEY (id_simulacao)
     REFERENCES projeto_simulacao (id_simulacao)
 );
+-- Streamer
+CREATE TABLE IF NOT EXISTS streamer (
+  id_streamer INT NOT NULL,
+  id_usuario INT NOT NULL,
+  nickname VARCHAR(50) NOT NULL,
+  nome_twitch VARCHAR(50) NOT NULL,
+  url_canal VARCHAR(255),
+  PRIMARY KEY (id_streamer, id_usuario),
+  CONSTRAINT fk_streamer_usuario
+    FOREIGN KEY (id_usuario)
+    REFERENCES usuario (id_usuario)
+);
 
+-- Desenvolvedor
+CREATE TABLE IF NOT EXISTS desenvolvedor (
+  id_desenvolvedor INT NOT NULL,
+  id_usuario INT NOT NULL,
+  nome_studio VARCHAR(45) NOT NULL,
+  PRIMARY KEY (id_desenvolvedor, id_usuario),
+  CONSTRAINT fk_dev_usuario
+    FOREIGN KEY (id_usuario)
+    REFERENCES usuario (id_usuario)
+);
+
+-- Live
+CREATE TABLE IF NOT EXISTS live (
+  id_live INT NOT NULL,
+  id_streamer INT NOT NULL,
+  nome_jogo VARCHAR(100),
+  categoria VARCHAR(100),
+  titulo_live VARCHAR(100),
+  descricao VARCHAR(500),
+  data_live DATE,
+  hora_inicio TIME,
+  hora_termino TIME,
+  duracao VARCHAR(20),
+  media_espectadores INT,
+  pico_espectadores INT,
+  visualizacoes_totais INT,
+  novos_seguidores INT,
+  nota_avaliacao INT,
+  engajamento_chart VARCHAR(250),
+  ponto_alto VARCHAR(250),
+  ponto_melhoria VARCHAR(250),
+  data_registro DATETIME,
+   PRIMARY KEY (id_live, id_streamer),
+  CONSTRAINT fk_live_streamer
+    FOREIGN KEY (id_streamer)
+    REFERENCES streamer (id_streamer)
+    
+);
 -- Visualizando os dados das tabelas
 SELECT * FROM perfil;
 SELECT * FROM usuario;
@@ -299,3 +352,4 @@ WHERE id_usuario = 1;
 
 -- CASO DE ALGUM BO
 -- DROP DATABASE indieLens;
+
