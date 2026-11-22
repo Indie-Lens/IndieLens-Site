@@ -8,12 +8,15 @@ var mySqlConfig = {
     port: process.env.DB_PORT
 };
 
-function executar(instrucao) {
+function executar(instrucao, valores = []) {
+    const ambiente = process.env.AMBIENTE_PROCESSO;
 
-    if (process.env.AMBIENTE_PROCESSO !== "producao" && process.env.AMBIENTE_PROCESSO !== "desenvolvimento") {
-        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM .env OU dev.env OU app.js\n");
-        return Promise.reject("AMBIENTE NÃO CONFIGURADO EM .env");
+    if (ambiente !== "producao" && ambiente !== "desenvolvimento") {
+        return Promise.reject(
+            new Error("AMBIENTE_PROCESSO não configurado corretamente.")
+        );
     }
+
 
     return new Promise(function (resolve, reject) {
         var conexao = mysql.createConnection(mySqlConfig);
