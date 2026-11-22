@@ -18,6 +18,7 @@ var usuarioRouter = require("./src/routes/usuarios");
 var liveRouter = require("./src/routes/lives");
 var simularJogoRouter = require("./src/routes/simularJogo");
 
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
@@ -28,6 +29,7 @@ app.use("/", indexRouter);
 app.use("/usuarios", usuarioRouter);
 app.use("/lives", liveRouter);
 app.use("/simularJogo", simularJogoRouter);
+
 
 app.listen(PORTA_APP, function () {
     console.log(`
