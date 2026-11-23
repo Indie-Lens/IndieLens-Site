@@ -24,9 +24,9 @@ function entrar() {
 
                         setTimeout(function () {
                             if (json.perfil == 3) {
-                                window.location = "dashboard/LeadGame/dashPrincipalLead.html";
+                                window.location = "Dashboard/LeadGame/dashPrincipalLead.html";
                             } else if (json.perfil == 4) {
-                                window.location = "dashboard/Streamer/DashboardGeral.html";
+                                window.location = "Dashboard/Streamer/DashboardGeral.html";
                             }
                         }, 1000);
                     })
