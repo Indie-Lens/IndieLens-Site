@@ -1,37 +1,48 @@
+
+/* ================= GERAL ================= */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    overflow-x: hidden;
+}
+
+img {
+    max-width: 100%;
+}
+
+/* ================= BANNER ================= */
+
 .banner-jogo {
     width: 100%;
-    height: 80vh;
-
+    min-height: 80vh;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
 }
 
-.poster-jogo {
-    width: 35%;
-    height: 30px;
-    background-color: rgb(44, 177, 177);
-}
-
 .header {
     position: relative;
-    margin: 0%;
-    height: 100%;
+    margin: 0;
+    min-height: 80vh;
     width: 100%;
     display: flex;
     overflow: hidden;
     justify-content: end;
     flex-direction: column;
     align-items: end;
-
-    img {
-        opacity: 31%;
-    }
 }
 
-.conteudo-imagem{
-     position: absolute;
+.header img {
+    opacity: 31%;
+}
+
+.conteudo-imagem {
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
@@ -39,10 +50,11 @@
     object-fit: cover;
     z-index: -1;
 }
+
 .header-jogo {
-    margin: 0%;
+    margin: 0;
     width: 45%;
-    height: 100%;
+    min-height: 100%;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -55,7 +67,7 @@
 }
 
 .header-titulo p {
-    color: #ffff;
+    color: var(--texto-branco);
     font-size: 36px;
     font-weight: bold;
     margin: 0;
@@ -63,60 +75,70 @@
 
 .header-descricao {
     width: 60%;
+}
 
-    p {
-        color: #ffffff;
-        font-size: 15px;
-        line-height: 1.4;
-        margin: 0;
-    }
+
+.header-descricao p {
+     color: var(--texto-branco);
+    font-size: 15px;
+    line-height: 1.4;
+    margin: 0;
+
+}
+
+.card-Btn-lista {
+    background-color: var(--roxo-primario);
+    clip-path: none;
+    padding: 12px 20px;
+    border-radius: 4px;
+    color: var(--texto-branco);
+    border: 0;
+    cursor: pointer;
 }
 
 .streamers-que-recomendam p {
-    color: #aaff00;
+    color: var(--verde-primario);
     font-weight: bold;
     font-size: 14px;
     margin: 0;
 }
 
-
-
 .preco-valor {
-    color: #ffff;
+    color: var(--texto-branco);
     font-size: 28px;
     font-weight: bold;
     margin: 0;
 }
 
 .preco-loja {
-    color: #ddd;
+    color: var(--texto-branco);
     font-size: 13px;
     margin: 0;
     font-style: italic;
 }
 
+/* ================= ABAS ================= */
 
 .container-sobre-jogo {
     margin-top: 30px;
     margin-bottom: 30px;
-
     width: 100%;
-    height: 70vh;
+    min-height: 70vh;
+    height: auto;
     display: flex;
     justify-content: center;
 }
 
 .container-sobre {
-    
     width: 80%;
-    height: 90%;
+    height: auto;
     display: flex;
     flex-direction: column;
 }
 
 .opcoes-buttons {
     width: 100%;
-    height: 15%;
+    min-height: 65px;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -125,52 +147,56 @@
 .btn-opcao {
     font-size: 21px;
     width: 250px;
-    color: #ffff;
-    background-color: black;
-    border: 0px;
+    color: var(--texto-branco);
+    background-color: var(--fundo-preto);
+    border: 0;
+    cursor: pointer;
 }
 
 .btn-opcao.active {
-    background-color: #8a2be2;
+    background-color: var(--roxo-primario);
 }
 
+
 .container-informacoes {
-    height: 85%;
-    border-top: 4px solid #aaff00;
-    background-color: rgb(3, 3, 3);
+    min-height: 400px;
+    height: auto;
+    border-top: 4px solid var(--verde-primario);
+    background-color: var(--fundo-campo);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 30px;
-    padding: 30px ;
-    box-sizing: border-box;
-    background-color: #252525;
+    padding: 30px;
+    overflow: visible;
 }
 
 .conteudo {
     width: 100%;
     display: flex;
     flex-direction: column;
-    
     justify-content: space-between;
     gap: 30px;
 }
+
+/* ================= ABA: SOBRE ================= */
 
 .cards {
     width: 100%;
     height: auto;
     display: flex;
     flex-direction: row;
-    justify-content: flex-start; 
+    justify-content: flex-start;
     align-items: stretch;
     gap: 20px;
-    
 }
 
-.card01, .card02, .card03{
-    color: #ffff;
-    
+
+.card01,
+.card02,
+.card03 {
+    color: var(--texto-branco);
     padding: 10px;
     display: flex;
     flex-direction: column;
@@ -188,9 +214,10 @@
     flex-direction: row;
     font-size: 16px;
     white-space: nowrap;
+
     
     a {
-        color: #aaff00;
+        color: var(--verde-primario);
         cursor: pointer;
         text-decoration: none;
     }
@@ -201,7 +228,9 @@
     padding-left: 10px;
     padding-right: 10px;
 }
-.div-infos, .titulo-div p {
+
+.div-infos,
+.titulo-div p {
     margin: 0;
 }
 
@@ -217,12 +246,12 @@
     flex-direction: column;
 }
 
-.card03 .titulo-div{
+.card03 .titulo-div {
     justify-content: flex-end;
     align-self: flex-end;
 }
 
-.card03 .div-infos{
+.card03 .div-infos {
     justify-content: flex-end;
     text-align: right;
 }
@@ -233,7 +262,7 @@
 }
 
 .card04 {
-    color: #ffff;
+    color: var(--texto-branco);
     display: flex;
     flex-direction: column;
     height: auto;
@@ -242,14 +271,470 @@
     padding: 10px;
     font-size: 16px;
     width: 20%;
+}
 
-    .titulo-div{
-        align-self: flex-start;
+.card04 .titulo-div {
+    align-self: flex-start;
+}
+
+.card04 .div-infos {
+    justify-content: flex-start;
+    text-align: left;
+}
+
+/* ================= ABA: REVIEWS ================= */
+
+#conteudo-reviews {
+    height: 100%;
+    min-height: 0;
+    gap: 25px;
+    color: var(--texto-branco);
+}
+
+/* Linha de cima */
+
+.reviews-topo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.reviews-stats {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+
+.stat {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.stat-icone {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.stat-icone svg {
+    width: 22px;
+    height: 22px;
+}
+
+.stat-icone.positivo { background-color: var(--icone-positivo); }
+.stat-icone.negativo { background-color: var(--icone-negativo); }
+.stat-icone.negativo svg { transform: rotate(180deg); }
+
+.stat-label {
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 1.1;
+}
+
+.stat-numero {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Rank */
+
+.rank {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-right: 40px;
+}
+
+.rank-icone {
+    width: 36px;
+    height: auto;
+}
+
+.rank-texto {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+}
+
+.rank-label {
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.rank-numero {
+    font-size: 26px;
+    font-weight: bold;
+}
+
+/* Lista de reviews */
+
+.reviews-titulo {
+    margin: 0;
+    padding-left: 35px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.reviews-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    width: 65%;
+    padding-left: 20px;
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+}
+
+.review-card {
+    background-color: var(--fundo-preto);
+    border-radius: 10px;
+    padding: 15px 20px;
+}
+
+.review-card p {
+    margin: 0;
+    font-size: 12px;
+    font-style: italic;
+    font-weight: bold;
+    line-height: 1.3;
+}
+
+/* ================= RESPONSIVIDADE ================= */
+
+/* TABLETS */
+
+@media (max-width: 768px) {
+
+    /* Banner */
+
+    .banner-jogo {
+        min-height: 75vh;
+        height: auto;
+    }
+
+    .header {
+        min-height: 75vh;
+        height: auto;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .conteudo-imagem {
+        object-position: center;
+    }
+
+    .header-jogo {
+        width: 85%;
+        min-height: auto;
+        padding: 50px 0;
+        align-items: center;
+        text-align: center;
+    }
+
+    .header-titulo p {
+        font-size: 30px;
+    }
+
+    .header-descricao {
+        width: 100%;
+    }
+
+    .header-descricao p {
+        font-size: 14px;
+    }
+
+    /* Abas */
+
+    .container-sobre-jogo {
+        min-height: 70vh;
+        height: auto;
+        margin: 30px 0;
+    }
+
+    .container-sobre {
+        width: 90%;
+    }
+
+    .opcoes-buttons {
+        height: auto;
+    }
+
+    .btn-opcao {
+        width: 50%;
+        min-height: 55px;
+        font-size: 17px;
+    }
+
+    .container-informacoes {
+        min-height: 400px;
+        height: auto;
+        padding: 25px 20px;
+        overflow: visible;
+    }
+
+    /* Cards */
+
+    .cards {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .card01,
+    .card02,
+    .card03 {
+        width: 45%;
+        height: auto;
     }
 
     .div-infos {
+        white-space: normal;
+        flex-wrap: wrap;
+        overflow-wrap: anywhere;
+    }
+
+    .card-suporte {
+        width: 90%;
+        height: auto;
+    }
+
+    .card04 {
+        width: 45%;
+    }
+
+    /* Reviews */
+
+    .reviews-topo {
+        gap: 20px;
+        padding: 0;
+        flex-wrap: wrap;
+    }
+
+    .reviews-stats {
+        gap: 25px;
+        flex-wrap: wrap;
+    }
+
+    .rank {
+        padding-right: 0;
+    }
+
+    .reviews-lista {
+        width: 100%;
+        padding: 0;
+    }
+
+    .reviews-titulo {
+        padding-left: 0;
+    }
+}
+
+/* CELULARES */
+
+@media (max-width: 480px) {
+
+    /* Banner */
+
+    .banner-jogo {
+        min-height: 85vh;
+    }
+
+    .header {
+        min-height: 85vh;
+    }
+
+    .header-jogo {
+        width: 90%;
+        gap: 20px;
+        padding: 35px 0;
+    }
+
+    .header-titulo p {
+        font-size: 25px;
+    }
+
+    .header-descricao p {
+        font-size: 13px;
+        line-height: 1.6;
+    }
+
+    .streamers-que-recomendam p {
+        font-size: 12px;
+    }
+
+    .preco-valor {
+        font-size: 24px;
+    }
+
+    .preco-loja {
+        font-size: 12px;
+    }
+
+    .card-Btn-lista {
+        font-size: 12px;
+    }
+
+    /* Abas */
+
+    .container-sobre {
+        width: 95%;
+    }
+
+    .opcoes-buttons {
+        width: 100%;
+    }
+
+    .btn-opcao {
+        font-size: 14px;
+        min-height: 50px;
+    }
+
+    .container-informacoes {
+        padding: 20px 15px;
+        gap: 20px;
+    }
+
+    .conteudo {
+        gap: 20px;
+    }
+
+    /* Cards */
+
+    .cards {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 25px;
+    }
+
+    .card01,
+    .card02,
+    .card03 {
+        width: 100%;
+        padding: 5px;
+        align-items: flex-start;
+    }
+
+    .div-infos {
+        width: 100%;
+        font-size: 13px;
+        white-space: normal;
+        overflow-wrap: anywhere;
+    }
+
+    .card01 .div-infos,
+    .card02 .div-infos,
+    .card03 .div-infos {
         justify-content: flex-start;
         text-align: left;
+        align-self: stretch;
     }
-    
+
+    .card02 .div-infos {
+        flex-direction: column;
+    }
+
+    .card03 .titulo-div {
+        align-self: flex-start;
+    }
+
+    .label {
+        padding-left: 0;
+        padding-right: 8px;
+    }
+
+    .card-suporte {
+        width: 100%;
+        height: auto;
+    }
+
+    .card04 {
+        width: 100%;
+        align-items: flex-start;
+        padding: 5px;
+    }
+
+    .card04 .titulo-div {
+        align-self: flex-start;
+    }
+
+    /* Reviews */
+
+    #conteudo-reviews {
+        gap: 20px;
+    }
+
+    .reviews-topo {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .reviews-stats {
+        width: 100%;
+        justify-content: space-between;
+        gap: 10px;
+    }
+
+    .stat {
+        gap: 6px;
+    }
+
+    .stat-icone {
+        width: 32px;
+        height: 32px;
+    }
+
+    .stat-icone svg {
+        width: 17px;
+        height: 17px;
+    }
+
+    .stat-label {
+        font-size: 10px;
+    }
+
+    .stat-numero {
+        font-size: 18px;
+    }
+
+    .rank {
+        padding: 0;
+    }
+
+    .rank-icone {
+        width: 30px;
+    }
+
+    .rank-label {
+        font-size: 12px;
+    }
+
+    .rank-numero {
+        font-size: 22px;
+    }
+
+    .reviews-titulo {
+        font-size: 13px;
+    }
+
+    .reviews-lista {
+        width: 100%;
+        padding: 0;
+        gap: 15px;
+        overflow: visible;
+    }
+
+    .review-card {
+        padding: 12px;
+    }
+
+    .review-card p {
+        font-size: 11px;
+        line-height: 1.5;
+    }
 }

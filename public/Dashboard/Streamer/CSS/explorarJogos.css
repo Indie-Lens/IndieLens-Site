@@ -1,0 +1,331 @@
+@import url("../../../css/style.css");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Inter", sans-serif;
+}
+
+body {
+    background-color: var(--fundo-conteudo);
+    color: var(--texto-branco);
+}
+
+.container {
+    display: flex;
+    min-height: 100vh;
+}
+
+.conteudo-principal {
+    flex: 1;
+    padding: 30px;
+    overflow-y: auto;
+}
+
+.painel-geral {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    max-width: 1500px;
+}
+
+.cartao {
+    background-color: var(--fundo-elementos);
+    border: 1px solid var(--borda-suave);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.cabecalho-pagina {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 25px;
+    border-bottom: 1px solid var(--borda-suave);
+}
+
+.cabecalho-pagina h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.cabecalho-pagina p {
+    font-size: 0.85rem;
+    color: var(--texto-cinza);
+}
+
+.acoes-usuario {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.btn-notificacao {
+    background: none;
+    border: none;
+    color: var(--texto-cinza);
+    font-size: 20px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-notificacao:hover { color: var(--texto-branco); }
+
+.perfil {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.nome { font-size: 14px; font-weight: 500; }
+
+.filtros-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.barra-busca {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.input-grupo {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: var(--fundo-conteudo);
+    border: 1px solid var(--borda-suave);
+    border-radius: 8px;
+    padding: 0 14px;
+    height: 38px;
+    color: var(--texto-cinza);
+    transition: 0.2s;
+}
+
+.input-grupo:focus-within { border-color: var(--roxo-primario); }
+
+.input-grupo input {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--texto-branco);
+    font-size: 0.85rem;
+    width: 100%;
+}
+
+.input-grupo input::placeholder { color: var(--texto-cinza); }
+
+.select-grupo {
+    display: flex;
+    align-items: center;
+    background-color: var(--fundo-conteudo);
+    border: 1px solid var(--borda-suave);
+    border-radius: 8px;
+    padding: 0 14px;
+    height: 38px;
+    color: var(--texto-cinza);
+    transition: 0.2s;
+    min-width: 165px;
+}
+
+.select-grupo:focus-within { border-color: var(--roxo-primario); }
+
+.select-grupo select {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--texto-branco);
+    font-size: 0.85rem;
+    cursor: pointer;
+    appearance: none;
+    width: 100%;
+}
+
+.chips-genero {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.chips-genero > span {
+    font-size: 0.8rem;
+    color: var(--texto-cinza);
+}
+
+.chip {
+    background-color: var(--fundo-conteudo);
+    border: 1px solid var(--borda-suave);
+    color: var(--texto-cinza);
+    border-radius: 6px;
+    padding: 4px 14px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.2s;
+    font-family: "Inter", sans-serif;
+}
+
+.chip:hover {
+    border-color: var(--texto-cinza);
+    color: var(--texto-branco);
+}
+
+.chip.ativo {
+    background-color: rgba(151, 73, 224, 0.12);
+    border-color: var(--roxo-primario);
+    color: var(--roxo-primario);
+}
+
+.grid-jogos {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+}
+
+.card-jogo {
+    background-color: var(--fundo-elementos);
+    border: 1px solid var(--borda-suave);
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.2s, transform 0.2s;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.card-jogo:hover {
+    border-color: var(--roxo-primario);
+    transform: translateY(-3px);
+}
+
+.card-capa {
+    position: relative;
+    width: 100%;
+    height: 130px;
+    overflow: hidden;
+}
+
+.card-capa img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s;
+}
+
+.card-jogo:hover .card-capa img {
+    transform: scale(1.05);
+}
+
+.badge-genero {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    background-color: rgba(151, 73, 224, 0.88);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 9px;
+    border-radius: 4px;
+}
+
+.badge-alta {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background-color: rgba(156, 255, 0, 0.12);
+    color: var(--verde-primario);
+    border: 1px solid rgba(156, 255, 0, 0.35);
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 9px;
+    border-radius: 4px;
+}
+
+.card-corpo {
+    padding: 14px 14px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex-grow: 1;
+}
+
+.card-topo-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 6px;
+}
+
+.card-topo-info h3 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--texto-branco);
+    line-height: 1.3;
+}
+
+.card-avaliacao {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--verde-primario);
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.card-desc {
+    font-size: 0.75rem;
+    color: var(--texto-cinza);
+    line-height: 1.45;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.card-metricas {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 14px;
+    border-top: 1px solid var(--borda-suave);
+}
+
+.card-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    align-items: center;
+}
+
+.card-stat-label {
+    font-size: 9px;
+    color: var(--texto-cinza);
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.card-stat-valor {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--texto-branco);
+}
+
+.card-stat-valor.verde { color: var(--verde-primario); }
+.card-stat-valor.roxo  { color: var(--roxo-primario); }

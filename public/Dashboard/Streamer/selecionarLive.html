@@ -1,47 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="../../css/style.css" />
+        <title>Histórico de Lives | INDIE LENS</title>
+        <link rel="stylesheet" href="../../components/sidebar.css" />
         <link rel="stylesheet" href="./CSS/SelecionarLives.css" />
-        <title>Document</title>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     </head>
     <body>
-        <aside class="sidebar">
-            <div class="sidebar-logo">Streamer</div>
-            <nav class="sidebar-nav">
-                <a href="DashboardGeral.html" class="active">Dashboard</a>
-                <a href="selecionarLive.html">Lives</a>
-            </nav>
-        </aside>
+        <div class="container">
+
+        <aside class="sidebar" id="sidebar"></aside>
 
         <main class="conteudo-principal">
             <header class="cabecalho">
                 <div class="titulo-sessao">
                     <div>
                         <h1>Histórico de Lives</h1>
-                        <p>
-                            Acompanhe todas as suas transmissões e veja o
-                            desempenho de cada uma.
-                        </p>
+                        <p>Acompanhe todas as suas transmissões e veja o desempenho de cada uma.</p>
                     </div>
                 </div>
 
                 <div class="acoes-usuario">
-
-                    
                     <button class="btn-notificacao">
-                     
                     </button>
                     <div class="perfil">
-                        <img
-                           src="../../assets/imgs/Hades.jpg"
-                            alt="Avatar do Streamer"
-                            class="avatar"
-                        />
+                        <img src="https://marketplace.canva.com/Dz63E/MAF4KJDz63E/1/tl/canva-%C3%ADcone-do-usu%C3%A1rio-MAF4KJDz63E.png" alt="Avatar do Streamer" class="avatar" />
                         <div class="info-perfil">
-                            <span class="nome">Guilherme</span>
+                            <span class="nome">Usuário</span>
                         </div>
                     </div>
                 </div>
@@ -49,279 +37,216 @@
 
             <section class="barra-filtros">
                 <div class="input-grupo">
-                  
-                    <input
-                        type="text"
-                        placeholder="Buscar por jogo, categoria ou título da live..."
-                    />
+                    <input type="text" id="busca" placeholder="Buscar por jogo, categoria ou título da live..." />
                 </div>
 
                 <div class="filtros-selecao">
                     <div class="select-grupo">
-                   
-                        <select>
-                            <option>Todos os jogos</option>
+                        <select id="filtroJogo">
+                            <option value="">Todos os jogos</option>
                         </select>
                     </div>
 
                     <div class="select-grupo">
-                       
-                        <select>
-                            <option>Todas as categorias</option>
+                        <select id="filtroCategoria">
+                            <option value="">Todas as categorias</option>
                         </select>
                     </div>
 
                     <div class="select-grupo">
-                      
-                        <select>
-                            <option>Mais recentes</option>
+                        <select id="ordenacao">
+                            <option value="recentes">Mais recentes</option>
+                            <option value="antigas">Mais antigas</option>
+                            <option value="audiencia">Maior audiência</option>
                         </select>
                     </div>
                 </div>
-
-
             </section>
 
-            <section class="grid-lives">
-                <article class="card-live">
-                    <div class="card-header">
-                        <div class="thumb-container">
-                            <img
-                                src="../../assets/imgs/Hades.jpg"
-                                alt="Hades"
-                            />
-                        
-                        </div>
-                        <div class="info-principal">
-                            <div class="topo-info">
-                                <h3>Hades</h3>
-                                <button class="btn-opcoes">
-                   
-                                </button>
-                            </div>
-                            <span class="categoria"
-                            <p class="descricao-live">
-                                Run até o final do Ato 2 (dificuldade maior)
-                            </p>
-                        </div>
-                    </div>
-                    <div class="card-detalhes">
-                        <span class="detalhe-item"
-                            ><i class="fa-regular fa-calendar"></i> 12/08/2026 •
-                            20:15 - 23:57</span
-                        >
-                        <span class="detalhe-item"
-                            ><i class="fa-regular fa-clock"></i> 3h 42min</span
-                        >
-                    </div>
-                    <div class="card-metricas">
-                        <div class="metrica">
-                            <span class="metrica-header"
-                                > Espectadores
-                                Médios</span
-                            >
-                            <span class="valor">185</span>
-                        </div>
-                        <div class="metrica">
-                            <span class="metrica-header"
-                                > Pico de
-                                Viewers</span
-                            >
-                            <span class="valor">342</span>
-                        </div>
-                        <div class="metrica">
-                            <span class="metrica-header"
-                                >
-                                Visualizações</span
-                            >
-                            <span class="valor">4.802</span>
-                        </div>
-                      
-                    </div>
-                    <div class="card-tags">
-                        <span class="tag">RPG</span>
-                        <span class="tag">Rogue-like</span>
-                    </div>
-                </article>
-
-                <article class="card-live">
-                    <div class="card-header">
-                        <div class="thumb-container">
-                            <img
-                                src="../../assets/imgs/Hades.jpg"
-                                alt="Stardew Valley"
-                            />
-                            
-                        </div>
-                        <div class="info-principal">
-                            <div class="topo-info">
-                                <h3>Stardew Valley</h3>
-                                <button class="btn-opcoes">
-                           
-                                </button>
-                            </div>
-                            <span class="categoria"
-                                >
-                                Simulação</span
-                            >
-                            <p class="descricao-live">
-                                Organizando a fazenda e conversando com os
-                                inscritos
-                            </p>
-                        </div>
-                    </div>
-                    <div class="card-detalhes">
-                        <span class="detalhe-item"
-                            ><i class="fa-regular fa-calendar"></i> 09/08/2026 •
-                            19:00 - 22:15</span
-                        >
-                        <span class="detalhe-item"
-                            ><i class="fa-regular fa-clock"></i> 3h 15min</span
-                        >
-                    </div>
-                    <div class="card-metricas">
-                        <div class="metrica">
-                            <span class="metrica-header"
-                                > Espectadores
-                                Médios</span
-                            >
-                            <span class="valor">142</span>
-                        </div>
-                        <div class="metrica">
-                            <span class="metrica-header"
-                                >Pico de
-                                Viewers</span
-                            >
-                            <span class="valor">231</span>
-                        </div>
-                        <div class="metrica">
-                            <span class="metrica-header"
-                                >
-                                Visualizações</span
-                            >
-                            <span class="valor">3.764</span>
-                        </div>
-                       
-                    </div>
-                    <div class="card-tags">
-                        <span class="tag">Simulação</span>
-                        <span class="tag">Relaxante</span>
-                    </div>
-                </article>
-
-                <article class="card-live">
-                    <div class="card-header">
-                        <div class="thumb-container">
-                            <img
-                                src="../../assets/imgs/Hades.jpg"
-                            />
-                            
-                        </div>
-                        <div class="info-principal">
-                            <div class="topo-info">
-                                <h3>Hollow Knight</h3>
-                                <button class="btn-opcoes">
-                               
-                                </button>
-                            </div>
-                            <span class="categoria"
-                               
-                                Aventura</span
-                            >
-                            <p class="descricao-live">
-                                Explorando a Cidade das Lágrimas
-                            </p>
-                        </div>
-                    </div>
-                    <div class="card-detalhes">
-                        <span class="detalhe-item"
-                            ><i class="fa-regular fa-calendar"></i> 05/08/2026 •
-                            21:40 - 01:13</span
-                        >
-                        <span class="detalhe-item"
-                            ><i class="fa-regular fa-clock"></i> 3h 33min</span
-                        >
-                    </div>
-                    <div class="card-metricas">
-                        <div class="metrica">
-                            <span class="metrica-header"
-                                > Espectadores
-                                Médios</span
-                            >
-                            <span class="valor">98</span>
-                        </div>
-                        <div class="metrica">
-                            <span class="metrica-header"
-                                > Pico de
-                                Viewers</span
-                            >
-                            <span class="valor">176</span>
-                        </div>
-                        <div class="metrica">
-                            <span class="metrica-header"
-                                >
-                                Visualizações</span
-                            >
-                            <span class="valor">2.843</span>
-                        </div>
-                    
-                    </div>
-                    <div class="card-tags">
-                        <span class="tag">Aventura</span>
-                        <span class="tag">Metroidvania</span>
-                    </div>
-                </article>
-
-            </section>
+            <section class="grid-lives" id="gridLives"></section>
 
             <button class="btn-adicionar-live" id="abrirCadastro">
                 <i class="fa-solid fa-plus"></i>
                 Adicionar Live
             </button>
-            
+
             <div class="modal-overlay" id="modalCadastro">
                 <div class="modal-container">
-                    <button
-                        class="fechar-modal"
-                        id="fecharCadastro"
-                        aria-label="Fechar cadastro"
-                    >
+                    <button class="fechar-modal" id="fecharCadastro" aria-label="Fechar cadastro">
                         &times;
                     </button>
-            
-                    <iframe
-                        src="./CadastrarLive.html"
-                        title="Cadastrar nova live"
-                    ></iframe>
+                    <iframe src="./CadastrarLive.html" title="Cadastrar nova live"></iframe>
                 </div>
             </div>
         </main>
-    </body>
+        </div>
 
 <script>
-    const modal = document.getElementById("modalCadastro");
-const abrir = document.getElementById("abrirCadastro");
-const fechar = document.getElementById("fecharCadastro");
+    const modal  = document.getElementById("modalCadastro");
+    const abrir  = document.getElementById("abrirCadastro");
+    const fechar = document.getElementById("fecharCadastro");
 
-abrir.addEventListener("click", () => {
-    modal.classList.add("ativo");
-});
-
-fechar.addEventListener("click", () => {
-    modal.classList.remove("ativo");
-});
-
-modal.addEventListener("click", (event) => {
-    if (event.target === modal) {
-        modal.classList.remove("ativo");
-    }
-});
-
-document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") {
-        modal.classList.remove("ativo");
-    }
-});
+    abrir.addEventListener("click", () => modal.classList.add("ativo"));
+    fechar.addEventListener("click", () => modal.classList.remove("ativo"));
+    modal.addEventListener("click", (e) => { if (e.target === modal) modal.classList.remove("ativo"); });
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape") modal.classList.remove("ativo"); });
 </script>
 
+<script src="./JS/lives.js"></script>
+<script>
+    let todasAsLives = [];
+    const grid = document.getElementById("gridLives");
+    const esc = LivesFmt.esc;
+
+    function mensagemGrid(texto) {
+        grid.innerHTML = `<p style="color:#8c8d9e;grid-column:1/-1;">${esc(texto)}</p>`;
+    }
+
+    function cardLive(l) {
+        const detalhes = `${LivesFmt.data(l.dataLive)} • ${LivesFmt.hora(l.horaInicio)} - ${LivesFmt.hora(l.horaTermino)}`;
+        return `
+        <a href="./dashboardLive.html?id=${encodeURIComponent(l.idLive)}">
+            <article class="card-live">
+                <div class="card-header">
+                    <div class="thumb-container">
+                        <img src="${LivesFmt.imagemJogo(l.nomeJogo)}" alt="${esc(l.nomeJogo)}" />
+                    </div>
+                    <div class="info-principal">
+                        <div class="topo-info">
+                            <h3>${esc(l.nomeJogo)}</h3>
+                            <button class="btn-opcoes"></button>
+                        </div>
+                        <span class="categoria">${esc(l.categoria)}</span>
+                        <p class="descricao-live">${esc(l.tituloLive)}</p>
+                    </div>
+                </div>
+                <div class="card-detalhes">
+                    <span class="detalhe-item"><i class="fa-regular fa-calendar"></i> ${detalhes}</span>
+                    <span class="detalhe-item"><i class="fa-regular fa-clock"></i> ${esc(LivesFmt.duracao(l.duracao))}</span>
+                </div>
+                <div class="card-metricas">
+                    <div class="metrica">
+                        <span class="metrica-header">Espectadores Médios</span>
+                        <span class="valor">${LivesFmt.numero(l.mediaEspectadores)}</span>
+                    </div>
+                    <div class="metrica">
+                        <span class="metrica-header">Pico de Viewers</span>
+                        <span class="valor">${LivesFmt.numero(l.picoEspectadores)}</span>
+                    </div>
+                    <div class="metrica">
+                        <span class="metrica-header">Visualizações</span>
+                        <span class="valor">${LivesFmt.numero(l.visualizacoesTotais)}</span>
+                    </div>
+                </div>
+                <div class="card-tags">
+                    <span class="tag">${esc(l.categoria)}</span>
+                </div>
+            </article>
+        </a>`;
+    }
+
+    function preencherFiltros() {
+        const jogoAtual = document.getElementById("filtroJogo").value;
+        const catAtual = document.getElementById("filtroCategoria").value;
+        const unicos = campo => [...new Set(todasAsLives.map(l => l[campo]))].sort((a, b) => a.localeCompare(b, "pt-BR"));
+
+        document.getElementById("filtroJogo").innerHTML =
+            '<option value="">Todos os jogos</option>' +
+            unicos("nomeJogo").map(j => `<option value="${esc(j)}">${esc(j)}</option>`).join("");
+        document.getElementById("filtroCategoria").innerHTML =
+            '<option value="">Todas as categorias</option>' +
+            unicos("categoria").map(c => `<option value="${esc(c)}">${esc(c)}</option>`).join("");
+
+        document.getElementById("filtroJogo").value = jogoAtual;
+        document.getElementById("filtroCategoria").value = catAtual;
+    }
+
+    function renderizar() {
+        const termo = document.getElementById("busca").value.trim().toLowerCase();
+        const jogo = document.getElementById("filtroJogo").value;
+        const categoria = document.getElementById("filtroCategoria").value;
+        const ordem = document.getElementById("ordenacao").value;
+
+        let lista = todasAsLives.filter(l =>
+            (!jogo || l.nomeJogo === jogo) &&
+            (!categoria || l.categoria === categoria) &&
+            (!termo || [l.nomeJogo, l.categoria, l.tituloLive].join(" ").toLowerCase().includes(termo))
+        );
+
+        const chave = l => l.dataLive + " " + l.horaInicio;
+        if (ordem === "antigas") lista.sort((a, b) => chave(a).localeCompare(chave(b)));
+        else if (ordem === "audiencia") lista.sort((a, b) => b.mediaEspectadores - a.mediaEspectadores);
+        else lista.sort((a, b) => chave(b).localeCompare(chave(a)));
+
+        if (!todasAsLives.length) return mensagemGrid("Você ainda não cadastrou nenhuma live. Clique em \"Adicionar Live\" para começar.");
+        if (!lista.length) return mensagemGrid("Nenhuma live encontrada com esses filtros.");
+        grid.innerHTML = lista.map(cardLive).join("");
+    }
+
+    async function carregarLives() {
+        try {
+            todasAsLives = await LivesAPI.listar();
+            preencherFiltros();
+            renderizar();
+        } catch (erro) {
+            mensagemGrid(erro.message);
+        }
+    }
+
+    ["busca", "filtroJogo", "filtroCategoria", "ordenacao"].forEach(id => {
+        document.getElementById(id).addEventListener(id === "busca" ? "input" : "change", renderizar);
+    });
+
+    // o formulário (iframe) avisa quando uma live foi salva
+    window.addEventListener("message", (e) => {
+        if (e.origin !== window.location.origin || !e.data || e.data.tipo !== "live-cadastrada") return;
+        modal.classList.remove("ativo");
+        document.querySelector("#modalCadastro iframe").src = "./CadastrarLive.html"; // formulário limpo
+        carregarLives();
+    });
+
+    carregarLives();
+</script>
+
+<script>
+    fetch("./sidebarStreamer.html")
+        .then((res) => {
+            if (!res.ok) throw new Error("Não foi possível carregar o componente");
+            return res.text();
+        })
+        .then((data) => { document.getElementById("sidebar").innerHTML = data; })
+        .catch((erro) => console.log(erro));
+</script>
+
+<script>
+    function abrirMenuMobile() {
+    const sidebar = document.querySelector("#sidebar .left-container");
+    const fundo = document.querySelector("#sidebar .fundo-menu");
+
+    sidebar?.classList.add("menu-aberto");
+    fundo?.classList.add("menu-aberto");
+}
+
+function fecharMenuMobile() {
+    const sidebar = document.querySelector("#sidebar .left-container");
+    const fundo = document.querySelector("#sidebar .fundo-menu");
+
+    sidebar?.classList.remove("menu-aberto");
+    fundo?.classList.remove("menu-aberto");
+}
+
+function abrirNotificacoes() {
+    document
+        .getElementById("barraNotificacoes")
+        ?.classList.add("notificacoes-abertas");
+}
+
+function fecharNotificacoes() {
+    document
+        .getElementById("barraNotificacoes")
+        ?.classList.remove("notificacoes-abertas");
+}
+</script>
+
+<script src="./JS/global.js"></script>
 </html>

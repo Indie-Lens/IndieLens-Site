@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS usuario (
   id_perfil INT NOT NULL,
   nome VARCHAR(50) NULL,
   email VARCHAR(100) NULL,
-  senha VARCHAR(255) NULL,
+  senha VARCHAR(45) NULL,
   CONSTRAINT fk_usuario_perfil1
     FOREIGN KEY (id_perfil)
     REFERENCES perfil (id_perfil)
@@ -63,7 +63,7 @@ CREATE TABLE IF NOT EXISTS projeto_simulacao (
 );
 
 -- Registro
-CREATE TABLE IF NOT EXISTS Registro (
+CREATE TABLE IF NOT EXISTS registro (
   id_registro INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
   dataResgistro DATETIME NULL,
   dataMetrica DATE NULL
@@ -74,18 +74,35 @@ CREATE TABLE IF NOT EXISTS jogo_main (
   id_jogo_rastreavel INT NOT NULL AUTO_INCREMENT,
   id_jogo INT NOT NULL,
   id_registro INT NOT NULL,
-  nome VARCHAR(255) NULL,
-  desenvolvedor VARCHAR(100) NULL,
+  nome TEXT NULL,
+  desenvolvedor TEXT NULL,
   idade_minima INT NULL,
   proprietarios_estimados INT NULL,
   preco DECIMAL(8,2) NULL,
   data_lancamento DATE NULL,
-  PRIMARY KEY (id_jogo_rastreavel),
+  PRIMARY KEY (id_jogo_rastreavel, id_jogo, id_registro),
   CONSTRAINT uq_jogo_main_jogo_registro
     UNIQUE (id_jogo, id_registro),
   CONSTRAINT fk_jogo_main_Registro1
     FOREIGN KEY (id_registro)
-    REFERENCES Registro (id_registro)
+    REFERENCES registro (id_registro)
+);
+
+-- Notificações
+CREATE TABLE IF NOT EXISTS notificacao (
+    id_notificacao INT AUTO_INCREMENT PRIMARY KEY,
+    id_usuario INT NULL,
+    id_jogo INT NULL, 
+    tipo VARCHAR(30) NOT NULL,
+    titulo VARCHAR(100) NOT NULL,
+    mensagem VARCHAR(255) NOT NULL,
+    data_criacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    lida TINYINT(1) NOT NULL DEFAULT 0,
+    data_leitura DATETIME NULL,
+
+    CONSTRAINT fk_notificacao_usuario
+        FOREIGN KEY (id_usuario)
+        REFERENCES usuario (id_usuario)
 );
 
 -- Jogo Suporte
@@ -108,15 +125,15 @@ CREATE TABLE IF NOT EXISTS jogo_metricas (
   id_jogo INT NOT NULL,
   id_registro INT NOT NULL,
   peak_CCU INT NULL,
-  qtd_donos INT NULL,
-  nota_score INT NULL,
-  nota_usuarios INT NULL,
-  nota_metacritic INT NULL,
-  qtd_dlc INT NULL,
-  qtd_conquistas INT NULL,
-  qtd_recomendacoes INT NULL,
   avaliacoes_positivas INT NULL,
   avaliacoes_negativas INT NULL,
+  taxa_aprovacao DECIMAL(5,2) NULL,
+  nota_metacritic DECIMAL(5,2) NULL,
+  nota_usuarios DECIMAL(5,2) NULL,
+  qtd_dlc INT NULL,
+  qtd_recomendacoes INT NULL,
+  qtd_conquistas INT NULL,
+  nota_score INT NULL,
   PRIMARY KEY (id_jogo, id_registro),
   CONSTRAINT fk_jogo_metricas_jogo_main1
     FOREIGN KEY (id_jogo, id_registro)
@@ -143,7 +160,7 @@ CREATE TABLE IF NOT EXISTS jogo_detalhes (
   id_jogo INT NOT NULL,
   tags TEXT NULL,
   generos TEXT NULL,
-  descricao TEXT NULL,
+  descricao MEDIUMTEXT NULL,
   categorias TEXT NULL,
   publicante TEXT NULL,
   jogo_anotacoes TEXT NULL,
@@ -205,8 +222,8 @@ CREATE TABLE IF NOT EXISTS jogo_midia (
 CREATE TABLE IF NOT EXISTS avaliacao_simulacao (
   id_usuario INT NOT NULL,
   id_simulacao INT NOT NULL,
-  positiva TINYINT NULL,
-  negativa TINYINT NULL,
+  positiva INT NULL,
+  negativa INT NULL,
   comentarios VARCHAR(255) NULL,
   PRIMARY KEY (id_simulacao, id_usuario),
   CONSTRAINT fk_avaliacao_simulacao_usuario1
@@ -215,6 +232,39 @@ CREATE TABLE IF NOT EXISTS avaliacao_simulacao (
   CONSTRAINT fk_avaliacao_simulacao_projeto_simulacao1
     FOREIGN KEY (id_simulacao)
     REFERENCES projeto_simulacao (id_simulacao)
+);
+
+-- Streamer
+CREATE TABLE IF NOT EXISTS streamer (
+  id_streamer INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+  id_usuario INT NOT NULL,
+  nickname VARCHAR(50) NULL,
+  nome_twitch VARCHAR(50) NULL,
+  url_canal VARCHAR(255) NULL,
+  CONSTRAINT fk_streamer_usuario
+    FOREIGN KEY (id_usuario)
+    REFERENCES usuario (id_usuario)
+);
+
+-- Avaliacao Jogo
+-- Interações do streamer com um jogo (curtir, lista de desejos, já transmitido, nota pessoal).
+-- Aponta para id_jogo (o ID lógico atemporal do jogo), NÃO para o par (id_jogo, id_registro),
+-- pois a base atualiza semanalmente e o mesmo jogo ganha novos registros. A avaliação do
+-- streamer precisa persistir entre semanas, por isso não há FK para jogo_main.
+CREATE TABLE IF NOT EXISTS avaliacao_jogo (
+  id_avaliacao INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+  id_streamer INT NOT NULL,
+  id_jogo INT NOT NULL,
+  curtido TINYINT(1) NOT NULL DEFAULT 0,
+  lista_desejos TINYINT(1) NOT NULL DEFAULT 0,
+  ja_transmitido TINYINT(1) NOT NULL DEFAULT 0,
+  nota_pessoal VARCHAR(500) NULL,
+  data_criacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  data_atualizacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  CONSTRAINT uq_avaliacao_streamer_jogo UNIQUE (id_streamer, id_jogo),
+  CONSTRAINT fk_avaliacao_jogo_streamer
+    FOREIGN KEY (id_streamer)
+    REFERENCES streamer (id_streamer)
 );
 
 -- Visualizando os dados das tabelas
@@ -237,6 +287,48 @@ INSERT INTO perfil (id_perfil, tipo, descricao) VALUES
 
 -- Inserindo usuario
 INSERT INTO usuario (id_perfil, nome, email, senha) VALUES
-(1, 'UsuarioTeste', 'Teste@Teste.com', 'Senha123');
+(1, "UsuarioTeste", "Teste@Teste.com", "Senha123");
+
+INSERT INTO notificacao (id_usuario, id_jogo, tipo, titulo, mensagem) VALUES
+(NULL, NULL, 'GLOBAL', 'nova base de dados!', 'teste de atualização da base de dados foi um sucesso!'),
+(1, NULL, 'INDIVIDUAL', 'Notificação individual de teste', 'O teste da notificação individual foi um sucesso!');
+
+-- VERIFICANDO SE O JOGO EXISTEs
+SELECT COUNT(*) AS quantidade
+FROM jogo_main
+WHERE id_jogo = 100;
+
+-- INSERINDO NOTIFICAÇÃO
+INSERT INTO notificacao (
+    id_usuario,
+    id_jogo,
+    tipo,
+    titulo,
+    mensagem )
+VALUES (
+    1,
+    1,
+    'JOGO_NOVO',
+    'Novo jogo disponível!',
+    'Um novo jogo foi adicionado à plataforma.');
+
+-- MARCANDO UMA NOTIFICAÇÃO COMO LIDA
+UPDATE notificacao
+SET
+    lida = 1,
+    data_leitura = CURRENT_TIMESTAMP
+WHERE id_notificacao = 1
+  AND id_usuario = 1;
+  
+-- SELECIONANDO QUANTIDADE DE NOTIFICACOES NAO LIDAS (USAR NO CONTADOR)
+SELECT COUNT(*) AS total_notificacoes
+FROM notificacao
+WHERE id_usuario = 1
+  AND lida = 0;
+  
+-- APAGANDO TODAS AS NOTIFICAÇÕES DO USUÁRIO 
+DELETE FROM notificacao
+WHERE id_usuario = 1;
+
 -- CASO DE ALGUM BO
 -- DROP DATABASE indieLens;

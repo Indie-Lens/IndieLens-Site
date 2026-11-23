@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard da Live | INDIE LENS</title>
+    <link rel="stylesheet" href="../../components/sidebar.css">
+    <link rel="stylesheet" href="./CSS/dashboardLive.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <div class="container">
+
+        <aside class="sidebar" id="sidebar"></aside>
+
+        <main class="conteudo-principal">
+            <div class="painel-geral">
+
+                <div class="topo-pagina">
+                    <div class="topo-esquerda">
+                        <a href="./selecionarLive.html" class="btn-voltar" title="Voltar">
+                            <i class="fa-solid fa-arrow-left"></i>
+                        </a>
+                        <div>
+                            <h1>Dashboard da Live</h1>
+                            <p>Análise baseada nos dados que você registrou.</p>
+                        </div>
+                    </div>
+                    <div class="topo-direita">
+                        <button class="btn-notificacao" aria-label="Notificações" onclick="abrirNotificacoes()">
+                            <i class="fa-regular fa-bell"></i>
+                        </button>
+                        <div class="perfil">
+                            <img src="https://marketplace.canva.com/Dz63E/MAF4KJDz63E/1/tl/canva-%C3%ADcone-do-usu%C3%A1rio-MAF4KJDz63E.png" alt="Avatar" class="avatar">
+                            <span class="nome">Usuário</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cartao cartao-identidade">
+                    <div class="identidade-capa">
+                        <img id="capaJogo" src="../../assets/imgs/Logo.jpeg" alt="">
+                    </div>
+                    <div class="identidade-corpo">
+                        <div class="identidade-linha-topo">
+                            <div class="identidade-badges">
+                                <span class="badge-categoria" id="badgeCategoria"></span>
+                                <span class="badge-nota" id="badgeNota"></span>
+                            </div>
+                        </div>
+                        <h2 id="tituloLive">Carregando...</h2>
+                        <div class="identidade-meta">
+                            <span><i class="fa-regular fa-calendar"></i> <span id="metaData"></span></span>
+                            <span><i class="fa-regular fa-clock"></i> <span id="metaHorario"></span></span>
+                            <span><i class="fa-solid fa-hourglass-half"></i> <span id="metaDuracao"></span></span>
+                            <span><i class="fa-solid fa-gamepad"></i> <span id="metaJogo"></span></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="linha-indicadores">
+
+                    <div class="cartao">
+                        <div class="cabecalho-indicador">
+                            <span>Espectadores Médios</span>
+                        </div>
+                        <h2 id="indMedia"></h2>
+                        <span class="tendencia" id="tendMedia"></span>
+                    </div>
+
+                    <div class="cartao">
+                        <div class="cabecalho-indicador">
+                            <span>Pico de Espectadores</span>
+                        </div>
+                        <h2 id="indPico"></h2>
+                        <span class="tendencia" id="tendPico"></span>
+                    </div>
+
+                    <div class="cartao">
+                        <div class="cabecalho-indicador">
+                            <span>Visualizações Totais</span>
+                        </div>
+                        <h2 id="indViews"></h2>
+                        <span class="tendencia" id="tendViews"></span>
+                    </div>
+
+                    <div class="cartao">
+                        <div class="cabecalho-indicador">
+                            <span>Novos Seguidores</span>
+                        </div>
+                        <h2 id="indSeg"></h2>
+                        <span class="tendencia" id="tendSeg"></span>
+                    </div>
+
+                    <div class="cartao cartao-destaque">
+                        <div class="cabecalho-indicador">
+                            <span>Duração da Live</span>
+                        </div>
+                        <h2 id="indDuracao"></h2>
+                        <p id="indHorario"></p>
+                        <small id="indData"></small>
+                    </div>
+
+                </div>
+
+                <div class="linha-graficos">
+
+                    <div class="cartao grafico-grande">
+                        <h3>Suas Lives — Média e Pico</h3>
+                        <div class="container-grafico">
+                            <canvas id="graficoComparativo"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="cartao grafico-medio">
+                        <h3>Quando você transmite melhor</h3>
+                        <div class="container-grafico">
+                            <canvas id="graficoHorarios"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="cartao grafico-pequeno">
+                        <h3>Jogos transmitidos</h3>
+                        <div class="container-grafico">
+                            <canvas id="graficoJogos"></canvas>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="linha-inferior">
+
+                    <div class="cartao">
+                        <h3>Avaliação Pessoal</h3>
+                        <div class="lista-avaliacao">
+
+                            <div class="avaliacao-item">
+                                <span class="avaliacao-label">Nota</span>
+                                <span class="avaliacao-valor"><span id="avEstrelas"></span> <span class="avaliacao-texto" id="avTexto"></span></span>
+                            </div>
+
+                            <div class="avaliacao-item">
+                                <span class="avaliacao-label">Chat</span>
+                                <span class="avaliacao-valor" id="avChat"></span>
+                            </div>
+
+                            <div class="avaliacao-item avaliacao-item-texto">
+                                <span class="avaliacao-label">Ponto alto</span>
+                                <span class="avaliacao-valor-texto" id="avPontoAlto"></span>
+                            </div>
+
+                            <div class="avaliacao-item avaliacao-item-texto">
+                                <span class="avaliacao-label">Melhorar</span>
+                                <span class="avaliacao-valor-texto" id="avMelhoria"></span>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="cartao">
+                        <div class="cabecalho-flexivel">
+                            <h3>Histórico das Suas Lives</h3>
+                            <a href="selecionarLive.html" class="link-ver-todos">Ver todas</a>
+                        </div>
+                        <table class="tabela-recentes">
+                            <thead>
+                                <tr>
+                                    <th>Jogo</th>
+                                    <th>Data e Hora</th>
+                                    <th>Duração</th>
+                                    <th>Média</th>
+                                    <th>Pico</th>
+                                    <th>+Seg.</th>
+                                    <th>Nota</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tabelaHistorico"></tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <script src="./JS/lives.js"></script>
+    <script src="./JS/dashboardLive.js"></script>
+
+    <script>
+        fetch("./sidebarStreamer.html")
+            .then(res => { if (!res.ok) throw new Error(); return res.text(); })
+            .then(data => { document.getElementById("sidebar").innerHTML = data; })
+            .catch(e => console.log(e));
+    </script>
+
+    
+<script>
+    function abrirMenuMobile() {
+    const sidebar = document.querySelector("#sidebar .left-container");
+    const fundo = document.querySelector("#sidebar .fundo-menu");
+
+    sidebar?.classList.add("menu-aberto");
+    fundo?.classList.add("menu-aberto");
+}
+
+function fecharMenuMobile() {
+    const sidebar = document.querySelector("#sidebar .left-container");
+    const fundo = document.querySelector("#sidebar .fundo-menu");
+
+    sidebar?.classList.remove("menu-aberto");
+    fundo?.classList.remove("menu-aberto");
+
+}
+</script>
+    <script src="./JS/global.js"></script>
+
+</body>
+</html>

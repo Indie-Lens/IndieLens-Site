@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IndieLens | Painel Geral</title>
+
+    <link rel="stylesheet" href="../../components/sidebar.css">
+    <link rel="stylesheet" href="../Streamer/CSS/dashPrincLeadGame.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div class="layout">
+
+        <div class="left-container" id="sidebar"></div>
+
+        <div class="barra-notificacoes" id="barraNotificacoes">
+            <div class="notificacoes-topo">
+                <h2>Notificações</h2>
+                <button type="button" onclick="fecharNotificacoes()">X</button>
+            </div>
+
+            <div class="notificacao">
+                <h3>Jogo em promoção!</h3>
+                <p>Hades está com 50% de desconto.</p>
+                <span>Promoção</span>
+            </div>
+
+            <div class="notificacao">
+                <h3>Novo lançamento</h3>
+                <p>Um novo jogo de RPG foi lançado na plataforma.</p>
+                <span>Lançamento</span>
+            </div>
+
+            <div class="notificacao">
+                <h3>Jogo da sua lista de favoritos</h3>
+                <p>Hollow Knight entrou em promoção!</p>
+                <span>Favoritos</span>
+            </div>
+
+            <div class="notificacao">
+                <h3>Novidade na plataforma</h3>
+                <p>Confira os jogos recém-lançados.</p>
+                <span>Novidades</span>
+            </div>
+        </div>
+
+        <main class="conteudo" id="dashboard">
+
+            <header class="topo">
+                <div>
+                    <h1> Painel geral</h1>
+                    <p>Acompanhe o panorama do mercado de jogos na Steam e suas simulações.</p>
+                </div>
+                <div class="filtros">
+                <div class="filtro-info">
+                    <label for="generoSelecionado">Filtrar por gênero</label>
+                    <select id="generoSelecionado" onchange="alterarGenero()">
+                        <option value="Todos">Todos os gêneros</option>
+                        <option value="Ação">Ação</option>
+                        <option value="Aventura">Aventura</option>
+                        <option value="RPG">RPG</option>
+                        <option value="Simulação">Simulação</option>
+                        <option value="Estratégia">Estratégia</option>
+                        <option value="Indie">Indie</option>
+                    </select>
+                </div>
+               
+            </div>
+            </header>
+
+            
+
+            <div class="metricas">
+                <div class="metrica verde">
+                    <div class="metrica-topo">
+                        <span>Gênero mais frequente</span>
+                    </div>
+                    <strong id="generoFrequente">Ação</strong>
+                    <small>Na seleção atual</small>
+                </div>
+
+                <div class="metrica roxa">
+                    <div class="metrica-topo">
+                        <span>Preço médio</span>
+                    </div>
+                    <strong id="precoMedio">US$ 12,50</strong>
+                    <small>Considerando jogos pagos e gratuitos</small>
+                </div>
+
+                <div class="metrica verde">
+                    <div class="metrica-topo">
+                        <span>Avaliações positivas médias</span>
+                    </div>
+                    <strong id="avaliacoesMedias">78%</strong>
+                    <small>Percentual de avaliações positivas</small>
+                </div>
+
+                
+            </div>
+
+            <div class="grade">
+
+                <div class="painel">
+                    <h2 class="painel-titulo">Quantidade de jogos por gênero</h2>
+                    <p class="subtitulo">Distribuição dos jogos encontrados na base Steam.</p>
+                    <div class="grafico-chart">
+                        <canvas id="graficoGeneros"></canvas>
+                    </div>
+                </div>
+
+                <div class="painel">
+                    <h2 class="painel-titulo">Distribuição de preços</h2>
+                    <p class="subtitulo">Quantidade de jogos em cada faixa de preço (US$).</p>
+                    <div class="grafico-chart">
+                        <canvas id="graficoPrecos"></canvas>
+                    </div>
+                </div>
+
+                <div class="painel painel-completo" id="simulacoes">
+                    <div class="cabecalho-painel">
+                        <div>
+                            <h2 class="painel-titulo">Minhas simulações recentes</h2>
+                            <p class="subtitulo">Protótipos que você cadastrou no IndieLens.</p>
+                        </div>
+                        <a href="../Simulador/minhasSimulacoes.html" class="link-painel">Ver todas</a>
+                    </div>
+
+                    <div class="tabela-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Nome da simulação</th>
+                                    <th>Gênero</th>
+                                    <th>Preço planejado</th>
+                                    <th>Data de criação</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tabelaSimulacoes">
+                                <tr>
+                                    <td>RPG de mundo aberto</td>
+                                    <td>RPG</td>
+                                    <td>US$ 19,99</td>
+                                    <td>25/10/2026</td>
+                                </tr>
+                                <tr>
+                                    <td>Jogo de terror cooperativo</td>
+                                    <td>Terror</td>
+                                    <td>US$ 14,99</td>
+                                    <td>22/10/2026</td>
+                                </tr>
+                                <tr>
+                                    <td>Simulador de cafeteria</td>
+                                    <td>Simulação</td>
+                                    <td>US$ 9,99</td>
+                                    <td>15/10/2026</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+
+            
+
+        </main>
+    </div>
+
+    <script>
+        /*
+         * DADOS DE EXEMPLO
+         * Estes valores servem apenas para visualizar os gráficos.
+         * Depois, substitua os arrays pelos dados retornados pela API/consultas SQL.
+         *
+         * A estrutura foi separada para facilitar a integração dinâmica.
+         */
+        const dadosDashboard = {
+            Todos: {
+                generoFrequente: "Ação",
+                precoMedio: "US$ 12,50",
+                avaliacoesMedias: "78%",
+                idiomaComum: "Inglês",
+                generos: [3200, 2500, 1800, 1400, 900, 800],
+                precos: [35, 30, 25, 10]
+            },
+            "Ação": {
+                generoFrequente: "Ação",
+                precoMedio: "US$ 10,90",
+                avaliacoesMedias: "76%",
+                idiomaComum: "Inglês",
+                generos: [3200, 2500, 1800, 1400, 900, 800],
+                precos: [40, 32, 20, 8]
+            },
+            "Aventura": {
+                generoFrequente: "Aventura",
+                precoMedio: "US$ 13,20",
+                avaliacoesMedias: "80%",
+                idiomaComum: "Inglês",
+                generos: [2100, 2500, 1200, 900, 700, 600],
+                precos: [30, 34, 24, 12]
+            },
+            "RPG": {
+                generoFrequente: "RPG",
+                precoMedio: "US$ 18,70",
+                avaliacoesMedias: "82%",
+                idiomaComum: "Inglês",
+                generos: [1100, 1500, 2800, 900, 700, 500],
+                precos: [20, 25, 35, 20]
+            },
+            "Simulação": {
+                generoFrequente: "Simulação",
+                precoMedio: "US$ 14,20",
+                avaliacoesMedias: "85%",
+                idiomaComum: "Inglês",
+                generos: [900, 1200, 1000, 2600, 800, 700],
+                precos: [25, 30, 30, 15]
+            },
+            "Estratégia": {
+                generoFrequente: "Estratégia",
+                precoMedio: "US$ 11,80",
+                avaliacoesMedias: "79%",
+                idiomaComum: "Inglês",
+                generos: [800, 900, 1100, 700, 2400, 600],
+                precos: [38, 27, 23, 12]
+            },
+            "Indie": {
+                generoFrequente: "Indie",
+                precoMedio: "US$ 9,90",
+                avaliacoesMedias: "81%",
+                idiomaComum: "Inglês",
+                generos: [1800, 1600, 1300, 1100, 900, 3200],
+                precos: [45, 28, 18, 9]
+            }
+        };
+
+        const rotulosGeneros = ["Ação", "Aventura", "RPG", "Simulação", "Estratégia", "Indie"];
+        const rotulosPrecos = ["Gratuitos", "Até US$ 10", "US$ 10–30", "Acima de US$ 30"];
+
+        const opcoesComuns = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: "#aab5c7",
+                        usePointStyle: true,
+                        padding: 18,
+                        font: { family: "Inter" }
+                    }
+                }
+            }
+        };
+
+        const contextoGeneros = document.getElementById("graficoGeneros");
+        const graficoGeneros = new Chart(contextoGeneros, {
+            type: "bar",
+            data: {
+                labels: rotulosGeneros,
+                datasets: [{
+                    label: "Quantidade de jogos",
+                    data: dadosDashboard.Todos.generos,
+                    backgroundColor: [
+                        "#9749e0", "#9cff00", "#8C8D9E",
+                        "#36374A", "#3b1e5a", "#2E4316"
+                    ],
+                    borderRadius: 5,
+                    borderSkipped: false
+                }]
+            },
+            options: {
+                opcoesComuns,
+                indexAxis: "y",
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        ticks: { color: "#aab5c7" },
+                        grid: { color: "#263142" }
+                    },
+                    y: {
+                        ticks: { color: "#aab5c7" },
+                        grid: { display: false }
+                    }
+                },
+                plugins: {
+                    ...opcoesComuns.plugins,
+                    legend: { display: false }
+                }
+            }
+        });
+
+        const contextoPrecos = document.getElementById("graficoPrecos");
+        const graficoPrecos = new Chart(contextoPrecos, {
+            type: "doughnut",
+            data: {
+                labels: rotulosPrecos,
+                datasets: [{
+                    data: dadosDashboard.Todos.precos,
+                    backgroundColor: ["#36374A", "#9749e0", "#bdff45", "#8C8D9E"],
+                    borderColor: "#0d121a",
+                    borderWidth: 3,
+                    hoverOffset: 6
+                }]
+            },
+            options: {
+                ...opcoesComuns,
+                cutout: "62%",
+                plugins: {
+                    ...opcoesComuns.plugins,
+                    legend: {
+                        position: "bottom",
+                        labels: {
+                            color: "#aab5c7",
+                            usePointStyle: true,
+                            padding: 16,
+                            font: { family: "Inter", size: 11 }
+                        }
+                    }
+                }
+            }
+        });
+
+        function alterarGenero() {
+            const genero = document.getElementById("generoSelecionado").value;
+            const dados = dadosDashboard[genero];
+
+            document.getElementById("generoFrequente").textContent = dados.generoFrequente;
+            document.getElementById("precoMedio").textContent = dados.precoMedio;
+            document.getElementById("avaliacoesMedias").textContent = dados.avaliacoesMedias;
+            document.getElementById("idiomaComum").textContent = dados.idiomaComum;
+
+            graficoGeneros.data.datasets[0].data = dados.generos;
+            graficoGeneros.update();
+
+            graficoPrecos.data.datasets[0].data = dados.precos;
+            graficoPrecos.update();
+        }
+
+        function abrirNotificacoes() {
+            document.getElementById("barraNotificacoes").style.display = "block";
+        }
+
+        function fecharNotificacoes() {
+            document.getElementById("barraNotificacoes").style.display = "none";
+        }
+    </script>
+
+    <script>
+        fetch("./sidebarLeadGame.html")
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error("Não foi possível carregar o componente");
+                }
+                return res.text();
+            })
+            .then((data) => {
+                document.getElementById("sidebar").innerHTML = data;
+
+                if (typeof inicializarFuturosLancamentos === "function") {
+                    inicializarFuturosLancamentos(document.getElementById("sidebar"));
+                }
+            })
+            .catch((erro) => console.log(erro));
+    </script>
+
+
+    <script>
+        function abrirMenuMobile() {
+    const sidebar = document.querySelector("#sidebar .left-container");
+    const fundo = document.querySelector("#sidebar .fundo-menu");
+
+    sidebar.classList.add("menu-aberto");
+    fundo.classList.add("menu-aberto");
+}
+
+function fecharMenuMobile() {
+    const sidebar = document.querySelector("#sidebar .left-container");
+    const fundo = document.querySelector("#sidebar .fundo-menu");
+
+    sidebar.classList.remove("menu-aberto");
+    fundo.classList.remove("menu-aberto");
+}
+    </script>
+</body>
+
+</html>

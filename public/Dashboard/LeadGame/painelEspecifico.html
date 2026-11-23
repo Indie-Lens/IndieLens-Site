@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#171522">
+    <title>IndieLens | Painel Específico</title>
+
+    <link rel="stylesheet" href="../../components/sidebar.css">
+    <link rel="stylesheet" href="../Streamer/CSS/dashPrincLeadGame.css">
+    <link rel="stylesheet" href="./CSS/painelEspecifico.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="layout">
+        <div class="left-container" id="sidebar"></div>
+
+        <div class="barra-notificacoes" id="barraNotificacoes">
+            <div class="notificacoes-topo">
+                <h2>Notificações</h2>
+                <button type="button" onclick="fecharNotificacoes()">X</button>
+            </div>
+            <div class="notificacao">
+                <h3>Jogo em promoção!</h3>
+                <p>Hades está com 50% de desconto.</p>
+                <span>Promoção</span>
+            </div>
+            <div class="notificacao">
+                <h3>Novo lançamento</h3>
+                <p>Um novo jogo de RPG foi lançado na plataforma.</p>
+                <span>Lançamento</span>
+            </div>
+        </div>
+
+        <main class="conteudo conteudo-painel-especifico" id="painel-especifico" aria-label="Painel específico do protótipo">
+            <header class="topo topo-especifico">
+                <div>
+                    <h1>Painel específico</h1>
+                    <p>Compare seu protótipo com jogos do mesmo gênero e preço parecido.</p>
+                </div>
+            </header>
+
+            <section class="controles-comparacao" aria-label="Busca de jogos parecidos">
+                <label class="campo-comparacao">
+                    <span>Protótipo</span>
+                    <select id="prototipoSelecionado" aria-label="Selecionar protótipo"></select>
+                </label>
+                <div class="campo-genero"><span>Gênero do protótipo</span><strong id="generoPrototipo">Aguardando protótipo</strong></div>
+                <div class="recorte-preco">
+                    <span class="recorte-icone" aria-hidden="true"><i data-lucide="coins"></i></span>
+                    <label class="campo-porcentagem" for="margemPreco"><small>Diferença de preço aceita</small><span><input id="margemPreco" type="number" min="0" max="100" step="1" value="30" aria-label="Porcentagem de diferença de preço"><b>% para mais ou para menos</b></span></label>
+                    <button class="botao-buscar" id="buscarJogos" type="button">Buscar jogos</button>
+                </div>
+            </section>
+
+            <p class="mensagem-painel" id="mensagemPainel" role="status">Cadastre e simule um protótipo para liberar a busca.</p>
+
+            <div id="resultadosComparacao" hidden>
+            <section class="resumo-comparacao" aria-label="Resumo do protótipo e da média dos jogos encontrados">
+                <article class="resumo-prototipo">
+                    <div class="resumo-titulo"><span class="marcador-prototipo" aria-hidden="true"></span><span>Seu protótipo</span></div>
+                    <div class="resumo-dados">
+                        <div class="resumo-nome"><h2 id="nomePrototipo">Protótipo</h2><p id="detalhesPrototipo">—</p></div>
+                        <div class="resumo-preco"><small>Preço planejado</small><strong id="precoPrototipo">—</strong></div>
+                    </div>
+                </article>
+                <div class="comparacao-separador" aria-hidden="true"><span>vs.</span></div>
+                <article class="resumo-mercado">
+                    <div class="resumo-titulo"><span class="marcador-mercado" aria-hidden="true"></span><span>Média dos jogos encontrados</span></div>
+                    <div class="resumo-dados">
+                        <div class="resumo-nome"><h2 id="tituloRecorte">Jogos de Simulação</h2><p id="contextoRecorte">Mesmo gênero · preço parecido</p></div>
+                        <div class="resumo-preco"><small>Preço médio dos jogos</small><strong id="precoMedio">—</strong></div>
+                    </div>
+                </article>
+            </section>
+
+            <section class="indicadores-mercado" aria-label="Resumo dos jogos encontrados">
+                <article class="indicador"><span>Jogos encontrados</span><strong id="qtdJogos">—</strong></article>
+                <article class="indicador"><span>Média de avaliações positivas</span><strong id="mediaAprovacao">—</strong></article>
+            </section>
+
+            <section class="tabela-referencias">
+                <div class="cabecalho-tabela">
+                    <div><h2>Jogos encontrados</h2><p>Os mais e menos bem avaliados dentro do gênero e preço escolhido.</p></div>
+                    <span class="contador-referencias">— jogos</span>
+                </div>
+                <div class="tabela-scroll">
+                    <table>
+                        <thead><tr><th>Jogo</th><th>Preço</th><th>Avaliações positivas</th><th>Grupo</th></tr></thead>
+                        <tbody id="tabelaJogos"></tbody>
+                    </table>
+                </div>
+            </section>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://unpkg.com/lucide@1.66.0/dist/umd/lucide.js"></script>
+    <script src="./JS/painelEspecifico.js"></script>
+</body>
+
+</html>
