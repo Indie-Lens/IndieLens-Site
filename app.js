@@ -15,9 +15,11 @@ var app = express();
 
 var indexRouter = require("./src/routes/index");
 var usuarioRouter = require("./src/routes/usuarios");
-var liveRouter = require("./src/routes/lives"); 
-var simularJogoRouter = require("./src/routes/simularJogo");
+// var liveRouter = require("./src/routes/lives"); 
 var avaliacaoRouter = require("./src/routes/avaliacoes");
+var simularJogoRouter = require("./src/routes/simularJogo");
+// var notificacaoRouter = require("./src/routes/notificacoes");
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -26,10 +28,12 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(cors());
 
 app.use("/", indexRouter);
+// app.use("/lives", liveRouter);
 app.use("/usuarios", usuarioRouter);
-app.use("/lives", liveRouter); 
 app.use("/simularJogo", simularJogoRouter);
 app.use("/avaliacoes", avaliacaoRouter);
+// app.use("/notificacoes", notificacaoRouter);
+
 
 app.listen(PORTA_APP, function () {
     console.log(`
