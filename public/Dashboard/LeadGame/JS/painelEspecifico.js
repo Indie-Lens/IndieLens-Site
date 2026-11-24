@@ -18,12 +18,21 @@ fetch("./sidebarLeadGame.html")
 
 window.abrirNotificacoes = () => {
     const panel = document.getElementById("barraNotificacoes");
-    if (panel) panel.style.display = "block";
+    if (panel) {
+        panel.style.display = "block";
+        panel.classList.add("notificacoes-abertas");
+    }
+    if (typeof window.carregarNotificacoes === "function") {
+        window.carregarNotificacoes(true);
+    }
 };
 
 window.fecharNotificacoes = () => {
     const panel = document.getElementById("barraNotificacoes");
-    if (panel) panel.style.display = "none";
+    if (panel) {
+        panel.style.display = "none";
+        panel.classList.remove("notificacoes-abertas");
+    }
 };
 
 window.abrirMenuMobile = () => {

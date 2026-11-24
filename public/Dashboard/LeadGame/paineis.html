@@ -15,39 +15,6 @@
         <div class="left-container" id="sidebar">
 
         </div>
-        <div class="barra-notificacoes" id="barraNotificacoes">
-
-            <div class="notificacoes-topo">
-                <h2>Notificações</h2>
-
-                <button type="button" onclick="fecharNotificacoes()">X</button>
-            </div>
-
-            <div class="notificacao">
-                <h3> Jogo em promoção!</h3>
-                <p>Hades está com 50% de desconto.</p>
-                <span>Promoção</span>
-            </div>
-
-            <div class="notificacao">
-                <h3> Novo lançamento</h3>
-                <p>Um novo jogo de RPG foi lançado na plataforma.</p>
-                <span>Lançamento</span>
-            </div>
-
-            <div class="notificacao">
-                <h3> Jogo da sua lista de favoritos</h3>
-                <p>Hollow Knight entrou em promoção!</p>
-                <span>Favoritos</span>
-            </div>
-
-            <div class="notificacao">
-                <h3> Novidade na plataforma</h3>
-                <p>Confira os jogos recém-lançados.</p>
-                <span>Novidades</span>
-            </div>
-
-        </div>
         <main class="conteudo" id="dashboard">
             <header class="topo">
                 <div>
@@ -265,15 +232,8 @@
             document.getElementById("posicao4").innerHTML = "9º";
         }
     }
-
-    function abrirNotificacoes() {
-        document.getElementById("barraNotificacoes").style.display = "block";
-    }
-
-    function fecharNotificacoes() {
-        document.getElementById("barraNotificacoes").style.display = "none";
-    }
 </script>
+<script src="../../components/dashboard-sidebar.js"></script>
 
 <script>
     fetch("./sidebarLeadGame.html")

@@ -49,10 +49,87 @@
         }
     }
 
+    function escaparTextoNotificacao(texto) {
+        var div = document.createElement("div");
+        div.textContent = texto ?? "";
+        return div.innerHTML;
+    }
+
+    function carregarNotificacoes(marcarLidasAoAbrir) {
+        var panel = document.getElementById("barraNotificacoes");
+        if (!panel) return;
+
+        var container = document.getElementById("listaNotificacoes");
+        if (!container) {
+            panel.querySelectorAll(".notificacao").forEach(function (elemento) { elemento.remove(); });
+            container = document.createElement("div");
+            container.id = "listaNotificacoes";
+            panel.appendChild(container);
+        }
+
+        var idUsuario = sessionStorage.ID_USUARIO || 1;
+
+        fetch("/notificacoes/listar/" + idUsuario)
+            .then(function (res) {
+                if (!res.ok) throw new Error("Erro ao buscar notificações");
+                return res.json();
+            })
+            .then(function (notificacoes) {
+                container.innerHTML = "";
+
+                if (!Array.isArray(notificacoes) || notificacoes.length === 0) {
+                    container.innerHTML =
+                        '<div class="notificacao">' +
+                            "<h3>Sem notificações</h3>" +
+                            "<p>Você não possui notificações no momento.</p>" +
+                        "</div>";
+                    return;
+                }
+
+                notificacoes.forEach(function (n) {
+                    var jaLida = Number(n.lida) === 1;
+                    var item = document.createElement("div");
+                    item.className = "notificacao";
+                    item.dataset.id = n.id_notificacao;
+                    if (jaLida) {
+                        item.style.opacity = "0.6";
+                    }
+
+                    item.innerHTML =
+                        "<h3>" + escaparTextoNotificacao(n.titulo) + "</h3>" +
+                        "<p>" + escaparTextoNotificacao(n.mensagem) + "</p>" +
+                        "<span>" + escaparTextoNotificacao(n.tipo) + "</span>";
+                    container.appendChild(item);
+
+                    if (marcarLidasAoAbrir && !jaLida && n.id_usuario != null) {
+                        fetch("/notificacoes/ler/" + n.id_notificacao, { method: "PUT" })
+                            .catch(function (erro) { console.log(erro); });
+                    }
+                });
+            })
+            .catch(function (erro) {
+                console.log(erro);
+                container.innerHTML =
+                    '<div class="notificacao">' +
+                        "<h3>Indisponível</h3>" +
+                        "<p>Não foi possível carregar as notificações.</p>" +
+                    "</div>";
+            });
+    }
+
     function abrirNotificacoes() {
-        document.getElementById("barraNotificacoes").style.display = "block";
+        var panel = document.getElementById("barraNotificacoes");
+        if (panel) {
+            panel.style.display = "block";
+            panel.classList.add("notificacoes-abertas");
+        }
+        carregarNotificacoes(true);
     }
 
     function fecharNotificacoes() {
-        document.getElementById("barraNotificacoes").style.display = "none";
+        var panel = document.getElementById("barraNotificacoes");
+        if (panel) {
+            panel.style.display = "none";
+            panel.classList.remove("notificacoes-abertas");
+        }
     }
