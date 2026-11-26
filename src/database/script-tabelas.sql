@@ -15,7 +15,6 @@ CREATE TABLE IF NOT EXISTS usuario (
   nome VARCHAR(50) NULL,
   email VARCHAR(100) NULL,
   senha VARCHAR(45) NULL,
-  receber_notificacoes TINYINT,
   CONSTRAINT fk_usuario_perfil1
     FOREIGN KEY (id_perfil)
     REFERENCES perfil (id_perfil)
@@ -39,7 +38,6 @@ CREATE TABLE IF NOT EXISTS log_usuario (
   id_sessao INT NOT NULL,
   id_usuario INT NOT NULL,
   tipo_evento VARCHAR(50) NULL,
-  data_log DATETIME,
   descricao_evento VARCHAR(200) NULL,
   data_log DATETIME,
   CONSTRAINT fk_log_usuario_sessao_usuario1
@@ -69,8 +67,7 @@ CREATE TABLE IF NOT EXISTS projeto_simulacao (
 CREATE TABLE IF NOT EXISTS registro (
   id_registro INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
   dataResgistro DATETIME NULL,
-  dataMetrica DATE NULL,
-  statusRegistro TINYINT
+  dataMetrica DATE NULL
 );
 
 -- Jogo Main
@@ -237,32 +234,6 @@ CREATE TABLE IF NOT EXISTS avaliacao_simulacao (
     FOREIGN KEY (id_simulacao)
     REFERENCES projeto_simulacao (id_simulacao)
 );
-<<<<<<< Updated upstream
--- Streamer
-CREATE TABLE IF NOT EXISTS streamer (
-  id_streamer INT NOT NULL,
-  id_usuario INT NOT NULL,
-  nickname VARCHAR(50) NOT NULL,
-  nome_twitch VARCHAR(50) NOT NULL,
-  url_canal VARCHAR(255),
-  PRIMARY KEY (id_streamer, id_usuario),
-  CONSTRAINT fk_streamer_usuario
-    FOREIGN KEY (id_usuario)
-    REFERENCES usuario (id_usuario)
-);
-
--- Desenvolvedor
-CREATE TABLE IF NOT EXISTS desenvolvedor (
-  id_desenvolvedor INT NOT NULL,
-  id_usuario INT NOT NULL,
-  nome_studio VARCHAR(45) NOT NULL,
-  PRIMARY KEY (id_desenvolvedor, id_usuario),
-  CONSTRAINT fk_dev_usuario
-    FOREIGN KEY (id_usuario)
-    REFERENCES usuario (id_usuario)
-);
-
-=======
 
 -- Avaliacao Jogo
 -- Interações do streamer com um jogo (curtir, lista de desejos, já transmitido, nota pessoal).
@@ -271,6 +242,7 @@ CREATE TABLE IF NOT EXISTS desenvolvedor (
 -- streamer precisa persistir entre semanas, por isso não há FK para jogo_main.
 CREATE TABLE IF NOT EXISTS avaliacao_jogo (
   id_avaliacao INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+
   id_streamer INT NOT NULL,
   id_jogo INT NOT NULL,
   curtido TINYINT(1) NOT NULL DEFAULT 0,
@@ -299,7 +271,7 @@ CREATE TABLE IF NOT EXISTS streamer (
 
 -- Desenvolvedor
 CREATE TABLE IF NOT EXISTS desenvolvedor (
-  id_desenvolvedor INT NOT NULL,
+  id_desenvolvedor INT AUTO_INCREMENT NOT NULL,
   id_usuario INT NOT NULL,
   nome_studio VARCHAR(45) NOT NULL,
   url_studio VARCHAR(245),
@@ -310,40 +282,24 @@ CREATE TABLE IF NOT EXISTS desenvolvedor (
     REFERENCES usuario (id_usuario)
 );
 
->>>>>>> Stashed changes
 -- Live
 CREATE TABLE IF NOT EXISTS live (
-  id_live INT NOT NULL,
+  id_live INT AUTO_INCREMENT NOT NULL,
+
   id_streamer INT NOT NULL,
-  nome_jogo VARCHAR(100),
-  categoria VARCHAR(100),
-  titulo_live VARCHAR(100),
-  descricao VARCHAR(500),
-  data_live DATE,
-  hora_inicio TIME,
-  hora_termino TIME,
-  duracao VARCHAR(20),
-  media_espectadores INT,
-  pico_espectadores INT,
-  visualizacoes_totais INT,
-  novos_seguidores INT,
-  nota_avaliacao INT,
-  engajamento_chart VARCHAR(250),
-  ponto_alto VARCHAR(250),
-  ponto_melhoria VARCHAR(250),
-  data_registro DATETIME,
-   PRIMARY KEY (id_live, id_streamer),
-  CONSTRAINT fk_live_streamer
+  id_jogo INT NOT NULL,
+  curtido TINYINT(1) NOT NULL DEFAULT 0,
+  lista_desejos TINYINT(1) NOT NULL DEFAULT 0,
+  ja_transmitido TINYINT(1) NOT NULL DEFAULT 0,
+  nota_pessoal VARCHAR(500) NULL,
+  data_criacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  data_atualizacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  CONSTRAINT uq_avaliacao_streamer_jogo UNIQUE (id_streamer, id_jogo),
+  CONSTRAINT fk_avaliacao_jogo_streamer
     FOREIGN KEY (id_streamer)
     REFERENCES streamer (id_streamer)
-    
 );
-<<<<<<< Updated upstream
-=======
 
-
-
->>>>>>> Stashed changes
 -- Visualizando os dados das tabelas
 SELECT * FROM perfil;
 SELECT * FROM usuario;
@@ -409,4 +365,3 @@ WHERE id_usuario = 1;
 
 -- CASO DE ALGUM BO
 -- DROP DATABASE indieLens;
-

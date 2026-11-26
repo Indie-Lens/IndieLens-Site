@@ -7,6 +7,8 @@ require("dotenv").config({ path: caminho_env });
 var express = require("express");
 var cors = require("cors");
 var path = require("path");
+var swaggerUi = require("swagger-ui-express");
+var swaggerSpec = require("./src/swagger");
 
 var PORTA_APP = process.env.APP_PORT;
 var HOST_APP = process.env.APP_HOST;
@@ -15,7 +17,9 @@ var app = express();
 
 var indexRouter = require("./src/routes/index");
 var usuarioRouter = require("./src/routes/usuarios");
-var liveRouter = require("./src/routes/lives");
+var liveRouter = require("./src/routes/lives"); 
+var simularJogoRouter = require("./src/routes/simularJogo");
+var avaliacaoRouter = require("./src/routes/avaliacoes");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -23,9 +27,17 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use(cors());
 
+app.get("/api-docs.json", function (req, res) {
+    res.json(swaggerSpec);
+});
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
 app.use("/", indexRouter);
 app.use("/usuarios", usuarioRouter);
-app.use("/lives", liveRouter);
+app.use("/lives", liveRouter); 
+app.use("/simularJogo", simularJogoRouter);
+app.use("/avaliacoes", avaliacaoRouter);
 
 app.listen(PORTA_APP, function () {
     console.log(`

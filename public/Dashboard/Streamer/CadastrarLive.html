@@ -313,16 +313,57 @@
                 );
             }
 
-            document.getElementById('formCadastroLive').addEventListener('submit', e => {
+            document.getElementById('formCadastroLive').addEventListener('submit', async e => {
                 e.preventDefault();
                 if (!notaInput.value)
                     return alert('Avalie a live antes de salvar.');
-                console.log('Salvo!');
+
+                const valor = id => document.getElementById(id).value.trim();
+                // campos opcionais em branco viram 0 (a API exige inteiro não negativo)
+                const inteiro = id => valor(id) === '' ? 0 : Number(valor(id));
+
+                const dados = {
+                    nomeJogo: valor('jogo'),
+                    categoria: valor('categoria'),
+                    tituloLive: valor('tituloLive'),
+                    descricao: valor('descricao'),
+                    dataLive: valor('dataLive'),
+                    horaInicio: valor('horaInicio'),
+                    horaTermino: valor('horaTermino'),
+                    mediaEspectadores: inteiro('mediaEspectadores'),
+                    picoEspectadores: inteiro('picoEspectadores'),
+                    visualizacoesTotais: inteiro('visualizacoes'),
+                    novosSeguidores: inteiro('novosSeguidores'),
+                    notaAvaliacao: Number(notaInput.value),
+                    engajamentoChat: valor('engajamentoChat'),
+                    pontoAlto: valor('pontoAlto'),
+                    pontoMelhoria: valor('pontoMelhoria')
+                };
+
+                const botao = document.querySelector('.btn-salvar-final');
+                botao.disabled = true;
+                botao.textContent = 'Salvando...';
+
+                try {
+                    await LivesAPI.cadastrar(dados);
+
+                    if (window.parent !== window) {
+                        // aberto dentro do modal do histórico: avisa a página pai
+                        window.parent.postMessage({ tipo: 'live-cadastrada' }, window.location.origin);
+                    } else {
+                        window.location.href = './selecionarLive.html';
+                    }
+                } catch (erro) {
+                    alert(erro.message);
+                    botao.disabled = false;
+                    botao.textContent = 'Salvar Live';
+                }
             });
 
             atualizarStepper();
         </script>
 
+        <script src="./JS/lives.js"></script>
         <script src="./JS/global.js"></script>
     </body>
 </html>
