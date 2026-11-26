@@ -51,9 +51,9 @@
                             <div class="select-grupo">
                                 <select id="filtroPlataforma">
                                     <option value="">Todas as plataformas</option>
-                                    <option value="pc">PC</option>
-                                    <option value="console">Console</option>
-                                    <option value="switch">Nintendo Switch</option>
+                                    <option value="windows">Windows</option>
+                                    <option value="mac">macOS</option>
+                                    <option value="linux">Linux</option>
                                 </select>
                             </div>
                         </div>
@@ -70,235 +70,15 @@
                     </div>
                 </div>
 
-                <div class="grid-jogos" id="gridJogos">
+                <div class="grid-jogos" id="gridJogos"></div>
 
-                    <a class="card-jogo" href="pagJogo.html?jogo=hades" data-genero="Roguelike">
-                        <div class="card-capa">
-                            <img src="../../assets/imgs/Hades.jpg" alt="Hades">
-                            <span class="badge-genero">Roguelike</span>
-                            <span class="badge-alta">↑ Em alta</span>
-                        </div>
-                        <div class="card-corpo">
-                            <div class="card-topo-info">
-                                <h3>Hades</h3>
-                                <span class="card-avaliacao">98%</span>
-                            </div>
-                            <p class="card-desc">Desafie o deus da morte em batalhas frenéticas com história envolvente e progressão permanente.</p>
-                        </div>
-                        <div class="card-metricas">
-                            <div class="card-stat">
-                                <span class="card-stat-label">Avg. viewers</span>
-                                <span class="card-stat-valor verde">2.4k</span>
-                            </div>
-                            <div class="card-stat">
-                                <span class="card-stat-label">Horas median.</span>
-                                <span class="card-stat-valor">48h</span>
-                            </div>
-                            <div class="card-stat">
-                                <span class="card-stat-label">CCU médio</span>
-                                <span class="card-stat-valor roxo">12k</span>
-                            </div>
-                        </div>
-                    </a>
+                <div id="statusJogos" class="estado-jogos" aria-live="polite"></div>
 
-                    <a class="card-jogo" href="pagJogo.html?jogo=stardew" data-genero="Simulação">
-                        <div class="card-capa">
-                            <img src="../../assets/imgs/StardewValleyBanner.png" alt="Stardew Valley">
-                            <span class="badge-genero">Simulação</span>
-                        </div>
-                        <div class="card-corpo">
-                            <div class="card-topo-info">
-                                <h3>Stardew Valley</h3>
-                                <span class="card-avaliacao">97%</span>
-                            </div>
-                            <p class="card-desc">Gerencie sua fazenda, cultive amizades e explore masmorras em um RPG relaxante e profundo.</p>
-                        </div>
-                        <div class="card-metricas">
-                            <div class="card-stat">
-                                <span class="card-stat-label">Avg. viewers</span>
-                                <span class="card-stat-valor verde">1.8k</span>
-                            </div>
-                            <div class="card-stat">
-                                <span class="card-stat-label">Horas median.</span>
-                                <span class="card-stat-valor">130h</span>
-                            </div>
-                            <div class="card-stat">
-                                <span class="card-stat-label">CCU médio</span>
-                                <span class="card-stat-valor roxo">8.2k</span>
-                            </div>
-                        </div>
-                    </a>
-
-                    <a class="card-jogo" href="pagJogo.html?jogo=hollow" data-genero="Aventura">
-                        <div class="card-capa">
-                            <img src="../../assets/imgs/Hollow.jpg" alt="Hollow Knight">
-                            <span class="badge-genero">Aventura</span>
-                        </div>
-                        <div class="card-corpo">
-                            <div class="card-topo-info">
-                                <h3>Hollow Knight</h3>
-                                <span class="card-avaliacao">95%</span>
-                            </div>
-                            <p class="card-desc">Explore um reino subterrâneo em um metroidvania desafiador com combate preciso e mundo vasto.</p>
-                        </div>
-                        <div class="card-metricas">
-                            <div class="card-stat">
-                                <span class="card-stat-label">Avg. viewers</span>
-                                <span class="card-stat-valor verde">1.2k</span>
-                            </div>
-                            <div class="card-stat">
-                                <span class="card-stat-label">Horas median.</span>
-                                <span class="card-stat-valor">52h</span>
-                            </div>
-                            <div class="card-stat">
-                                <span class="card-stat-label">CCU médio</span>
-                                <span class="card-stat-valor roxo">5.6k</span>
-                            </div>
-                        </div>
-                    </a>
-
-                    <a class="card-jogo" href="pagJogo.html?jogo=cuphead" data-genero="Ação">
-                        <div class="card-capa">
-                            <img src="../../assets/imgs/Cuphead.jpg" alt="Cuphead">
-                            <span class="badge-genero">Ação</span>
-                            <span class="badge-alta">↑ Em alta</span>
-                        </div>
-                        <div class="card-corpo">
-                            <div class="card-topo-info">
-                                <h3>Cuphead</h3>
-                                <span class="card-avaliacao">93%</span>
-                            </div>
-                            <p class="card-desc">Run-and-gun com arte estilo anos 30 e chefes desafiadores. Alta dificuldade, visual único.</p>
-                        </div>
-                        <div class="card-metricas">
-                            <div class="card-stat">
-                                <span class="card-stat-label">Avg. viewers</span>
-                                <span class="card-stat-valor verde">980</span>
-                            </div>
-                            <div class="card-stat">
-                                <span class="card-stat-label">Horas median.</span>
-                                <span class="card-stat-valor">16h</span>
-                            </div>
-                            <div class="card-stat">
-                                <span class="card-stat-label">CCU médio</span>
-                                <span class="card-stat-valor roxo">3.1k</span>
-                            </div>
-                        </div>
-                    </a>
-
-                    <a class="card-jogo" href="pagJogo.html?jogo=dave" data-genero="Aventura">
-                        <div class="card-capa">
-                            <img src="../../assets/imgs/DaveTheDiver.jpg" alt="Dave the Diver">
-                            <span class="badge-genero">Aventura</span>
-                        </div>
-                        <div class="card-corpo">
-                            <div class="card-topo-info">
-                                <h3>Dave the Diver</h3>
-                                <span class="card-avaliacao">96%</span>
-                            </div>
-                            <p class="card-desc">Mergulhe no oceano de dia e gerencie um restaurante de sushi à noite. Híbrido casual irresistível.</p>
-                        </div>
-                        <div class="card-metricas">
-                            <div class="card-stat">
-                                <span class="card-stat-label">Avg. viewers</span>
-                                <span class="card-stat-valor verde">1.5k</span>
-                            </div>
-                            <div class="card-stat">
-                                <span class="card-stat-label">Horas median.</span>
-                                <span class="card-stat-valor">38h</span>
-                            </div>
-                            <div class="card-stat">
-                                <span class="card-stat-label">CCU médio</span>
-                                <span class="card-stat-valor roxo">6.8k</span>
-                            </div>
-                        </div>
-                    </a>
-
-                    <a class="card-jogo" href="pagJogo.html?jogo=celeste" data-genero="Plataforma">
-                        <div class="card-capa">
-                            <img src="../../assets/imgs/celeste-e1534205369647.jpg" alt="Celeste">
-                            <span class="badge-genero">Plataforma</span>
-                        </div>
-                        <div class="card-corpo">
-                            <div class="card-topo-info">
-                                <h3>Celeste</h3>
-                                <span class="card-avaliacao">99%</span>
-                            </div>
-                            <p class="card-desc">Plataforma de precisão com narrativa emocional. Melhor avaliado do catálogo.</p>
-                        </div>
-                        <div class="card-metricas">
-                            <div class="card-stat">
-                                <span class="card-stat-label">Avg. viewers</span>
-                                <span class="card-stat-valor verde">870</span>
-                            </div>
-                            <div class="card-stat">
-                                <span class="card-stat-label">Horas median.</span>
-                                <span class="card-stat-valor">10h</span>
-                            </div>
-                            <div class="card-stat">
-                                <span class="card-stat-label">CCU médio</span>
-                                <span class="card-stat-valor roxo">2.4k</span>
-                            </div>
-                        </div>
-                    </a>
-
-                    <a class="card-jogo" href="pagJogo.html?jogo=undertale" data-genero="RPG">
-                        <div class="card-capa">
-                            <img src="../../assets/imgs/tela.jpg" alt="Undertale">
-                            <span class="badge-genero">RPG</span>
-                            <span class="badge-alta">↑ Em alta</span>
-                        </div>
-                        <div class="card-corpo">
-                            <div class="card-topo-info">
-                                <h3>Undertale</h3>
-                                <span class="card-avaliacao">98%</span>
-                            </div>
-                            <p class="card-desc">RPG onde cada escolha muda o jogo. Narrativa impactante e comunidade fiel.</p>
-                        </div>
-                        <div class="card-metricas">
-                            <div class="card-stat">
-                                <span class="card-stat-label">Avg. viewers</span>
-                                <span class="card-stat-valor verde">1.1k</span>
-                            </div>
-                            <div class="card-stat">
-                                <span class="card-stat-label">Horas median.</span>
-                                <span class="card-stat-valor">8h</span>
-                            </div>
-                            <div class="card-stat">
-                                <span class="card-stat-label">CCU médio</span>
-                                <span class="card-stat-valor roxo">4.2k</span>
-                            </div>
-                        </div>
-                    </a>
-
-                    <a class="card-jogo" href="pagJogo.html?jogo=deadcells" data-genero="Roguelike">
-                        <div class="card-capa">
-                            <img src="../../assets/imgs/MeninaJogando.jpg" alt="Dead Cells">
-                            <span class="badge-genero">Roguelike</span>
-                        </div>
-                        <div class="card-corpo">
-                            <div class="card-topo-info">
-                                <h3>Dead Cells</h3>
-                                <span class="card-avaliacao">94%</span>
-                            </div>
-                            <p class="card-desc">Metroidvania roguelike com combate frenético e progressão permanente entre runs.</p>
-                        </div>
-                        <div class="card-metricas">
-                            <div class="card-stat">
-                                <span class="card-stat-label">Avg. viewers</span>
-                                <span class="card-stat-valor verde">760</span>
-                            </div>
-                            <div class="card-stat">
-                                <span class="card-stat-label">Horas median.</span>
-                                <span class="card-stat-valor">35h</span>
-                            </div>
-                            <div class="card-stat">
-                                <span class="card-stat-label">CCU médio</span>
-                                <span class="card-stat-valor roxo">2.9k</span>
-                            </div>
-                        </div>
-                    </a>
-
+                <div id="rodapePaginacao" class="rodape-paginacao">
+                    <button type="button" id="btnCarregarMais" class="btn-carregar-mais" style="display: none;">
+                        Carregar mais jogos
+                    </button>
+                    <div id="sentinelaCarregamento" class="sentinela-carregamento" aria-hidden="true"></div>
                 </div>
 
             </div>
@@ -306,24 +86,278 @@
     </div>
 
     <script>
-        document.querySelectorAll('.chip').forEach(chip => {
-            chip.addEventListener('click', () => {
-                document.querySelectorAll('.chip').forEach(c => c.classList.remove('ativo'));
-                chip.classList.add('ativo');
-                const genero = chip.dataset.genero;
-                document.querySelectorAll('.card-jogo').forEach(card => {
-                    card.style.display = (genero === 'todos' || card.dataset.genero === genero) ? '' : 'none';
+        (function () {
+            const LIMITE_INICIAL = 20;
+            const LIMITE_PAGINA = 12;
+            const IMAGEM_FALLBACK = "../../assets/imgs/Logo.jpeg";
+            const API_BASE = window.location.protocol === "file:" ? "http://localhost:3333" : "";
+
+            const MAPA_SLUGS_PAG_JOGO = {
+                "hades": "hades",
+                "stardew valley": "stardew",
+                "hollow knight": "hollow",
+                "hollow knight: silksong": "hollow",
+                "cuphead": "cuphead",
+                "dave the diver": "dave",
+                "celeste": "celeste",
+                "undertale": "undertale",
+                "dead cells": "deadcells"
+            };
+
+            const gridJogos = document.getElementById("gridJogos");
+            const statusJogos = document.getElementById("statusJogos");
+            const btnCarregarMais = document.getElementById("btnCarregarMais");
+            const sentinela = document.getElementById("sentinelaCarregamento");
+            const campoBusca = document.getElementById("campoBusca");
+            const filtroOrdem = document.getElementById("filtroOrdem");
+            const filtroPlataforma = document.getElementById("filtroPlataforma");
+            const chips = document.querySelectorAll(".chip");
+            const conteudoPrincipal = document.querySelector(".conteudo-principal");
+
+            let generoAtivo = "todos";
+            let offsetAtual = 0;
+            let carregando = false;
+            let temMais = true;
+            let requisicaoId = 0;
+            let timerBusca = null;
+
+            function escaparHtml(texto) {
+                return String(texto == null ? "" : texto)
+                    .replace(/&/g, "&amp;")
+                    .replace(/</g, "&lt;")
+                    .replace(/>/g, "&gt;")
+                    .replace(/"/g, "&quot;")
+                    .replace(/'/g, "&#39;");
+            }
+
+            function resolverImagem(url) {
+                if (typeof url !== "string") return IMAGEM_FALLBACK;
+                const limpa = url.trim();
+                if (!limpa) return IMAGEM_FALLBACK;
+
+                const lower = limpa.toLowerCase();
+                if (lower.startsWith("javascript:") || lower.startsWith("vbscript:") || lower.startsWith("data:")) {
+                    return IMAGEM_FALLBACK;
+                }
+
+                if (lower.startsWith("https://") || lower.startsWith("http://") || limpa.startsWith("../../") || limpa.startsWith("/") || limpa.startsWith("./")) {
+                    return limpa;
+                }
+
+                return IMAGEM_FALLBACK;
+            }
+
+            function gerarSlug(nome) {
+                const texto = String(nome || "").trim();
+                const chave = texto.toLowerCase();
+                if (MAPA_SLUGS_PAG_JOGO[chave]) {
+                    return MAPA_SLUGS_PAG_JOGO[chave];
+                }
+                const prefixo = chave.split(":")[0].trim();
+                if (MAPA_SLUGS_PAG_JOGO[prefixo]) {
+                    return MAPA_SLUGS_PAG_JOGO[prefixo];
+                }
+                const slug = chave
+                    .normalize("NFD")
+                    .replace(/[\u0300-\u036f]/g, "")
+                    .replace(/[^a-z0-9]+/g, "-")
+                    .replace(/^-+|-+$/g, "");
+                return slug || "jogo";
+            }
+
+            function formatarCompacto(valor) {
+                const numero = Number(valor) || 0;
+                if (numero >= 1000) {
+                    return (numero / 1000).toFixed(1).replace(/\.0$/, "") + "k";
+                }
+                return Math.round(numero).toString();
+            }
+
+            function primeiroGenero(generos) {
+                if (!generos) return "Indie";
+                const primeiro = String(generos).split(",")[0].trim();
+                return primeiro || "Indie";
+            }
+
+            function criarCardHtml(jogo) {
+                const nome = escaparHtml(jogo.nome || "Jogo sem título");
+                const generoPrincipal = escaparHtml(primeiroGenero(jogo.generos));
+                const descricao = escaparHtml(jogo.descricao || "Sem descrição disponível.");
+                const imagemSegura = escaparHtml(resolverImagem(jogo.imagem));
+                const avaliacao = Math.round(Number(jogo.avaliacaoPct) || 0) + "%";
+                const avgViewers = formatarCompacto(jogo.avgViewers);
+                const horasMedianas = Math.round(Number(jogo.horasMedianas) || 0) + "h";
+                const ccuMedio = formatarCompacto(jogo.ccuMedio);
+                const emAltaHtml = Number(jogo.emAlta) === 1 ? '<span class="badge-alta">↑ Em alta</span>' : "";
+                const slug = gerarSlug(jogo.nome);
+                const href = "pagJogo.html?id=" + encodeURIComponent(jogo.idJogo) + "&jogo=" + encodeURIComponent(slug);
+
+                return (
+                    '<a class="card-jogo" href="' + href + '" data-genero="' + generoPrincipal + '">' +
+                        '<div class="card-capa">' +
+                            '<img src="' + imagemSegura + '" alt="' + nome + '" loading="lazy" onerror="this.onerror=null;this.src=\'' + IMAGEM_FALLBACK + '\';">' +
+                            '<span class="badge-genero">' + generoPrincipal + '</span>' +
+                            emAltaHtml +
+                        '</div>' +
+                        '<div class="card-corpo">' +
+                            '<div class="card-topo-info">' +
+                                '<h3>' + nome + '</h3>' +
+                                '<span class="card-avaliacao">' + avaliacao + '</span>' +
+                            '</div>' +
+                            '<p class="card-desc">' + descricao + '</p>' +
+                        '</div>' +
+                        '<div class="card-metricas">' +
+                            '<div class="card-stat">' +
+                                '<span class="card-stat-label">Avg. viewers</span>' +
+                                '<span class="card-stat-valor verde">' + avgViewers + '</span>' +
+                            '</div>' +
+                            '<div class="card-stat">' +
+                                '<span class="card-stat-label">Horas median.</span>' +
+                                '<span class="card-stat-valor">' + horasMedianas + '</span>' +
+                            '</div>' +
+                            '<div class="card-stat">' +
+                                '<span class="card-stat-label">CCU médio</span>' +
+                                '<span class="card-stat-valor roxo">' + ccuMedio + '</span>' +
+                            '</div>' +
+                        '</div>' +
+                    '</a>'
+                );
+            }
+
+            function atualizarStatus(mensagem, tipo) {
+                if (!mensagem) {
+                    statusJogos.textContent = "";
+                    statusJogos.className = "estado-jogos";
+                    return;
+                }
+                statusJogos.textContent = mensagem;
+                statusJogos.className = "estado-jogos " + (tipo || "");
+            }
+
+            function atualizarBotaoCarregarMais() {
+                btnCarregarMais.style.display = temMais && !carregando ? "inline-flex" : "none";
+            }
+
+            async function carregarJogos(reiniciar) {
+                if (reiniciar) {
+                    offsetAtual = 0;
+                    temMais = true;
+                    gridJogos.innerHTML = "";
+                } else if (carregando || !temMais) {
+                    return;
+                }
+
+                const limit = reiniciar ? LIMITE_INICIAL : LIMITE_PAGINA;
+                const reqAtual = ++requisicaoId;
+                carregando = true;
+                atualizarBotaoCarregarMais();
+                atualizarStatus("Carregando jogos...", "carregando");
+
+                const params = new URLSearchParams({
+                    limit: String(limit),
+                    offset: String(offsetAtual),
+                    ordem: filtroOrdem.value || "viewers"
+                });
+
+                const busca = campoBusca.value.trim();
+                if (busca) params.set("busca", busca);
+                if (generoAtivo && generoAtivo !== "todos") params.set("genero", generoAtivo);
+                if (filtroPlataforma.value) params.set("plataforma", filtroPlataforma.value);
+
+                try {
+                    const resposta = await fetch(API_BASE + "/jogos?" + params.toString());
+                    if (!resposta.ok) {
+                        throw new Error("Erro HTTP " + resposta.status);
+                    }
+                    const dados = await resposta.json();
+                    if (reqAtual !== requisicaoId) return;
+
+                    const jogos = Array.isArray(dados.jogos) ? dados.jogos : [];
+                    if (jogos.length > 0) {
+                        gridJogos.insertAdjacentHTML("beforeend", jogos.map(criarCardHtml).join(""));
+                        offsetAtual += jogos.length;
+                    }
+
+                    temMais = Boolean(dados.temMais);
+
+                    if (offsetAtual === 0) {
+                        atualizarStatus("Nenhum jogo encontrado para os filtros selecionados.", "vazio");
+                    } else {
+                        atualizarStatus("", "");
+                    }
+                } catch (erro) {
+                    if (reqAtual !== requisicaoId) return;
+                    console.error("Erro ao carregar jogos:", erro);
+                    if (offsetAtual === 0) {
+                        atualizarStatus("Não foi possível carregar os jogos no momento.", "erro");
+                    } else {
+                        atualizarStatus("Erro ao carregar mais jogos.", "erro");
+                    }
+                } finally {
+                    if (reqAtual === requisicaoId) {
+                        carregando = false;
+                        atualizarBotaoCarregarMais();
+                    }
+                }
+            }
+
+            chips.forEach(function (chip) {
+                chip.addEventListener("click", function () {
+                    chips.forEach(function (c) { c.classList.remove("ativo"); });
+                    chip.classList.add("ativo");
+                    generoAtivo = chip.dataset.genero || "todos";
+                    carregarJogos(true);
                 });
             });
-        });
 
-        document.getElementById('campoBusca').addEventListener('input', function () {
-            const termo = this.value.toLowerCase();
-            document.querySelectorAll('.card-jogo').forEach(card => {
-                const nome = card.querySelector('h3').textContent.toLowerCase();
-                card.style.display = nome.includes(termo) ? '' : 'none';
+            campoBusca.addEventListener("input", function () {
+                clearTimeout(timerBusca);
+                timerBusca = setTimeout(function () {
+                    carregarJogos(true);
+                }, 300);
             });
-        });
+
+            filtroOrdem.addEventListener("change", function () {
+                carregarJogos(true);
+            });
+
+            filtroPlataforma.addEventListener("change", function () {
+                carregarJogos(true);
+            });
+
+            btnCarregarMais.addEventListener("click", function () {
+                carregarJogos(false);
+            });
+
+            if ("IntersectionObserver" in window && sentinela) {
+                const observer = new IntersectionObserver(function (entries) {
+                    if (entries.some(function (entry) { return entry.isIntersecting; })) {
+                        if (temMais && !carregando && offsetAtual > 0) {
+                            carregarJogos(false);
+                        }
+                    }
+                }, { rootMargin: "200px" });
+                observer.observe(sentinela);
+            }
+
+            function verificarScrollFallback() {
+                if (carregando || !temMais || offsetAtual === 0) return;
+                const pertoDoFimJanela = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 220;
+                const pertoDoFimContainer = conteudoPrincipal
+                    ? conteudoPrincipal.scrollTop + conteudoPrincipal.clientHeight >= conteudoPrincipal.scrollHeight - 220
+                    : false;
+                if (pertoDoFimJanela || pertoDoFimContainer) {
+                    carregarJogos(false);
+                }
+            }
+
+            window.addEventListener("scroll", verificarScrollFallback, { passive: true });
+            if (conteudoPrincipal) {
+                conteudoPrincipal.addEventListener("scroll", verificarScrollFallback, { passive: true });
+            }
+
+            carregarJogos(true);
+        })();
     </script>
 
     <script>

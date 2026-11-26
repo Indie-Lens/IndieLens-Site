@@ -155,6 +155,11 @@ body {
     width: 100%;
 }
 
+.select-grupo select option {
+    background-color: var(--fundo-elementos);
+    color: var(--texto-branco);
+}
+
 .chips-genero {
     display: flex;
     gap: 8px;
@@ -329,3 +334,72 @@ body {
 
 .card-stat-valor.verde { color: var(--verde-primario); }
 .card-stat-valor.roxo  { color: var(--roxo-primario); }
+
+.estado-jogos {
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--texto-cinza);
+    padding: 12px 0;
+}
+
+.estado-jogos:empty {
+    display: none;
+}
+
+.estado-jogos.erro {
+    color: var(--tooltip-erro, #ff5f5f);
+}
+
+.rodape-paginacao {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 0 16px;
+}
+
+.btn-carregar-mais {
+    align-items: center;
+    justify-content: center;
+    padding: 10px 22px;
+    border-radius: 8px;
+    border: 1px solid var(--roxo-primario);
+    background-color: rgba(151, 73, 224, 0.14);
+    color: var(--texto-branco);
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.btn-carregar-mais:hover {
+    background-color: var(--roxo-primario);
+    transform: translateY(-1px);
+}
+
+.sentinela-carregamento {
+    width: 100%;
+    height: 1px;
+}
+
+@media (max-width: 1200px) {
+    .grid-jogos {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 850px) {
+    .barra-busca {
+        flex-wrap: wrap;
+    }
+
+    .grid-jogos {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 540px) {
+    .grid-jogos {
+        grid-template-columns: 1fr;
+    }
+}
