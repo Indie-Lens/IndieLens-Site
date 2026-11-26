@@ -15,6 +15,7 @@ CREATE TABLE IF NOT EXISTS usuario (
   nome VARCHAR(50) NULL,
   email VARCHAR(100) NULL,
   senha VARCHAR(45) NULL,
+  receber_notificacoes TINYINT NULL,
   CONSTRAINT fk_usuario_perfil1
     FOREIGN KEY (id_perfil)
     REFERENCES perfil (id_perfil)
@@ -38,6 +39,7 @@ CREATE TABLE IF NOT EXISTS log_usuario (
   id_sessao INT NOT NULL,
   id_usuario INT NOT NULL,
   tipo_evento VARCHAR(50) NULL,
+  data_log DATETIME NULL,
   descricao_evento VARCHAR(200) NULL,
   CONSTRAINT fk_log_usuario_sessao_usuario1
     FOREIGN KEY (id_sessao, id_usuario)
@@ -66,7 +68,8 @@ CREATE TABLE IF NOT EXISTS projeto_simulacao (
 CREATE TABLE IF NOT EXISTS registro (
   id_registro INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
   dataResgistro DATETIME NULL,
-  dataMetrica DATE NULL
+  dataMetrica DATE NULL,
+  statusRegistro TINYINT NULL
 );
 
 -- Jogo Main
@@ -246,6 +249,19 @@ CREATE TABLE IF NOT EXISTS streamer (
     REFERENCES usuario (id_usuario)
 );
 
+-- Desenvolvedor
+CREATE TABLE IF NOT EXISTS desenvolvedor (
+  id_desenvolvedor INT AUTO_INCREMENT NOT NULL,
+  id_usuario INT NOT NULL,
+  nome_studio VARCHAR(45) NOT NULL,
+  url_studio VARCHAR(245) NULL,
+  tipo_jogo VARCHAR(45) NULL,
+  PRIMARY KEY (id_desenvolvedor, id_usuario),
+  CONSTRAINT fk_dev_usuario
+    FOREIGN KEY (id_usuario)
+    REFERENCES usuario (id_usuario)
+);
+
 -- Avaliacao Jogo
 -- Interações do streamer com um jogo (curtir, lista de desejos, já transmitido, nota pessoal).
 -- Aponta para id_jogo (o ID lógico atemporal do jogo), NÃO para o par (id_jogo, id_registro),
@@ -263,6 +279,33 @@ CREATE TABLE IF NOT EXISTS avaliacao_jogo (
   data_atualizacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   CONSTRAINT uq_avaliacao_streamer_jogo UNIQUE (id_streamer, id_jogo),
   CONSTRAINT fk_avaliacao_jogo_streamer
+    FOREIGN KEY (id_streamer)
+    REFERENCES streamer (id_streamer)
+);
+
+-- Live
+CREATE TABLE IF NOT EXISTS live (
+  id_live INT AUTO_INCREMENT NOT NULL,
+  id_streamer INT NOT NULL,
+  nome_jogo VARCHAR(100) NULL,
+  categoria VARCHAR(100) NULL,
+  titulo_live VARCHAR(100) NULL,
+  descricao VARCHAR(500) NULL,
+  data_live DATE NULL,
+  hora_inicio TIME NULL,
+  hora_termino TIME NULL,
+  duracao VARCHAR(20) NULL,
+  media_espectadores INT NULL,
+  pico_espectadores INT NULL,
+  visualizacoes_totais INT NULL,
+  novos_seguidores INT NULL,
+  nota_avaliacao INT NULL,
+  engajamento_chat VARCHAR(250) NULL,
+  ponto_alto VARCHAR(250) NULL,
+  ponto_melhoria VARCHAR(250) NULL,
+  data_registro DATETIME NULL,
+  PRIMARY KEY (id_live, id_streamer),
+  CONSTRAINT fk_live_streamer
     FOREIGN KEY (id_streamer)
     REFERENCES streamer (id_streamer)
 );
