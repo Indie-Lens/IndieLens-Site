@@ -110,152 +110,10 @@
                     Jogos populares entre streamers:
                 </h3>
 
-                <div class="div-Cards">
+                <div class="div-Cards" id="listaJogosPopulares">
                     <div class="div-Card">
-                        <div class="card-Ranq">
-                            <span>#1</span>
-                        </div>
-
-                        <div class="card-img">
-                            <a href="pagJogo.html">
-                            <img
-                                src="./assets/imgs/yakuza.png"
-                                alt="YAKUZA"
-                            />
-                            </a>
-                        </div>
-
                         <div class="card-InfoBase">
-                            <h4>YAKUZA KIWAMI II</h4>
-                            <span>Ação, Aventura</span>
-                        </div>
-
-                        <div class="card-Plataformas">
-                            <span>PC/ Nintendo Switch/ PS4, PS5</span>
-                        </div>
-
-                        <div class="card-DivBtn">
-                            <button class="card-Btn">
-                                <span>LISTA DE INTERESSE</span>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="div-Card">
-                        <div class="card-Ranq">
-                            <span>#2</span>
-                        </div>
-
-                        <div class="card-img">
-                            <img
-                                src="./assets/imgs/StardewValleyBanner.png"
-                                alt="Stardew Valley"
-                            />
-                        </div>
-
-                        <div class="card-InfoBase">
-                            <h4>Stardew Valley</h4>
-                            <span>RPG, simulação de vida</span>
-                        </div>
-
-                        <div class="card-Plataformas">
-                            <span
-                                >PC/ Xbox Series/ PS4, PS5/ Nintendo
-                                Switch</span
-                            >
-                        </div>
-
-                        <div class="card-DivBtn">
-                            <button class="card-Btn">
-                                <span>LISTA DE INTERESSE</span>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="div-Card">
-                        <div class="card-Ranq">
-                            <span>#3</span>
-                        </div>
-
-                        <div class="card-img">
-                            <img src="./assets/imgs/Hades.jpg" alt="Hades" />
-                        </div>
-
-                        <div class="card-InfoBase">
-                            <h4>Hades</h4>
-                            <span>Roguelike, ação</span>
-                        </div>
-
-                        <div class="card-Plataformas">
-                            <span
-                                >PC/ Xbox Series/ PS4, PS5/ Nintendo
-                                Switch</span
-                            >
-                        </div>
-
-                        <div class="card-DivBtn">
-                            <button class="card-Btn">
-                                <span>LISTA DE INTERESSE</span>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="div-Card">
-                        <div class="card-Ranq">
-                            <span>#4</span>
-                        </div>
-
-                        <div class="card-img">
-                            <img
-                                src="./assets/imgs/Hollow.jpg"
-                                alt="Hollow Knight"
-                            />
-                        </div>
-
-                        <div class="card-InfoBase">
-                            <h4>Hollow Knight</h4>
-                            <span>Metroidvania, ação</span>
-                        </div>
-
-                        <div class="card-Plataformas">
-                            <span
-                                >PC/ Xbox Series/ PS4, PS5/ Nintendo
-                                Switch</span
-                            >
-                        </div>
-
-                        <div class="card-DivBtn">
-                            <button class="card-Btn">
-                                <span>LISTA DE INTERESSE</span>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="div-Card">
-                        <div class="card-Ranq">
-                            <span>#5</span>
-                        </div>
-
-                        <div class="card-img">
-                            <img
-                                src="./assets/imgs/Cuphead.jpg"
-                                alt="Cuphead"
-                            />
-                        </div>
-
-                        <div class="card-InfoBase">
-                            <h4>Cuphead</h4>
-                            <span>Plataforma, ação</span>
-                        </div>
-
-                        <div class="card-Plataformas">
-                            <span>PC/ Xbox One/ PS4/ Nintendo Switch</span>
-                        </div>
-
-                        <div class="card-DivBtn">
-                            <button class="card-Btn">
-                                <span>LISTA DE INTERESSE</span>
-                            </button>
+                            <span>Carregando jogos populares...</span>
                         </div>
                     </div>
                 </div>
@@ -458,6 +316,196 @@
         </div>
 
         <script>
+            (function () {
+                const API_BASE =
+                    window.location.protocol === "file:"
+                        ? "http://localhost:3333"
+                        : "";
+                const FALLBACK_IMAGEM = "./assets/imgs/Logo.jpeg";
+
+                function escaparHtml(valor) {
+                    return String(valor ?? "")
+                        .replace(/&/g, "&amp;")
+                        .replace(/</g, "&lt;")
+                        .replace(/>/g, "&gt;")
+                        .replace(/"/g, "&quot;")
+                        .replace(/'/g, "&#39;");
+                }
+
+                function normalizarUrlImagem(url) {
+                    if (typeof url !== "string") return FALLBACK_IMAGEM;
+                    const limpa = url.trim();
+                    if (!limpa) return FALLBACK_IMAGEM;
+                    if (/^https?:\/\//i.test(limpa)) return limpa;
+                    if (/^(?:\.\.\/)+assets\//i.test(limpa)) {
+                        return limpa.replace(/^(?:\.\.\/)+assets\//i, "./assets/");
+                    }
+                    if (limpa.startsWith("./assets/")) return limpa;
+                    if (limpa.startsWith("/assets/")) return "." + limpa;
+                    if (limpa.startsWith("assets/")) return "./" + limpa;
+                    return FALLBACK_IMAGEM;
+                }
+
+                function formatarGeneros(generos) {
+                    if (typeof generos !== "string" || !generos.trim()) {
+                        return "Indie";
+                    }
+                    const lista = generos
+                        .split(",")
+                        .map((item) => item.trim())
+                        .filter(Boolean)
+                        .slice(0, 2);
+                    return lista.length > 0 ? lista.join(", ") : "Indie";
+                }
+
+                function formatarPlataformas(jogo) {
+                    const plataformas = [];
+                    if (Number(jogo.suporteWindows) === 1) plataformas.push("Windows");
+                    if (Number(jogo.suporteMac) === 1) plataformas.push("macOS");
+                    if (Number(jogo.suporteLinux) === 1) plataformas.push("Linux");
+                    return plataformas.length > 0 ? plataformas.join(" / ") : "PC";
+                }
+
+                function usuarioAutenticado() {
+                    try {
+                        return Boolean(
+                            sessionStorage.getItem("ID_USUARIO") ||
+                            sessionStorage.getItem("ID_STREAMER")
+                        );
+                    } catch (erro) {
+                        return false;
+                    }
+                }
+
+                function renderizarMensagemPopulares(container, texto) {
+                    container.innerHTML = `
+                        <div class="div-Card">
+                            <div class="card-InfoBase">
+                                <span>${escaparHtml(texto)}</span>
+                            </div>
+                        </div>
+                    `;
+                }
+
+                function renderizarJogosPopulares(container, jogos) {
+                    if (!Array.isArray(jogos) || jogos.length === 0) {
+                        renderizarMensagemPopulares(
+                            container,
+                            "Nenhum jogo popular disponível no momento."
+                        );
+                        return;
+                    }
+
+                    container.innerHTML = jogos
+                        .map((jogo, index) => {
+                            const idJogo = encodeURIComponent(jogo.idJogo ?? "");
+                            const nomeBruto = jogo.nome || "Jogo sem título";
+                            const nomeEncoded = encodeURIComponent(nomeBruto);
+                            const nomeEscapado = escaparHtml(nomeBruto);
+                            const generosEscapados = escaparHtml(
+                                formatarGeneros(jogo.generos)
+                            );
+                            const plataformasEscapadas = escaparHtml(
+                                formatarPlataformas(jogo)
+                            );
+                            const imgUrl = escaparHtml(
+                                normalizarUrlImagem(jogo.imagem)
+                            );
+                            const linkPublico = `pagJogo.html?id=${idJogo}&jogo=${nomeEncoded}`;
+                            const linkInteresse = `Dashboard/Streamer/pagJogo.html?id=${idJogo}&jogo=${nomeEncoded}`;
+
+                            return `
+                                <div class="div-Card">
+                                    <div class="card-Ranq">
+                                        <span>#${index + 1}</span>
+                                    </div>
+
+                                    <div class="card-img">
+                                        <a href="${linkPublico}">
+                                            <img src="${imgUrl}" alt="${nomeEscapado}" />
+                                        </a>
+                                    </div>
+
+                                    <div class="card-InfoBase">
+                                        <h4>${nomeEscapado}</h4>
+                                        <span>${generosEscapados}</span>
+                                    </div>
+
+                                    <div class="card-Plataformas">
+                                        <span>${plataformasEscapadas}</span>
+                                    </div>
+
+                                    <div class="card-DivBtn">
+                                        <button
+                                            class="card-Btn"
+                                            type="button"
+                                            data-destino="${escaparHtml(linkInteresse)}"
+                                        >
+                                            <span>LISTA DE INTERESSE</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            `;
+                        })
+                        .join("");
+
+                    container.querySelectorAll(".card-img img").forEach((img) => {
+                        img.addEventListener("error", function () {
+                            if (img.dataset.fallbackAplicado === "1") return;
+                            img.dataset.fallbackAplicado = "1";
+                            img.src = FALLBACK_IMAGEM;
+                        });
+                    });
+
+                    container.querySelectorAll(".card-Btn").forEach((botao) => {
+                        botao.addEventListener("click", function () {
+                            if (usuarioAutenticado()) {
+                                window.location.href =
+                                    botao.dataset.destino ||
+                                    "Dashboard/Streamer/pagJogo.html";
+                            } else {
+                                window.location.href = "login.html";
+                            }
+                        });
+                    });
+                }
+
+                async function carregarJogosPopulares() {
+                    const container = document.querySelector("#jogosPopu .div-Cards");
+                    if (!container) return;
+
+                    try {
+                        const resposta = await fetch(
+                            `${API_BASE}/jogos/populares?limit=5`
+                        );
+                        if (!resposta.ok) {
+                            throw new Error(
+                                `Erro ao buscar jogos populares (${resposta.status})`
+                            );
+                        }
+                        const dados = await resposta.json();
+                        const jogos = Array.isArray(dados)
+                            ? dados
+                            : Array.isArray(dados?.jogos)
+                            ? dados.jogos
+                            : [];
+                        renderizarJogosPopulares(container, jogos);
+                    } catch (erro) {
+                        console.error("Erro ao carregar jogos populares:", erro);
+                        renderizarMensagemPopulares(
+                            container,
+                            "Não foi possível carregar os jogos populares."
+                        );
+                    }
+                }
+
+                if (document.readyState === "loading") {
+                    document.addEventListener("DOMContentLoaded", carregarJogosPopulares);
+                } else {
+                    carregarJogosPopulares();
+                }
+            })();
+
             fetch("./components/FuturosLancamentos.html")
                 .then((res) => {
                     if (!res.ok) {
