@@ -1,5 +1,3 @@
-var idUsuario = sessionStorage.ID_USUARIO;
-
 var grid = document.getElementById("grid");
 var vazio = document.getElementById("vazio");
 var modal = document.getElementById("modal");
@@ -9,6 +7,10 @@ var modalAnalise = document.getElementById("modalAnalise");
 
 let prototipos = [];
 let editandoId = null;
+
+function obterIdUsuario() {
+    return sessionStorage.ID_USUARIO;
+}
 
 function escrita(texto) {
     var div = document.createElement("div");
@@ -25,30 +27,62 @@ function formatarPreco(valor) {
 
 function formatarData(dataTexto) {
     if (!dataTexto) return "-";
-    var [ano, mes, dia] = dataTexto.slice(0, 10).split("-");
-    return `${dia}/${mes}/${ano}`;
+    var partes = String(dataTexto).slice(0, 10).split("-");
+    if (partes.length !== 3) return dataTexto;
+    return `${partes[2]}/${partes[1]}/${partes[0]}`;
+}
+
+async function extrairMensagemErro(res, fallback) {
+    try {
+        var texto = await res.text();
+        if (!texto) return fallback;
+        try {
+            var json = JSON.parse(texto);
+            return json.erro || json.message || fallback;
+        } catch {
+            return texto;
+        }
+    } catch {
+        return fallback;
+    }
 }
 
 function carregar() {
+    var idUsuario = obterIdUsuario();
     if (!idUsuario) {
-        console.log("ID_USUARIO não encontrado no sessionStorage");
+        prototipos = [];
+        grid.innerHTML = "";
+        vazio.textContent = "Sessão não encontrada. Faça login novamente para visualizar suas simulações.";
+        vazio.hidden = false;
         return;
     }
 
-    fetch(`/simularJogo/listar/${idUsuario}`)
-        .then(res => {
-            if (!res.ok) throw new Error("Erro ao listar");
+    vazio.textContent = "Carregando simulações...";
+    vazio.hidden = false;
+
+    fetch(`/simularJogo/listar/${encodeURIComponent(idUsuario)}`)
+        .then(async res => {
+            if (!res.ok) {
+                throw new Error(await extrairMensagemErro(res, "Erro ao listar simulações."));
+            }
             return res.json();
         })
         .then(dados => {
-            prototipos = dados;
+            prototipos = Array.isArray(dados) ? dados : [];
             renderizar();
         })
-        .catch(erro => console.log(erro));
+        .catch(erro => {
+            console.log(erro);
+            prototipos = [];
+            grid.innerHTML = "";
+            vazio.textContent = "Não foi possível carregar suas simulações no momento.";
+            vazio.hidden = false;
+        });
 }
 
 function renderizar() {
     grid.innerHTML = "";
+    vazio.textContent = "Nenhum protótipo cadastrado ainda.";
     vazio.hidden = prototipos.length > 0;
 
     for (let i = 0; i < prototipos.length; i++) {
@@ -78,7 +112,7 @@ function renderizar() {
 
 function buscarPorId(id) {
     for (let i = 0; i < prototipos.length; i++) {
-        if (prototipos[i].id === id) {
+        if (Number(prototipos[i].id) === Number(id)) {
             return prototipos[i];
         }
     }
@@ -107,16 +141,22 @@ grid.addEventListener("click", evento => {
 });
 
 function abrirModal(proto) {
+    if (!obterIdUsuario()) {
+        alert("Sessão não encontrada. Redirecionando para o login.");
+        window.location.href = "/login.html";
+        return;
+    }
+
     form.reset();
     editandoId = proto ? proto.id : null;
     modalTitulo.textContent = proto ? "Editar Jogo" : "Cadastrar Jogo";
 
     if (proto) {
-        form.nome.value = proto.nome;
-        form.preco.value = proto.preco;
-        form.data.value = proto.data;
-        form.tag.value = proto.tag;
-        form.genero.value = proto.genero;
+        form.nome.value = proto.nome ?? "";
+        form.preco.value = proto.preco ?? "";
+        form.data.value = proto.data ? String(proto.data).slice(0, 10) : "";
+        form.tag.value = proto.tag ?? "";
+        form.genero.value = proto.genero ?? "";
     }
 
     modal.hidden = false;
@@ -134,10 +174,17 @@ document.getElementById("btnCancelar").addEventListener("click", fecharModal);
 form.addEventListener("submit", evento => {
     evento.preventDefault();
 
+    var idUsuario = obterIdUsuario();
+    if (!idUsuario) {
+        alert("Sessão não encontrada. Redirecionando para o login.");
+        window.location.href = "/login.html";
+        return;
+    }
+
     var corpo = {
-        idUsuario: idUsuario,
+        idUsuario: Number(idUsuario),
         nome: form.nome.value.trim(),
-        preco: form.preco.value,
+        preco: Number(form.preco.value),
         data: form.data.value,
         tag: form.tag.value.trim(),
         genero: form.genero.value.trim()
@@ -151,14 +198,16 @@ form.addEventListener("submit", evento => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(corpo)
     })
-        .then(res => {
-            if (!res.ok) throw new Error("Erro ao salvar");
+        .then(async res => {
+            if (!res.ok) {
+                throw new Error(await extrairMensagemErro(res, "Não foi possível salvar o jogo."));
+            }
             fecharModal();
             carregar();
         })
         .catch(erro => {
             console.log(erro);
-            alert("Não foi possível salvar o jogo.");
+            alert(erro.message || "Não foi possível salvar o jogo.");
         });
 });
 
@@ -166,11 +215,16 @@ function deletar(id) {
     if (!confirm("Excluir este protótipo?")) return;
 
     fetch(`/simularJogo/deletar/${id}`, { method: "DELETE" })
-        .then(res => {
-            if (!res.ok) throw new Error("Erro ao excluir");
+        .then(async res => {
+            if (!res.ok) {
+                throw new Error(await extrairMensagemErro(res, "Erro ao excluir o protótipo."));
+            }
             carregar();
         })
-        .catch(erro => console.log(erro));
+        .catch(erro => {
+            console.log(erro);
+            alert(erro.message || "Não foi possível excluir o protótipo.");
+        });
 }
 
 function criarJogoParecido(j) {
