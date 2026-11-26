@@ -234,6 +234,39 @@ CREATE TABLE IF NOT EXISTS avaliacao_simulacao (
     REFERENCES projeto_simulacao (id_simulacao)
 );
 
+-- Streamer
+CREATE TABLE IF NOT EXISTS streamer (
+  id_streamer INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+  id_usuario INT NOT NULL,
+  nickname VARCHAR(50) NULL,
+  nome_twitch VARCHAR(50) NULL,
+  url_canal VARCHAR(255) NULL,
+  CONSTRAINT fk_streamer_usuario
+    FOREIGN KEY (id_usuario)
+    REFERENCES usuario (id_usuario)
+);
+
+-- Avaliacao Jogo
+-- Interações do streamer com um jogo (curtir, lista de desejos, já transmitido, nota pessoal).
+-- Aponta para id_jogo (o ID lógico atemporal do jogo), NÃO para o par (id_jogo, id_registro),
+-- pois a base atualiza semanalmente e o mesmo jogo ganha novos registros. A avaliação do
+-- streamer precisa persistir entre semanas, por isso não há FK para jogo_main.
+CREATE TABLE IF NOT EXISTS avaliacao_jogo (
+  id_avaliacao INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+  id_streamer INT NOT NULL,
+  id_jogo INT NOT NULL,
+  curtido TINYINT(1) NOT NULL DEFAULT 0,
+  lista_desejos TINYINT(1) NOT NULL DEFAULT 0,
+  ja_transmitido TINYINT(1) NOT NULL DEFAULT 0,
+  nota_pessoal VARCHAR(500) NULL,
+  data_criacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  data_atualizacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  CONSTRAINT uq_avaliacao_streamer_jogo UNIQUE (id_streamer, id_jogo),
+  CONSTRAINT fk_avaliacao_jogo_streamer
+    FOREIGN KEY (id_streamer)
+    REFERENCES streamer (id_streamer)
+);
+
 -- Visualizando os dados das tabelas
 SELECT * FROM perfil;
 SELECT * FROM usuario;
