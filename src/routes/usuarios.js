@@ -19,6 +19,10 @@ var usuarioController = require("../controllers/usuarioController");
  *     responses:
  *       '200':
  *         description: Usuário cadastrado.
+ *       '400':
+ *         description: Dados obrigatórios ausentes ou perfil inválido.
+ *       '409':
+ *         description: E-mail já cadastrado.
  *       '500':
  *         description: Erro ao cadastrar o usuário.
  */
@@ -48,6 +52,8 @@ router.post("/cadastrarUsuario",
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/UsuarioAutenticado'
+ *       '400':
+ *         description: Email e senha são obrigatórios.
  *       '403':
  *         description: Email ou senha inválidos.
  *       '500':

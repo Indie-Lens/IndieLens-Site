@@ -1,30 +1,26 @@
 var database = require("../database/config");
 
-function cadastrar (nome, email, perfil, senha) {
-    console.log(`
-        Realizando cadastro de usuário: 
-        Nome: ${nome}, 
-        Email: ${email}, 
-        Tipo de Perfil: ${perfil},
-        Senha: ${senha}
-    `);
-
-    let instrucaoSQL = `INSERT INTO usuario (id_perfil, nome, email, senha) VALUES (${perfil}, "${nome}", "${email}", "${senha}");`;
-    return database.executar(instrucaoSQL);
+function buscarPorEmail(email) {
+    let instrucaoSQL = `SELECT id_usuario, email FROM usuario WHERE email = ? LIMIT 1;`;
+    return database.executar(instrucaoSQL, [email]);
 }
 
-function autenticar (email, senha){
-    console.log(`
-        Realizando validação de login:
-        Email: ${email},
-        Senha: ${senha}
-    `)
+function cadastrar(nome, email, perfil, senha) {
+    console.log(`Realizando cadastro de usuário: Nome: ${nome}, Email: ${email}, Perfil: ${perfil}`);
 
-    let instrucaoSQL = `SELECT id_usuario,id_perfil,nome,email,senha FROM usuario WHERE email = "${email}" AND senha = "${senha}";`;
-    return database.executar(instrucaoSQL);
+    let instrucaoSQL = `INSERT INTO usuario (id_perfil, nome, email, senha) VALUES (?, ?, ?, ?);`;
+    return database.executar(instrucaoSQL, [perfil, nome, email, senha]);
+}
+
+function autenticar(email, senha) {
+    console.log(`Realizando validação de login: Email: ${email}`);
+
+    let instrucaoSQL = `SELECT id_usuario, id_perfil, nome, email FROM usuario WHERE email = ? AND senha = ?;`;
+    return database.executar(instrucaoSQL, [email, senha]);
 }
 
 module.exports = {
+    buscarPorEmail,
     cadastrar,
     autenticar
-}
+};

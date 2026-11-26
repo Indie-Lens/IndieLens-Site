@@ -3,13 +3,18 @@ let listaNumeros = ["1","2","3","4","5","6","7","8","9","0"];
 let listaEspeciais = ["!","@","#","$","%","¨","&","*","(",")","_","-","=","+","{","[","´","`","]","}",`"`,"^","~","|",`\``,",","<",">",":",";","?","/","°","¹","²","³","£","¢","¬","§","ª","º"];
 
 function cadastrar(){
-    let nome = nome_input.value;
-    let email = email_input.value;
+    let nome = nome_input.value.trim();
+    let email = email_input.value.trim();
     let senha = senha_input.value;
     let senhaConfirmacao = confirmacao_senha_input.value;
 
-    //ALTERAR P/REQUISITO DE TIPO, HARDCODED NO MOMENTO  --- JA ALTERADO
-    let perfil = document.querySelector('input[name="tipo_usuario"]:checked').value;
+    let radioSelecionado = document.querySelector('input[name="tipo_usuario"]:checked');
+    if (!radioSelecionado) {
+        alert("Selecione um tipo de perfil (Streamer ou Lead Game) antes de continuar.");
+        return;
+    }
+
+    let perfil = radioSelecionado.value;
 
     //validações simples
     let nomeValido = (nome.length >= 1 && nome.length <= 50) ? true : false;
@@ -22,6 +27,8 @@ function cadastrar(){
         exibirErro("nome");
     }
 
+    let emailValido = validarEmail(email);
+
     // MOSTRA O ERRO DA SENHA
     if(!validarSenha(senha)){
         exibirErro("senha");
@@ -32,10 +39,10 @@ function cadastrar(){
         exibirErro("distintas");
     }
 
-       if(nomeValido && validarEmail(email) && validarSenha(senha) && senhasValidas){
+    if(nomeValido && emailValido && validarSenha(senha) && senhasValidas){
         sessionStorage.setItem("cadastro", JSON.stringify({ nome, email, senha, perfil }));
 
-        window.location.href = perfil === "streamer"
+        window.location.href = perfil === "4"
             ? "cadastro2-streamer.html"
             : "cadastro2-desenvolvedor.html";
     }
@@ -90,7 +97,10 @@ function validarSenha(senha){
 }
 
 function validarEmail(email){
-    if(validarNulo(email)){return false;}
+    if(validarNulo(email)){
+        exibirErro("email");
+        return false;
+    }
 
     let especial = false, pontoDepois = false;
 
