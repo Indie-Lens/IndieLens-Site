@@ -14,12 +14,12 @@ var HOST_APP = process.env.APP_HOST;
 var app = express();
 
 var indexRouter = require("./src/routes/index");
-var usuarioRouter = require("./src/routes/usuarios");
 var liveRouter = require("./src/routes/lives");
+var usuarioRouter = require("./src/routes/usuarios");
+var dashboardRouter = require("./src/routes/dashboard");
 var avaliacaoRouter = require("./src/routes/avaliacoes");
 var simularJogoRouter = require("./src/routes/simularJogo");
 var notificacaoRouter = require("./src/routes/notificacoes");
-var dashboardRouter = require("./src/routes/dashboard");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -28,12 +28,14 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(cors());
 
 app.use("/", indexRouter);
+app.use("/lives", liveRouter); 
 app.use("/usuarios", usuarioRouter);
-app.use("/lives", liveRouter);
-app.use("/simularJogo", simularJogoRouter);
-app.use("/avaliacoes", avaliacaoRouter);
-app.use("/notificacoes", notificacaoRouter);
 app.use("/dashboard", dashboardRouter);
+app.use("/avaliacoes", avaliacaoRouter);
+app.use("/simularJogo", simularJogoRouter);
+app.use("/notificacoes", notificacaoRouter);
+
+app.use("/avaliacoes", avaliacaoRouter);
 
 app.listen(PORTA_APP, function () {
     console.log(`
