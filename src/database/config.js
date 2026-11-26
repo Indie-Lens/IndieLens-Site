@@ -9,26 +9,42 @@ var mySqlConfig = {
     charset: "utf8mb4"
 };
 
-function executar(instrucao, parametros) {
+var pool = null;
 
+function obterPool() {
+    if (!pool) {
+        pool = mysql.createPool({
+            ...mySqlConfig,
+            waitForConnections: true,
+            connectionLimit: 10,
+            queueLimit: 0
+        });
+        pool.on("error", function (erro) {
+            console.error("ERRO NO POOL MySQL:", erro && (erro.sqlMessage || erro.message || erro));
+        });
+    }
+    return pool;
+}
+
+function executar(instrucao, parametros) {
     if (process.env.AMBIENTE_PROCESSO !== "producao" && process.env.AMBIENTE_PROCESSO !== "desenvolvimento") {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM .env OU dev.env OU app.js\n");
         return Promise.reject("AMBIENTE NÃO CONFIGURADO EM .env");
     }
 
     return new Promise(function (resolve, reject) {
-        var conexao = mysql.createConnection(mySqlConfig);
-        conexao.connect();
-        conexao.query(instrucao, parametros || [], function (erro, resultados) {
-            conexao.end();
+        var dbPool;
+        try {
+            dbPool = obterPool();
+        } catch (erroPool) {
+            return reject(erroPool);
+        }
+
+        dbPool.query(instrucao, parametros || [], function (erro, resultados) {
             if (erro) {
                 return reject(erro);
             }
-            console.log(resultados);
             resolve(resultados);
-        });
-        conexao.on('error', function (erro) {
-            return ("ERRO NO MySQL SERVER: ", erro.sqlMessage);
         });
     });
 }

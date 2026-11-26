@@ -14,7 +14,7 @@ function responder(promessa, res) {
 function destaque(req, res) {
     dashboardModel.jogoDestaque()
         .then(function (resultado) {
-            res.json(resultado.length > 0 ? resultado[0] : {});
+            res.json(resultado && resultado.length > 0 ? resultado[0] : {});
         })
         .catch(function (erro) {
             console.log(erro);
@@ -25,7 +25,7 @@ function destaque(req, res) {
 function indicadores(req, res) {
     dashboardModel.indicadores()
         .then(function (resultado) {
-            res.json(resultado[0]);
+            res.json(resultado && resultado[0] ? resultado[0] : { jogosEmAlta: 0, emPromocao: 0, lancamentos: 0 });
         })
         .catch(function (erro) {
             console.log(erro);
@@ -53,35 +53,7 @@ function graficoCcu(req, res) {
 }
 
 function graficoTags(req, res) {
-    dashboardModel.graficoTags()
-        .then(function (resultado) {
-            var contagem = {};
-
-            resultado.forEach(function (linha) {
-                if (!linha.generos) return;
-                linha.generos.split(",").forEach(function (g) {
-                    var genero = g.trim();
-                    if (genero) {
-                        contagem[genero] = (contagem[genero] || 0) + 1;
-                    }
-                });
-            });
-
-            var ranking = Object.keys(contagem)
-                .map(function (nome) {
-                    return { nome: nome, total: contagem[nome] };
-                })
-                .sort(function (a, b) {
-                    return b.total - a.total;
-                })
-                .slice(0, 5);
-
-            res.json(ranking);
-        })
-        .catch(function (erro) {
-            console.log(erro);
-            res.status(500).json(erro.sqlMessage || erro.message);
-        });
+    responder(dashboardModel.graficoTags(), res);
 }
 
 function graficoEngajamento(req, res) {

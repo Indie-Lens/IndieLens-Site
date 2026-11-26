@@ -21,22 +21,18 @@ function listar(req, res) {
         genero: genero,
         plataforma: plataforma,
         ordem: ordem,
-        limit: limit,
+        limit: limit + 1,
         offset: offset
     };
 
-    Promise.all([
-        jogoModel.listarJogos(filtros),
-        jogoModel.contarJogos(filtros)
-    ])
-        .then(function (resultados) {
-            var jogos = resultados[0] || [];
-            var total = resultados[1] && resultados[1][0] ? Number(resultados[1][0].total) : jogos.length;
-            var temMais = offset + jogos.length < total;
+    jogoModel.listarJogos(filtros)
+        .then(function (rows) {
+            var lista = rows || [];
+            var temMais = lista.length > limit;
+            var jogos = lista.slice(0, limit);
 
             res.json({
                 jogos: jogos,
-                total: total,
                 temMais: temMais,
                 limit: limit,
                 offset: offset

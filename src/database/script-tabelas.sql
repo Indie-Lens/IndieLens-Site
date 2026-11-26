@@ -310,6 +310,13 @@ CREATE TABLE IF NOT EXISTS live (
     REFERENCES streamer (id_streamer)
 );
 
+-- Índices para consultas otimizadas em grande volume (300k+ registros)
+CREATE INDEX idx_jogo_main_reg_lanc ON jogo_main (id_registro, data_lancamento);
+CREATE INDEX idx_jogo_metricas_reg_ccu ON jogo_metricas (id_registro, peak_CCU);
+CREATE INDEX idx_jogo_metricas_reg_score ON jogo_metricas (id_registro, nota_score, peak_CCU);
+CREATE INDEX idx_jogo_auxiliar_reg_desc ON jogo_auxiliar (id_registro, desconto_pct);
+CREATE INDEX idx_jogo_playtime_reg_med ON jogo_playtime (id_registro, mediana_horas_total);
+
 -- Visualizando os dados das tabelas
 SELECT * FROM perfil;
 SELECT * FROM usuario;

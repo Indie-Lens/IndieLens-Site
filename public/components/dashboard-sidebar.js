@@ -1,11 +1,15 @@
 (function verificarAcessoPerfil() {
-    const perfil = String(sessionStorage.getItem('PERFIL_USUARIO') || '').trim();
-    const path = window.location.pathname.toLowerCase();
+    try {
+        const perfil = String(sessionStorage.getItem('PERFIL_USUARIO') || '').trim();
+        const path = window.location.pathname.toLowerCase();
 
-    if (perfil === '4' && (path.includes('/dashboard/leadgame/') || path.includes('/dashboard/desenvolvedor/'))) {
-        window.location.replace('/Dashboard/Streamer/DashboardGeral.html');
-    } else if (perfil === '3' && path.includes('/dashboard/streamer/')) {
-        window.location.replace('/Dashboard/LeadGame/dashPrincipalLead.html');
+        if (perfil === '4' && (path.includes('/dashboard/leadgame/') || path.includes('/dashboard/desenvolvedor/'))) {
+            window.location.replace('/Dashboard/Streamer/DashboardGeral.html');
+        } else if (perfil === '3' && path.includes('/dashboard/streamer/')) {
+            window.location.replace('/Dashboard/LeadGame/dashPrincipalLead.html');
+        }
+    } catch (erro) {
+        console.error('Erro ao verificar acesso do perfil:', erro);
     }
 })();
 
@@ -23,48 +27,60 @@ function escaparTextoNotificacao(texto) {
 }
 
 window.atualizarUsuarioSidebar = (escopo = document) => {
-    const raiz = escopo && typeof escopo.querySelectorAll === 'function' ? escopo : document;
-    const nome = (sessionStorage.getItem('NOME_USUARIO') || '').trim();
-    const perfil = String(sessionStorage.getItem('PERFIL_USUARIO') || '').trim();
-    const rotuloPerfil = ROTULOS_PERFIL_SIDEBAR[perfil];
+    try {
+        const raiz = escopo && typeof escopo.querySelectorAll === 'function' ? escopo : document;
+        const nome = (sessionStorage.getItem('NOME_USUARIO') || '').trim();
+        const perfil = String(sessionStorage.getItem('PERFIL_USUARIO') || '').trim();
+        const rotuloPerfil = ROTULOS_PERFIL_SIDEBAR[perfil];
 
-    if (nome) {
-        raiz.querySelectorAll('.nome-usuario').forEach((el) => {
-            el.textContent = nome;
-        });
-        document.querySelectorAll('.acoes-usuario .perfil .nome, .topo-direita .perfil .nome').forEach((el) => {
-            el.textContent = nome;
-        });
-    }
-
-    if (rotuloPerfil) {
-        raiz.querySelectorAll('.tipo-usuario').forEach((el) => {
-            el.textContent = rotuloPerfil;
-        });
-    }
-
-    const currentPath = window.location.pathname.toLowerCase();
-    raiz.querySelectorAll('.opcao[href]').forEach((link) => {
-        try {
-            if (new URL(link.href, window.location.href).pathname.toLowerCase() === currentPath) {
-                link.classList.add('active');
-            }
-        } catch {
-            // Ignora href inválido
-        }
-    });
-
-    raiz.querySelectorAll('.btn-perfil').forEach((botao) => {
-        if (!botao.getAttribute('onclick') && !botao.dataset.perfilBound) {
-            botao.dataset.perfilBound = '1';
-            botao.addEventListener('click', () => {
-                const destino = (perfil === '4' || currentPath.includes('/dashboard/streamer/'))
-                    ? '/Dashboard/Streamer/Perfil.html'
-                    : '/Dashboard/Desenvolvedor/Perfil.html';
-                window.location.href = destino;
+        if (nome) {
+            raiz.querySelectorAll('.nome-usuario').forEach((el) => {
+                if (el.textContent !== nome) {
+                    el.textContent = nome;
+                }
+            });
+            document.querySelectorAll('.acoes-usuario .perfil .nome, .topo-direita .perfil .nome').forEach((el) => {
+                if (el.textContent !== nome) {
+                    el.textContent = nome;
+                }
             });
         }
-    });
+
+        if (rotuloPerfil) {
+            raiz.querySelectorAll('.tipo-usuario').forEach((el) => {
+                if (el.textContent !== rotuloPerfil) {
+                    el.textContent = rotuloPerfil;
+                }
+            });
+        }
+
+        const currentPath = window.location.pathname.toLowerCase();
+        raiz.querySelectorAll('.opcao[href]').forEach((link) => {
+            try {
+                if (new URL(link.href, window.location.href).pathname.toLowerCase() === currentPath) {
+                    if (!link.classList.contains('active')) {
+                        link.classList.add('active');
+                    }
+                }
+            } catch {
+                // Ignora href inválido
+            }
+        });
+
+        raiz.querySelectorAll('.btn-perfil').forEach((botao) => {
+            if (!botao.getAttribute('onclick') && !botao.dataset.perfilBound) {
+                botao.dataset.perfilBound = '1';
+                botao.addEventListener('click', () => {
+                    const destino = (perfil === '4' || currentPath.includes('/dashboard/streamer/'))
+                        ? '/Dashboard/Streamer/Perfil.html'
+                        : '/Dashboard/Desenvolvedor/Perfil.html';
+                    window.location.href = destino;
+                });
+            }
+        });
+    } catch (erro) {
+        console.error('Erro ao atualizar usuário na sidebar:', erro);
+    }
 };
 
 window.carregarNotificacoes = async (marcarLidasAoAbrir = false) => {
@@ -178,28 +194,46 @@ if (typeof window.fecharMenuMobile !== 'function') {
 }
 
 (function iniciarObservadorSidebar() {
+    let atualizandoSidebar = false;
+
     function sincronizarSidebar(sidebar) {
-        if (!sidebar) return;
-        window.atualizarUsuarioSidebar(sidebar);
-        const panel = sidebar.querySelector('#barraNotificacoes');
-        if (panel && !panel.dataset.notificacoesInit) {
-            panel.dataset.notificacoesInit = '1';
-            window.carregarNotificacoes(false);
+        if (!sidebar || atualizandoSidebar) return;
+        atualizandoSidebar = true;
+        try {
+            window.atualizarUsuarioSidebar(sidebar);
+            const panel = sidebar.querySelector('#barraNotificacoes');
+            if (panel && !panel.dataset.notificacoesInit) {
+                panel.dataset.notificacoesInit = '1';
+                window.carregarNotificacoes(false);
+            }
+        } catch (erro) {
+            console.error('Erro ao sincronizar sidebar:', erro);
+        } finally {
+            atualizandoSidebar = false;
         }
     }
 
     function observarSidebar() {
-        window.atualizarUsuarioSidebar(document);
-        const sidebar = document.getElementById('sidebar');
-        if (!sidebar || sidebar.dataset.observerAttached) return;
+        try {
+            window.atualizarUsuarioSidebar(document);
+            const sidebar = document.getElementById('sidebar');
+            if (!sidebar || sidebar.dataset.observerAttached) return;
 
-        sidebar.dataset.observerAttached = '1';
-        sincronizarSidebar(sidebar);
-
-        const observer = new MutationObserver(() => {
+            sidebar.dataset.observerAttached = '1';
             sincronizarSidebar(sidebar);
-        });
-        observer.observe(sidebar, { childList: true, subtree: true });
+
+            const observer = new MutationObserver((mutations) => {
+                const alterouFilhosDiretos = mutations.some(
+                    (m) => m.type === 'childList' && m.target === sidebar
+                );
+                if (alterouFilhosDiretos) {
+                    sincronizarSidebar(sidebar);
+                }
+            });
+            observer.observe(sidebar, { childList: true });
+        } catch (erro) {
+            console.error('Erro ao iniciar observador da sidebar:', erro);
+        }
     }
 
     if (document.readyState === 'loading') {
