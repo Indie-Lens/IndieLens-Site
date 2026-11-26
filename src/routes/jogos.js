@@ -75,4 +75,31 @@ router.get("/populares", function (req, res) {
     jogoController.populares(req, res);
 });
 
+/**
+ * @swagger
+ * /jogos/lancamentos:
+ *   get:
+ *     summary: Lista lançamentos de jogos por mês e ano para o calendário
+ *     tags: [Jogos]
+ *     parameters:
+ *       - in: query
+ *         name: mes
+ *         schema:
+ *           type: integer
+ *           minimum: 1
+ *           maximum: 12
+ *         description: Mês desejado (1 a 12). Se omitido com ano, seleciona o próximo mês com lançamentos
+ *       - in: query
+ *         name: ano
+ *         schema:
+ *           type: integer
+ *         description: Ano desejado (ex. 2026)
+ *     responses:
+ *       200:
+ *         description: Objeto com mes, ano e lista de lancamentos
+ */
+router.get("/lancamentos", function (req, res) {
+    jogoController.lancamentos(req, res);
+});
+
 module.exports = router;

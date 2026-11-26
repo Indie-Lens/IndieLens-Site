@@ -261,8 +261,98 @@ async function listarPopulares(limit = 5) {
     return database.executar(sql, [idRegistroAtual, limiteConsulta]);
 }
 
+async function listarLancamentosPorMes({ mes, ano } = {}) {
+    const mesParsed = Number.parseInt(mes, 10);
+    const anoParsed = Number.parseInt(ano, 10);
+    const temMesAnoValidos = (
+        Number.isInteger(mesParsed) && mesParsed >= 1 && mesParsed <= 12 &&
+        Number.isInteger(anoParsed) && anoParsed >= 1970 && anoParsed <= 2100
+    );
+
+    const { idRegistroAtual } = await obterRegistrosReferencia();
+    if (idRegistroAtual === null || idRegistroAtual === undefined) {
+        const agora = new Date();
+        return {
+            mes: temMesAnoValidos ? mesParsed : (agora.getMonth() + 1),
+            ano: temMesAnoValidos ? anoParsed : agora.getFullYear(),
+            lancamentos: []
+        };
+    }
+
+    let mesAlvo = temMesAnoValidos ? mesParsed : null;
+    let anoAlvo = temMesAnoValidos ? anoParsed : null;
+
+    if (!temMesAnoValidos) {
+        const proxRows = await database.executar(
+            `SELECT MONTH(data_lancamento) AS mes, YEAR(data_lancamento) AS ano
+             FROM jogo_main
+             WHERE id_registro = ? AND data_lancamento >= DATE_FORMAT(CURDATE(), '%Y-%m-01')
+             ORDER BY data_lancamento ASC
+             LIMIT 1;`,
+            [idRegistroAtual]
+        );
+
+        if (proxRows && proxRows.length > 0 && proxRows[0].mes && proxRows[0].ano) {
+            mesAlvo = Number(proxRows[0].mes);
+            anoAlvo = Number(proxRows[0].ano);
+        } else {
+            const recRows = await database.executar(
+                `SELECT MONTH(data_lancamento) AS mes, YEAR(data_lancamento) AS ano
+                 FROM jogo_main
+                 WHERE id_registro = ? AND data_lancamento IS NOT NULL
+                 ORDER BY data_lancamento DESC
+                 LIMIT 1;`,
+                [idRegistroAtual]
+            );
+
+            if (recRows && recRows.length > 0 && recRows[0].mes && recRows[0].ano) {
+                mesAlvo = Number(recRows[0].mes);
+                anoAlvo = Number(recRows[0].ano);
+            } else {
+                const agora = new Date();
+                return {
+                    mes: agora.getMonth() + 1,
+                    ano: agora.getFullYear(),
+                    lancamentos: []
+                };
+            }
+        }
+    }
+
+    const sql = `
+        SELECT
+            m.id_jogo AS idJogo,
+            m.nome AS nome,
+            DATE_FORMAT(m.data_lancamento, '%Y-%m-%d') AS dataLancamento,
+            DAY(m.data_lancamento) AS dia,
+            d.generos AS generos,
+            mid.imagem_cabecalho AS imagem
+        FROM jogo_main m
+        LEFT JOIN jogo_metricas mt
+            ON mt.id_jogo = m.id_jogo AND mt.id_registro = m.id_registro
+        LEFT JOIN jogo_detalhes d
+            ON d.id_registro = m.id_registro AND d.id_jogo = m.id_jogo
+        LEFT JOIN jogo_midia mid
+            ON mid.id_jogo = m.id_jogo AND mid.id_registro = m.id_registro
+        WHERE m.id_registro = ?
+          AND YEAR(m.data_lancamento) = ?
+          AND MONTH(m.data_lancamento) = ?
+        ORDER BY m.data_lancamento ASC, mt.peak_CCU DESC, m.id_jogo ASC
+        LIMIT 50;
+    `;
+
+    const lancamentos = await database.executar(sql, [idRegistroAtual, anoAlvo, mesAlvo]);
+
+    return {
+        mes: mesAlvo,
+        ano: anoAlvo,
+        lancamentos: lancamentos || []
+    };
+}
+
 module.exports = {
     obterRegistrosReferencia,
     listarJogos,
-    listarPopulares
+    listarPopulares,
+    listarLancamentosPorMes
 };

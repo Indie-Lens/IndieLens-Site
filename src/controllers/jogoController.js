@@ -57,7 +57,22 @@ function populares(req, res) {
         });
 }
 
+function lancamentos(req, res) {
+    jogoModel.listarLancamentosPorMes({
+        mes: req.query.mes,
+        ano: req.query.ano
+    })
+        .then(function (resultado) {
+            res.json(resultado);
+        })
+        .catch(function (erro) {
+            console.error("Erro ao listar lançamentos:", erro);
+            res.status(500).json({ erro: erro.sqlMessage || erro.message || "Erro ao listar lançamentos" });
+        });
+}
+
 module.exports = {
     listar,
-    populares
+    populares,
+    lancamentos
 };
