@@ -162,96 +162,112 @@
         Chart.defaults.color = '#8c8d9e';
         Chart.defaults.font.family = 'Inter, sans-serif';
         const corRoxo = '#9749e0', corVerde = '#9cff00', corBorda = '#222330', corCinza = '#8c8d9e';
+        const API = 'http://localhost:3333';
 
-        new Chart(document.getElementById('graficoCcuConcorrencia'), {
-            data: {
-                labels: ['Hollow Kni...', 'Road 96', 'Blue Prince', 'Neon White', 'Roboquest'],
-                datasets: [
-                    {
-                        type: 'bar',
-                        label: 'Peak CCU (mil)',
-                        data: [430, 75, 90, 120, 55],
-                        backgroundColor: 'rgba(151, 73, 224, 0.5)',
-                        borderColor: corRoxo,
-                        borderWidth: 1,
-                        borderRadius: 4,
-                        yAxisID: 'y'
+        fetch(`${API}/dashboard/grafico/ccu`)
+            .then(res => res.json())
+            .then(dados => {
+                new Chart(document.getElementById('graficoCcuConcorrencia'), {
+                    data: {
+                        labels: dados.map(j => j.nome.length > 14 ? j.nome.slice(0, 12) + '...' : j.nome),
+                        datasets: [
+                            {
+                                type: 'bar',
+                                label: 'Público (Peak CCU)',
+                                data: dados.map(j => Math.round(j.peakCcu / 1000)),
+                                backgroundColor: 'rgba(151, 73, 224, 0.5)',
+                                borderColor: corRoxo,
+                                borderWidth: 1,
+                                borderRadius: 4,
+                                yAxisID: 'y'
+                            },
+                            {
+                                type: 'line',
+                                label: 'Concorrência nicho',
+                                data: dados.map(j => Number(j.concorrencia)),
+                                borderColor: corVerde,
+                                backgroundColor: corVerde,
+                                borderWidth: 2,
+                                tension: 0.3,
+                                pointRadius: 4,
+                                pointBackgroundColor: corVerde,
+                                yAxisID: 'y1'
+                            }
+                        ]
                     },
-                    {
-                        type: 'line',
-                        label: 'Concorrência nicho',
-                        data: [445, 115, 150, 275, 130],
-                        borderColor: corVerde,
-                        backgroundColor: corVerde,
-                        borderWidth: 2,
-                        tension: 0.3,
-                        pointRadius: 4,
-                        pointBackgroundColor: corVerde,
-                        yAxisID: 'y1'
+                    options: {
+                        responsive: true, maintainAspectRatio: false,
+                        plugins: { legend: { position: 'top', align: 'end', labels: { usePointStyle: true, boxWidth: 8 } } },
+                        scales: {
+                            y:  { position: 'left',  beginAtZero: true, grid: { color: corBorda }, ticks: { callback: v => v + 'k' } },
+                            y1: { position: 'right', beginAtZero: true, grid: { display: false } },
+                            x:  { grid: { display: false } }
+                        }
                     }
-                ]
-            },
-            options: {
-                responsive: true, maintainAspectRatio: false,
-                plugins: { legend: { position: 'top', align: 'end', labels: { usePointStyle: true, boxWidth: 8 } } },
-                scales: {
-                    y:  { position: 'left',  beginAtZero: true, grid: { color: corBorda }, ticks: { callback: v => v + 'h' } },
-                    y1: { position: 'right', beginAtZero: true, grid: { display: false } },
-                    x:  { grid: { display: false } }
-                }
-            }
-        });
+                });
+            })
+            .catch(e => console.log('Erro gráfico CCU:', e));
 
-        new Chart(document.getElementById('graficoTags'), {
-            type: 'bar',
-            data: {
-                labels: ['Roguelike', 'Narrativa', 'Co-op', 'Mistério', 'História Rica'],
-                datasets: [{
-                    label: 'Frequência',
-                    data: [9.2, 8, 6.8, 5.5, 5],
-                    backgroundColor: corRoxo,
-                    borderRadius: 4
-                }]
-            },
-            options: {
-                indexAxis: 'y',
-                responsive: true, maintainAspectRatio: false,
-                plugins: { legend: { display: false } },
-                scales: {
-                    x: { beginAtZero: true, max: 10, grid: { color: corBorda } },
-                    y: { grid: { display: false } }
-                }
-            }
-        });
-
-        new Chart(document.getElementById('graficoEngajamento'), {
-            type: 'bar',
-            data: {
-                labels: ['Jogo A', 'Jogo B', 'Jogo C', 'Jogo D'],
-                datasets: [
-                    {
-                        label: 'Últimas 2 semanas',
-                        data: [87, 72, 55, 76],
-                        backgroundColor: corRoxo,
-                        borderRadius: { topLeft: 0, topRight: 0 }
+        fetch(`${API}/dashboard/grafico/tags`)
+            .then(res => res.json())
+            .then(dados => {
+                new Chart(document.getElementById('graficoTags'), {
+                    type: 'bar',
+                    data: {
+                        labels: dados.map(t => t.nome),
+                        datasets: [{
+                            label: 'Frequência',
+                            data: dados.map(t => t.total),
+                            backgroundColor: corRoxo,
+                            borderRadius: 4
+                        }]
                     },
-                    {
-                        label: 'Total',
-                        data: [38, 36, 33, 44],
-                        backgroundColor: 'rgba(156, 255, 0, 0.35)',
-                        borderRadius: { topLeft: 4, topRight: 4 }
+                    options: {
+                        indexAxis: 'y',
+                        responsive: true, maintainAspectRatio: false,
+                        plugins: { legend: { display: false } },
+                        scales: {
+                            x: { beginAtZero: true, grid: { color: corBorda }, ticks: { precision: 0 } },
+                            y: { grid: { display: false } }
+                        }
                     }
-                ]
-            },
-            options: {
-                responsive: true, maintainAspectRatio: false,
-                plugins: { legend: { position: 'top', align: 'end', labels: { usePointStyle: true, boxWidth: 8 } } },
-                scales: {
-                    x: { stacked: true, grid: { display: false } },
-                    y: { stacked: true, beginAtZero: true, grid: { color: corBorda }, ticks: { callback: v => v + 'h' } }
-                }
-            }
-        });
+                });
+            })
+            .catch(e => console.log('Erro gráfico Tags:', e));
+
+        fetch(`${API}/dashboard/grafico/engajamento`)
+            .then(res => res.json())
+            .then(dados => {
+                new Chart(document.getElementById('graficoEngajamento'), {
+                    type: 'bar',
+                    data: {
+                        labels: dados.map(j => j.nome.length > 12 ? j.nome.slice(0, 10) + '...' : j.nome),
+                        datasets: [
+                            {
+                                label: 'Últimas 2 semanas',
+                                data: dados.map(j => j.horasDuasSemanas),
+                                backgroundColor: corRoxo,
+                                borderRadius: 4
+                            },
+                            {
+                                label: 'Total',
+                                data: dados.map(j => j.horasTotal - j.horasDuasSemanas),
+                                backgroundColor: 'rgba(156, 255, 0, 0.35)',
+                                borderRadius: 4
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true, maintainAspectRatio: false,
+                        plugins: { legend: { position: 'top', align: 'end', labels: { usePointStyle: true, boxWidth: 8 } } },
+                        scales: {
+                            x: { stacked: true, grid: { display: false } },
+                            y: { stacked: true, beginAtZero: true, grid: { color: corBorda }, ticks: { callback: v => v + 'h' } }
+                        }
+                    }
+                });
+            })
+            .catch(e => console.log('Erro gráfico Engajamento:', e));
 
         new Chart(document.getElementById('graficoRadar'), {
             type: 'radar',
@@ -296,71 +312,99 @@
     </script>
 
     <script>
-        const listasJogos = {
-            alta: {
-                titulo: 'Jogos em alta',
-                subtitulo: 'Os que estão bombando esta semana',
-                jogos: [
-                    { nome: 'Hollow Knight: Silksong', img: '../../assets/imgs/Hollow.jpg', tag: 'Metroidvania', info: '430 mil jogando agora' },
-                    { nome: 'Hades', img: '../../assets/imgs/Hades.jpg', tag: 'Roguelike', info: '280 mil jogando agora' },
-                    { nome: 'Dave the Diver', img: '../../assets/imgs/DaveTheDiver.jpg', tag: 'Aventura', info: '150 mil jogando agora' },
-                    { nome: 'Cuphead', img: '../../assets/imgs/Cuphead.jpg', tag: 'Ação', info: '98 mil jogando agora' }
-                ]
-            },
-            promocao: {
-                titulo: 'Em promoção',
-                subtitulo: 'Aproveite antes que acabe a oferta',
-                jogos: [
-                    { nome: 'Hades', img: '../../assets/imgs/Hades.jpg', tag: 'Roguelike', info: 'R$ 44,99 → R$ 11,24', desconto: '-75%' },
-                    { nome: 'Celeste', img: '../../assets/imgs/celeste-e1534205369647.jpg', tag: 'Plataforma', info: 'R$ 34,99 → R$ 13,99', desconto: '-60%' },
-                    { nome: 'Stardew Valley', img: '../../assets/imgs/StardewValleyBanner.png', tag: 'Simulação', info: 'R$ 24,99 → R$ 14,99', desconto: '-40%' },
-                    { nome: 'Cuphead', img: '../../assets/imgs/Cuphead.jpg', tag: 'Ação', info: 'R$ 39,99 → R$ 23,99', desconto: '-40%' }
-                ]
-            },
-            perfil: {
-                titulo: 'A sua cara',
-                subtitulo: 'Combinam com o estilo das suas lives',
-                jogos: [
-                    { nome: 'Hollow Knight', img: '../../assets/imgs/Hollow.jpg', tag: 'Metroidvania', info: '95% de match com seu perfil' },
-                    { nome: 'Dead Cells', img: '../../assets/imgs/MeninaJogando.jpg', tag: 'Roguelike', info: '92% de match com seu perfil' },
-                    { nome: 'Hades', img: '../../assets/imgs/Hades.jpg', tag: 'Ação', info: '89% de match com seu perfil' },
-                    { nome: 'Undertale', img: '../../assets/imgs/tela.jpg', tag: 'RPG', info: '84% de match com seu perfil' }
-                ]
-            },
-            lancamentos: {
-                titulo: 'Lançamentos',
-                subtitulo: 'Os jogos que acabaram de chegar',
-                jogos: [
-                    { nome: 'Hollow Knight: Silksong', img: '../../assets/imgs/Hollow.jpg', tag: 'Metroidvania', info: 'Lançou há 2 dias' },
-                    { nome: 'Dave the Diver', img: '../../assets/imgs/DaveTheDiver.jpg', tag: 'Aventura', info: 'Lançou esta semana' },
-                    { nome: 'Celeste', img: '../../assets/imgs/celeste-e1534205369647.jpg', tag: 'Plataforma', info: 'Lançou há 5 dias' },
-                    { nome: 'Cuphead', img: '../../assets/imgs/Cuphead.jpg', tag: 'Ação', info: 'Lançou há 1 semana' }
-                ]
-            }
+        const metaLista = {
+            alta:        { titulo: 'Jogos em alta',  subtitulo: 'Os que estão bombando esta semana' },
+            promocao:    { titulo: 'Em promoção',    subtitulo: 'Aproveite antes que acabe a oferta' },
+            lancamentos: { titulo: 'Lançamentos',    subtitulo: 'Os jogos que acabaram de chegar' }
         };
 
+        // "A sua cara" depende do perfil do streamer — ainda mocado (backend futuro)
+        const listaPerfilMock = [
+            { nome: 'Hollow Knight', imagem: '../../assets/imgs/Hollow.jpg', generos: 'Metroidvania', extra: '95% de match' },
+            { nome: 'Dead Cells', imagem: '../../assets/imgs/MeninaJogando.jpg', generos: 'Roguelike', extra: '92% de match' },
+            { nome: 'Hades', imagem: '../../assets/imgs/Hades.jpg', generos: 'Ação', extra: '89% de match' },
+            { nome: 'Undertale', imagem: '../../assets/imgs/tela.jpg', generos: 'RPG', extra: '84% de match' }
+        ];
+
+        const IMG_PADRAO = '../../assets/imgs/exemplo-imagem.png';
+
+        function primeiroGenero(generos) {
+            return generos ? generos.split(',')[0].trim() : '';
+        }
+
+        function slugJogo(nome) {
+            return encodeURIComponent(nome.toLowerCase().split(':')[0].trim());
+        }
+
+        function infoPorTipo(tipo, j) {
+            if (tipo === 'alta') {
+                return `${(j.peakCcu / 1000).toFixed(0)} mil jogando`;
+            }
+            if (tipo === 'promocao') {
+                const de = Number(j.preco);
+                const por = de * (1 - j.descontoPct / 100);
+                return `R$ ${de.toFixed(2).replace('.', ',')} → R$ ${por.toFixed(2).replace('.', ',')}`;
+            }
+            if (tipo === 'lancamentos') {
+                return new Date(j.dataLancamento).toLocaleDateString('pt-BR');
+            }
+            return '';
+        }
+
         function abrirListaJogos(tipo) {
-            const lista = listasJogos[tipo];
-            if (!lista) return;
+            // "A sua cara" é tratado localmente até o backend de perfil existir
+            if (tipo === 'perfil') {
+                document.getElementById('modalTitulo').textContent = 'A sua cara';
+                document.getElementById('modalSubtitulo').textContent = 'Combinam com o estilo das suas lives';
+                document.getElementById('modalLista').innerHTML = listaPerfilMock.map(j => `
+                    <a class="item-jogo" href="pagJogo.html?jogo=${slugJogo(j.nome)}">
+                        <img src="${j.imagem}" alt="${j.nome}">
+                        <div class="item-info">
+                            <span class="item-nome">${j.nome}</span>
+                            <span class="item-tag">${j.generos}</span>
+                        </div>
+                        <div class="item-direita">
+                            <span class="item-extra">${j.extra}</span>
+                        </div>
+                    </a>
+                `).join('');
+                document.getElementById('modalJogos').classList.add('ativo');
+                return;
+            }
 
-            document.getElementById('modalTitulo').textContent = lista.titulo;
-            document.getElementById('modalSubtitulo').textContent = lista.subtitulo;
+            const meta = metaLista[tipo];
+            if (!meta) return;
 
-            document.getElementById('modalLista').innerHTML = lista.jogos.map(j => `
-                <a class="item-jogo" href="pagJogo.html?jogo=${encodeURIComponent(j.nome.toLowerCase().split(':')[0].trim())}">
-                    <img src="${j.img}" alt="${j.nome}">
-                    <div class="item-info">
-                        <span class="item-nome">${j.nome}</span>
-                        <span class="item-tag">${j.tag}</span>
-                    </div>
-                    <div class="item-direita">
-                        ${j.desconto ? `<span class="item-desconto">${j.desconto}</span>` : ''}
-                        <span class="item-extra">${j.info}</span>
-                    </div>
-                </a>
-            `).join('');
-
+            document.getElementById('modalTitulo').textContent = meta.titulo;
+            document.getElementById('modalSubtitulo').textContent = meta.subtitulo;
+            document.getElementById('modalLista').innerHTML = '<p style="color:#8c8d9e;font-size:0.85rem;padding:10px;">Carregando...</p>';
             document.getElementById('modalJogos').classList.add('ativo');
+
+            fetch(`${API}/dashboard/lista/${tipo}`)
+                .then(res => res.json())
+                .then(jogos => {
+                    if (!jogos.length) {
+                        document.getElementById('modalLista').innerHTML = '<p style="color:#8c8d9e;font-size:0.85rem;padding:10px;">Nenhum jogo encontrado.</p>';
+                        return;
+                    }
+                    document.getElementById('modalLista').innerHTML = jogos.map(j => `
+                        <a class="item-jogo" href="pagJogo.html?jogo=${slugJogo(j.nome)}">
+                            <img src="${j.imagem || IMG_PADRAO}" alt="${j.nome}">
+                            <div class="item-info">
+                                <span class="item-nome">${j.nome}</span>
+                                <span class="item-tag">${primeiroGenero(j.generos)}</span>
+                            </div>
+                            <div class="item-direita">
+                                ${tipo === 'promocao' ? `<span class="item-desconto">-${j.descontoPct}%</span>` : ''}
+                                <span class="item-extra">${infoPorTipo(tipo, j)}</span>
+                            </div>
+                        </a>
+                    `).join('');
+                })
+                .catch(e => {
+                    console.log('Erro ao carregar lista:', e);
+                    document.getElementById('modalLista').innerHTML = '<p style="color:#8c8d9e;font-size:0.85rem;padding:10px;">Erro ao carregar.</p>';
+                });
         }
 
         function fecharListaJogos(e) {
@@ -371,6 +415,39 @@
         document.addEventListener('keydown', e => {
             if (e.key === 'Escape') document.getElementById('modalJogos').classList.remove('ativo');
         });
+
+        function carregarDestaque() {
+            fetch(`${API}/dashboard/destaque`)
+                .then(res => res.json())
+                .then(j => {
+                    if (!j || !j.nome) return;
+                    const banner = document.querySelector('.card-jogo-destaque');
+                    if (j.imagem) banner.style.backgroundImage = `url('${j.imagem}')`;
+                    banner.querySelector('h2').textContent = j.nome;
+                    banner.querySelector('.jogo-descricao').textContent = j.descricao || '';
+                    const preco = Number(j.preco);
+                    banner.querySelector('.jogo-preco').textContent = preco > 0 ? `R$ ${preco.toFixed(2).replace('.', ',')}` : 'Grátis';
+                    const tagsEl = banner.querySelector('.jogo-tags');
+                    const generos = (j.generos || '').split(',').map(g => g.trim()).filter(Boolean).slice(0, 3);
+                    tagsEl.innerHTML = generos.map(g => `<span>${g}</span>`).join('');
+                })
+                .catch(e => console.log('Erro ao carregar destaque:', e));
+        }
+
+        function carregarIndicadores() {
+            fetch(`${API}/dashboard/indicadores`)
+                .then(res => res.json())
+                .then(d => {
+                    const kpis = document.querySelectorAll('.linha-kpis .kpi-valor');
+                    if (kpis[0]) kpis[0].textContent = d.jogosEmAlta;
+                    if (kpis[1]) kpis[1].textContent = d.emPromocao;
+                    if (kpis[3]) kpis[3].textContent = d.lancamentos;
+                })
+                .catch(e => console.log('Erro ao carregar indicadores:', e));
+        }
+
+        carregarDestaque();
+        carregarIndicadores();
     </script>
 
     <script>

@@ -18,6 +18,7 @@ var usuarioRouter = require("./src/routes/usuarios");
 var liveRouter = require("./src/routes/lives"); 
 var simularJogoRouter = require("./src/routes/simularJogo");
 var avaliacaoRouter = require("./src/routes/avaliacoes");
+var dashboardRouter = require("./src/routes/dashboard");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -30,6 +31,7 @@ app.use("/usuarios", usuarioRouter);
 app.use("/lives", liveRouter); 
 app.use("/simularJogo", simularJogoRouter);
 app.use("/avaliacoes", avaliacaoRouter);
+app.use("/dashboard", dashboardRouter);
 
 app.listen(PORTA_APP, function () {
     console.log(`
