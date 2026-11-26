@@ -52,4 +52,27 @@ router.get("/", function (req, res) {
     jogoController.listar(req, res);
 });
 
+/**
+ * @swagger
+ * /jogos/populares:
+ *   get:
+ *     summary: Lista os jogos mais populares do registro mais recente
+ *     tags: [Jogos]
+ *     parameters:
+ *       - in: query
+ *         name: limit
+ *         schema:
+ *           type: integer
+ *           default: 5
+ *           minimum: 1
+ *           maximum: 20
+ *         description: Quantidade máxima de jogos populares a retornar
+ *     responses:
+ *       200:
+ *         description: Lista dos jogos mais populares
+ */
+router.get("/populares", function (req, res) {
+    jogoController.populares(req, res);
+});
+
 module.exports = router;

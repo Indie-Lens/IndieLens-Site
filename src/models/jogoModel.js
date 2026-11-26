@@ -54,13 +54,16 @@ function construirFiltros({ idRegistroAtual, busca, genero, plataforma }) {
     };
 }
 
-async function listarJogos({ busca, genero, plataforma, ordem, limit, offset }) {
-    // Etapa 0: buscar o registro mais recente e o penúltimo uma única vez
+async function obterRegistrosReferencia(incluirAnterior = false) {
     const regAtualRows = await database.executar("SELECT MAX(id_registro) AS idRegistroAtual FROM registro;");
     const idRegistroAtual = regAtualRows && regAtualRows[0] ? regAtualRows[0].idRegistroAtual : null;
 
     if (idRegistroAtual === null || idRegistroAtual === undefined) {
-        return [];
+        return { idRegistroAtual: null, idRegistroAnterior: null };
+    }
+
+    if (!incluirAnterior) {
+        return { idRegistroAtual, idRegistroAnterior: null };
     }
 
     const regAntRows = await database.executar(
@@ -68,6 +71,17 @@ async function listarJogos({ busca, genero, plataforma, ordem, limit, offset }) 
         [idRegistroAtual]
     );
     const idRegistroAnterior = regAntRows && regAntRows[0] ? regAntRows[0].idRegistroAnterior : null;
+
+    return { idRegistroAtual, idRegistroAnterior };
+}
+
+async function listarJogos({ busca, genero, plataforma, ordem, limit, offset }) {
+    // Etapa 0: buscar o registro mais recente e o penúltimo uma única vez
+    const { idRegistroAtual, idRegistroAnterior } = await obterRegistrosReferencia(true);
+
+    if (idRegistroAtual === null || idRegistroAtual === undefined) {
+        return [];
+    }
 
     // Etapa 1: paginar primeiro no registro atual (JOIN apenas nas tabelas de filtro/ordenação)
     const { whereSql, params } = construirFiltros({ idRegistroAtual, busca, genero, plataforma });
@@ -211,6 +225,44 @@ async function listarJogos({ busca, genero, plataforma, ordem, limit, offset }) 
     });
 }
 
+async function listarPopulares(limit = 5) {
+    const { idRegistroAtual } = await obterRegistrosReferencia();
+    if (idRegistroAtual === null || idRegistroAtual === undefined) {
+        return [];
+    }
+
+    const parsedLimit = Number.parseInt(limit, 10);
+    const limiteConsulta = Number.isInteger(parsedLimit) && parsedLimit > 0 ? Math.min(parsedLimit, 20) : 5;
+
+    const sql = `
+        SELECT
+            m.id_jogo AS idJogo,
+            m.nome AS nome,
+            d.generos AS generos,
+            mid.imagem_cabecalho AS imagem,
+            COALESCE(mt.peak_CCU, 0) AS peakCcu,
+            COALESCE(s.suporte_windows, 0) AS suporteWindows,
+            COALESCE(s.suporte_MAC, 0) AS suporteMac,
+            COALESCE(s.suporte_linux, 0) AS suporteLinux
+        FROM jogo_main m
+        LEFT JOIN jogo_metricas mt
+            ON mt.id_jogo = m.id_jogo AND mt.id_registro = m.id_registro
+        LEFT JOIN jogo_detalhes d
+            ON d.id_registro = m.id_registro AND d.id_jogo = m.id_jogo
+        LEFT JOIN jogo_midia mid
+            ON mid.id_jogo = m.id_jogo AND mid.id_registro = m.id_registro
+        LEFT JOIN jogo_suporte s
+            ON s.id_jogo = m.id_jogo AND s.id_registro = m.id_registro
+        WHERE m.id_registro = ?
+        ORDER BY mt.peak_CCU DESC, mt.qtd_recomendacoes DESC, mt.nota_score DESC, m.id_jogo ASC
+        LIMIT ?;
+    `;
+
+    return database.executar(sql, [idRegistroAtual, limiteConsulta]);
+}
+
 module.exports = {
-    listarJogos
+    obterRegistrosReferencia,
+    listarJogos,
+    listarPopulares
 };

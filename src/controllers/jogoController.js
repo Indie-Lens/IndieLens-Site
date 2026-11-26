@@ -44,6 +44,20 @@ function listar(req, res) {
         });
 }
 
+function populares(req, res) {
+    var limit = parseInteiroPositivo(req.query.limit, 5, 1, 20);
+
+    jogoModel.listarPopulares(limit)
+        .then(function (rows) {
+            res.json({ jogos: rows || [] });
+        })
+        .catch(function (erro) {
+            console.error("Erro ao listar jogos populares:", erro);
+            res.status(500).json({ erro: erro.sqlMessage || erro.message || "Erro ao listar jogos populares" });
+        });
+}
+
 module.exports = {
-    listar
+    listar,
+    populares
 };
