@@ -1,0 +1,250 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700;800&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background: #101010;
+    color: #fff;
+    font-family: 'Roboto Condensed', Arial, sans-serif;
+    overflow-x: hidden;
+}
+
+.container {
+    position: relative;
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    background: #101010;
+}
+
+
+.lado-formulario {
+    position: relative;
+    z-index: 2;
+    width: 48%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 25px 20px 40px;
+}
+
+.cabecalho {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.cabecalho h1 {
+    font-size: clamp(25px, 3vw, 38px);
+    font-weight: 800;
+    margin-bottom: 5px;
+}
+
+.cabecalho h2 {
+    font-size: clamp(17px, 2vw, 25px);
+    font-weight: 800;
+}
+
+
+.avatar {
+    width: 144px;
+    height: 144px;
+    border: 4px solid #9427f5;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto 40px;
+    flex-shrink: 0;
+}
+
+.avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+#form-desenvolvedor {
+    width: min(100%, 390px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+.campo {
+    position: relative;
+    width: 100%;
+    height: 54px;
+}
+
+.campo input,
+.campo select {
+    width: 100%;
+    height: 100%;
+    padding: 0 48px 0 12px;
+    background: #252525;
+    color: #fff;
+    border: 2px solid #9427f5;
+    border-radius: 0;
+    outline: none;
+    font-size: 16px;
+    font-family: inherit;
+    transition: border-color 0.2s;
+}
+
+.campo input:focus,
+.campo select:focus {
+    border-color: #a6ff00;
+}
+
+.campo input::placeholder {
+    color: #f0f0f0;
+    opacity: 1;
+}
+
+.campo > i {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    font-size: 25px;
+    color: #a6ff00;
+    pointer-events: none;
+}
+
+.campo-select {
+    width: 80%;
+}
+
+.campo select {
+    appearance: none;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.campo select option {
+    background: #252525;
+    color: #fff;
+}
+
+.campo-select > i {
+    font-size: 18px;
+}
+
+/* BOTÃO */
+
+.botao {
+    width: 92%;
+    min-height: 49px;
+    margin-top: 18px;
+    background: #a6ff00;
+    color: #fff;
+    border: none;
+    font-family: inherit;
+    font-size: 22px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.botao:hover {
+    background: #b8ff33;
+    transform: scale(1.02);
+}
+
+
+.lado-imagem {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 47%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.circulo-roxo {
+    position: absolute;
+    width: min(65vw, 570px);
+    height: min(65vw, 570px);
+    right: -130px;
+    bottom: -125px;
+    background: #8e24e8;
+    border-radius: 50%;
+}
+
+.personagem {
+    position: absolute;
+    z-index: 1;
+    height: 82%;
+    max-width: 100%;
+    width: auto;
+    object-fit: contain;
+    object-position: bottom right;
+    right: 5%;
+    bottom: 0;
+}
+
+
+@media (max-width: 850px) {
+    .lado-formulario {
+        width: 60%;
+    }
+
+    .lado-imagem {
+        width: 40%;
+    }
+
+    .personagem {
+        height: 65%;
+        right: -15%;
+    }
+
+    .circulo-roxo {
+        right: -180px;
+    }
+
+    .cabecalho h2 {
+        max-width: 450px;
+        margin: auto;
+    }
+}
+
+@media (max-width: 600px) {
+    .container {
+        min-height: 100vh;
+    }
+
+    .lado-formulario {
+        width: 100%;
+        padding: 35px 22px;
+    }
+
+    .lado-imagem {
+        display: none;
+    }
+
+    .cabecalho h1 {
+        font-size: 30px;
+    }
+
+    .cabecalho h2 {
+        font-size: 19px;
+    }
+
+    .avatar {
+        width: 125px;
+        height: 125px;
+        margin-bottom: 32px;
+    }
+
+    #form-desenvolvedor {
+        gap: 24px;
+    }
+}

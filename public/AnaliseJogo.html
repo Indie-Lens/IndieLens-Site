@@ -1,0 +1,455 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>IndieLens - Análise de Jogo</title>
+
+    <link rel="stylesheet" href="css/AnaliseJogo.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+    <div class="dashboard">
+
+        <aside class="sidebar">
+
+            <div class="sidebar-top">
+                <div class="logo">
+                    <span class="logo-icon">I</span>
+                    <span>IndieLens</span>
+                </div>
+            </div>
+
+            <nav class="menu">
+                <a href="#" class="menu-item ativo">
+                    Dashboard
+                </a>
+
+                <a href="#" class="menu-item">
+                    Outro
+                </a>
+
+                <a href="compararJogo.html" class="menu-item">
+                    Prototipos
+                </a>
+            </nav>
+
+            <div class="sidebar-bottom">
+
+                <div class="usuario">
+                    <div class="avatar"></div>
+                    <span>Olá, usuário</span>
+                </div>
+
+                <button class="btn-sair">Sair</button>
+
+            </div>
+
+        </aside>
+
+
+        <main class="conteudo">
+
+            <header class="topo">
+
+                <div>
+                    <h1>Dashboard - Análise de Jogo</h1>
+
+                    <div class="selecao-jogo">
+                        <label for="jogo">Selecione o jogo</label>
+
+                        <select id="jogo">
+                            <option value="stardew">Stardew Valley</option>
+                            <option value="hollow">Hollow Knight</option>
+                            <option value="celeste">Celeste</option>
+                        </select>
+                    </div>
+                </div>
+
+            </header>
+
+
+            <section class="kpis">
+
+                <div class="kpi">
+                    <h3>Posição no gênero</h3>
+
+                    <div class="kpi-valor">
+                        <strong>12º</strong>
+                        <span class="kpi-detalhe">/ 1.240</span>
+                    </div>
+                </div>
+
+                <div class="kpi">
+                    <h3>Avaliações Positivas</h3>
+
+                    <div class="kpi-valor">
+                        <strong>87%</strong>
+                    </div>
+                </div>
+
+                <div class="kpi">
+                    <h3>Desvio da média<br>do gênero</h3>
+
+                    <div class="kpi-valor">
+                        <strong class="verde">+5</strong>
+                    </div>
+
+                    <span class="kpi-legenda">Pontos percentuais</span>
+                </div>
+
+                <div class="kpi">
+                    <h3>Preço vs Mercado</h3>
+
+                    <div class="kpi-valor">
+                        <strong>R$ 34,99</strong>
+                    </div>
+
+                    <span class="kpi-legenda">+R$ 10 vs. média</span>
+                </div>
+
+            </section>
+
+
+            <section class="graficos">
+
+                <div class="grafico-container grafico-barras">
+
+                    <div class="grafico-titulo">
+                        <h2>Posição no mercado</h2>
+                        <p>Avaliações positivas vs. Concorrentes</p>
+                    </div>
+
+                    <div class="grafico">
+                        <canvas id="graficoBarras"></canvas>
+                    </div>
+
+                </div>
+
+
+                <div class="grafico-container grafico-dispersao">
+
+                    <div class="grafico-titulo">
+                        <h2>Preço × avaliações positivas</h2>
+                        <p>Cada jogo = um ponto</p>
+                    </div>
+
+                    <div class="legenda-jogo">
+                        <span class="bolinha-verde"></span>
+                        <span>Seu jogo</span>
+                    </div>
+
+                    <div class="grafico">
+                        <canvas id="graficoDispersao"></canvas>
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <script>
+
+
+        const contextoBarras = document
+            .getElementById("graficoBarras")
+            .getContext("2d");
+
+        const graficoBarras = new Chart(contextoBarras, {
+
+            type: "bar",
+
+            data: {
+
+                labels: [
+                    "Jogo A",
+                    "Stardew",
+                    "Jogo C",
+                    "Jogo D"
+                ],
+
+                datasets: [{
+                    label: "Ranking",
+                    data: [92, 87, 57, 63],
+
+                    backgroundColor: [
+                        "#777777",
+                        "#111111",
+                        "#cccccc",
+                        "#aaaaaa"
+                    ],
+
+                    borderRadius: 4,
+                    borderSkipped: false,
+                    barThickness: 28
+                }]
+
+            },
+
+            options: {
+
+                indexAxis: "y",
+
+                responsive: true,
+                maintainAspectRatio: false,
+
+                plugins: {
+
+                    legend: {
+                        display: true,
+                        position: "top",
+
+                        labels: {
+                            boxWidth: 8,
+                            boxHeight: 8,
+                            usePointStyle: true,
+                            color: "#111111",
+                            font: {
+                                size: 10
+                            }
+                        }
+                    },
+
+                    tooltip: {
+                        callbacks: {
+                            label: function (contexto) {
+                                return contexto.raw + "% de avaliações positivas";
+                            }
+                        }
+                    }
+                },
+
+                scales: {
+
+                    x: {
+                        min: 0,
+                        max: 100,
+
+                        ticks: {
+                            stepSize: 20,
+                            color: "#555555",
+                            font: {
+                                size: 9
+                            }
+                        },
+
+                        grid: {
+                            color: "#eeeeee"
+                        },
+
+                        border: {
+                            display: false
+                        }
+                    },
+
+                    y: {
+
+                        ticks: {
+                            color: "#555555",
+                            font: {
+                                size: 9
+                            }
+                        },
+
+                        grid: {
+                            display: false
+                        },
+
+                        border: {
+                            display: false
+                        }
+                    }
+
+                }
+
+            }
+
+        });
+
+
+        const contextoDispersao = document
+            .getElementById("graficoDispersao")
+            .getContext("2d");
+
+        const graficoDispersao = new Chart(contextoDispersao, {
+
+            type: "scatter",
+
+            data: {
+
+                datasets: [
+
+                    {
+                        label: "Concorrentes",
+
+                        data: [
+                            { x: 8, y: 80 },
+                            { x: 12, y: 43 },
+                            { x: 30, y: 7 }
+                        ],
+
+                        backgroundColor: "#9749e0",
+                        pointBackgroundColor: "#9749e0",
+                        pointRadius: 5,
+                        pointHoverRadius: 7
+                    },
+
+                    {
+                        label: "Seu jogo",
+
+                        data: [
+                            { x: 8, y: 87 }
+                        ],
+
+                        backgroundColor: "#9cff00",
+                        pointBackgroundColor: "#9cff00",
+                        pointBorderColor: "#75b800",
+                        pointBorderWidth: 1,
+                        pointRadius: 6,
+                        pointHoverRadius: 8
+                    }
+
+                ]
+
+            },
+
+            options: {
+
+                responsive: true,
+                maintainAspectRatio: false,
+
+                plugins: {
+
+                    legend: {
+                        display: false
+                    },
+
+                    tooltip: {
+
+                        callbacks: {
+
+                            label: function (contexto) {
+
+                                const preco = contexto.raw.x;
+                                const avaliacao = contexto.raw.y;
+
+                                return "R$ " + preco.toFixed(2).replace(".", ",")
+                                    + " | " + avaliacao + "% positivas";
+
+                            }
+
+                        }
+
+                    }
+
+                },
+
+                scales: {
+
+                    x: {
+
+                        type: "linear",
+
+                        title: {
+                            display: true,
+                            text: "Preço por Jogo",
+                            color: "#555555",
+                            font: {
+                                size: 10
+                            }
+                        },
+
+                        min: 0,
+                        max: 30,
+
+                        ticks: {
+                            stepSize: 5,
+                            color: "#555555",
+                            font: {
+                                size: 9
+                            }
+                        },
+
+                        grid: {
+                            color: "#eeeeee"
+                        }
+
+                    },
+
+                    y: {
+
+                        title: {
+                            display: true,
+                            text: "Avaliações Positivas (%)",
+                            color: "#555555",
+                            font: {
+                                size: 10
+                            }
+                        },
+
+                        min: 0,
+                        max: 100,
+
+                        ticks: {
+                            stepSize: 20,
+                            color: "#555555",
+                            font: {
+                                size: 9
+                            }
+                        },
+
+                        grid: {
+                            color: "#eeeeee"
+                        }
+
+                    }
+
+                }
+
+            }
+
+        });
+
+
+        document.getElementById("jogo").addEventListener("change", function () {
+
+            const jogoSelecionado = this.value;
+
+            if (jogoSelecionado === "stardew") {
+
+                graficoDispersao.data.datasets[1].data = [
+                    { x: 8, y: 87 }
+                ];
+
+            } else if (jogoSelecionado === "hollow") {
+
+                graficoDispersao.data.datasets[1].data = [
+                    { x: 15, y: 96 }
+                ];
+
+            } else if (jogoSelecionado === "celeste") {
+
+                graficoDispersao.data.datasets[1].data = [
+                    { x: 20, y: 97 }
+                ];
+
+            }
+
+            graficoDispersao.update();
+
+        });
+
+    </script>
+
+</body>
+</html>
