@@ -287,7 +287,10 @@ INSERT INTO perfil (id_perfil, tipo, descricao) VALUES
 
 -- Inserindo usuario
 INSERT INTO usuario (id_perfil, nome, email, senha) VALUES
-(1, "UsuarioTeste", "Teste@Teste.com", "Senha123");
+(1, "UsuarioTeste", "Teste@Teste.com", "123"),
+(2, "AdminTeste", "Admin@Teste.com", "123"),
+(3, "DevTeste", "Dev@Teste.com", "123"),
+(4, "StreamerTeste", "indielens.inc@gmail.com", "123");
 
 INSERT INTO notificacao (id_usuario, id_jogo, tipo, titulo, mensagem) VALUES
 (NULL, NULL, 'GLOBAL', 'nova base de dados!', 'teste de atualização da base de dados foi um sucesso!'),
