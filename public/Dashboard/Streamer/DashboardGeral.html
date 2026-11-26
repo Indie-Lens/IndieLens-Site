@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Geral | INDIE LENS</title>
+    <title>Dashboard | INDIE LENS</title>
     <link rel="stylesheet" href="CSS/dashboardGeral.css">
     <link rel="stylesheet" href="../../components/sidebar.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
@@ -17,16 +17,11 @@
         <aside class="sidebar" id="sidebar"></aside>
 
         <main class="conteudo-principal">
-    <div class="painel-geral">
+            <div class="painel-geral">
 
-        
-
-                <div class="topo-pagina">
-                    <div>
-                        <h1>Visão Geral</h1>
-                        <p>Acompanhe o desempenho consolidado de todas as suas lives.</p>
-                    </div>
-                    <div class="topo-direita">
+                <div class="cabecalho-pagina">
+                    <h1>Dashboard</h1>
+                    <div class="acoes-usuario">
                         <button class="btn-notificacao" aria-label="Notificações" onclick="abrirNotificacoes()">
                             <i class="fa-regular fa-bell"></i>
                         </button>
@@ -37,244 +32,344 @@
                     </div>
                 </div>
 
-                <div class="linha-indicadores">
-
-                    <div class="cartao cartao-indicador">
-                        <div class="cabecalho-indicador">
-                            <span>Total de Lives</span>
+                <div class="card-jogo-destaque" style="background-image: url('../../assets/imgs/Hollow.jpg');">
+                    <div class="jogo-overlay"></div>
+                    <div class="jogo-conteudo">
+                        <span class="selo-dia">
+                            <i class="fa-solid fa-star"></i> Recomendado do dia
+                        </span>
+                        <h2>Hollow Knight: Silksong</h2>
+                        <p class="jogo-descricao">Explore um vasto reino em um metroidvania desafiador. Alta audiência e público engajado — ideal para sua próxima live.</p>
+                        <div class="jogo-tags">
+                            <span>Metroidvania</span>
+                            <span>Ação</span>
+                            <span>PC®</span>
                         </div>
-                        <h2>18</h2>
-                        <span class="tendencia positiva">↑ 3 lives este mês</span>
+                        <div class="jogo-rodape">
+                            <div class="jogo-acoes">
+                                <button class="btn-jogo primario">
+                                    <i class="fa-solid fa-play"></i> Ver Gameplay
+                                </button>
+                                <button class="btn-jogo">
+                                    <i class="fa-regular fa-bookmark"></i> Quero jogar
+                                </button>
+                            </div>
+                            <span class="jogo-preco">US$ 19,99</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="linha-kpis">
+
+                    <button class="cartao card-kpi" type="button" onclick="abrirListaJogos('alta')">
+                        <span class="kpi-icone roxo"><i class="fa-solid fa-fire"></i></span>
+                        <div class="kpi-texto">
+                            <span class="kpi-valor">21</span>
+                            <span class="kpi-label">Jogos em alta</span>
+                        </div>
+                        <i class="fa-solid fa-chevron-right kpi-seta"></i>
+                    </button>
+
+                    <button class="cartao card-kpi" type="button" onclick="abrirListaJogos('promocao')">
+                        <span class="kpi-icone verde"><i class="fa-solid fa-tag"></i></span>
+                        <div class="kpi-texto">
+                            <span class="kpi-valor">15</span>
+                            <span class="kpi-label">Em promoção</span>
+                        </div>
+                        <i class="fa-solid fa-chevron-right kpi-seta"></i>
+                    </button>
+
+                    <button class="cartao card-kpi" type="button" onclick="abrirListaJogos('perfil')">
+                        <span class="kpi-icone roxo"><i class="fa-solid fa-wand-magic-sparkles"></i></span>
+                        <div class="kpi-texto">
+                            <span class="kpi-valor">12</span>
+                            <span class="kpi-label">A sua cara</span>
+                        </div>
+                        <i class="fa-solid fa-chevron-right kpi-seta"></i>
+                    </button>
+
+                    <button class="cartao card-kpi" type="button" onclick="abrirListaJogos('lancamentos')">
+                        <span class="kpi-icone verde"><i class="fa-solid fa-rocket"></i></span>
+                        <div class="kpi-texto">
+                            <span class="kpi-valor">8</span>
+                            <span class="kpi-label">Lançamentos</span>
+                        </div>
+                        <i class="fa-solid fa-chevron-right kpi-seta"></i>
+                    </button>
+
+                </div>
+
+                <div class="linha-graficos-dupla">
+
+                    <div class="cartao">
+                        <h3>Público dos jogos em alta</h3>
+                        <p class="cartao-subtitulo">Barras: quanta gente joga. Linha: o quão concorrido está.</p>
+                        <div class="container-grafico">
+                            <canvas id="graficoCcuConcorrencia"></canvas>
+                        </div>
                     </div>
 
-                    <div class="cartao cartao-indicador">
-                        <div class="cabecalho-indicador">
-                            <span>Média de Espectadores</span>
+                    <div class="cartao">
+                        <h3>Temas que mais atraem</h3>
+                        <p class="cartao-subtitulo">Os estilos de jogo mais buscados agora.</p>
+                        <div class="container-grafico">
+                            <canvas id="graficoTags"></canvas>
                         </div>
-                        <h2>124</h2>
-                        <span class="tendencia positiva">↑ 42% vs. mês anterior</span>
-                    </div>
-
-                    <div class="cartao cartao-indicador">
-                        <div class="cabecalho-indicador">
-                            <span>Maior Pico Registrado</span>
-                        </div>
-                        <h2>342</h2>
-                        <span class="tendencia positiva">↑ 67% vs. mês anterior</span>
-                    </div>
-
-                    <div class="cartao cartao-indicador">
-                        <div class="cabecalho-indicador">
-                            <span>Seguidores Ganhos</span>
-                        </div>
-                        <h2>98</h2>
-                        <span class="tendencia positiva">↑ 24% vs. mês anterior</span>
-                    </div>
-
-                    <div class="cartao cartao-destaque">
-                        <div class="cabecalho-indicador">
-                            <span>Melhor Live</span>
-                        </div>
-                        <h2>Hades</h2>
-                        <p>342 espectadores (pico)</p>
-                        <small>12/08 • 20:15 &nbsp;·&nbsp; nota ★ 4</small>
                     </div>
 
                 </div>
 
-                <div class="linha-graficos">
+                <div class="linha-inferior-dupla">
 
-                    <div class="cartao grafico-grande">
-                        <h3>Evolução de Espectadores</h3>
-                        <div class="container-grafico">
-                            <canvas id="graficoEvolucao"></canvas>
+                    <div class="cartao">
+                        <h3>Ainda prende o público?</h3>
+                        <p class="cartao-subtitulo">Compare o interesse das últimas 2 semanas com o total.</p>
+                        <div class="container-grafico-pequeno">
+                            <canvas id="graficoEngajamento"></canvas>
                         </div>
                     </div>
 
-                    <div class="cartao grafico-medio">
-                        <h3>Melhores Horários para Transmitir</h3>
-                        <div class="container-grafico">
-                            <canvas id="graficoHorarios"></canvas>
-                        </div>
-                    </div>
-
-                    <div class="cartao grafico-pequeno">
-                        <h3>Jogos Mais Transmitidos</h3>
-                        <div class="container-grafico">
-                            <canvas id="graficoJogos"></canvas>
+                    <div class="cartao">
+                        <h3>Seu perfil de jogos</h3>
+                        <p class="cartao-subtitulo">O seu estilo comparado com a média dos streamers.</p>
+                        <div class="container-grafico-pequeno">
+                            <canvas id="graficoRadar"></canvas>
                         </div>
                     </div>
 
                 </div>
 
-                <div class="linha-inferior">
-
-                    <div class="cartao cartao-desempenho">
-                        <h3>Desempenho por Categoria</h3>
-                        <div class="grade-categorias">
-
-                            <div class="caixa-categoria caixa-roxa">
-                                <h4>Roguelike</h4>
-                                <h2>186</h2>
-                                <span class="tendencia positiva">↑ 53%</span>
-                            </div>
-
-                            <div class="caixa-categoria caixa-verde">
-                                <h4>Simulação</h4>
-                                <h2>142</h2>
-                                <span class="tendencia positiva">↑ 30%</span>
-                            </div>
-
-                            <div class="caixa-categoria caixa-roxa">
-                                <h4>Aventura</h4>
-                                <h2>98</h2>
-                                <span class="tendencia positiva">↑ 21%</span>
-                            </div>
-
-                            <div class="caixa-categoria caixa-verde">
-                                <h4>Ação</h4>
-                                <h2>89</h2>
-                                <span class="tendencia positiva">↑ 12%</span>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <div class="cartao cartao-ultimas-lives">
-                        <div class="cabecalho-flexivel">
-                            <h3>Últimas Lives</h3>
-                            <a href="selecionarLive.html" class="link-ver-todos">Ver todas</a>
-                        </div>
-                        <table class="tabela-recentes">
-                            <thead>
-                                <tr>
-                                    <th>Jogo</th>
-                                    <th>Data e Hora</th>
-                                    <th>Duração</th>
-                                    <th>Média</th>
-                                    <th>Pico</th>
-                                    <th>+Seg.</th>
-                                    <th>Nota</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr onclick="location.href='dashboardLive.html'">
-                                    <td>Hades</td>
-                                    <td>12/08 • 20:15</td>
-                                    <td>3h 42min</td>
-                                    <td>185</td>
-                                    <td>342</td>
-                                    <td>+24</td>
-                                    <td>★ 4</td>
-                                </tr>
-                                <tr onclick="location.href='dashboardLive.html'">
-                                    <td>Stardew Valley</td>
-                                    <td>09/08 • 19:00</td>
-                                    <td>3h 15min</td>
-                                    <td>142</td>
-                                    <td>231</td>
-                                    <td>+16</td>
-                                    <td>★ 4</td>
-                                </tr>
-                                <tr onclick="location.href='dashboardLive.html'">
-                                    <td>Hollow Knight</td>
-                                    <td>05/08 • 21:40</td>
-                                    <td>3h 33min</td>
-                                    <td>98</td>
-                                    <td>176</td>
-                                    <td>+9</td>
-                                    <td>★ 3</td>
-                                </tr>
-                                <tr onclick="location.href='dashboardLive.html'">
-                                    <td>Hades</td>
-                                    <td>01/08 • 20:00</td>
-                                    <td>2h 50min</td>
-                                    <td>112</td>
-                                    <td>198</td>
-                                    <td>+12</td>
-                                    <td>★ 3</td>
-                                </tr>
-                                <tr onclick="location.href='dashboardLive.html'">
-                                    <td>Cuphead</td>
-                                    <td>28/07 • 18:30</td>
-                                    <td>2h 10min</td>
-                                    <td>89</td>
-                                    <td>154</td>
-                                    <td>+7</td>
-                                    <td>★ 5</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                </div>
-
-            
+            </div>
         </main>
+    </div>
+
+    <div class="modal-overlay" id="modalJogos" onclick="fecharListaJogos(event)">
+        <div class="modal-jogos">
+            <div class="modal-topo">
+                <div>
+                    <h2 id="modalTitulo">Jogos em alta</h2>
+                    <p id="modalSubtitulo">bombando esta semana</p>
+                </div>
+                <button class="btn-fechar-modal" type="button" onclick="fecharListaJogos()" aria-label="Fechar">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-lista" id="modalLista"></div>
+        </div>
     </div>
 
     <script>
         Chart.defaults.color = '#8c8d9e';
         Chart.defaults.font.family = 'Inter, sans-serif';
-        const corRoxo = '#9749e0', corVerde = '#9cff00', corBorda = '#222330';
+        const corRoxo = '#9749e0', corVerde = '#9cff00', corBorda = '#222330', corCinza = '#8c8d9e';
 
-        const ctxEv = document.getElementById('graficoEvolucao').getContext('2d');
-        const gV = ctxEv.createLinearGradient(0, 0, 0, 400);
-        gV.addColorStop(0, 'rgba(156,255,0,0.3)');
-        gV.addColorStop(1, 'rgba(156,255,0,0.0)');
-        const gR = ctxEv.createLinearGradient(0, 0, 0, 400);
-        gR.addColorStop(0, 'rgba(151,73,224,0.5)');
-        gR.addColorStop(1, 'rgba(151,73,224,0.0)');
-
-        new Chart(ctxEv, {
-            type: 'line',
+        new Chart(document.getElementById('graficoCcuConcorrencia'), {
             data: {
-                labels: ['28/07','01/08','05/08','09/08','12/08'],
+                labels: ['Hollow Kni...', 'Road 96', 'Blue Prince', 'Neon White', 'Roboquest'],
                 datasets: [
-                    { label: 'Pico',  data: [154,198,176,231,342], borderColor: corVerde, backgroundColor: gV, borderWidth: 2, tension: 0.4, fill: true, pointRadius: 0 },
-                    { label: 'Média', data: [89, 112, 98,142,185], borderColor: corRoxo,  backgroundColor: gR, borderWidth: 2, tension: 0.4, fill: true, pointRadius: 0 }
+                    {
+                        type: 'bar',
+                        label: 'Peak CCU (mil)',
+                        data: [430, 75, 90, 120, 55],
+                        backgroundColor: 'rgba(151, 73, 224, 0.5)',
+                        borderColor: corRoxo,
+                        borderWidth: 1,
+                        borderRadius: 4,
+                        yAxisID: 'y'
+                    },
+                    {
+                        type: 'line',
+                        label: 'Concorrência nicho',
+                        data: [445, 115, 150, 275, 130],
+                        borderColor: corVerde,
+                        backgroundColor: corVerde,
+                        borderWidth: 2,
+                        tension: 0.3,
+                        pointRadius: 4,
+                        pointBackgroundColor: corVerde,
+                        yAxisID: 'y1'
+                    }
                 ]
             },
             options: {
                 responsive: true, maintainAspectRatio: false,
-                scales: { y: { beginAtZero: true, grid: { color: corBorda } }, x: { grid: { display: false } } },
-                plugins: { legend: { position: 'top', align: 'end', labels: { usePointStyle: true, boxWidth: 8 } } }
+                plugins: { legend: { position: 'top', align: 'end', labels: { usePointStyle: true, boxWidth: 8 } } },
+                scales: {
+                    y:  { position: 'left',  beginAtZero: true, grid: { color: corBorda }, ticks: { callback: v => v + 'h' } },
+                    y1: { position: 'right', beginAtZero: true, grid: { display: false } },
+                    x:  { grid: { display: false } }
+                }
             }
         });
 
-        new Chart(document.getElementById('graficoHorarios'), {
+        new Chart(document.getElementById('graficoTags'), {
             type: 'bar',
             data: {
-                labels: ['18h–19h','19h–20h','20h–21h','21h–22h'],
+                labels: ['Roguelike', 'Narrativa', 'Co-op', 'Mistério', 'História Rica'],
                 datasets: [{
-                    label: 'Pico médio',
-                    data: [154, 165, 265, 231],
-                    backgroundColor: ['#4a246e','#592b84', corVerde, corRoxo],
+                    label: 'Frequência',
+                    data: [9.2, 8, 6.8, 5.5, 5],
+                    backgroundColor: corRoxo,
                     borderRadius: 4
                 }]
             },
             options: {
+                indexAxis: 'y',
                 responsive: true, maintainAspectRatio: false,
                 plugins: { legend: { display: false } },
-                scales: { y: { beginAtZero: true, grid: { color: corBorda } }, x: { grid: { display: false } } }
+                scales: {
+                    x: { beginAtZero: true, max: 10, grid: { color: corBorda } },
+                    y: { grid: { display: false } }
+                }
             }
         });
 
-        new Chart(document.getElementById('graficoJogos'), {
-            type: 'doughnut',
+        new Chart(document.getElementById('graficoEngajamento'), {
+            type: 'bar',
             data: {
-                labels: ['Hades','Stardew Valley','Hollow Knight','Cuphead','Outros'],
-                datasets: [{
-                    data: [7, 4, 3, 2, 2],
-                    backgroundColor: [corVerde, corRoxo, '#8c8d9e', '#36374a', '#1a1b24'],
-                    borderWidth: 0,
-                    hoverOffset: 4
-                }]
+                labels: ['Jogo A', 'Jogo B', 'Jogo C', 'Jogo D'],
+                datasets: [
+                    {
+                        label: 'Últimas 2 semanas',
+                        data: [87, 72, 55, 76],
+                        backgroundColor: corRoxo,
+                        borderRadius: { topLeft: 0, topRight: 0 }
+                    },
+                    {
+                        label: 'Total',
+                        data: [38, 36, 33, 44],
+                        backgroundColor: 'rgba(156, 255, 0, 0.35)',
+                        borderRadius: { topLeft: 4, topRight: 4 }
+                    }
+                ]
             },
             options: {
-                responsive: true, maintainAspectRatio: false, cutout: '70%',
-                plugins: { legend: { position: 'right', labels: { usePointStyle: true, color: '#8c8d9e', padding: 15 } } }
+                responsive: true, maintainAspectRatio: false,
+                plugins: { legend: { position: 'top', align: 'end', labels: { usePointStyle: true, boxWidth: 8 } } },
+                scales: {
+                    x: { stacked: true, grid: { display: false } },
+                    y: { stacked: true, beginAtZero: true, grid: { color: corBorda }, ticks: { callback: v => v + 'h' } }
+                }
             }
+        });
+
+        new Chart(document.getElementById('graficoRadar'), {
+            type: 'radar',
+            data: {
+                labels: ['Afinidade de gênero', 'Caça-promoções', 'Foco indie', 'Variedade', 'Novidades', 'Dificuldade'],
+                datasets: [
+                    {
+                        label: 'Você',
+                        data: [85, 60, 90, 45, 70, 80],
+                        borderColor: corRoxo,
+                        backgroundColor: 'rgba(151, 73, 224, 0.25)',
+                        borderWidth: 2,
+                        pointBackgroundColor: corRoxo,
+                        pointRadius: 3
+                    },
+                    {
+                        label: 'Média dos streamers',
+                        data: [60, 55, 50, 65, 60, 55],
+                        borderColor: corVerde,
+                        backgroundColor: 'rgba(156, 255, 0, 0.12)',
+                        borderWidth: 2,
+                        pointBackgroundColor: corVerde,
+                        pointRadius: 3
+                    }
+                ]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                plugins: { legend: { position: 'top', align: 'end', labels: { usePointStyle: true, boxWidth: 8 } } },
+                scales: {
+                    r: {
+                        min: 0,
+                        max: 100,
+                        angleLines: { color: corBorda },
+                        grid: { color: corBorda },
+                        pointLabels: { color: '#c5cdd9', font: { size: 11 } },
+                        ticks: { display: false, stepSize: 25 }
+                    }
+                }
+            }
+        });
+    </script>
+
+    <script>
+        const listasJogos = {
+            alta: {
+                titulo: 'Jogos em alta',
+                subtitulo: 'Os que estão bombando esta semana',
+                jogos: [
+                    { nome: 'Hollow Knight: Silksong', img: '../../assets/imgs/Hollow.jpg', tag: 'Metroidvania', info: '430 mil jogando agora' },
+                    { nome: 'Hades', img: '../../assets/imgs/Hades.jpg', tag: 'Roguelike', info: '280 mil jogando agora' },
+                    { nome: 'Dave the Diver', img: '../../assets/imgs/DaveTheDiver.jpg', tag: 'Aventura', info: '150 mil jogando agora' },
+                    { nome: 'Cuphead', img: '../../assets/imgs/Cuphead.jpg', tag: 'Ação', info: '98 mil jogando agora' }
+                ]
+            },
+            promocao: {
+                titulo: 'Em promoção',
+                subtitulo: 'Aproveite antes que acabe a oferta',
+                jogos: [
+                    { nome: 'Hades', img: '../../assets/imgs/Hades.jpg', tag: 'Roguelike', info: 'R$ 44,99 → R$ 11,24', desconto: '-75%' },
+                    { nome: 'Celeste', img: '../../assets/imgs/celeste-e1534205369647.jpg', tag: 'Plataforma', info: 'R$ 34,99 → R$ 13,99', desconto: '-60%' },
+                    { nome: 'Stardew Valley', img: '../../assets/imgs/StardewValleyBanner.png', tag: 'Simulação', info: 'R$ 24,99 → R$ 14,99', desconto: '-40%' },
+                    { nome: 'Cuphead', img: '../../assets/imgs/Cuphead.jpg', tag: 'Ação', info: 'R$ 39,99 → R$ 23,99', desconto: '-40%' }
+                ]
+            },
+            perfil: {
+                titulo: 'A sua cara',
+                subtitulo: 'Combinam com o estilo das suas lives',
+                jogos: [
+                    { nome: 'Hollow Knight', img: '../../assets/imgs/Hollow.jpg', tag: 'Metroidvania', info: '95% de match com seu perfil' },
+                    { nome: 'Dead Cells', img: '../../assets/imgs/MeninaJogando.jpg', tag: 'Roguelike', info: '92% de match com seu perfil' },
+                    { nome: 'Hades', img: '../../assets/imgs/Hades.jpg', tag: 'Ação', info: '89% de match com seu perfil' },
+                    { nome: 'Undertale', img: '../../assets/imgs/tela.jpg', tag: 'RPG', info: '84% de match com seu perfil' }
+                ]
+            },
+            lancamentos: {
+                titulo: 'Lançamentos',
+                subtitulo: 'Os jogos que acabaram de chegar',
+                jogos: [
+                    { nome: 'Hollow Knight: Silksong', img: '../../assets/imgs/Hollow.jpg', tag: 'Metroidvania', info: 'Lançou há 2 dias' },
+                    { nome: 'Dave the Diver', img: '../../assets/imgs/DaveTheDiver.jpg', tag: 'Aventura', info: 'Lançou esta semana' },
+                    { nome: 'Celeste', img: '../../assets/imgs/celeste-e1534205369647.jpg', tag: 'Plataforma', info: 'Lançou há 5 dias' },
+                    { nome: 'Cuphead', img: '../../assets/imgs/Cuphead.jpg', tag: 'Ação', info: 'Lançou há 1 semana' }
+                ]
+            }
+        };
+
+        function abrirListaJogos(tipo) {
+            const lista = listasJogos[tipo];
+            if (!lista) return;
+
+            document.getElementById('modalTitulo').textContent = lista.titulo;
+            document.getElementById('modalSubtitulo').textContent = lista.subtitulo;
+
+            document.getElementById('modalLista').innerHTML = lista.jogos.map(j => `
+                <a class="item-jogo" href="pagJogo.html?jogo=${encodeURIComponent(j.nome.toLowerCase().split(':')[0].trim())}">
+                    <img src="${j.img}" alt="${j.nome}">
+                    <div class="item-info">
+                        <span class="item-nome">${j.nome}</span>
+                        <span class="item-tag">${j.tag}</span>
+                    </div>
+                    <div class="item-direita">
+                        ${j.desconto ? `<span class="item-desconto">${j.desconto}</span>` : ''}
+                        <span class="item-extra">${j.info}</span>
+                    </div>
+                </a>
+            `).join('');
+
+            document.getElementById('modalJogos').classList.add('ativo');
+        }
+
+        function fecharListaJogos(e) {
+            if (e && e.target !== e.currentTarget) return;
+            document.getElementById('modalJogos').classList.remove('ativo');
+        }
+
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') document.getElementById('modalJogos').classList.remove('ativo');
         });
     </script>
 
@@ -286,23 +381,20 @@
     </script>
     <script src="./JS/global.js"></script>
 
-<script>
-    function abrirMenuMobile() {
-    const sidebar = document.querySelector("#sidebar .left-container");
-    const fundo = document.querySelector("#sidebar .fundo-menu");
+    <script>
+        function abrirMenuMobile() {
+            const sidebar = document.querySelector("#sidebar .left-container");
+            const fundo = document.querySelector("#sidebar .fundo-menu");
+            sidebar?.classList.add("menu-aberto");
+            fundo?.classList.add("menu-aberto");
+        }
 
-    sidebar?.classList.add("menu-aberto");
-    fundo?.classList.add("menu-aberto");
-}
-
-function fecharMenuMobile() {
-    const sidebar = document.querySelector("#sidebar .left-container");
-    const fundo = document.querySelector("#sidebar .fundo-menu");
-
-    sidebar?.classList.remove("menu-aberto");
-    fundo?.classList.remove("menu-aberto");
-
-}
-</script>
+        function fecharMenuMobile() {
+            const sidebar = document.querySelector("#sidebar .left-container");
+            const fundo = document.querySelector("#sidebar .fundo-menu");
+            sidebar?.classList.remove("menu-aberto");
+            fundo?.classList.remove("menu-aberto");
+        }
+    </script>
 </body>
 </html>
