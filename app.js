@@ -1,5 +1,5 @@
-//var ambiente_processo = 'producao';
-var ambiente_processo = 'desenvolvimento';
+var ambiente_processo = 'producao';
+// var ambiente_processo = 'desenvolvimento';
 
 var caminho_env = ambiente_processo === 'producao' ? '.env' : '.env.dev';
 require("dotenv").config({ path: caminho_env });
@@ -15,10 +15,10 @@ var app = express();
 
 var indexRouter = require("./src/routes/index");
 var usuarioRouter = require("./src/routes/usuarios");
-// var liveRouter = require("./src/routes/lives"); 
+var liveRouter = require("./src/routes/lives"); 
 var avaliacaoRouter = require("./src/routes/avaliacoes");
 var simularJogoRouter = require("./src/routes/simularJogo");
-// var notificacaoRouter = require("./src/routes/notificacoes");
+var notificacaoRouter = require("./src/routes/notificacoes");
 
 
 app.use(express.json());
@@ -28,11 +28,11 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(cors());
 
 app.use("/", indexRouter);
-// app.use("/lives", liveRouter);
+app.use("/lives", liveRouter);
 app.use("/usuarios", usuarioRouter);
 app.use("/simularJogo", simularJogoRouter);
 app.use("/avaliacoes", avaliacaoRouter);
-// app.use("/notificacoes", notificacaoRouter);
+app.use("/notificacoes", notificacaoRouter);
 
 
 app.listen(PORTA_APP, function () {
