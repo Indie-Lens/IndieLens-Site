@@ -6,8 +6,8 @@ function listarPorUsuario(idUsuario) {
         ID do Usuário: ${idUsuario}
     `);
 
-    let instrucaoSQL = `
-        SELECT 
+    const instrucaoSQL = `
+        SELECT
             id_notificacao,
             id_usuario,
             id_jogo,
@@ -16,15 +16,15 @@ function listarPorUsuario(idUsuario) {
             mensagem,
             data_criacao,
             data_leitura,
-            CASE 
+            CASE
                 WHEN id_usuario IS NULL AND DATEDIFF(CURRENT_TIMESTAMP, data_criacao) > 7 THEN 1
                 ELSE lida
             END AS lida
         FROM notificacao
-        WHERE id_usuario = ${idUsuario} OR id_usuario IS NULL
+        WHERE id_usuario = ? OR id_usuario IS NULL
         ORDER BY data_criacao DESC;
     `;
-    return database.executar(instrucaoSQL);
+    return database.executar(instrucaoSQL, [idUsuario]);
 }
 
 function contarNaoLidas(idUsuario) {
@@ -33,13 +33,13 @@ function contarNaoLidas(idUsuario) {
         ID do Usuário: ${idUsuario}
     `);
 
-    let instrucaoSQL = `
+    const instrucaoSQL = `
         SELECT COUNT(*) AS total_notificacoes
         FROM notificacao
-        WHERE (id_usuario = ${idUsuario} AND lida = 0)
-           OR (id_usuario IS NULL AND DATEDIFF(CURRENT_TIMESTAMP, data_criacao) <= 7);
+        WHERE (id_usuario = ? AND lida = 0)
+           OR (id_usuario IS NULL AND lida = 0 AND DATEDIFF(CURRENT_TIMESTAMP, data_criacao) <= 7);
     `;
-    return database.executar(instrucaoSQL);
+    return database.executar(instrucaoSQL, [idUsuario]);
 }
 
 function marcarComoLida(idNotificacao) {
@@ -48,15 +48,15 @@ function marcarComoLida(idNotificacao) {
         ID da Notificação: ${idNotificacao}
     `);
 
-    let instrucaoSQL = `
+    const instrucaoSQL = `
         UPDATE notificacao
         SET
             lida = 1,
             data_leitura = CURRENT_TIMESTAMP
-        WHERE id_notificacao = ${idNotificacao}
+        WHERE id_notificacao = ?
           AND id_usuario IS NOT NULL;
     `;
-    return database.executar(instrucaoSQL);
+    return database.executar(instrucaoSQL, [idNotificacao]);
 }
 
 function marcarTodasComoLidas(idUsuario) {
@@ -65,15 +65,15 @@ function marcarTodasComoLidas(idUsuario) {
         ID do Usuário: ${idUsuario}
     `);
 
-    let instrucaoSQL = `
+    const instrucaoSQL = `
         UPDATE notificacao
         SET
             lida = 1,
             data_leitura = CURRENT_TIMESTAMP
-        WHERE id_usuario = ${idUsuario}
+        WHERE id_usuario = ?
           AND lida = 0;
     `;
-    return database.executar(instrucaoSQL);
+    return database.executar(instrucaoSQL, [idUsuario]);
 }
 
 function cadastrar(idUsuario, idJogo, tipo, titulo, mensagem) {
@@ -86,14 +86,14 @@ function cadastrar(idUsuario, idJogo, tipo, titulo, mensagem) {
         Mensagem: ${mensagem}
     `);
 
-    let valorUsuario = idUsuario ? idUsuario : "NULL";
-    let valorJogo = idJogo ? idJogo : "NULL";
+    const valorUsuario = idUsuario ? Number(idUsuario) : null;
+    const valorJogo = idJogo ? Number(idJogo) : null;
 
-    let instrucaoSQL = `
+    const instrucaoSQL = `
         INSERT INTO notificacao (id_usuario, id_jogo, tipo, titulo, mensagem)
-        VALUES (${valorUsuario}, ${valorJogo}, "${tipo}", "${titulo}", "${mensagem}");
+        VALUES (?, ?, ?, ?, ?);
     `;
-    return database.executar(instrucaoSQL);
+    return database.executar(instrucaoSQL, [valorUsuario, valorJogo, tipo, titulo, mensagem]);
 }
 
 module.exports = {

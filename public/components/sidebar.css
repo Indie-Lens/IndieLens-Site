@@ -298,6 +298,9 @@ body {
     overflow-y: auto;
 
     background-color: #0d121a;
+    color: var(--texto, #f4f6fb);
+    border-right: 1px solid var(--borda, #263142);
+    box-shadow: 8px 0 28px rgba(0, 0, 0, 0.45);
     opacity: 1;
     z-index: 10001;
     isolation: isolate;
@@ -307,52 +310,61 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 25px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--borda, #263142);
+    margin-bottom: 20px;
 }
 
 .notificacoes-topo h2 {
-    color: var(--verde-primario);
+    color: var(--verde-primario, #9cff00);
     font-size: 1.2rem;
+    margin: 0;
 }
 
 .notificacoes-topo button {
     background: transparent;
-    color: var(--texto);
-    border: 1px solid var(--borda);
+    color: var(--texto, #f4f6fb);
+    border: 1px solid var(--borda, #263142);
     border-radius: 5px;
     padding: 6px 10px;
     cursor: pointer;
 }
 
+.notificacoes-topo button:hover {
+    border-color: var(--verde-primario, #9cff00);
+    color: var(--verde-primario, #9cff00);
+}
+
 .notificacao {
     background: #14141C;
-    border: 1px solid var(--borda);
+    border: 1px solid var(--borda, #263142);
     border-radius: 8px;
     padding: 15px;
     margin-bottom: 15px;
 }
 
 .notificacao h3 {
+    color: var(--texto, #f4f6fb);
     font-size: 0.9rem;
-    margin-bottom: 10px;
+    margin: 0 0 10px 0;
 }
 
 .notificacao p {
-    color: var(--texto-secundario);
+    color: var(--texto-secundario, #aab5c7);
     font-size: 0.8rem;
     line-height: 1.5;
-    margin-bottom: 12px;
+    margin: 0 0 12px 0;
 }
 
 .notificacao span {
-    color: var(--verde-primario);
+    color: var(--verde-primario, #9cff00);
     font-size: 0.75rem;
     font-weight: bold;
 }
 
 @media (max-width: 1100px) {
     .barra-notificacoes {
-        left: 210px;
+        left: 260px;
     }
 }
 

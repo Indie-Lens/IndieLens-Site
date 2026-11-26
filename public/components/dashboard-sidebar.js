@@ -1,8 +1,71 @@
+(function verificarAcessoPerfil() {
+    const perfil = String(sessionStorage.getItem('PERFIL_USUARIO') || '').trim();
+    const path = window.location.pathname.toLowerCase();
+
+    if (perfil === '4' && (path.includes('/dashboard/leadgame/') || path.includes('/dashboard/desenvolvedor/'))) {
+        window.location.replace('/Dashboard/Streamer/DashboardGeral.html');
+    } else if (perfil === '3' && path.includes('/dashboard/streamer/')) {
+        window.location.replace('/Dashboard/LeadGame/dashPrincipalLead.html');
+    }
+})();
+
+const ROTULOS_PERFIL_SIDEBAR = {
+    '1': 'Teste',
+    '2': 'Admin',
+    '3': 'Lead Game',
+    '4': 'Streamer'
+};
+
 function escaparTextoNotificacao(texto) {
     const div = document.createElement('div');
     div.textContent = texto ?? '';
     return div.innerHTML;
 }
+
+window.atualizarUsuarioSidebar = (escopo = document) => {
+    const raiz = escopo && typeof escopo.querySelectorAll === 'function' ? escopo : document;
+    const nome = (sessionStorage.getItem('NOME_USUARIO') || '').trim();
+    const perfil = String(sessionStorage.getItem('PERFIL_USUARIO') || '').trim();
+    const rotuloPerfil = ROTULOS_PERFIL_SIDEBAR[perfil];
+
+    if (nome) {
+        raiz.querySelectorAll('.nome-usuario').forEach((el) => {
+            el.textContent = nome;
+        });
+        document.querySelectorAll('.acoes-usuario .perfil .nome, .topo-direita .perfil .nome').forEach((el) => {
+            el.textContent = nome;
+        });
+    }
+
+    if (rotuloPerfil) {
+        raiz.querySelectorAll('.tipo-usuario').forEach((el) => {
+            el.textContent = rotuloPerfil;
+        });
+    }
+
+    const currentPath = window.location.pathname.toLowerCase();
+    raiz.querySelectorAll('.opcao[href]').forEach((link) => {
+        try {
+            if (new URL(link.href, window.location.href).pathname.toLowerCase() === currentPath) {
+                link.classList.add('active');
+            }
+        } catch {
+            // Ignora href inválido
+        }
+    });
+
+    raiz.querySelectorAll('.btn-perfil').forEach((botao) => {
+        if (!botao.getAttribute('onclick') && !botao.dataset.perfilBound) {
+            botao.dataset.perfilBound = '1';
+            botao.addEventListener('click', () => {
+                const destino = (perfil === '4' || currentPath.includes('/dashboard/streamer/'))
+                    ? '/Dashboard/Streamer/Perfil.html'
+                    : '/Dashboard/Desenvolvedor/Perfil.html';
+                window.location.href = destino;
+            });
+        }
+    });
+};
 
 window.carregarNotificacoes = async (marcarLidasAoAbrir = false) => {
     const panel = document.getElementById('barraNotificacoes');
@@ -16,7 +79,7 @@ window.carregarNotificacoes = async (marcarLidasAoAbrir = false) => {
         panel.appendChild(container);
     }
 
-    const idUsuario = sessionStorage.ID_USUARIO || 1;
+    const idUsuario = sessionStorage.ID_USUARIO || 0;
 
     try {
         const resposta = await fetch(`/notificacoes/listar/${idUsuario}`);
@@ -74,6 +137,9 @@ window.loadDashboardSidebar = async (host, source) => {
         const response = await fetch(source);
         if (!response.ok) throw new Error(`Sidebar request failed: ${response.status}`);
         host.innerHTML = await response.text();
+        window.atualizarUsuarioSidebar(host);
+        const panel = host.querySelector('#barraNotificacoes');
+        if (panel) panel.dataset.notificacoesInit = '1';
         await window.carregarNotificacoes(false);
     } catch (error) {
         console.error('Não foi possível carregar a navegação.', error);
@@ -96,3 +162,49 @@ window.fecharNotificacoes = () => {
         panel.classList.remove('notificacoes-abertas');
     }
 };
+
+if (typeof window.abrirMenuMobile !== 'function') {
+    window.abrirMenuMobile = () => {
+        document.querySelector('#sidebar .left-container, #profile-sidebar .left-container')?.classList.add('menu-aberto');
+        document.querySelector('#sidebar .fundo-menu, #profile-sidebar .fundo-menu')?.classList.add('menu-aberto');
+    };
+}
+
+if (typeof window.fecharMenuMobile !== 'function') {
+    window.fecharMenuMobile = () => {
+        document.querySelector('#sidebar .left-container, #profile-sidebar .left-container')?.classList.remove('menu-aberto');
+        document.querySelector('#sidebar .fundo-menu, #profile-sidebar .fundo-menu')?.classList.remove('menu-aberto');
+    };
+}
+
+(function iniciarObservadorSidebar() {
+    function sincronizarSidebar(sidebar) {
+        if (!sidebar) return;
+        window.atualizarUsuarioSidebar(sidebar);
+        const panel = sidebar.querySelector('#barraNotificacoes');
+        if (panel && !panel.dataset.notificacoesInit) {
+            panel.dataset.notificacoesInit = '1';
+            window.carregarNotificacoes(false);
+        }
+    }
+
+    function observarSidebar() {
+        window.atualizarUsuarioSidebar(document);
+        const sidebar = document.getElementById('sidebar');
+        if (!sidebar || sidebar.dataset.observerAttached) return;
+
+        sidebar.dataset.observerAttached = '1';
+        sincronizarSidebar(sidebar);
+
+        const observer = new MutationObserver(() => {
+            sincronizarSidebar(sidebar);
+        });
+        observer.observe(sidebar, { childList: true, subtree: true });
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', observarSidebar);
+    } else {
+        observarSidebar();
+    }
+})();
