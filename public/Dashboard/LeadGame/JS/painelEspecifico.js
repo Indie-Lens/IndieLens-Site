@@ -120,12 +120,21 @@ const dadosPorGenero = {
     ]
 };
 
-function carregarPrototipos() {
+async function carregarPrototipos() {
+    const idUsuario = sessionStorage.ID_USUARIO;
+    if (!idUsuario) {
+        return { erro: "Sessão não encontrada. Faça login para visualizar suas simulações.", itens: [] };
+    }
+
     try {
-        const salvos = JSON.parse(localStorage.getItem("prototipos") || "[]");
-        return Array.isArray(salvos) ? salvos : [];
+        const resposta = await fetch(`/simularJogo/listar/${encodeURIComponent(idUsuario)}`);
+        if (!resposta.ok) {
+            return { erro: "Não foi possível carregar suas simulações do servidor.", itens: [] };
+        }
+        const dados = await resposta.json();
+        return { erro: null, itens: Array.isArray(dados) ? dados : [] };
     } catch {
-        return [];
+        return { erro: "Erro de conexão ao buscar suas simulações.", itens: [] };
     }
 }
 
@@ -177,26 +186,37 @@ function preencherSelect(select, opcoes, valorSelecionado) {
 function detectarGenero(genero) {
     const valor = normalizar(genero);
     if (!valor) return null;
-    return Object.keys(dadosPorGenero).find((categoria) => normalizar(categoria) === valor) || null;
+    const categorias = Object.keys(dadosPorGenero);
+    const exato = categorias.find((categoria) => normalizar(categoria) === valor);
+    if (exato) return exato;
+
+    const partes = valor.split(/[,/]/).map((parte) => parte.trim()).filter(Boolean);
+    return categorias.find((categoria) => {
+        const normCategoria = normalizar(categoria);
+        return partes.some((parte) => parte === normCategoria || parte.includes(normCategoria));
+    }) || null;
 }
 
-const listaPrototipos = carregarPrototipos();
+let listaPrototipos = [];
 const prototipoSelect = document.getElementById("prototipoSelecionado");
 const margemPrecoInput = document.getElementById("margemPreco");
 const botaoBuscar = document.getElementById("buscarJogos");
 const resultados = document.getElementById("resultadosComparacao");
 const mensagemPainel = document.getElementById("mensagemPainel");
-const temPrototipo = listaPrototipos.length > 0;
+const generoPrototipoEl = document.getElementById("generoPrototipo");
 const parametros = new URLSearchParams(window.location.search);
-const indiceInicial = Number(parametros.get("prototipo"));
-let indicePrototipo = Number.isInteger(indiceInicial) && indiceInicial >= 0 && indiceInicial < listaPrototipos.length ? indiceInicial : 0;
-let generoAtivo = temPrototipo ? detectarGenero(dadosDoPrototipo(listaPrototipos[indicePrototipo]).genero) : null;
+let indicePrototipo = 0;
+let generoAtivo = null;
+
+function definirEstadoSelect(texto) {
+    const option = document.createElement("option");
+    option.textContent = texto;
+    prototipoSelect.replaceChildren(option);
+}
 
 function preencherPrototipos() {
     if (!listaPrototipos.length) {
-        const option = document.createElement("option");
-        option.textContent = "Nenhum protótipo simulado";
-        prototipoSelect.replaceChildren(option);
+        definirEstadoSelect("Nenhum protótipo simulado");
         return;
     }
     preencherSelect(prototipoSelect, listaPrototipos.map((prototipo, indice) => {
@@ -237,7 +257,7 @@ function renderizarTabela(lista) {
         tabela.append(linha);
     }
 
-    linhas.forEach(({ jogo, grupo, menor }, indice) => {
+    linhas.forEach(({ jogo, grupo }) => {
         const linha = document.createElement("tr");
         const celulaJogo = document.createElement("td");
         celulaJogo.textContent = jogo.nome;
@@ -254,7 +274,28 @@ function renderizarTabela(lista) {
     document.querySelector(".contador-referencias").textContent = `${linhas.length} jogos`;
 }
 
+function atualizarControlesPrototipo() {
+    const selecionado = listaPrototipos[indicePrototipo];
+    if (!selecionado) return;
+
+    const dados = dadosDoPrototipo(selecionado);
+    generoAtivo = detectarGenero(dados.genero);
+    generoPrototipoEl.textContent = generoAtivo || "Gênero não identificado";
+
+    const precoValido = dados.preco !== null && dados.preco > 0;
+    botaoBuscar.disabled = !precoValido || !generoAtivo;
+    mensagemPainel.hidden = false;
+    resultados.hidden = true;
+    mensagemPainel.textContent = !generoAtivo
+        ? "Não foi possível identificar o gênero do protótipo para buscar jogos iguais."
+        : !precoValido
+            ? "Informe o preço do protótipo para liberar a busca."
+            : "Escolha a diferença de preço e clique em “Buscar jogos”.";
+}
+
 function renderizar() {
+    if (!listaPrototipos[indicePrototipo] || !generoAtivo) return;
+
     const prototipo = dadosDoPrototipo(listaPrototipos[indicePrototipo]);
     const preco = prototipo.preco;
     const margem = Math.min(100, Math.max(0, Number(margemPrecoInput.value) || 0)) / 100;
@@ -279,36 +320,51 @@ function renderizar() {
     mensagemPainel.hidden = true;
 }
 
-preencherPrototipos();
-document.getElementById("generoPrototipo").textContent = temPrototipo ? (generoAtivo || "Gênero não identificado") : "Aguardando protótipo";
-
-if (!temPrototipo) {
+async function inicializarPainelEspecifico() {
     prototipoSelect.disabled = true;
     margemPrecoInput.disabled = true;
     botaoBuscar.disabled = true;
-} else {
-    const precoValido = dadosDoPrototipo(listaPrototipos[indicePrototipo]).preco > 0;
-    botaoBuscar.disabled = !precoValido || !generoAtivo;
-    mensagemPainel.textContent = !generoAtivo
-        ? "Não foi possível identificar o gênero do protótipo para buscar jogos iguais."
-        : !precoValido
-            ? "Informe o preço do protótipo para liberar a busca."
-            : "Escolha a diferença de preço e clique em “Buscar jogos”.";
+    resultados.hidden = true;
+    definirEstadoSelect("Carregando simulações...");
+    generoPrototipoEl.textContent = "Carregando...";
+    mensagemPainel.hidden = false;
+    mensagemPainel.textContent = "Carregando suas simulações...";
+
+    const { erro, itens } = await carregarPrototipos();
+    listaPrototipos = itens;
+
+    if (erro) {
+        definirEstadoSelect(sessionStorage.ID_USUARIO ? "Erro ao carregar" : "Sessão não iniciada");
+        generoPrototipoEl.textContent = sessionStorage.ID_USUARIO ? "Indisponível" : "Sessão não encontrada";
+        mensagemPainel.textContent = erro;
+        return;
+    }
+
+    if (!listaPrototipos.length) {
+        preencherPrototipos();
+        generoPrototipoEl.textContent = "Aguardando protótipo";
+        mensagemPainel.textContent = "Cadastre e simule um protótipo para liberar a busca.";
+        return;
+    }
+
+    const indiceInicial = Number(parametros.get("prototipo"));
+    const idParam = Number(parametros.get("id"));
+    if (Number.isInteger(idParam) && idParam > 0) {
+        const encontrado = listaPrototipos.findIndex((item) => Number(item.id) === idParam);
+        indicePrototipo = encontrado >= 0 ? encontrado : 0;
+    } else {
+        indicePrototipo = Number.isInteger(indiceInicial) && indiceInicial >= 0 && indiceInicial < listaPrototipos.length ? indiceInicial : 0;
+    }
+
+    prototipoSelect.disabled = false;
+    margemPrecoInput.disabled = false;
+    preencherPrototipos();
+    atualizarControlesPrototipo();
 }
 
 prototipoSelect.addEventListener("change", () => {
     indicePrototipo = Number(prototipoSelect.value);
-    generoAtivo = detectarGenero(dadosDoPrototipo(listaPrototipos[indicePrototipo]).genero);
-    document.getElementById("generoPrototipo").textContent = generoAtivo || "Gênero não identificado";
-    const temPreco = dadosDoPrototipo(listaPrototipos[indicePrototipo]).preco > 0;
-    botaoBuscar.disabled = !temPreco || !generoAtivo;
-    mensagemPainel.hidden = false;
-    resultados.hidden = true;
-    mensagemPainel.textContent = !generoAtivo
-        ? "Não foi possível identificar o gênero do protótipo para buscar jogos iguais."
-        : !temPreco
-            ? "Informe o preço do protótipo para liberar a busca."
-            : "Clique em “Buscar jogos” para ver os resultados.";
+    atualizarControlesPrototipo();
 });
 
 margemPrecoInput.addEventListener("input", () => {
@@ -319,5 +375,7 @@ margemPrecoInput.addEventListener("input", () => {
 });
 
 botaoBuscar.addEventListener("click", renderizar);
+
+inicializarPainelEspecifico();
 
 if (window.lucide) lucide.createIcons();

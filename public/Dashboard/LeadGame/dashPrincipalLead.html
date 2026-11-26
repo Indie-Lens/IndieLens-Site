@@ -96,7 +96,7 @@
                             <h2 class="painel-titulo">Minhas simulações recentes</h2>
                             <p class="subtitulo">Protótipos que você cadastrou no IndieLens.</p>
                         </div>
-                        <a href="../Simulador/minhasSimulacoes.html" class="link-painel">Ver todas</a>
+                        <a href="./simularJogo.html" class="link-painel">Ver todas</a>
                     </div>
 
                     <div class="tabela-container">
@@ -111,22 +111,7 @@
                             </thead>
                             <tbody id="tabelaSimulacoes">
                                 <tr>
-                                    <td>RPG de mundo aberto</td>
-                                    <td>RPG</td>
-                                    <td>US$ 19,99</td>
-                                    <td>25/10/2026</td>
-                                </tr>
-                                <tr>
-                                    <td>Jogo de terror cooperativo</td>
-                                    <td>Terror</td>
-                                    <td>US$ 14,99</td>
-                                    <td>22/10/2026</td>
-                                </tr>
-                                <tr>
-                                    <td>Simulador de cafeteria</td>
-                                    <td>Simulação</td>
-                                    <td>US$ 9,99</td>
-                                    <td>15/10/2026</td>
+                                    <td colspan="4">Carregando simulações...</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -300,7 +285,10 @@
             document.getElementById("generoFrequente").textContent = dados.generoFrequente;
             document.getElementById("precoMedio").textContent = dados.precoMedio;
             document.getElementById("avaliacoesMedias").textContent = dados.avaliacoesMedias;
-            document.getElementById("idiomaComum").textContent = dados.idiomaComum;
+            const idiomaComumEl = document.getElementById("idiomaComum");
+            if (idiomaComumEl) {
+                idiomaComumEl.textContent = dados.idiomaComum;
+            }
 
             graficoGeneros.data.datasets[0].data = dados.generos;
             graficoGeneros.update();
@@ -308,6 +296,79 @@
             graficoPrecos.data.datasets[0].data = dados.precos;
             graficoPrecos.update();
         }
+
+        function formatarPrecoSimulacao(valor) {
+            if (valor === "" || valor === null || valor === undefined || Number.isNaN(Number(valor))) {
+                return "—";
+            }
+            return Number(valor).toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+        }
+
+        function formatarDataSimulacao(dataTexto) {
+            if (!dataTexto) return "—";
+            const partes = String(dataTexto).slice(0, 10).split("-");
+            if (partes.length !== 3) return String(dataTexto);
+            return `${partes[2]}/${partes[1]}/${partes[0]}`;
+        }
+
+        function renderizarMensagemSimulacoes(mensagem) {
+            const tbody = document.getElementById("tabelaSimulacoes");
+            tbody.replaceChildren();
+            const tr = document.createElement("tr");
+            const td = document.createElement("td");
+            td.colSpan = 4;
+            td.textContent = mensagem;
+            tr.appendChild(td);
+            tbody.appendChild(tr);
+        }
+
+        function carregarSimulacoesRecentes() {
+            const idUsuario = sessionStorage.ID_USUARIO;
+            if (!idUsuario) {
+                renderizarMensagemSimulacoes("Faça login para visualizar suas simulações recentes.");
+                return;
+            }
+
+            fetch(`/simularJogo/listar/${encodeURIComponent(idUsuario)}`)
+                .then((res) => {
+                    if (!res.ok) throw new Error("Erro ao listar simulações");
+                    return res.json();
+                })
+                .then((simulacoes) => {
+                    if (!Array.isArray(simulacoes) || simulacoes.length === 0) {
+                        renderizarMensagemSimulacoes("Nenhuma simulação cadastrada ainda.");
+                        return;
+                    }
+
+                    const tbody = document.getElementById("tabelaSimulacoes");
+                    tbody.replaceChildren();
+
+                    simulacoes.slice(0, 5).forEach((sim) => {
+                        const tr = document.createElement("tr");
+
+                        const tdNome = document.createElement("td");
+                        tdNome.textContent = sim.nome || "—";
+
+                        const tdGenero = document.createElement("td");
+                        tdGenero.textContent = sim.genero || "—";
+
+                        const tdPreco = document.createElement("td");
+                        tdPreco.textContent = formatarPrecoSimulacao(sim.preco);
+
+                        const tdData = document.createElement("td");
+                        tdData.textContent = formatarDataSimulacao(sim.dataCriacao || sim.data);
+
+                        tr.append(tdNome, tdGenero, tdPreco, tdData);
+                        tbody.appendChild(tr);
+                    });
+                })
+                .catch((erro) => {
+                    console.log(erro);
+                    renderizarMensagemSimulacoes("Não foi possível carregar suas simulações.");
+                });
+        }
+
+        carregarSimulacoesRecentes();
     </script>
     <script src="../../components/dashboard-sidebar.js"></script>
 
